@@ -1,0 +1,113 @@
+.series {
+    background: $technique-bg-color;
+    @media #{$sm} {
+        & {
+            padding: 80px 0;
+        }
+    }
+
+    @media #{$xs} {
+        & {
+            padding: 30px 0;
+        }
+    }
+
+    &__container {
+        margin-bottom: 30px;
+    }
+
+    &__item {
+        background-color: #FFF;
+        border-radius: 4px;
+        border: 1px solid #ECE8F3;
+        cursor: pointer;
+        overflow: hidden;
+        @include anim(all, .4s);
+        &:hover &__cover__overlay {
+            opacity: .8;
+        }
+        &:hover &__cover__overlay__label {
+            opacity: 1;
+            transform: scale(1);
+        }
+        &:hover .series__item__notifier {
+            opacity: 0;
+        }
+
+        &__cover {
+            position: relative;
+            width: 100%;
+
+            &__overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                background-color: $bread-letter-two;
+                opacity: 0;
+                z-index: 99;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include anim(all, .3s, ease-in);
+
+                &__label {
+                    opacity: 0;
+                    transform: scale(1.8);
+                    font-size: 17px;
+                    color: #FFF;
+                    font-weight: 600;
+                    @include anim(all, .3s, ease-in);
+                }
+            }
+
+            &__img {
+                width: 100%;
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+
+        &__notifier {
+            position: absolute;
+            top: 3px;
+            left: 20px;
+            padding: 0 8px;
+        }
+
+        &__info {
+            padding: 10px 13px 15px;
+            position: relative;
+            min-height: 128px;
+
+            &__tag-list {
+                margin: 0;
+                padding: 0;
+                padding-bottom: 5px;
+                list-style: none;
+            }
+
+            &__name {
+                margin: 8px 0;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 1.4;
+            }
+        }
+
+        &__other {
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #b1b1b1;
+            padding: 10px 0;
+            @media #{$sm} {
+                left: 10%;
+                width: 80%;
+            }
+            @media #{$xs} {
+                left: 5%;
+                width: 90%;
+            }
+        }
+    }
+}

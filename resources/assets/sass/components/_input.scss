@@ -1,0 +1,40 @@
+.custom-input {
+    background-color: #e8ebed;
+    color: #7b8b8e;
+
+    &:focus {
+        background-color: #FFF;
+        box-shadow: none;
+        border-width: 2px;
+        border-color: #a6b0b7;
+    }
+}
+
+.btn-wiggle {
+    animation: wiggle 6s linear infinite;
+    transform-origin: 50% 5em;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(0);
+  }
+  2% {
+    transform: rotateZ(-15deg);
+  }
+  4% {
+    transform: rotateZ(10deg);
+  }
+  6% {
+    transform: rotateZ(-10deg);
+  }
+  8% {
+    transform: rotateZ(6deg);
+  }
+  10% {
+    transform: rotateZ(-4deg);
+  }
+  10%, 100% {
+    transform: rotateZ(0);
+  }
+}

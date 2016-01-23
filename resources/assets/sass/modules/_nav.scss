@@ -1,0 +1,115 @@
+header nav.navbar {
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(black, .2);
+    @include round(0);
+    @include anim(all, .3s);
+
+    &-default {
+        border: none;
+        background-color: #FFF;
+
+        & .navbar-nav {
+            & li {
+                margin-right: 20px;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            & a:hover {
+                color: $font-hover-color;
+            }
+
+            & .active a {
+                color: $font-hover-color;
+                background: transparent;
+                border-bottom: 4px solid $link-hover-color;
+                text-shadow: none;
+
+                &:hover,
+                &:focus {
+                    background: transparent;
+                    text-shadow: none;
+                }
+            }
+        }
+
+        & .navbar-toggle {
+            border: none;
+            &:focus,
+            &:hover {
+                background: none;
+            }
+            & .icon-bar {
+                background: $font-color;
+            }
+            &:hover .icon-bar {
+                background: $font-hover-color;
+            }
+        }
+    }
+}
+
+.navbar-right li a {
+    // heigth: 80px;
+    // line-height: 50px;
+    color: $font-color;
+}
+
+@media #{$sm} {
+    header nav.navbar {
+        padding: 14px;
+    }
+    .learner-bread {
+        font-size: 28px;
+    }
+    header nav.navbar .navbar-header {
+        margin-top: 6px;
+    }
+}
+
+// 小屏适配
+// small screen
+@media #{$xs} {
+    header nav.navbar-default {
+        .navbar-header {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            line-height: 48px;
+            transform: translateX(25px);
+
+            .learner-bread {
+                font-size: 20px;
+            }
+        }
+        .navbar-collapse {
+            z-index: 99;
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            border: none;
+            box-shadow: 0 5px 10px 2px rgba(0,0,0,.2);
+            box-shadow: rgba(0,0,0,.117647) 0 1px 6px,rgba(0,0,0,.239216) 0 1px 4px;
+            border-radius: 2px;
+            width: 170px;
+            float: right;
+            margin: 0;
+            background: #FFF;
+        }
+        .navbar-nav li a:hover {
+            color: $link-hover-color;
+        }
+        .navbar-nav .active a {
+            border: none;
+            color: $link-hover-color;
+        }
+
+        .navbar-toggle {
+        }
+    }
+
+}

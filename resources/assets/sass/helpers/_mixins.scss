@@ -1,0 +1,6 @@
+@mixin round($radius: 50%) {
+    border-radius: $radius;
+}
+@mixin anim($prop, $time, $type: ease-in-out) {
+    transition: $prop $time $type;
+}

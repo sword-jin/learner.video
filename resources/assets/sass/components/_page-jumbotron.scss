@@ -1,0 +1,13 @@
+.page-jumbotron {
+    font-family: 'Montserrat', sans-serif;
+    @media #{$sm} {
+        & {
+            padding: 60px 0;
+        }
+    }
+    @media #{$xs} {
+        & {
+            padding: 28px 0;
+        }
+    }
+}

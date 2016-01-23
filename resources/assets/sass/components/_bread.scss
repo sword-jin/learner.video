@@ -1,0 +1,45 @@
+.learner-bread {
+    font-family: 'Lobster', cursive;
+    @include anim(color, .18);
+    .learner-bread--one {
+        color: $bread-letter-one;
+    }
+    .learner-bread--two {
+        color: $bread-letter-two;
+    }
+    .learner-bread--three {
+        color: $bread-letter-three;
+    }
+    .learner-bread--four {
+        color: $bread-letter-four;
+    }
+    .learner-bread--five {
+        color: $bread-letter-five;
+    }
+    .learner-bread--six {
+        color: $bread-letter-six;
+    }
+
+    &--hover {
+        &:hover {
+            .learner-bread--one {
+                color: darken($bread-letter-one, 15%);
+            }
+            .learner-bread--two {
+                color: darken($bread-letter-two, 15%);
+            }
+            .learner-bread--three {
+                color: darken($bread-letter-three, 15%);
+            }
+            .learner-bread--four {
+                color: darken($bread-letter-four, 15%);
+            }
+            .learner-bread--five {
+                color: darken($bread-letter-five, 15%);
+            }
+            .learner-bread--six {
+                color: darken($bread-letter-six, 15%);
+            }
+        }
+    }
+}

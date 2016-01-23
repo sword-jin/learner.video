@@ -1,0 +1,31 @@
+/************************************
+* colors
+************************************/
+$brand-primary:         #7dd999 !default;
+//** rewrite font color
+$font-color: #576366;
+$font-hover-color: #343b3d;
+
+//** Global textual link color.
+$link-color:            $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      #5ece80 !default;
+
+//** newsletter bgcolor
+$newsletter-bg-color: #5fcf80;
+//** newsletter font color
+$newsletter-color: #FFF;
+$newsletter-form-title-color: #3ac162;
+
+//** technique bg color
+$technique-bg-color: #F4F3F2;
+
+//** rewrite success color.
+$brand-success: #5fcf80;
+
+$bread-letter-one: #FECE26;
+$bread-letter-two: #B9543A;
+$bread-letter-three: #DCBEAA;
+$bread-letter-four: #65643A;
+$bread-letter-five: #DDA93B;
+$bread-letter-six: #8CC26E;

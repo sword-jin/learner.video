@@ -1,0 +1,33 @@
+.label--php {
+    @include label-variant(#444E7E);
+}
+.label--javascript {
+    @include label-variant($bread-letter-one);
+}
+.label--html {
+    @include label-variant($bread-letter-three);
+}
+.label--css {
+    @include label-variant($bread-letter-four);
+}
+.label--laravel {
+    @include label-variant(#f4645f);
+}
+.label--node {
+    @include label-variant($bread-letter-five);
+}
+.label--vue {
+    @include label-variant(#41B883);
+}
+.label--angular {
+    @include label-variant(#DD1B16);
+}
+.label--react {
+    @include label-variant(#61DAFB);
+}
+.label--project {
+    @include label-variant($bread-letter-two);
+}
+.label--other {
+    @include label-variant(#f4645f);
+}

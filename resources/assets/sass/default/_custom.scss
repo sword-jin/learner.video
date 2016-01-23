@@ -1,0 +1,26 @@
+body {
+    color: $font-color;
+}
+
+@media #{$sm} {
+    body {
+        padding-top: 82px;
+    }
+}
+@media #{$xs} {
+    body {
+        padding-top: 50px;
+    }
+}
+
+a {
+    animation: color .21s ease-in-out;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+::selection {
+    background: #c0ecf4;
+}

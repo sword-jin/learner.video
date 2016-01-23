@@ -1,0 +1,45 @@
+footer {
+    margin-top: 80px;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    position: relative;
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    &>p {
+        font-size: 12px;
+        line-height: 1.45;
+        margin-top: 10px;
+    }
+
+    .social {
+        & a {
+            width: 30px;
+            height: 30px;
+            background-color: #d3d9dd;
+            display: inline-block;
+            color: #FFF;
+            font-size: 20px;
+            padding: 1px 1px 0 0;
+            @include round();
+            @include anim(background, .2s);
+
+            &:hover {
+                background-color: $link-hover-color;
+            }
+        }
+        &-link {
+            display: inline;
+            margin-right: 4px;
+        }
+    }
+}
+

@@ -1,0 +1,58 @@
+.newsletter {
+    background: $newsletter-bg-color;
+    color: $newsletter-color;
+    text-align: left;
+
+    &__letter {
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+
+    &__form {
+        margin-top: 24px;
+
+        p {
+            letter-spacing: .2em;
+            font-weight: 400;
+            background-color: $newsletter-form-title-color;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            font-weight: 500;
+            padding: 20px;
+            color: #fff;
+            margin: 0;
+        }
+
+        form {
+            background: #FFF;
+            padding: 28px 30px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        &__address {
+            @extend .custom-input;
+        }
+    }
+
+    h1 {
+        margin: 0 0 28px 0;
+        @media #{$sm} {
+            & {
+                font-size: 36px;
+            }
+        }
+        @media #{$xs} {
+            & {
+                font-size: 30px;
+            }
+        }
+    }
+
+    ul li {
+        margin-bottom: 8px;
+        font-size:14px;
+    }
+}
