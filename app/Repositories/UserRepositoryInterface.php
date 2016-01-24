@@ -22,4 +22,11 @@ interface UserRepositoryInterface
      * @param  mixed $roleOrRoleId
      */
     public function attachRole(User $user, $roleOrRoleId);
+
+    /**
+     * Get the user creation form service.
+     *
+     * @return \Learner\Services\Forms\UserFormService.
+     */
+    public function getCreationForm();
 }

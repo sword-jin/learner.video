@@ -2,6 +2,8 @@
 
 namespace Learner\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+
 class BaseController extends Controller
 {
     /**
@@ -16,5 +18,17 @@ class BaseController extends Controller
     protected function redirectToRoute($route, $params = [], $data = [])
     {
         return Redirect::route($route, $params)->with($data);
+    }
+
+    /**
+     * Redirect back with old input and the specified data.
+     *
+     * @param array $data
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function redirectBack($data = [])
+    {
+        return Redirect::back()->withInput()->with($data);
     }
 }

@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+	填写正确邮箱
+@stop
 
 <!-- Main Content -->
 @section('content')

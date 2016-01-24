@@ -3,6 +3,7 @@
 namespace Learner\Repositories\Eloquent;
 
 use Learner\Models\User;
+use Learner\Services\Forms\UserFormService;
 use Learner\Repositories\UserRepositoryInterface;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
@@ -29,7 +30,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         $user = $this->getNew();
 
         $user->email = $data['email'];
-        $user->name = $data['name'];
+        $user->name = $data['username'];
         $user->password = encrypt($data['password']);
 
         $user->save();
@@ -46,5 +47,15 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     public function attachRole(User $user, $roleOrRoleId)
     {
         $user->roles()->attach($roleOrRoleId);
+    }
+
+    /**
+     * Get the user creation form service.
+     *
+     * @return \Learner\Services\Forms\UserFormService.
+     */
+    public function getCreationForm()
+    {
+        return new UserFormService;
     }
 }

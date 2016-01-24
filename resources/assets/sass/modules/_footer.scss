@@ -28,8 +28,8 @@ footer {
             display: inline-block;
             color: #FFF;
             font-size: 20px;
-            padding: 1px 1px 0 0;
-            @include round();
+            padding: 1px 0 0;
+            @include round(4px);
             @include anim(background, .2s);
 
             &:hover {

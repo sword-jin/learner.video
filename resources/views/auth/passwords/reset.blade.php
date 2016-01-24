@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+	重置密码
+@stop
 
 @section('content')
 <div class="container">

@@ -1,0 +1,89 @@
+.card {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #c9c9c9;
+    border-right: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+    border-radius: 4px;
+
+    &__update,
+    &__video-count {
+        position: absolute;
+        top: 5px;
+        letter-spacing: 0.2px;
+        z-index: 1;
+    }
+
+    &__update {
+        left: 12px;
+        text-transform: uppercase;
+    }
+
+    &__video-count {
+        right: 12px;
+        color: #FFF;
+        font-weight: bold;
+    }
+
+    &__img {
+        position: relative;
+        &:hover {
+            .card__overlay {
+                background-color: rgba(0,0,0,0.7);
+                opacity: .9;
+            }
+            .card__overlay>i {
+                transform: scale(1);
+            }
+        }
+    }
+
+    &__overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0);
+        @include anim(all, .32s);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        &>i {
+            font-size: 60px;
+            color: #FFF;
+            transform: scale(1.2);
+            @include anim(all, .32s);
+        }
+    }
+
+    &__details {
+        background-color: #FFF;
+        padding: 8px 12px 10px;
+    }
+
+    &__category {
+        margin: 0;
+        padding: 4px 0;
+        text-align: left;
+    }
+
+    &__title {
+        margin: 0;
+        padding-top: 4px;
+        font-size: 15px;
+        text-align: left;
+    }
+
+    &__title--a {
+        color: $font-color;
+
+        &:focus,
+        &:hover {
+            color: $font-hover-color;
+        }
+    }
+}

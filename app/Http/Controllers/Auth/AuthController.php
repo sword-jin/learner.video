@@ -2,6 +2,7 @@
 
 namespace Learner\Http\Controllers\Auth;
 
+use Auth;
 use Validator;
 use Learner\Models\User;
 use Learner\Http\Controllers\BaseController;
@@ -67,7 +68,7 @@ class AuthController extends BaseController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'username' => 'required|valid_username|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -87,5 +88,24 @@ class AuthController extends BaseController
         $this->users->attachRole($user, $userRole);
 
         return $user;
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register()
+    {
+        $form = $this->users->getCreationForm();
+
+        if (! $form->isValid()) {
+            return $this->redirectBack(['errors' => $form->getErrors()]);
+        }
+
+        Auth::guard($this->getGuard())->login($this->create($form->getInputData()));
+
+        return redirect($this->redirectPath());
     }
 }

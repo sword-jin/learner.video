@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -160,6 +160,7 @@ return [
         /************************************
         * Packages
         ************************************/
+        Illuminate\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
@@ -211,7 +212,9 @@ return [
         /************************************
         * Aliases
         ************************************/
-        'Entrust'   => Zizaco\Entrust\EntrustServiceProvider::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Html'      => Illuminate\Html\HtmlFacade::class,
+        'Form'      => Illuminate\Html\FormFacade::class,
 
     ],
 

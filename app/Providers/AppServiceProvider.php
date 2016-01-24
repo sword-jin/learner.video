@@ -2,6 +2,7 @@
 
 namespace Learner\Providers;
 
+use Illuminate\Validation\Factory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +12,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Factory $validator)
     {
-        //
+        require_once app_path() . '/validators.php';
     }
 
     /**

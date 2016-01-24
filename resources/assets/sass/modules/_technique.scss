@@ -14,44 +14,4 @@
             margin: 0 0 30px 0;
         }
     }
-
-    &__content {
-        min-height: 240px;
-        background: #FFF;
-        border-radius: 4px 4px 0 0;
-        margin-bottom: 30px;
-
-        &:hover {
-            box-shadow: 0 0 3px rgba(0, 0, 0, .2);
-            opacity: .8;
-        }
-
-        &__icon {
-            height: 30px;
-            width: 30px;
-            margin-bottom: 10px;
-        }
-        &__info {
-            padding: 10px;
-
-            &__title {
-                min-height: 40px;
-                font-size: 18px;
-                color: $font-color;
-                display: block;
-                line-height: 1.2;
-                font-weight: normal;
-            }
-
-            &__count {
-                font-size: 24px;
-                font-weight: 400;
-                color: $link-hover-color;
-            }
-        }
-    }
-
-    &__more {
-        margin-top: 30px;
-    }
 }
