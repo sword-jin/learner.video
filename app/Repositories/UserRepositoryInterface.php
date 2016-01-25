@@ -26,7 +26,7 @@ interface UserRepositoryInterface
     /**
      * Get the user creation form service.
      *
-     * @return \Learner\Services\Forms\UserFormService.
+     * @return \Learner\Services\Forms\UserRegisterFormService.
      */
-    public function getCreationForm();
+    public function getRegisterForm();
 }

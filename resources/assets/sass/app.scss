@@ -2,13 +2,8 @@
 @import "helpers/variables";
 //** screen width helper
 @import "helpers/screen";
-//** fonts
-@import "helpers/fonts";
-@import "node_modules/font-awesome/scss/font-awesome";
 //** mixin
 @import "helpers/mixins";
-//** import bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 //** my own style
 @import "default/custom";
 

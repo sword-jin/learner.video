@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Forms;
 
-class UserFormService extends AbstractFormService
+class UserRegisterFormService extends AbstractFormService
 {
     /**
      * The validation rules to validate the input data against.
@@ -10,8 +10,8 @@ class UserFormService extends AbstractFormService
      * @var array
      */
     protected $rules = [
-        'username' => 'required|valid_username|max:255|unique:users',
-        'email' => 'required|email|max:255|unique:users',
+        'username' => 'required|alpha_dash|max:255|unique:users',
+        'email'    => 'required|email|max:255|unique:users',
         'password' => 'required|confirmed|min:6',
     ];
 
@@ -23,10 +23,10 @@ class UserFormService extends AbstractFormService
     public function getAttributes()
     {
         return [
-            'username' => '用户名',
-            'email'    => '邮箱',
-            'password' => '密码',
-            'password_confirmation' => '确认密码',
+            'username' => trans('register.username'),
+            'email'    => trans('register.email'),
+            'password' => trans('register.password'),
+            'password_confirmation' => trans('register.password_confirmation'),
         ];
     }
 

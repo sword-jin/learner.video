@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'title' => 'Learner永不止步'
+    'title' => 'Learner Video'
 ];

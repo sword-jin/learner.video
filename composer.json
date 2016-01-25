@@ -7,8 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "zizaco/entrust": "dev-laravel-5",
-        "illuminate/html": "^5.0"
+        "Zizaco/Entrust": "dev-laravel-5",
+        "illuminate/html": "^5.0",
+        "mercuryseries/flashy": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -23,7 +24,10 @@
         ],
         "psr-4": {
             "Learner\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [
@@ -51,6 +55,10 @@
     "config": {
         "preferred-install": "dist"
     },
+    "repositories": [
+        {"type": "composer", "url": "http://packagist.phpcomposer.com"},
+        {"packagist": false}
+    ],
     "repositories": [
         {"type": "composer", "url": "http://packagist.phpcomposer.com"},
         {"packagist": false}

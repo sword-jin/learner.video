@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost:8000',
+    'url' => 'http://localhost:8080',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'daily'),
+    'log' => env('APP_LOG', 'single'),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,8 @@ return [
         ************************************/
         Illuminate\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        MercurySeries\Flashy\FlashyServiceProvider::class,
+
 
     ],
 

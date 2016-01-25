@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="{{ url('/') }}" class="navbar-bread learner-bread learner-bread--hover">
+                <a href="<?php echo e(url('/')); ?>" class="navbar-bread learner-bread learner-bread--hover">
                     L<span class="learner-bread--one">e</span><span class="learner-bread--two">a</span><span class="learner-bread--three">r</span><span class="learner-bread--four">n</span><span class="learner-bread--five">e</span><span class="learner-bread--six">r</span>
                 </a>
             </div> <!-- navbar-header -->
@@ -24,20 +24,26 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">登陆</a></li>
-                    <li><a href="{{ url('/register') }}">注册</a></li>
-                    @else
+                    <?php if(Auth::guest()): ?>
+                    <li><a href="<?php echo e(route('auth.login')); ?>">登陆</a></li>
+                    <li><a href="<?php echo e(route('auth.register')); ?>">注册</a></li>
+                    <?php else: ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <?php echo e(Auth::user()->username); ?> <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                <a href="<?php echo e(route('auth.logout')); ?>">
+                                    <i class="fa fa-btn fa-sign-out"></i>
+                                    <?php echo e(lang('navigation.logout', 'Logout')); ?>
+
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    @endif
+                    <?php endif; ?>
                 </ul>
             </div>
         </div> <!-- navbar -->

@@ -1,5 +1,7 @@
 <?php
 
+use Learner\Exceptions\Handler;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -7,7 +9,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://localhost';
+    protected $baseUrl = 'http://localhost:8080';
 
     /**
      * Creates the application.
@@ -21,5 +23,24 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    protected function disableExceptionHandling()
+    {
+        app()->instance(Handler::class, new PassThroughHandler);
+    }
+}
+
+class PassThroughHandler extends Handler
+{
+    public function __construct() {}
+
+    public function report(Exception $e)
+    {
+        // no-op
+    }
+    public function render($request, Exception $e)
+    {
+        throw $e;
     }
 }

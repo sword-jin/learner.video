@@ -1,0 +1,18 @@
+//** rewrite font color
+$brand-primary:         #7dd999 !default;
+$font-color: #576366;
+$font-hover-color: #343b3d;
+
+a {
+  animation: color .21s ease-in-out;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+//** import bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//** font-awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+//** fonts
+@import "helpers/fonts";

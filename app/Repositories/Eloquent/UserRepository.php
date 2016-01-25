@@ -2,8 +2,9 @@
 
 namespace Learner\Repositories\Eloquent;
 
+use Hash;
 use Learner\Models\User;
-use Learner\Services\Forms\UserFormService;
+use Learner\Services\Forms\UserRegisterFormService;
 use Learner\Repositories\UserRepositoryInterface;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
@@ -30,8 +31,8 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         $user = $this->getNew();
 
         $user->email = $data['email'];
-        $user->name = $data['username'];
-        $user->password = encrypt($data['password']);
+        $user->username = $data['username'];
+        $user->password = Hash::make($data['password']);
 
         $user->save();
 
@@ -52,10 +53,10 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     /**
      * Get the user creation form service.
      *
-     * @return \Learner\Services\Forms\UserFormService.
+     * @return \Learner\Services\Forms\UserRegisterFormService.
      */
-    public function getCreationForm()
+    public function getRegisterForm()
     {
-        return new UserFormService;
+        return new UserRegisterFormService;
     }
 }

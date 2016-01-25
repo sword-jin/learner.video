@@ -9,7 +9,7 @@
 @stop
 
 @section('title')
-	注册
+	{{ lang('register.panel_title', 'Register') }}
 @stop
 
 @section('content')
@@ -18,14 +18,15 @@
         <div class="col-md-8 col-md-offset-2">
 
             @include("errors/list")
+
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('register.panel_title') }}</div>
+                <div class="panel-heading">{{ lang('register.panel_title', 'Register') }}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('auth.register.post') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('register.username') }}</label>
+                            <label class="col-md-4 control-label">{{ lang('register.username', 'Username') }}</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="username" value="{{ old('username') }}">
@@ -33,7 +34,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('register.email') }}</label>
+                            <label class="col-md-4 control-label">{{ lang('register.email', 'Email') }}</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -41,7 +42,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('register.password') }}</label>
+                            <label class="col-md-4 control-label">{{ lang('register.password', 'Password') }}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
@@ -49,7 +50,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('register.password_confirmation') }}</label>
+                            <label class="col-md-4 control-label">{{ lang('register.password_confirmation', 'Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
@@ -59,7 +60,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>{{ trans('register.submit') }}
+                                    <i class="fa fa-btn fa-user"></i>{{ lang('register.submit', 'Register') }}
                                 </button>
                             </div>
                         </div>

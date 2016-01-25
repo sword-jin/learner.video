@@ -1,44 +1,43 @@
 @extends('layouts.master')
 
+@section('style')
+    <style>
+        body {
+            padding-top: 130px;
+        }
+    </style>
+@stop
+
 @section('title')
-	登陆
+	{{ lang('login.panel_title', 'Login') }}
 @stop
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
+            @include("errors/list")
+
             <div class="panel panel-default">
-                <div class="panel-heading">登陆</div>
+                <div class="panel-heading">{{ lang('login.panel_title', 'Login') }}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('auth.login.post') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">邮箱</label>
+                        <div class="form-group{{ $errors->has('credential') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">{{ lang('login.credential', 'Username/Email') }}</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="credential" value="{{ old('credential') }}">
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">密码</label>
+                            <label class="col-md-4 control-label">{{ trans('login.password') }}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -46,7 +45,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember"> 记住密码
+                                        <input type="checkbox" name="remember"> {{ lang('login.remember', 'Remember me?') }}
                                     </label>
                                 </div>
                             </div>
@@ -55,10 +54,10 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>登陆
+                                    <i class="fa fa-btn fa-sign-in"></i>{{ lang('login.submit', 'Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">忘记密码?</a>
+                                <a class="btn btn-link" href="{{ url('password/reset') }}">{{ lang('login.forget', 'Forget your password?') }}</a>
                             </div>
                         </div>
                     </form>

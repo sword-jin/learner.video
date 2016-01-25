@@ -5,33 +5,13 @@ namespace Learner\Http\Controllers\Auth;
 use Auth;
 use Validator;
 use Learner\Models\User;
+use Illuminate\Http\Request;
 use Learner\Http\Controllers\BaseController;
-use Learner\Repositories\UserRepositoryInterface;
 use Learner\Repositories\RoleRepositoryInterface;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Learner\Repositories\UserRepositoryInterface;
 
 class AuthController extends BaseController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
     /**
      * User Repository.
      *
@@ -53,25 +33,75 @@ class AuthController extends BaseController
      */
     public function __construct(UserRepositoryInterface $users, RoleRepositoryInterface $roles)
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'getLogout']);
 
         $this->users = $users;
         $this->roles = $roles;
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the application login form.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function getLogin()
     {
-        return Validator::make($data, [
-            'username' => 'required|valid_username|max:255|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+        return view('auth.login');
+    }
+
+    /**
+     * Show the application register form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegister()
+    {
+        return view('auth/register');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
         ]);
+
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            flashy()->success(lang('notification.login', 'Welcome to Learner!'));
+
+            return $this->redirectIntended('/');
+        }
+
+        return $this->redirectBackWithErrors(['other' => trans('auth.failed')]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister()
+    {
+        $form = $this->users->getRegisterForm();
+
+        if (! $form->isValid()) {
+            return $this->redirectBack(['errors' => $form->getErrors()]);
+        }
+
+        Auth::login($this->create($form->getInputData()));
+
+        flashy()->message(lang('notification.register', 'Register Successfully!'));
+
+        return $this->redirectIntended('/');
     }
 
     /**
@@ -91,21 +121,47 @@ class AuthController extends BaseController
     }
 
     /**
-     * Handle a registration request for the application.
+     * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register()
+    public function getLogout()
     {
-        $form = $this->users->getCreationForm();
+        Auth::logout();
 
-        if (! $form->isValid()) {
-            return $this->redirectBack(['errors' => $form->getErrors()]);
-        }
+        flashy()->info(
+            lang('notification.logout', 'Logout successfully!'),
+            link_to_route('auth.login'));
 
-        Auth::guard($this->getGuard())->login($this->create($form->getInputData()));
+        return $this->redirectIntended('/');
+    }
 
-        return redirect($this->redirectPath());
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    protected function loginUsername()
+    {
+        return 'credential';
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+        $credential = $request->get('credential');
+
+        $credential_key = filter_var($credential, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        return [
+            $credential_key => $credential,
+            'password'      => $request->get('password')
+        ];
     }
 }
