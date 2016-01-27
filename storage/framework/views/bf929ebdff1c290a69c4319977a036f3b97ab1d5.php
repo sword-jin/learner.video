@@ -2,23 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Learner 后台管理</title>
     <link rel="stylesheet" href="<?php echo e(elixir("css/lib.css")); ?>">
     <link rel="stylesheet" href="./css/admin/admin.css">
     <meta name="token" id="token" value="<?php echo e(csrf_token()); ?>">
 </head>
-<body id="app" class="skin-blue">
+<body id="app" class="skin-black">
 
-    <h1>Hello App!</h1>
-    <p>
-        <a v-link="{ path: '/foo' }">Go to Foo</a>
-        <a v-link="{ path: '/bar' }">Go to Bar</a>
-    </p>
+    <main-header :username="auth.username"></main-header>
 
-    <router-view></router-view>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <siderbar :auth="auth"></siderbar>
+
+        <aside class="right-side">
+            <section class="content">
+                <router-view :roles="auth.roles"></router-view>
+            </section>
+        </aside>
+    </div>
 
     <script src="<?php echo e(elixir('js/lib.js')); ?>"></script>
-    <script src="js/admin/director.js" type="text/javascript"></script>
-    <script src="<?php echo e(elixir('js/admin/admin.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/admin/director.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('js/admin/build.js')); ?>"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ class RoleTableSeeder extends Seeder
         $roles = Config::get('seeders.roles');
 
         foreach ($roles as $role) {
-            Role::create([
+            $role = Role::create([
                 'name' => $role['name'],
                 'display_name' => $role['display_name'],
                 'description' => $role['description']

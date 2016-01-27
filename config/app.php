@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -156,15 +156,16 @@ return [
         Learner\Providers\EventServiceProvider::class,
         Learner\Providers\RouteServiceProvider::class,
         Learner\Providers\RepositoryServiceProvider::class,
+        Learner\Providers\AvatarServiceProvider::class,
+        Learner\Providers\AuthBladeServiceProvider::class,
 
         /************************************
         * Packages
         ************************************/
-        Illuminate\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         MercurySeries\Flashy\FlashyServiceProvider::class,
-
-
+        Intervention\Image\ImageServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
     ],
 
     /*
@@ -215,8 +216,9 @@ return [
         * Aliases
         ************************************/
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Html'      => Illuminate\Html\HtmlFacade::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'AvatarManager' => Learner\Facades\AvatarManager::class,
 
     ],
 

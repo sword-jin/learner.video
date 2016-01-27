@@ -11,6 +11,15 @@ class User extends Authenticatable
     use SoftDeletes, EntrustUserTrait;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'username', 'email', 'avatar', 'is_active', 'deleted_at'
+    ];
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
@@ -25,4 +34,33 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Format the output.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'bool'
+    ];
+
+    /**
+     * Eager load relations on the model.
+     *
+     * @return $this
+     */
+    public function relations()
+    {
+        return $this->load('roles.perms');
+    }
+
+    /**
+     * Whether the user is not active.
+     *
+     * @return boolean
+     */
+    public function isNotActive()
+    {
+        return (boolean) ! $this->is_active;
+    }
 }

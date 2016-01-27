@@ -16,13 +16,13 @@ class AllPageWorkTest extends TestCase
     {
         $this->visit('/')
              ->click('登陆')
-             ->seePageIs('/login');
+             ->seePageIs('/auth/login');
     }
 
     public function test_can_click_register_btn_redirect_to_register_page()
     {
         $this->visit('/')
             ->click('注册')
-            ->seePageIs('/register');
+            ->seePageIs('/auth/register');
     }
 }

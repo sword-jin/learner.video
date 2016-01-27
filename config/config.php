@@ -7,6 +7,7 @@ return [
         'privacy',
         'license',
         'resources',
+        'boss',
         'about',
         'login',
         'logout',

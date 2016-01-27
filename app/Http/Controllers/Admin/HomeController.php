@@ -2,12 +2,9 @@
 
 namespace Learner\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use Learner\Http\Controllers\BaseController;
 
-use Learner\Http\Requests;
-use Learner\Http\Controllers\Controller;
-
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function index()
     {

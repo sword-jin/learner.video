@@ -3,6 +3,7 @@
 namespace Learner\Providers;
 
 use Illuminate\Validation\Factory;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Factory $validator)
     {
         require_once app_path() . '/validators.php';
+
+        Blade::directive('role', function($expression) {
+            return "<?php if(Auth::check() && Auth::user()->hasRole{$expression}): ?>";
+        });
+
+        Blade::directive('endrole', function($expression) {
+            return "<?php endif ?>";
+        });
     }
 
     /**
@@ -24,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() == 'local') {
+            $this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
+        }
     }
 }

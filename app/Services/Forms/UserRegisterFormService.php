@@ -10,7 +10,7 @@ class UserRegisterFormService extends AbstractFormService
      * @var array
      */
     protected $rules = [
-        'username' => 'required|alpha_dash|max:255|unique:users',
+        'username' => 'required|valid_username|alpha_dash|max:255|unique:users',
         'email'    => 'required|email|max:255|unique:users',
         'password' => 'required|confirmed|min:6',
     ];

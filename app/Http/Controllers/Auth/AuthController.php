@@ -75,6 +75,19 @@ class AuthController extends BaseController
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+
+            if (Auth::user()->isNotActive()) {
+                Auth::logout();
+
+                flashy()->success(lang('notification.account_not_active', 'Your account not active, please contact me!'));
+
+                return $this->redirectIntended('/');
+            }
+
+            if (Auth::user()->hasRole(['admin', 'boss'])) {
+                return $this->redirectIntended('/admin');
+            }
+
             flashy()->success(lang('notification.login', 'Welcome to Learner!'));
 
             return $this->redirectIntended('/');
@@ -131,7 +144,7 @@ class AuthController extends BaseController
 
         flashy()->info(
             lang('notification.logout', 'Logout successfully!'),
-            link_to_route('auth.login'));
+            url('auth/login'));
 
         return $this->redirectIntended('/');
     }

@@ -15,6 +15,7 @@ header nav.navbar {
 
             & a:hover {
                 color: $font-hover-color;
+                background-color: #fff;
             }
 
             & .active a {
@@ -28,6 +29,20 @@ header nav.navbar {
                     background: transparent;
                     text-shadow: none;
                 }
+
+                .dropdown-menu>li>a:focus,
+                .dropdown-menu>li>a:hover {
+                    background-color: #FFF;
+                }
+            }
+            &>.open>a,
+            &>.open>a:focus,
+            &>.open>a:hover {
+                background-color: #FFF;
+                color: $font-hover-color;
+            }
+            &>.open>li {
+                margin-top: 0;
             }
         }
 
@@ -47,10 +62,20 @@ header nav.navbar {
     }
 }
 
+a.learner-bread:hover,
+a.learner-bread:active {
+    text-decoration: none;
+}
+
 .navbar-right li a {
     // heigth: 80px;
     // line-height: 50px;
     color: $font-color;
+}
+
+.learner-logo {
+    width: 32px;
+    box-shadow: 0 0 3px 1px rgba(0,0,0,.2), 0 0 2px 2px rgba(#5fcf80,.2);
 }
 
 @media #{$sm} {
@@ -112,6 +137,13 @@ header nav.navbar {
         }
 
         .navbar-toggle {
+        }
+
+        .navbar-nav .open .dropdown-menu>li>a {
+            &:focus,
+            &:hover　{
+                color: $link-hover-color;
+            }
         }
     }
 

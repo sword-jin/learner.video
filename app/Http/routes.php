@@ -12,14 +12,32 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller('password', 'Auth\PasswordController');
 
-    Route::get('/', function() {
-        return view('pages/index');
-    });
+    Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
+});
 
-    Route::group(['as' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
-        Route::get('/', 'HomeController@index');
+Route::group(['middleware' => 'web'], function () {
+    $config = [
+        'as' => 'admin.',
+        'prefix' => 'admin',
+        'namespace' => 'Admin',
+        'middleware' => ['role:admin|boss']
+    ];
 
+    Route::group($config, function() {
+
+        Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
+
+        Route::get('/dashboard/information', 'InfoController@dashboard');
+
+        Route::get('/fetchAuth', 'InfoController@auth');
+        Route::get('/users', 'UserController@activeUsers');
+        Route::get('/users/notActive', 'UserController@notActiveUsers');
+        Route::get('/users/trashed', 'UserController@trashedUsers');
+        Route::put('/users/restore', 'UserController@restoreUser');
+        Route::put('/users/toggleActive', 'UserController@toggleUserActive');
+        Route::DELETE('/users/remove', 'UserController@removeToTrash');
+        Route::DELETE('/users/delete', 'UserController@deleteUser');
     });
 });
 

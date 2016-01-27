@@ -8,8 +8,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="{{ url('/') }}" class="navbar-bread learner-bread learner-bread--hover">
+                <a href="{{ url('/') }}" class="hidden-xs navbar-bread learner-bread learner-bread--hover">
                     L<span class="learner-bread--one">e</span><span class="learner-bread--two">a</span><span class="learner-bread--three">r</span><span class="learner-bread--four">n</span><span class="learner-bread--five">e</span><span class="learner-bread--six">r</span>
+                </a>
+                <a href="{{ url('/') }}" class="visible-xs navbar-bread">
+                    <img src="{{ asset('img/logo.png') }}" class="learner-logo" alt="Logo">
                 </a>
             </div> <!-- navbar-header -->
 
@@ -34,6 +37,14 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            @role(['admin', 'boss'])
+                            <li>
+                                <a href="{{ route('admin.dashboard') }}">
+                                    <i class="fa fa-dashboard"></i>
+                                    {{ lang('navigation.dashboard', "Dashboard") }}
+                                </a>
+                            </li>
+                            @endrole
                             <li>
                                 <a href="{{ route('auth.logout') }}">
                                     <i class="fa fa-btn fa-sign-out"></i>

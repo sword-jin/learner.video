@@ -30,6 +30,16 @@
             background: #FFF;
             padding: 28px 30px;
             border-radius: 0 0 5px 5px;
+
+            input[type='submit'] {
+                background: #637B94;
+                border-color: darken(#637B94, 8%);
+
+                &:hover {
+                    background: darken(#637B94, 15%);
+                    border-color: darken(#637B94, 10%);
+                }
+            }
         }
 
         &__address {

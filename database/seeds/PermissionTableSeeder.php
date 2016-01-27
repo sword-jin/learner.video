@@ -12,14 +12,14 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = Config::get('seeders.permissions');
+        // $permissions = Config::get('seeders.permissions');
 
-        foreach ($permissions as $permission) {
-            Permission::create([
-                'name' => $permission['name'],
-                'display_name' => $permission['display_name'],
-                'description' => $permission['description']
-            ]);
-        }
+        // foreach ($permissions as $permission) {
+        //     Permission::create([
+        //         'name' => $permission['name'],
+        //         'display_name' => $permission['display_name'],
+        //         'description' => $permission['description']
+        //     ]);
+        // }
     }
 }

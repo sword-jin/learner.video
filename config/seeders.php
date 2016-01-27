@@ -4,40 +4,35 @@ return [
     'roles' => [
         [
             'name' => 'user',
-            'display_name' => 'Learner User',
-            'description' => 'general user'
+            'display_name' => 'Learner用户',
+            'description' => '普通用户'
         ],
         [
             'name' => 'admin',
-            'display_name' => 'Learner Admin',
-            'description' => 'manage administration privileges'
+            'display_name' => 'Learner管理员',
+            'description' => '管理Learner日常'
         ],
         [
             'name' => 'boss',
-            'display_name' => 'Learner Boos',
-            'description' => 'the creater of site'
+            'display_name' => 'Learner站长',
+            'description' => '享有Learner一切权利'
         ],
     ],
-    'permissions' => [
-        [
-            'name' => 'create_user',
-            'display_name' => 'Create New User',
-            'description' => 'create a new user for learner on the backend'
-        ],
-        [
-            'name' => 'edit_user',
-            'display_name' => 'Edit User',
-            'description' => 'edit user\'s some infomation'
-        ],
-        [
-            'name' => 'delete_user',
-            'display_name' => 'Delete User',
-            'description' => 'delete user from learner'
-        ],
-        [
-            'name' => 'ban_user',
-            'display_name' => 'Ban User',
-            'description' => 'ban user to login'
-        ]
-    ]
+    // 'permissions' => [
+    //     [
+    //         'name' => 'edit_user',
+    //         'display_name' => '编辑用户',
+    //         'description' => ''
+    //     ],
+    //     [
+    //         'name' => '删除用户',
+    //         'display_name' => '删除用户',
+    //         'description' => ''
+    //     ],
+    //     [
+    //         'name' => 'ban_user',
+    //         'display_name' => '冻结用户',
+    //         'description' => ''
+    //     ]
+    // ]
 ];

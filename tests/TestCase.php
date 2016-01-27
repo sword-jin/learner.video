@@ -25,9 +25,30 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->disableExceptionHandling();
+    }
+
     protected function disableExceptionHandling()
     {
         app()->instance(Handler::class, new PassThroughHandler);
+    }
+
+    protected function addValidator() {
+        $this->app['validator']->extend('valid_username', function($attr, $value, $params) {
+            return ! in_array($value, config('config.forbidden_usernames', []));
+        }, trans('validators.username'));
+    }
+
+    protected function createAGeneralUser()
+    {
+        return factory(Learner\Models\User::class)->create([
+            'username' => 'learner',
+            'email'    => 'foo@bar.com',
+            'password' => Hash::make('121212'),
+        ]);
     }
 }
 
