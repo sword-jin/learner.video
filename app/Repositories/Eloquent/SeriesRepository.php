@@ -5,6 +5,7 @@ namespace Learner\Repositories\Eloquent;
 use Learner\Models\Series;
 use Learner\Repositories\SeriesRepositoryInterface;
 use Learner\Services\Forms\CreateSeriesFormService;
+use Learner\Services\Forms\UpdateSeriesFormService;
 
 class SeriesRepository extends AbstractRepository implements SeriesRepositoryInterface
 {
@@ -36,7 +37,17 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     }
 
     /**
-     * Create a new Series
+     * Get the user updation form service.
+     *
+     * @return \Learner\Services\Forms\UpdateSeriesFormService.
+     */
+    public function getUpdateForm()
+    {
+        return new UpdateSeriesFormService;
+    }
+
+    /**
+     * Create a new Series.
      *
      * @param  array $data
      *
@@ -52,12 +63,58 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
         $newSeries->save();
 
-        return [
-            'id' => $newSeries['id'],
-            'title' => $newSeries['title'],
-            'image' => $newSeries['image'],
-            'description' => $newSeries['description']
-        ];
+        return $newSeries->toArray();
+    }
+
+    /**
+     * Find series by gived id.
+     *
+     * @param integer  $id
+     *
+     * @return
+     */
+    public function findById($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Find image path by id.
+     *
+     * @param  integer $id
+     *
+     * @return string
+     */
+    public function findImageById($id)
+    {
+        return array_get($this->findById($id), 'image');
+    }
+
+    /**
+     * Update Series by id.
+     *
+     * @param  integer $id
+     * @param  array   $data
+     *
+     * @return array
+     */
+    public function update($id, $data)
+    {
+        $series = $this->findById($id);
+
+        $series->update($data);
+
+        return $this->findByIdWithRelation($series->id)->toArray();
+    }
+
+    /**
+     * Delete the series from the database.
+     *
+     * @return bool|null
+     */
+    public function deleteById($id)
+    {
+        return $this->findById($id)->delete();
     }
 
     /**
@@ -68,5 +125,10 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     public function findAllWithRelation()
     {
         return $this->model->with(self::$relations)->get();
+    }
+
+    public function findByIdWithRelation($id)
+    {
+        return $this->model->with(self::$relations)->findOrFail($id);
     }
 }

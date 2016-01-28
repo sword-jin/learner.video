@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class AvatarManagerService extends ImageManagerService
 {
-    use ImageTrait;
+    use ManagerTrait;
 
     /**
      * The directory to safe image uploads to.
@@ -88,22 +88,6 @@ class AvatarManagerService extends ImageManagerService
                 ->save($this->getFullpath($path), self::$quality);
 
         return $path;
-    }
-
-    /**
-     * Delete avatar by path.
-     *
-     * @param  string $path
-     *
-     * @return
-     */
-    public function delete($path)
-    {
-        $fullPath = $this->getFullpath($path);
-
-        if (is_file($fullPath)) {
-            unlink($fullPath);
-        }
     }
 
     /**

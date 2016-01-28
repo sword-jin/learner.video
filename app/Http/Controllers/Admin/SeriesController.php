@@ -2,6 +2,9 @@
 
 namespace Learner\Http\Controllers\Admin;
 
+use Log;
+use Auth;
+use Hash;
 use ImageManager;
 use Illuminate\Http\Request;
 use Learner\Http\Controllers\Admin\BaseController;
@@ -39,30 +42,80 @@ class SeriesController extends BaseController
     /**
      * Create a new series.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store()
     {
         $form = $this->series->getCreateForm();
 
         if (! $form->isValid()) {
-            return $this->responseJson(['errors' => $form->getErrors()], 413);
+            return $this->responseJson(['errors' => $form->getErrors()], 400);
         }
 
         $seriesData = $form->getInputData();
 
-        $imagePath = ImageManager::saveSeriesImage($seriesData['image']);
+        $series = $this->series->create([
+            'title' => $seriesData['title'],
+            'description' => $seriesData['description'],
+            'image' => ImageManager::saveSeriesImage($seriesData['image'])
+        ]);
 
+        return $this->responseJson(['message' => '系列创建成功', 'data' => $series]);
+    }
+
+    /**
+     * Update series.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update($id)
+    {
+        $form = $this->series->getUpdateForm();
+
+        if (! $form->isValid()) {
+            return $this->responseJson(['errors' => $form->getErrors()], 400);
+        }
+
+        $seriesData = $form->getInputData();
         $data = [
             'title' => $seriesData['title'],
             'description' => $seriesData['description'],
-            'image' => $imagePath
         ];
 
-        $series = $this->series->create($data);
+        if (key_exists('image', $seriesData)) {
+            $imagePath = ImageManager::changeSeriesImage(
+                    $seriesData['image'],
+                    $this->series->findImageById($id)
+            );
 
-        return $this->responseJson(['message' => '系列创建成功', 'data' => $series]);
+            $data['image'] = $imagePath;
+        }
+
+        $series = $this->series->update($id, $data);
+
+        return $this->responseJson(['message' => '系列修改成功', 'data' => $series]);
+    }
+
+    /**
+     * Delete series.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destory(Request $request, $id)
+    {
+        $truePassword = Auth::user()->password;
+
+        if (Hash::check($request->get('password'), $truePassword)) {
+            // delete image.
+            ImageManager::delete($this->series->findImageById($id));
+            // remove from db.
+            $this->series->deleteById($id);
+
+            Log::warning(lang("log.deleteSeriesSuccess", "You delete a series."));
+            return $this->responseJson(['message' => '删除成功！']);
+        }
+
+        Log::warning(lang("log.deleteSeriesError", "MayBe Someone want delete your series."));
+        return $this->responseJson(['error' => '密码错误，记录日志'], 403);
     }
 }

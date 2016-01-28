@@ -41,6 +41,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/series', 'SeriesController@index');
         Route::post('/series', 'SeriesController@store');
+        Route::post('/series/update/{id}', 'SeriesController@update');
+        Route::delete('/series/{id}', 'SeriesController@destory');
     });
 });
 

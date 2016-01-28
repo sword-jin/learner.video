@@ -6,7 +6,7 @@ use Image;
 
 class ImageManagerService
 {
-    use ImageTrait;
+    use ManagerTrait;
 
     /**
      * The dimensions to width the series image to.
@@ -37,7 +37,7 @@ class ImageManagerService
     /**
      * Save the series image.
      *
-     * @param  string $image
+     * @param  Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
      * @return string
      */
@@ -53,6 +53,22 @@ class ImageManagerService
         $img->save($fullpath);
 
         return $filepath;
+    }
+
+    /**
+     * Change the series image.
+     *
+     * @param  Symfony\Component\HttpFoundation\File\UploadedFile $image
+     * @param  string $imagePath
+     *
+     * @return string
+     */
+    public function changeSeriesImage($image, $imagePath)
+    {
+        // remove origin image
+        $this->delete($imagePath);
+        // create new image
+        return $this->saveSeriesImage($image);
     }
 
     /**

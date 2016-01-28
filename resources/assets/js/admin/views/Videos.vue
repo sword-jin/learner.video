@@ -1,6 +1,20 @@
 <template>
 <div class="row">
-    <div class="col-sm-9">
+    <div class="form-group" class="col-sm-3" style="text-align: center">
+        <button class="btn btn-success btn-lg"
+            @click="addSeries()">
+            <i class="fa fa-film"></i> 添加系列
+        </button>
+    </div>
+    <div class="form-group" style="text-align: center">
+        <button class="btn btn-success btn-lg">
+            <span class="fa fa-youtube-play"></span> 添加视频
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
 
         <div class="alert alert-success" v-show="success">
             {{ message }}
@@ -16,8 +30,9 @@
                     <thead>
                         <tr>
                             <th v-for="column in seriesColumns">{{ column }}</th>
-                            <th width="1%"><i class="fa fa-eye"></i></th>
-                            <th width="1%"><i class="fa fa-edit"></i></th>
+                            <th><i class="fa fa-eye"></i>展开</th>
+                            <th><i class="fa fa-edit"></i>编辑</th>
+                            <th><i class="fa fa-remove"></i>删除</th>
                         </tr>
                     </thead>
                     <tbody v-for="serie in series">
@@ -25,6 +40,7 @@
                             <td>{{ serie.id }}</td>
                             <td width="15%"><img :src="serie.image" width="30px"></td>
                             <td>{{ serie.title }}</td>
+                            <td>{{ serie.videos.length }}</td>
                             <td>{{ serie.created_at | date }}</td>
                             <td>
                                 <a @click.stop="toggleDescription(serie.id)">
@@ -39,9 +55,14 @@
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
+                            <td>
+                                <a @click="deleteSeriesForm(serie.id)" class="deleteSeries">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            </td>
                         </tr>
                         <tr v-show="showDescription.indexOf(serie.id) > -1">
-                            <td colspan="6"><b>描述：</b>{{ serie.description }}</td>
+                            <td colspan="8"><b>描述：</b>{{ serie.description }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -53,33 +74,35 @@
         </div>
     </div> <!-- col-12 -->
 
-    <div class="col-sm-3">
-        <div class="panel">
-            <header class="panel-heading">
-                操作
-            </header> <!-- panel-heading -->
+    <form @submit.prevent="deleteSeries" id="deleteSeries">
+        <div class="modal fade" id="deleteSeriesModal">
+             <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">请输入密码</h4>
+                    </div>
 
-            <div class="panel-body">
-                <div class="form-group" style="text-align: center">
-                    <button class="btn btn-success btn-lg"
-                        @click="addSeries()">
-                        <i class="fa fa-film"></i> 添加系列
-                    </button>
-                </div>
-                <div class="form-group" style="text-align: center">
-                    <button class="btn btn-success btn-lg">
-                        <span class="fa fa-youtube-play"></span> 添加视频
-                    </button>
+                    <div class="alert alert-danger" v-if="hasError">
+                        {{ error }}
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" id="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="submit" class="btn btn-danger" value="确认"></input>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> <!-- col-3 -->
+    </form>
 
     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
-
-        <input type="hidden" name="id" v-if="editing" v-model="serie.id">
-
-        <div class="modal fade" id="createModal">
+        <div class="modal fade" id="createSeriesModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -94,18 +117,18 @@
                         </div>
                         <div class="form-group">
                             <label for="serieTitle">标题</label>
-                            <input type="text" name="title" v-model="serie.title" id="serieTitle" class="form-control">
+                            <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="serieImage">图片</label>
                             <input type="file" name="image" id="serieImage" class="form-control">
                         </div>
                         <div class="form-group" v-if="editing">
-                            <img v-attr="src: editImageSrc" id="editImageSrc">
+                            <img :src="newSerie.image" id="editImageSrc">
                         </div>
                         <div class="form-group">
                             <label for="serieDescription">描述</label>
-                            <textarea type="file" name="description" v-model="serie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+                            <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -127,21 +150,31 @@ module.exports = {
                 'ID',
                 '图片',
                 '标题',
+                '视频数',
                 '创建时间'
             ],
-            serie: {
-                'id': 0,
+            newSerie: {
+                'id': '',
                 'title': '',
-                'description': ''
+                'description': '',
+                'image': '',
+                'created_at': '',
+                'updated_at': '',
+                videos: []
             },
             series: [],
             showDescription: [],
+            // message
             success: false,
             message: '',
             hasError: false,
+            error: '',
             errors: [],
+            // edit series
             editing: false,
-            editImageSrc: ''
+            editImageSrc: '',
+            // delete series
+            deleteId: ''
         }
     },
     computed: {
@@ -168,13 +201,12 @@ module.exports = {
         getSeries() {
             this.$http.get('/admin/series')
             .then(function(response) {
-                console.log(response);
                 this.series = response.data;
             });
         },
 
         toggleDescription(id) {
-            var index = this.showDescription.indexOf(id);
+            let index = this.showDescription.indexOf(id);
 
             if (index > -1) {
                 this.showDescription.$remove(id);
@@ -183,19 +215,29 @@ module.exports = {
             }
         },
 
+        findIndexById(id) {
+            let ids = this.series.map(s => s.id);
+
+            return ids.indexOf(id);
+        },
+
         saveSerie(e) {
-            var self = this;
+            let self = this;
             e.preventDefault();
 
-            var request = new XMLHttpRequest();
-            var formdata = new FormData(document.getElementById('serieForm'));
-            request.open('post', '/admin/series');
+            let request = new XMLHttpRequest();
+            let formdata = new FormData(document.getElementById('serieForm'));
+            if (! self.editing) {
+                request.open('post', '/admin/series');
+            } else {
+                request.open('post', '/admin/series/update/' + self.newSerie.id);
+            }
             request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
             request.send(formdata);
 
             request.onreadystatechange = function() {
                 if (this.readyState == 4) { // 对象读取服务器响应结束
-                    if (request.status == 413) {
+                    if (request.status == 400) {
                         self.hasError = true;
 
                         self.errors = JSON.parse(request.responseText).errors;
@@ -204,20 +246,19 @@ module.exports = {
                             self.hasError = false;
                         }, 2800);
                     } else if (request.status == 200) {
-                        jQuery('#createModal').modal('hide');
+                        jQuery('#createSeriesModal').modal('hide');
 
                         self.resetSeriesForm();
 
                         self.showMessage(JSON.parse(request.responseText).message);
 
-                        var serie = JSON.parse(request.responseText).data;
+                        let serie = JSON.parse(request.responseText).data;
 
-                        self.series.push({
-                            id: serie['id'],
-                            title: serie['title'],
-                            description: serie['description'],
-                            image: serie['image']
-                        });
+                        if (self.editing) {
+                            self.updateSeries(serie);
+                        } else {
+                            self.pushSeries(serie);
+                        }
                     }
                 }
             }
@@ -225,28 +266,71 @@ module.exports = {
 
         addSeries() {
             this.editing = false;
+            this.resetSeriesForm();
 
-            jQuery('#createModal').modal('show');
+            jQuery('#createSeriesModal').modal('show');
         },
 
         editSeries(serie) {
             this.editing = true;
-            this.serie.id = serie.id;
-            this.serie.title = serie.title;
-            this.serie.description = serie.description;
-            this.editImageSrc = serie.image;
-            console.log(serie.image);
-            // jQuery('#editImageSrc').attr('src', serie.image);
-            // jQuery('#serieImage').val(serie.image);
+            this.setSeriesForm(serie.id, serie.title, serie.description,
+                serie.image, serie.created_at, serie.updated_at, serie.videos);
 
-            jQuery('#createModal').modal('show');
+            jQuery('#createSeriesModal').modal('show');
+        },
+
+        deleteSeriesForm(id) {
+            jQuery('#password').val('');
+            this.deleteId = id;
+
+            jQuery('#deleteSeriesModal').modal('show');
+        },
+
+        deleteSeries() {
+            var self = this;
+            let password = jQuery('#password').val();
+
+            if (password.length == 0) {
+                return;
+            }
+
+            self.$http.delete('/admin/series/' + self.deleteId, {password})
+                .then(function(response) {
+                    this.showMessage(response.data.message);
+
+                    jQuery('#deleteSeriesModal').modal('hide');
+                })
+                .error(function(response) {
+                    self.hasError = true;
+                    self.error = response.error;
+                    console.log(self.error);
+
+                    setTimeout(function() {
+                        self.hasError = false;
+
+                        jQuery('#deleteSeriesModal').modal('hide');
+                    }, 2800);
+                });
+
+        },
+
+        setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
+            this.newSerie = {id, title, description, image, created_at, updated_at, videos};
         },
 
         resetSeriesForm() {
-            this.serie.id = 0;
-            this.serie.title = '';
-            this.serie.description = '';
+            this.setSeriesForm('', '', '', '', '', '', '', []);
             $('#serieImage').val('');
+        },
+
+        pushSeries(serie) {
+            this.series.push(serie);
+        },
+
+        updateSeries(serie) {
+            let index = this.findIndexById(serie.id);
+
+            this.series.$set(index, serie);
         },
 
         showMessage(message) {
@@ -260,3 +344,12 @@ module.exports = {
     }
 }
 </script>
+
+<style>
+.deleteSeries {
+    color: #ee3939;
+}
+.deleteSeries:hover {
+    color: #ac2925;
+}
+</style>

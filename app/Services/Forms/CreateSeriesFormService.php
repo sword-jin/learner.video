@@ -12,7 +12,7 @@ class CreateSeriesFormService extends AbstractFormService
     protected $rules = [
         'title' => 'required|max:120',
         'description' => 'required',
-        'image' => 'required|image',
+        'image' => 'image'
     ];
 
     /**
