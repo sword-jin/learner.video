@@ -38,6 +38,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::put('/users/toggleActive', 'UserController@toggleUserActive');
         Route::DELETE('/users/remove', 'UserController@removeToTrash');
         Route::DELETE('/users/delete', 'UserController@deleteUser');
+
+        Route::get('/series', 'SeriesController@index');
+        Route::post('/series', 'SeriesController@store');
     });
 });
 

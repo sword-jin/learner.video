@@ -5,8 +5,10 @@ namespace Learner\Services\Image;
 use Avatar;
 use Illuminate\Filesystem\Filesystem;
 
-class AvatarManagerService
+class AvatarManagerService extends ImageManagerService
 {
+    use ImageTrait;
+
     /**
      * The directory to safe image uploads to.
      *
@@ -15,18 +17,18 @@ class AvatarManagerService
     protected static $directory = 'img/avatar/temp';
 
     /**
-     * The extension to use for image files.
-     *
-     * @var string
-     */
-    protected static $extension = 'png';
-
-    /**
-     * The dimensions to resize the image to.
+     * The dimensions to width the image to.
      *
      * @var int
      */
-    protected static $size = 160;
+    protected static $width = 160;
+
+    /**
+     * The dimensions to height the image to.
+     *
+     * @var int
+     */
+    protected static $height = 160;
 
     /**
      * The dimensions to resize the font size to.
@@ -43,23 +45,18 @@ class AvatarManagerService
     protected static $quality = 100;
 
     /**
+     * The extension to use for image files.
+     *
+     * @var string
+     */
+    protected static $extension = 'png';
+
+    /**
      * Create the avatar directory.
      */
     public function __construct()
     {
         $this->createDirectory(self::$directory);
-    }
-
-    /**
-     * Get
-     *
-     * @param  string $path
-     *
-     * @return string
-     */
-    public function getFullpath($path)
-    {
-        return public_path() . '/' . $path;
     }
 
     /**
@@ -86,7 +83,7 @@ class AvatarManagerService
         $path = $this->getFilePath($name);
 
         Avatar::create(mb_strtoupper($name))
-                ->setDimension(self::$size)
+                ->setDimension(self::$width, self::$height)
                 ->setFontSize(self::$fontSize)
                 ->save($this->getFullpath($path), self::$quality);
 
@@ -94,18 +91,18 @@ class AvatarManagerService
     }
 
     /**
-     * Delete avatar by name.
+     * Delete avatar by path.
      *
-     * @param  string $username
+     * @param  string $path
      *
      * @return
      */
-    public function delete($name)
+    public function delete($path)
     {
-        $path = $this->getFullpath(self::$directory . '/' . $name . '.' . self::$extension);
+        $fullPath = $this->getFullpath($path);
 
-        if (is_file($path)) {
-            unlink($path);
+        if (is_file($fullPath)) {
+            unlink($fullPath);
         }
     }
 

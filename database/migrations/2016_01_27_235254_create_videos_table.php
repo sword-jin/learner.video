@@ -14,8 +14,8 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned()->index();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('series_id')->unsigned()->index();
+            $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
             $table->string('title', 120);
             $table->text('description')->nullable();
             $table->enum('resource_type', ['vimeo', 'youtube', 'youku']);

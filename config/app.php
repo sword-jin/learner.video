@@ -157,6 +157,7 @@ return [
         Learner\Providers\RouteServiceProvider::class,
         Learner\Providers\RepositoryServiceProvider::class,
         Learner\Providers\AvatarServiceProvider::class,
+        Learner\Providers\ImageManagerServiceProvider::class,
         Learner\Providers\AuthBladeServiceProvider::class,
 
         /************************************
@@ -219,6 +220,7 @@ return [
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'AvatarManager' => Learner\Facades\AvatarManager::class,
+        'ImageManager' => Learner\Facades\ImageManager::class,
 
     ],
 

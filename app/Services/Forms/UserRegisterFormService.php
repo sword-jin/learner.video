@@ -23,13 +23,18 @@ class UserRegisterFormService extends AbstractFormService
     public function getAttributes()
     {
         return [
-            'username' => trans('register.username'),
-            'email'    => trans('register.email'),
-            'password' => trans('register.password'),
-            'password_confirmation' => trans('register.password_confirmation'),
+            'username' => lang('register.username', 'Username'),
+            'email'    => lang('register.email', 'Email'),
+            'password' => lang('register.password', 'Password'),
+            'password_confirmation' => lang('register.password_confirmation', 'Password ConFirmation'),
         ];
     }
 
+    /**
+     * Get the prepared input data.
+     *
+     * @return array
+     */
     public function getInputData()
     {
         return array_only($this->inputData, [

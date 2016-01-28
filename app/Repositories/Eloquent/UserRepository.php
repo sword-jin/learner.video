@@ -167,7 +167,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     {
         $user = $this->findById($id);
 
-        AvatarManager::delete($user->username);
+        AvatarManager::delete($user->avatar);
 
         $user->forceDelete();
     }

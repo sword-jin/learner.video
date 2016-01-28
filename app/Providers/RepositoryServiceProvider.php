@@ -20,5 +20,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Learner\Repositories\RoleRepositoryInterface',
             'Learner\Repositories\Eloquent\RoleRepository'
         );
+
+        $this->app->bind(
+            'Learner\Repositories\SeriesRepositoryInterface',
+            'Learner\Repositories\Eloquent\SeriesRepository'
+        );
     }
 }

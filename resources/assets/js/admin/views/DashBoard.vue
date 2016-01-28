@@ -67,29 +67,6 @@
             </div>
         </section>
     </div><!--end col-9 -->
-    <div class="col-md-3">
-        <section class="panel">
-            <header class="panel-heading">
-                权限浏览
-            </header>
-            <div class="panel-body table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>显示名称</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="perm in all_perms">
-                            <td>{{ perm.id }}</td>
-                            <td>{{ perm.display_name }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </div>
 </div>
 </template>
 
@@ -111,7 +88,6 @@ module.exports = {
         getInformation() {
             this.$http.get('/admin/dashboard/information')
                 .then(function(response) {
-                    console.log(response);
                     let data = response.data;
 
                     this.user_count = data.info.user_count;

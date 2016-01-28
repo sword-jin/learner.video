@@ -70,6 +70,9 @@ class AuthController extends BaseController
     {
         $this->validate($request, [
             $this->loginUsername() => 'required', 'password' => 'required',
+        ], [
+            'credential.required' => lang('auth.credential.required', 'Credential is required.'),
+            'password.required' => lang('auth.password.required', 'Password is required.')
         ]);
 
         $credentials = $this->getCredentials($request);

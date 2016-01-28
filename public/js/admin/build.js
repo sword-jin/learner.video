@@ -300,7 +300,8 @@
 	//                 </a>
 	//             </li>
 	//
-	//             <li v-link="{name: 'videos', activeClass: 'active'}">
+	//             <li v-link="{name: 'videos', activeClass: 'active'}"
+	//                 v-if="isBoss">
 	//                 <a>
 	//                     <i class="fa fa-globe"></i> <span>视频</span>
 	//                 </a>
@@ -326,11 +327,17 @@
 	//
 	// <script>
 	module.exports = {
-	    data: function data() {
-	        return {};
-	    },
+	    props: ['auth'],
 
-	    props: ['auth']
+	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.auth.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        }
+	    }
 	};
 	// </script>
 	//
@@ -339,7 +346,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
+	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\"\n                v-if=\"isBoss\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
 
 /***/ },
 /* 7 */
@@ -438,29 +445,6 @@
 	//             </div>
 	//         </section>
 	//     </div><!--end col-9 -->
-	//     <div class="col-md-3">
-	//         <section class="panel">
-	//             <header class="panel-heading">
-	//                 权限浏览
-	//             </header>
-	//             <div class="panel-body table-responsive">
-	//                 <table class="table table-hover">
-	//                     <thead>
-	//                         <tr>
-	//                             <th>#</th>
-	//                             <th>显示名称</th>
-	//                         </tr>
-	//                     </thead>
-	//                     <tbody>
-	//                         <tr v-for="perm in all_perms">
-	//                             <td>{{ perm.id }}</td>
-	//                             <td>{{ perm.display_name }}</td>
-	//                         </tr>
-	//                     </tbody>
-	//                 </table>
-	//             </div>
-	//         </section>
-	//     </div>
 	// </div>
 	// </template>
 	//
@@ -480,7 +464,6 @@
 	    methods: {
 	        getInformation: function getInformation() {
 	            this.$http.get('/admin/dashboard/information').then(function (response) {
-	                console.log(response);
 	                var data = response.data;
 
 	                this.user_count = data.info.user_count;
@@ -497,7 +480,7 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                系列\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n    <div class=\"col-md-3\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                权限浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>显示名称</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"perm in all_perms\">\n                            <td>{{ perm.id }}</td>\n                            <td>{{ perm.display_name }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </section>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                系列\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n</div>\n";
 
 /***/ },
 /* 10 */
@@ -880,12 +863,19 @@
 
 	// <template>
 	// <div class="row" style="margin-bottom:5px;">
-	//     <div class="col-xs-12">
-	//         <select v-model="model" class="form-control">
-	//             <option selected value="active">活跃会员</option>
-	//             <option value="notActive">冻结会员</option>
-	//             <option value="trashed" v-if="isBoss">回收站</option>
-	//         </select>
+	//     <div class="form-group">
+	//         <form class="form-horizontal" role="form">
+	//             <label class="col-xs-2 control-label">
+	//                 选择查看模式
+	//             </label>
+	//             <div class="col-xs-10">
+	//                 <select v-model="model" class="form-control">
+	//                     <option selected value="active">活跃会员</option>
+	//                     <option value="notActive">冻结会员</option>
+	//                     <option value="trashed" v-if="isBoss">回收站</option>
+	//                 </select>
+	//             </div>
+	//         </form>
 	//     </div>
 	// </div>
 	// <div class="row">
@@ -1206,17 +1196,29 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-xs-12\">\n        <select v-model=\"model\" class=\"form-control\">\n            <option selected value=\"active\">活跃会员</option>\n            <option value=\"notActive\">冻结会员</option>\n            <option value=\"trashed\" v-if=\"isBoss\">回收站</option>\n        </select>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <form class=\"form-horizontal\" role=\"form\">\n            <label class=\"col-xs-2 control-label\">\n                选择查看模式\n            </label>\n            <div class=\"col-xs-10\">\n                <select v-model=\"model\" class=\"form-control\">\n                    <option selected value=\"active\">活跃会员</option>\n                    <option value=\"notActive\">冻结会员</option>\n                    <option value=\"trashed\" v-if=\"isBoss\">回收站</option>\n                </select>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
 
 /***/ },
 /* 17 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(47)
+	__vue_template__ = __webpack_require__(48)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Videos.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 18 */
@@ -15127,6 +15129,273 @@
 
 	module.exports = _.resource = Resource;
 
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	// <div class="row">
+	//     <div class="col-sm-9">
+	//
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 系列列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in seriesColumns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-eye"></i></th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody v-for="serie in series">
+	//                         <tr>
+	//                             <td>{{ serie.id }}</td>
+	//                             <td width="15%"><img :src="serie.image" width="30px"></td>
+	//                             <td>{{ serie.title }}</td>
+	//                             <td>{{ serie.created_at | date }}</td>
+	//                             <td>
+	//                                 <a @click.stop="toggleDescription(serie.id)">
+	//                                     <i class="fa"
+	//                                        :class="{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,
+	//                                                  'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }"
+	//                                     ></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td>
+	//                                 <a @click="editSeries(serie)">
+	//                                     <i class="fa fa-edit"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                         <tr v-show="showDescription.indexOf(serie.id) > -1">
+	//                             <td colspan="6"><b>描述：</b>{{ serie.description }}</td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//             </div> <!-- panel-body -->
+	//
+	//             <div class="table-foot">
+	//
+	//             </div> <!-- panel-foot -->
+	//         </div>
+	//     </div> <!-- col-12 -->
+	//
+	//     <div class="col-sm-3">
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 操作
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <div class="form-group" style="text-align: center">
+	//                     <button class="btn btn-success btn-lg"
+	//                         @click="addSeries()">
+	//                         <i class="fa fa-film"></i> 添加系列
+	//                     </button>
+	//                 </div>
+	//                 <div class="form-group" style="text-align: center">
+	//                     <button class="btn btn-success btn-lg">
+	//                         <span class="fa fa-youtube-play"></span> 添加视频
+	//                     </button>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div> <!-- col-3 -->
+	//
+	//     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
+	//
+	//         <input type="hidden" name="id" v-if="editing" v-model="serie.id">
+	//
+	//         <div class="modal fade" id="createModal">
+	//             <div class="modal-dialog">
+	//                 <div class="modal-content">
+	//                     <div class="modal-header">
+	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                         <h4 class="modal-title">系列管理</h4>
+	//                     </div>
+	//                     <div class="modal-body">
+	//                         <div class="alert alert-danger" v-if="hasError">
+	//                             <ul>
+	//                                 <li v-for="error in errorArray">{{ error }}</li>
+	//                             </ul>
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieTitle">标题</label>
+	//                             <input type="text" name="title" v-model="serie.title" id="serieTitle" class="form-control">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieImage">图片</label>
+	//                             <input type="file" name="image" id="serieImage" class="form-control">
+	//                         </div>
+	//                         <div class="form-group" v-if="editing">
+	//                             <img v-attr="src: editImageSrc" id="editImageSrc">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieDescription">描述</label>
+	//                             <textarea type="file" name="description" v-model="serie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+	//                         </div>
+	//                     </div>
+	//                     <div class="modal-footer">
+	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                         <button type="submit" class="btn btn-primary">保存</button>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </form> <!-- form -->
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            seriesColumns: ['ID', '图片', '标题', '创建时间'],
+	            serie: {
+	                'id': 0,
+	                'title': '',
+	                'description': ''
+	            },
+	            series: [],
+	            showDescription: [],
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            errors: [],
+	            editing: false,
+	            editImageSrc: ''
+	        };
+	    },
+
+	    computed: {
+	        errorArray: function errorArray() {
+	            var errors = [];
+
+	            if (this.errors.title) {
+	                errors.push(this.errors.title[0]);
+	            }
+	            if (this.errors.image) {
+	                errors.push(this.errors.image[0]);
+	            }
+	            if (this.errors.description) {
+	                errors.push(this.errors.description[0]);
+	            }
+
+	            return errors;
+	        }
+	    },
+	    created: function created() {
+	        this.getSeries();
+	    },
+
+	    methods: {
+	        getSeries: function getSeries() {
+	            this.$http.get('/admin/series').then(function (response) {
+	                console.log(response);
+	                this.series = response.data;
+	            });
+	        },
+	        toggleDescription: function toggleDescription(id) {
+	            var index = this.showDescription.indexOf(id);
+
+	            if (index > -1) {
+	                this.showDescription.$remove(id);
+	            } else {
+	                this.showDescription.push(id);
+	            }
+	        },
+	        saveSerie: function saveSerie(e) {
+	            var self = this;
+	            e.preventDefault();
+
+	            var request = new XMLHttpRequest();
+	            var formdata = new FormData(document.getElementById('serieForm'));
+	            request.open('post', '/admin/series');
+	            request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
+	            request.send(formdata);
+
+	            request.onreadystatechange = function () {
+	                if (this.readyState == 4) {
+	                    // 对象读取服务器响应结束
+	                    if (request.status == 413) {
+	                        self.hasError = true;
+
+	                        self.errors = JSON.parse(request.responseText).errors;
+
+	                        setTimeout(function () {
+	                            self.hasError = false;
+	                        }, 2800);
+	                    } else if (request.status == 200) {
+	                        jQuery('#createModal').modal('hide');
+
+	                        self.resetSeriesForm();
+
+	                        self.showMessage(JSON.parse(request.responseText).message);
+
+	                        var serie = JSON.parse(request.responseText).data;
+
+	                        self.series.push({
+	                            id: serie['id'],
+	                            title: serie['title'],
+	                            description: serie['description'],
+	                            image: serie['image']
+	                        });
+	                    }
+	                }
+	            };
+	        },
+	        addSeries: function addSeries() {
+	            this.editing = false;
+
+	            jQuery('#createModal').modal('show');
+	        },
+	        editSeries: function editSeries(serie) {
+	            this.editing = true;
+	            this.serie.id = serie.id;
+	            this.serie.title = serie.title;
+	            this.serie.description = serie.description;
+	            this.editImageSrc = serie.image;
+	            console.log(serie.image);
+	            // jQuery('#editImageSrc').attr('src', serie.image);
+	            // jQuery('#serieImage').val(serie.image);
+
+	            jQuery('#createModal').modal('show');
+	        },
+	        resetSeriesForm: function resetSeriesForm() {
+	            this.serie.id = 0;
+	            this.serie.title = '';
+	            this.serie.description = '';
+	            $('#serieImage').val('');
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        }
+	    }
+	};
+	// </script>
+	//
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\">\n    <div class=\"col-sm-9\">\n\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                系列列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in seriesColumns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-eye\"></i></th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody v-for=\"serie in series\">\n                        <tr>\n                            <td>{{ serie.id }}</td>\n                            <td width=\"15%\"><img :src=\"serie.image\" width=\"30px\"></td>\n                            <td>{{ serie.title }}</td>\n                            <td>{{ serie.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"toggleDescription(serie.id)\">\n                                    <i class=\"fa\"\n                                       :class=\"{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,\n                                                 'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }\"\n                                    ></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"editSeries(serie)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                        <tr v-show=\"showDescription.indexOf(serie.id) > -1\">\n                            <td colspan=\"6\"><b>描述：</b>{{ serie.description }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div> <!-- panel-body -->\n\n            <div class=\"table-foot\">\n\n            </div> <!-- panel-foot -->\n        </div>\n    </div> <!-- col-12 -->\n\n    <div class=\"col-sm-3\">\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                操作\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <div class=\"form-group\" style=\"text-align: center\">\n                    <button class=\"btn btn-success btn-lg\"\n                        @click=\"addSeries()\">\n                        <i class=\"fa fa-film\"></i> 添加系列\n                    </button>\n                </div>\n                <div class=\"form-group\" style=\"text-align: center\">\n                    <button class=\"btn btn-success btn-lg\">\n                        <span class=\"fa fa-youtube-play\"></span> 添加视频\n                    </button>\n                </div>\n            </div>\n        </div>\n    </div> <!-- col-3 -->\n\n    <form @submit=\"saveSerie\" id=\"serieForm\" enctype=\"multipart/form-data\">\n\n        <input type=\"hidden\" name=\"id\" v-if=\"editing\" v-model=\"serie.id\">\n\n        <div class=\"modal fade\" id=\"createModal\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">系列管理</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"alert alert-danger\" v-if=\"hasError\">\n                            <ul>\n                                <li v-for=\"error in errorArray\">{{ error }}</li>\n                            </ul>\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieTitle\">标题</label>\n                            <input type=\"text\" name=\"title\" v-model=\"serie.title\" id=\"serieTitle\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"serieImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img v-attr=\"src: editImageSrc\" id=\"editImageSrc\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieDescription\">描述</label>\n                            <textarea type=\"file\" name=\"description\" v-model=\"serie.description\" id=\"serieDescription\" class=\"form-control\" rows=\"6\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <button type=\"submit\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form> <!-- form -->\n</div>\n";
 
 /***/ }
 /******/ ]);
