@@ -48,6 +48,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/series', 'SeriesController@store');
         Route::post('/series/update/{id}', 'SeriesController@update');
         Route::delete('/series/{id}', 'SeriesController@destory');
+
+        Route::get('/videos', 'VideoController@index');
+        Route::post('/videos', 'VideoController@store');
     });
 });
 

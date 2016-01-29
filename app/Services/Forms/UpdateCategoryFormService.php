@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Forms;
 
-class UpdateCategoryFormService extends AbstractFormService
+class UpdateCategoryFormService extends CreateCategoryFormService
 {
     /**
      * The validation rules to validate the input data against.

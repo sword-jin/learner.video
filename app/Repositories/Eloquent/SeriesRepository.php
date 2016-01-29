@@ -10,9 +10,9 @@ use Learner\Services\Forms\UpdateSeriesFormService;
 class SeriesRepository extends AbstractRepository implements SeriesRepositoryInterface
 {
     /**
-     * The user relate models.
+     * The seires relate models.
      *
-     * @var string
+     * @var array
      */
     protected static $relations = ['videos', 'categories'];
 
@@ -24,6 +24,11 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     public function __construct(Series $series)
     {
         $this->model = $series;
+    }
+
+    public function listIdAndTitle()
+    {
+        return $this->model->select('id', 'title')->get();
     }
 
     /**
@@ -65,7 +70,8 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
         $newSeries->categories()->sync($data['categories']);
 
-        return $this->findByIdWithRelation($newSeries->id)->toArray();
+        return $this->findByIdWithRelation($newSeries->id, static::$relations)
+                    ->toArray();
     }
 
     /**
@@ -96,7 +102,8 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
         $series->categories()->sync($data['categories']);
 
-        return $this->findByIdWithRelation($series->id)->toArray();
+        return $this->findByIdWithRelation($series->id, static::$relations)
+                    ->toArray();
     }
 
     /**
@@ -107,10 +114,5 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     public function findAllWithRelation()
     {
         return $this->model->with(self::$relations)->get();
-    }
-
-    public function findByIdWithRelation($id)
-    {
-        return $this->model->with(self::$relations)->findOrFail($id);
     }
 }

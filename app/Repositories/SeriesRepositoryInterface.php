@@ -52,13 +52,4 @@ interface SeriesRepositoryInterface
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
      */
     public function findAllWithRelation();
-
-    /**
-     * Get series with relation by id.
-     *
-     * @param  integer $id
-     *
-     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
-     */
-    public function findByIdWithRelation($id);
 }

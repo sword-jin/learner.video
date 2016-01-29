@@ -49,7 +49,7 @@ class SeriesController extends BaseController
     public function index()
     {
         $series = $this->series->findAllWithRelation();
-        $categories = $this->categories->listAll();
+        $categories = $this->categories->listIdAndName();
 
         return $this->responseJson(compact('series', 'categories'));
     }

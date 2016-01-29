@@ -40,11 +40,24 @@ abstract class AbstractRepository
      *
      * @param integer  $id
      *
-     * @return
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection
      */
     public function findById($id)
     {
         return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Find instance with relation by id.
+     *
+     * @param  integer $id
+     * @param  string|array $relations
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection
+     */
+    public function findByIdWithRelation($id, $relations)
+    {
+        return $this->model->with($relations)->findOrFail($id);
     }
 
     /**

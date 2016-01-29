@@ -30,5 +30,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Learner\Repositories\CategoryRepositoryInterface',
             'Learner\Repositories\Eloquent\CategoryRepository'
         );
+
+        $this->app->bind(
+            'Learner\Repositories\VideoRepositoryInterface',
+            'Learner\Repositories\Eloquent\VideoRepository'
+        );
     }
 }

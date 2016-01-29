@@ -64,7 +64,7 @@
 
                 <div class="alert alert-danger" v-if="hasError">
                     <ul>
-                        <li v-for="error in errorArray">{{ error }}</li>
+                        <li v-for="error in errors">{{ error }}</li>
                     </ul>
                 </div>
 
@@ -167,19 +167,6 @@ module.exports = {
             let names = this.roles.map(role => role.name);
 
             return names.indexOf('boss') != -1;
-        },
-
-        errorArray() {
-            let errors = [];
-
-            if (this.errors.name) {
-                errors.push(this.errors.name[0]);
-            }
-            if (this.errors.image) {
-                errors.push(this.errors.image[0]);
-            }
-
-            return errors;
         }
     },
 
@@ -228,9 +215,9 @@ module.exports = {
                     jQuery('#deleteCateModal').modal('hide');
 
                 })
-                .error(function(response) {
+                .catch(function(response) {
                     self.hasError = true;
-                    self.error = response.error;
+                    self.error = response.data.error;
 
                     setTimeout(function() {
                         self.hasError = false;
@@ -272,13 +259,7 @@ module.exports = {
             request.onreadystatechange = function() {
                 if (this.readyState == 4) {
                     if (request.status == 400) {
-                        self.hasError = true;
-
-                        self.errors = JSON.parse(request.responseText).errors;
-
-                        setTimeout(function() {
-                            self.hasError = false;
-                        }, 2800);
+                        self.showErrors(JSON.parse(request.responseText).errors);
                     } else if (request.status == 200) {
                         jQuery('#saveCategoryModal').modal('hide');
 
@@ -287,7 +268,7 @@ module.exports = {
                         let category = JSON.parse(request.responseText).data;
 
                         if (! self.editing) {
-                            self.categories.push(category);
+                            self.categories.unshift(category);
                         } else {
                             self.updateCategories(category);
                         }
@@ -314,6 +295,19 @@ module.exports = {
 
             setTimeout(function() {
                 this.success = false;
+            }.bind(this), 2800);
+        },
+
+        showErrors(errors) {
+            this.errors = [];
+            this.hasError = true;
+
+            for(let key in errors) {
+                this.errors.push(errors[key][0]);
+            }
+
+            setTimeout(function() {
+                this.hasError = false;
             }.bind(this), 2800);
         }
     }

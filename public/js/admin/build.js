@@ -66,6 +66,10 @@
 
 	var _Categories2 = _interopRequireDefault(_Categories);
 
+	var _Series = __webpack_require__(94);
+
+	var _Series2 = _interopRequireDefault(_Series);
+
 	var _Videos = __webpack_require__(17);
 
 	var _Videos2 = _interopRequireDefault(_Videos);
@@ -126,6 +130,10 @@
 	    '/categories': {
 	        name: 'categories',
 	        component: _Categories2.default
+	    },
+	    '/series': {
+	        name: 'series',
+	        component: _Series2.default
 	    },
 	    '/videos': {
 	        name: 'videos',
@@ -312,12 +320,16 @@
 	//                     <i class="fa fa-gavel"></i> <span>分类</span>
 	//                 </a>
 	//             </li>
+	//             <li v-link="{name: 'series', activeClass: 'active'}">
+	//                 <a>
+	//                     <i class="fa fa-globe"></i> <span>系列</span>
+	//                 </a>
+	//             </li>
 	//             <li v-link="{name: 'videos', activeClass: 'active'}">
 	//                 <a>
 	//                     <i class="fa fa-globe"></i> <span>视频</span>
 	//                 </a>
 	//             </li>
-	//
 	//             <li v-link="{name: 'subscribers', activeClass: 'active'}">
 	//                 <a>
 	//                     <i class="fa fa-glass"></i> <span>订阅</span>
@@ -347,7 +359,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
+	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'series', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>系列</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
 
 /***/ },
 /* 7 */
@@ -1204,8 +1216,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(18)
-	__webpack_require__(54)
 	__vue_script__ = __webpack_require__(20)
 	__vue_template__ = __webpack_require__(21)
 	module.exports = __vue_script__ || {}
@@ -1224,63 +1234,19 @@
 	})()}
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(19);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(14)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(13)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n.delete {\n    color: #ee3939;\n}\n.delete:hover {\n    color: #ac2925;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 18 */,
+/* 19 */,
 /* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-	// <div class="row" style="margin-bottom: 15px">
+	// <div class="row" style="margin-bottom:15px;">
 	//     <div class="col-xs-12">
-	//         <div class="btn-group" role="group">
-	//             <button class="btn btn-success btn-lg"
-	//                 @click="addSeries()">
-	//                 <i class="fa fa-film"></i> 添加系列
-	//             </button>
-	//             <button class="btn btn-success btn-lg">
-	//                 <span class="fa fa-youtube-play"></span> 添加视频
-	//             </button>
-	//         </div>
+	//         <button class="btn btn-success btn-lg" @click="addVideo()">
+	//             <span class="fa fa-youtube-play"></span> 添加视频
+	//         </button>
 	//     </div>
 	// </div>
 	//
@@ -1292,383 +1258,262 @@
 	//
 	//         <div class="panel">
 	//             <header class="panel-heading">
-	//                 系列列表
+	//                 视频列表
 	//             </header> <!-- panel-heading -->
 	//
 	//             <div class="panel-body">
 	//                 <table class="table table-bordered">
 	//                     <thead>
 	//                         <tr>
-	//                             <th v-for="column in seriesColumns">{{ column }}</th>
-	//                             <th width="1%"><i class="fa fa-eye"></i></th>
+	//                             <th v-for="column in columns">{{ column }}</th>
 	//                             <th width="1%"><i class="fa fa-edit"></i></th>
-	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
 	//                         </tr>
 	//                     </thead>
-	//                     <tbody v-for="serie in series">
-	//                         <tr>
-	//                             <td>{{ serie.id }}</td>
-	//                             <td width="15%"><img :src="serie.image" width="30px"></td>
-	//                             <td>{{ serie.title }}</td>
-	//                             <td>{{ serie.videos.length }}</td>
+	//                     <tbody>
+	//                         <tr v-for="video in videos">
+	//                             <td>{{ video.id }}</td>
+	//                             <td>{{ video.title }}</td>
+	//                             <td v-text="getTitleById(video.series_id)"></td>
 	//                             <td>
-	//                                 <span v-for="category in serie.categories"
-	//                                     class="label label-primary">
-	//                                     {{ category.name }}
-	//                                 </span>
+	//                                 <i v-if="video.resource_type == 'vimeo'" class="fa fa-vimeo"></i>
+	//                                 <i v-if="video.resource_type == 'youtube'" class="fa fa-youtube"></i>
+	//                                 <span v-if="video.resource_type == 'youku'">优酷</span>
 	//                             </td>
-	//                             <td>{{ serie.created_at | date }}</td>
+	//                             <td>{{ video.created_at | date }}</td>
+	//                             <td>{{ video.published_at | date }}</td>
 	//                             <td>
-	//                                 <a @click.stop="toggleDescription(serie.id)">
-	//                                     <i class="fa"
-	//                                        :class="{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,
-	//                                                  'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }"
-	//                                     ></i>
-	//                                 </a>
-	//                             </td>
-	//                             <td>
-	//                                 <a @click="editSeries(serie)">
+	//                                 <a @click.stop="editVideo(video)">
 	//                                     <i class="fa fa-edit"></i>
 	//                                 </a>
 	//                             </td>
-	//                             <td v-if="isBoss">
-	//                                 <a @click="deleteSeriesForm(serie.id)" class="delete">
-	//                                     <i class="fa fa-remove"></i>
-	//                                 </a>
-	//                             </td>
-	//                         </tr>
-	//                         <tr v-show="showDescription.indexOf(serie.id) > -1">
-	//                             <td colspan="8"><b>描述：</b>{{ serie.description }}</td>
 	//                         </tr>
 	//                     </tbody>
 	//                 </table>
-	//             </div> <!-- panel-body -->
-	//         </div>
-	//     </div> <!-- col-12 -->
-	//
-	//     <form @submit.prevent="deleteSeries" id="deleteSeries">
-	//         <div class="modal fade" id="deleteSeriesModal">
-	//              <div class="modal-dialog modal-sm">
-	//                 <div class="modal-content">
-	//                     <div class="modal-header">
-	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	//                         <h4 class="modal-title">请输入密码</h4>
-	//                     </div>
-	//
-	//                     <div class="alert alert-danger" v-if="hasError">
-	//                         {{ error }}
-	//                     </div>
-	//
-	//                     <div class="modal-body">
-	//                         <div class="form-group">
-	//                             <input type="password" name="password" class="form-control" id="password">
-	//                         </div>
-	//                     </div>
-	//                     <div class="modal-footer">
-	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	//                         <input type="submit" class="btn btn-danger" value="确认"></input>
-	//                     </div>
-	//                 </div>
 	//             </div>
 	//         </div>
-	//     </form>
+	//     </div>
+	// </div>
 	//
-	//     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
-	//         <div class="modal fade" id="createSeriesModal">
-	//             <div class="modal-dialog">
-	//                 <div class="modal-content">
-	//                     <div class="modal-header">
-	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	//                         <h4 class="modal-title">系列管理</h4>
+	// <form @submit.prevent="saveVideo" id="saveVideo">
+	//     <div class="modal fade" id="saveVideoModal">
+	//          <div class="modal-dialog">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                     <h4 class="modal-title">视频管理</h4>
+	//                 </div>
+	//
+	//                 <div class="alert alert-danger" v-if="hasError">
+	//                     <ul>
+	//                         <li v-for="error in errors">{{ error }}</li>
+	//                     </ul>
+	//                 </div>
+	//
+	//                 <div class="modal-body">
+	//                     <!-- Title field -->
+	//                     <div class="form-group">
+	//                         <label for="title">标题</label>
+	//                         <input type="text"
+	//                             class="form-control"
+	//                             id="title"
+	//                             name="title"
+	//                             v-model="newVideo.title"
+	//                         >
 	//                     </div>
-	//                     <div class="modal-body">
-	//                         <div class="alert alert-danger" v-if="hasError">
-	//                             <ul>
-	//                                 <li v-for="error in errorArray">{{ error }}</li>
-	//                             </ul>
-	//                         </div>
-	//                         <div class="form-group">
-	//                             <label for="serieTitle">标题</label>
-	//                             <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
-	//                         </div>
-	//                         <div class="form-group">
-	//                             <label for="serieImage">图片</label>
-	//                             <input type="file" name="image" id="serieImage" class="form-control">
-	//                         </div>
-	//                         <div class="form-group" v-if="editing">
-	//                             <img :src="newSerie.image" id="editImageSrc">
-	//                         </div>
-	//                         <div class="form-group">
-	//                             <label for="serieDescription">描述</label>
-	//                             <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
-	//                         </div>
-	//                         <!-- Catego field -->
-	//                         <div class="form-group">
-	//                             <div class="select2-wrapper">
-	//                                 <select id="categories"
-	//                                     multiple
-	//                                     name="categories[]">
-	//                                     <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+	//                     <div class="row">
+	//                         <div class="col-sm-4">
+	//                             <div class="form-group">
+	//                                 <label for="series">所属系列</label>
+	//                                 <select name="series_id"
+	//                                     id="series"
+	//                                     class="form-control"
+	//                                     v-model="newVideo.series_id"
+	//                                 >
+	//                                     <option v-for="serie in series" v-bind:value="serie.id">{{ serie.title }}</option>
 	//                                 </select>
 	//                             </div>
 	//                         </div>
+	//                         <div class="col-sm-4">
+	//                             <div class="form-group">
+	//                                 <label for="resource_type">视频来源</label>
+	//                                 <select name="resource_type"
+	//                                     id="resource_type"
+	//                                     class="form-control"
+	//                                     v-model="newVideo.resource_type"
+	//                                 >
+	//                                     <option value="vimeo">Vimeo</option>
+	//                                     <option value="youtube">Youtube</option>
+	//                                     <option value="youku">Youku</option>
+	//                                 </select>
+	//                             </div>
+	//                         </div>
+	//                         <div class="col-sm-4">
+	//                             <div class="form-group">
+	//                                 <label for="resource_id">视频ID</label>
+	//                                 <input type="text"
+	//                                     name="resource_id"
+	//                                     id="resource_id"
+	//                                     class="form-control"
+	//                                     v-model="newVideo.resource_id"
+	//                                 >
+	//                             </div>
+	//                         </div>
 	//                     </div>
-	//                     <div class="modal-footer">
-	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	//                         <button type="submit" class="btn btn-primary">保存</button>
+	//                     <div class="form-group">
+	//                         <label for="published_at">发布日期</label>
+	//                         <input type="date"
+	//                             class="form-control"
+	//                             id="published_at"
+	//                             name="published_at"
+	//                             v-model="newVideo.published_at"
+	//                         >
 	//                     </div>
+	//                     <div class="form-group">
+	//                         <textarea name="description"
+	//                             rows="8"
+	//                             placeholder="请用 Markdown 格式填写视频下方的描述"
+	//                             class="form-control"
+	//                             v-model="newVideo.description">
+	//                         </textarea>
+	//                     </div>
+	//                 </div>
+	//                 <div class="modal-footer">
+	//                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                     <input type="submit" class="btn btn-primary" value="确认"></input>
 	//                 </div>
 	//             </div>
 	//         </div>
-	//     </form> <!-- form -->
-	// </div>
+	//     </div>
+	// </form>
 	// </template>
 	//
 	// <script>
 	module.exports = {
 	    data: function data() {
 	        return {
-	            seriesColumns: ['ID', '图片', '标题', '视频数', '分类', '创建时间'],
-	            newSerie: {
+	            columns: ['ID', '标题', '系列', '来源', '上传时间', '发布时间'],
+	            newVideo: {
 	                id: '',
+	                series_id: '',
 	                title: '',
 	                description: '',
-	                image: '',
+	                resource_type: '',
+	                resource_id: '',
+	                published_at: '',
 	                created_at: '',
 	                updated_at: '',
-	                videos: [],
-	                categories: []
+	                series: ''
 	            },
+	            videos: [],
 	            series: [],
-	            categories: [],
-
-	            showDescription: [],
 	            // message
 	            success: false,
 	            message: '',
 	            hasError: false,
-	            error: '',
 	            errors: [],
-	            // edit series
-	            editing: false,
-	            editImageSrc: '',
-	            // delete series
-	            deleteId: '',
 
-	            newSeriesCategories: [],
-
-	            select2: null
+	            editing: false
 	        };
 	    },
 
 	    props: ['roles'],
 
-	    computed: {
-	        isBoss: function isBoss() {
-	            var names = this.roles.map(function (role) {
-	                return role.name;
-	            });
-
-	            return names.indexOf('boss') != -1;
-	        },
-	        errorArray: function errorArray() {
-	            var errors = [];
-	            // maybe a function.
-	            if (this.errors.title) {
-	                errors.push(this.errors.title[0]);
-	            }
-	            if (this.errors.image) {
-	                errors.push(this.errors.image[0]);
-	            }
-	            if (this.errors.description) {
-	                errors.push(this.errors.description[0]);
-	            }
-	            if (this.errors.categories) {
-	                errors.push(this.errors.categories[0]);
-	            }
-
-	            return errors;
-	        }
-	    },
-	    ready: function ready() {
-	        this.getAllSeriesInfo();
-
-	        jQuery('#categories').select2({
-	            placeholder: '选择分类'
-	        });
-
-	        $('.select2').width('100%');
+	    created: function created() {
+	        this.getVideos();
 	    },
 
 	    methods: {
-	        getAllSeriesInfo: function getAllSeriesInfo() {
-	            // es6 promise... how to?
-	            this.$http.get('/admin/series').then(function (response) {
-	                this.series = response.data.series;
-	                this.categories = response.data.categories;
+	        getVideos: function getVideos() {
+	            var self = this;
+
+	            self.$http.get('/admin/videos').then(function (response) {
+	                self.series = response.data.series;
+	                self.videos = response.data.videos;
 	            });
 	        },
-	        toggleDescription: function toggleDescription(id) {
-	            var index = this.showDescription.indexOf(id);
-
-	            if (index > -1) {
-	                this.showDescription.$remove(id);
-	            } else {
-	                this.showDescription.push(id);
-	            }
+	        getFormData: function getFormData() {
+	            return {
+	                series_id: this.newVideo.series_id,
+	                title: this.newVideo.title,
+	                description: this.newVideo.description,
+	                resource_type: this.newVideo.resource_type,
+	                resource_id: this.newVideo.resource_id,
+	                published_at: this.newVideo.published_at
+	            };
 	        },
-	        findIndexById: function findIndexById(id) {
+	        saveVideo: function saveVideo() {
+	            this.$http.post('/admin/videos', this.getFormData()).then(function (response) {
+	                jQuery('#saveVideoModal').modal('hide');
+
+	                this.videos.unshift(response.data.video);
+
+	                this.showMessage(response.data.message);
+	            }).catch(function (response) {
+	                this.showErrors(response.data.errors);
+	            });
+	        },
+	        addVideo: function addVideo() {
+	            this.editing = false;
+	            this.resetVideoForm();
+
+	            jQuery('#saveVideoModal').modal('show');
+	        },
+	        editVideo: function editVideo(video) {
+	            this.editing = true;
+
+	            this.setVideoForm(video.id, video.series_id, video.title, video.description, video.resource_type, video.resource_id, video.published_at, video.created_at, video.updated_at);
+
+	            jQuery('#saveVideoModal').modal('show');
+	        },
+	        getTitleById: function getTitleById(id) {
 	            var ids = this.series.map(function (s) {
 	                return s.id;
 	            });
+	            var index = ids.indexOf(parseInt(id));
 
-	            return ids.indexOf(id);
+	            return this.series[index].title;
 	        },
-	        saveSerie: function saveSerie(e) {
-	            var self = this;
-	            e.preventDefault();
-
-	            var request = new XMLHttpRequest();
-	            var formdata = new FormData(document.getElementById('serieForm'));
-	            if (!self.editing) {
-	                request.open('post', '/admin/series');
-	            } else {
-	                request.open('post', '/admin/series/update/' + self.newSerie.id);
-	            }
-	            request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
-	            request.send(formdata);
-
-	            request.onreadystatechange = function () {
-	                if (this.readyState == 4) {
-	                    // 对象读取服务器响应结束
-	                    if (request.status == 400) {
-	                        self.hasError = true;
-
-	                        self.errors = JSON.parse(request.responseText).errors;
-
-	                        setTimeout(function () {
-	                            self.hasError = false;
-	                        }, 2800);
-	                    } else if (request.status == 200) {
-	                        jQuery('#createSeriesModal').modal('hide');
-
-	                        self.resetSeriesForm();
-
-	                        self.showMessage(JSON.parse(request.responseText).message);
-
-	                        var serie = JSON.parse(request.responseText).data;
-
-	                        if (self.editing) {
-	                            self.updateSeries(serie);
-	                        } else {
-	                            self.pushSeries(serie);
-	                        }
-	                    }
-	                }
-	            };
+	        resetVideoForm: function resetVideoForm() {
+	            this.setVideoForm('', '', '', '', '', '', '', '', '', '');
 	        },
-	        addSeries: function addSeries() {
-	            this.editing = false;
-	            this.resetSeriesForm();
-
-	            jQuery('#createSeriesModal').modal('show');
-	        },
-	        editSeries: function editSeries(serie) {
-	            this.editing = true;
-	            this.setSeriesForm(serie.id, serie.title, serie.description, serie.image, serie.created_at, serie.updated_at, serie.videos);
-	            jQuery('#categories').val(this.getSerieCateIds(serie.categories)).change();
-
-	            jQuery('#createSeriesModal').modal('show');
-	        },
-	        deleteSeriesForm: function deleteSeriesForm(id) {
-	            jQuery('#password').val('');
-	            this.deleteId = id;
-
-	            jQuery('#deleteSeriesModal').modal('show');
-	        },
-	        deleteSeries: function deleteSeries() {
-	            var self = this;
-	            var password = jQuery('#password').val();
-
-	            if (password.length == 0) {
-	                return;
-	            }
-
-	            self.$http.delete('/admin/series/' + self.deleteId, { password: password }).then(function (response) {
-	                self.showMessage(response.data.message);
-	                self.removeSeriesById(self.deleteId);
-
-	                jQuery('#deleteSeriesModal').modal('hide');
-	            }).error(function (response) {
-	                self.hasError = true;
-	                self.error = response.error;
-
-	                setTimeout(function () {
-	                    self.hasError = false;
-
-	                    jQuery('#deleteSeriesModal').modal('hide');
-	                }, 2800);
-	            });
-	        },
-	        removeSeriesById: function removeSeriesById(id) {
-	            var index = this.findIndexById(id);
-
-	            this.series.splice(index, 1);
-	        },
-	        setSeriesForm: function setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
-	            this.newSerie = { id: id, title: title, description: description, image: image, created_at: created_at, updated_at: updated_at, videos: videos };
-	        },
-	        resetSeriesForm: function resetSeriesForm() {
-	            this.setSeriesForm('', '', '', '', '', '', '', []);
-	            jQuery('#serieImage').val('');
-	            jQuery('#categories').select2("val", "");
-	        },
-	        pushSeries: function pushSeries(serie) {
-	            this.series.push(serie);
-	        },
-	        updateSeries: function updateSeries(serie) {
-	            var index = this.findIndexById(serie.id);
-
-	            this.series.$set(index, serie);
-	        },
-	        getSerieCateIds: function getSerieCateIds(categories) {
-	            return categories.map(function (c) {
-	                return c.id;
-	            });
+	        setVideoForm: function setVideoForm(id, series_id, title, description, resource_type, resource_id, published_at, created_at, updated_at) {
+	            this.newVideo = { id: id, series_id: series_id, title: title, description: description, resource_type: resource_type,
+	                resource_id: resource_id, published_at: published_at, created_at: created_at, updated_at: updated_at };
 	        },
 	        showMessage: function showMessage(message) {
 	            this.success = true;
+
 	            this.message = message;
 
 	            setTimeout(function () {
 	                this.success = false;
+	            }, 2800);
+	        },
+	        showErrors: function showErrors(errors) {
+	            this.errors = [];
+	            this.hasError = true;
+
+	            this.getErrors(errors);
+
+	            setTimeout(function () {
+	                this.hasError = false;
 	            }.bind(this), 2800);
+	        },
+	        getErrors: function getErrors(errors) {
+	            for (var key in errors) {
+	                this.errors.push(errors[key][0]);
+	            }
 	        }
 	    }
 	};
 	// </script>
-	//
-	// <style>
-	// .delete {
-	//     color: #ee3939;
-	// }
-	// .delete:hover {
-	//     color: #ac2925;
-	// }
-	// </style>
-	//
-	// <style>
-	// .select2-wrapper {
-	//     width: 100% ! important;
-	// }
-	// </style>
 	//
 
 /***/ },
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\" role=\"group\">\n            <button class=\"btn btn-success btn-lg\"\n                @click=\"addSeries()\">\n                <i class=\"fa fa-film\"></i> 添加系列\n            </button>\n            <button class=\"btn btn-success btn-lg\">\n                <span class=\"fa fa-youtube-play\"></span> 添加视频\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                系列列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in seriesColumns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-eye\"></i></th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody v-for=\"serie in series\">\n                        <tr>\n                            <td>{{ serie.id }}</td>\n                            <td width=\"15%\"><img :src=\"serie.image\" width=\"30px\"></td>\n                            <td>{{ serie.title }}</td>\n                            <td>{{ serie.videos.length }}</td>\n                            <td>\n                                <span v-for=\"category in serie.categories\"\n                                    class=\"label label-primary\">\n                                    {{ category.name }}\n                                </span>\n                            </td>\n                            <td>{{ serie.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"toggleDescription(serie.id)\">\n                                    <i class=\"fa\"\n                                       :class=\"{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,\n                                                 'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }\"\n                                    ></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"editSeries(serie)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(serie.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                        <tr v-show=\"showDescription.indexOf(serie.id) > -1\">\n                            <td colspan=\"8\"><b>描述：</b>{{ serie.description }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div> <!-- panel-body -->\n        </div>\n    </div> <!-- col-12 -->\n\n    <form @submit.prevent=\"deleteSeries\" id=\"deleteSeries\">\n        <div class=\"modal fade\" id=\"deleteSeriesModal\">\n             <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">请输入密码</h4>\n                    </div>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        {{ error }}\n                    </div>\n\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form>\n\n    <form @submit=\"saveSerie\" id=\"serieForm\" enctype=\"multipart/form-data\">\n        <div class=\"modal fade\" id=\"createSeriesModal\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">系列管理</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"alert alert-danger\" v-if=\"hasError\">\n                            <ul>\n                                <li v-for=\"error in errorArray\">{{ error }}</li>\n                            </ul>\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieTitle\">标题</label>\n                            <input type=\"text\" name=\"title\" v-model=\"newSerie.title\" id=\"serieTitle\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"serieImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newSerie.image\" id=\"editImageSrc\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieDescription\">描述</label>\n                            <textarea type=\"file\" name=\"description\" v-model=\"newSerie.description\" id=\"serieDescription\" class=\"form-control\" rows=\"6\"></textarea>\n                        </div>\n                        <!-- Catego field -->\n                        <div class=\"form-group\">\n                            <div class=\"select2-wrapper\">\n                                <select id=\"categories\"\n                                    multiple\n                                    name=\"categories[]\">\n                                    <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n                                </select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <button type=\"submit\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form> <!-- form -->\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <button class=\"btn btn-success btn-lg\" @click=\"addVideo()\">\n            <span class=\"fa fa-youtube-play\"></span> 添加视频\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                视频列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"video in videos\">\n                            <td>{{ video.id }}</td>\n                            <td>{{ video.title }}</td>\n                            <td v-text=\"getTitleById(video.series_id)\"></td>\n                            <td>\n                                <i v-if=\"video.resource_type == 'vimeo'\" class=\"fa fa-vimeo\"></i>\n                                <i v-if=\"video.resource_type == 'youtube'\" class=\"fa fa-youtube\"></i>\n                                <span v-if=\"video.resource_type == 'youku'\">优酷</span>\n                            </td>\n                            <td>{{ video.created_at | date }}</td>\n                            <td>{{ video.published_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"editVideo(video)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveVideo\" id=\"saveVideo\">\n    <div class=\"modal fade\" id=\"saveVideoModal\">\n         <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">视频管理</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    <ul>\n                        <li v-for=\"error in errors\">{{ error }}</li>\n                    </ul>\n                </div>\n\n                <div class=\"modal-body\">\n                    <!-- Title field -->\n                    <div class=\"form-group\">\n                        <label for=\"title\">标题</label>\n                        <input type=\"text\"\n                            class=\"form-control\"\n                            id=\"title\"\n                            name=\"title\"\n                            v-model=\"newVideo.title\"\n                        >\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-group\">\n                                <label for=\"series\">所属系列</label>\n                                <select name=\"series_id\"\n                                    id=\"series\"\n                                    class=\"form-control\"\n                                    v-model=\"newVideo.series_id\"\n                                >\n                                    <option v-for=\"serie in series\" v-bind:value=\"serie.id\">{{ serie.title }}</option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-group\">\n                                <label for=\"resource_type\">视频来源</label>\n                                <select name=\"resource_type\"\n                                    id=\"resource_type\"\n                                    class=\"form-control\"\n                                    v-model=\"newVideo.resource_type\"\n                                >\n                                    <option value=\"vimeo\">Vimeo</option>\n                                    <option value=\"youtube\">Youtube</option>\n                                    <option value=\"youku\">Youku</option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-group\">\n                                <label for=\"resource_id\">视频ID</label>\n                                <input type=\"text\"\n                                    name=\"resource_id\"\n                                    id=\"resource_id\"\n                                    class=\"form-control\"\n                                    v-model=\"newVideo.resource_id\"\n                                >\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"published_at\">发布日期</label>\n                        <input type=\"date\"\n                            class=\"form-control\"\n                            id=\"published_at\"\n                            name=\"published_at\"\n                            v-model=\"newVideo.published_at\"\n                        >\n                    </div>\n                    <div class=\"form-group\">\n                        <textarea name=\"description\"\n                            rows=\"8\"\n                            placeholder=\"请用 Markdown 格式填写视频下方的描述\"\n                            class=\"form-control\"\n                            v-model=\"newVideo.description\">\n                        </textarea>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-primary\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
 
 /***/ },
 /* 22 */
@@ -15606,7 +15451,7 @@
 /* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\" role=\"group\">\n            <button class=\"btn btn-success btn-lg\"\n                @click=\"addCategory()\">\n                <i class=\"fa fa-film\"></i> 添加分类\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                分类列表\n            </header> <!-- panel-heading -->\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                         </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"category in categories\">\n                            <td>{{ category.id }}</td>\n                            <td width=\"15%\"><img :src=\"category.image\" width=\"30px\"></td>\n                            <td>{{ category.name }}</td>\n                            <td>{{ category.created_at | date }}</td>\n                            <td>\n                                <a @click=\"editCategory(category)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(category.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveCategory\" id=\"saveCategoryForm\">\n    <div class=\"modal fade\" id=\"saveCategoryModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">保存分类</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    <ul>\n                        <li v-for=\"error in errorArray\">{{ error }}</li>\n                    </ul>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <!-- Name field -->\n                        <div class=\"form-group\">\n                            <label for=\"name\">名称</label>\n                            <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" v-model=\"newCategory.name\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"categoryImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"categoryImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newCategory.image\" id=\"editImageSrc\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n<form @submit.prevent=\"deleteCategory\" id=\"deleteCategory\">\n    <div class=\"modal fade\" id=\"deleteCateModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">请输入密码</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    {{ error }}\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\" role=\"group\">\n            <button class=\"btn btn-success btn-lg\"\n                @click=\"addCategory()\">\n                <i class=\"fa fa-film\"></i> 添加分类\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                分类列表\n            </header> <!-- panel-heading -->\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                         </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"category in categories\">\n                            <td>{{ category.id }}</td>\n                            <td width=\"15%\"><img :src=\"category.image\" width=\"30px\"></td>\n                            <td>{{ category.name }}</td>\n                            <td>{{ category.created_at | date }}</td>\n                            <td>\n                                <a @click=\"editCategory(category)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(category.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveCategory\" id=\"saveCategoryForm\">\n    <div class=\"modal fade\" id=\"saveCategoryModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">保存分类</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    <ul>\n                        <li v-for=\"error in errors\">{{ error }}</li>\n                    </ul>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <!-- Name field -->\n                        <div class=\"form-group\">\n                            <label for=\"name\">名称</label>\n                            <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" v-model=\"newCategory.name\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"categoryImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"categoryImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newCategory.image\" id=\"editImageSrc\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n<form @submit.prevent=\"deleteCategory\" id=\"deleteCategory\">\n    <div class=\"modal fade\" id=\"deleteCateModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">请输入密码</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    {{ error }}\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
 
 /***/ },
 /* 53 */
@@ -15680,7 +15525,7 @@
 	//
 	//                 <div class="alert alert-danger" v-if="hasError">
 	//                     <ul>
-	//                         <li v-for="error in errorArray">{{ error }}</li>
+	//                         <li v-for="error in errors">{{ error }}</li>
 	//                     </ul>
 	//                 </div>
 	//
@@ -15780,18 +15625,6 @@
 	            });
 
 	            return names.indexOf('boss') != -1;
-	        },
-	        errorArray: function errorArray() {
-	            var errors = [];
-
-	            if (this.errors.name) {
-	                errors.push(this.errors.name[0]);
-	            }
-	            if (this.errors.image) {
-	                errors.push(this.errors.image[0]);
-	            }
-
-	            return errors;
 	        }
 	    },
 
@@ -15832,9 +15665,9 @@
 	                self.removeCategoryById(self.deleteId);
 
 	                jQuery('#deleteCateModal').modal('hide');
-	            }).error(function (response) {
+	            }).catch(function (response) {
 	                self.hasError = true;
-	                self.error = response.error;
+	                self.error = response.data.error;
 
 	                setTimeout(function () {
 	                    self.hasError = false;
@@ -15872,13 +15705,7 @@
 	            request.onreadystatechange = function () {
 	                if (this.readyState == 4) {
 	                    if (request.status == 400) {
-	                        self.hasError = true;
-
-	                        self.errors = JSON.parse(request.responseText).errors;
-
-	                        setTimeout(function () {
-	                            self.hasError = false;
-	                        }, 2800);
+	                        self.showErrors(JSON.parse(request.responseText).errors);
 	                    } else if (request.status == 200) {
 	                        jQuery('#saveCategoryModal').modal('hide');
 
@@ -15887,7 +15714,7 @@
 	                        var category = JSON.parse(request.responseText).data;
 
 	                        if (!self.editing) {
-	                            self.categories.push(category);
+	                            self.categories.unshift(category);
 	                        } else {
 	                            self.updateCategories(category);
 	                        }
@@ -15914,6 +15741,18 @@
 	            setTimeout(function () {
 	                this.success = false;
 	            }.bind(this), 2800);
+	        },
+	        showErrors: function showErrors(errors) {
+	            this.errors = [];
+	            this.hasError = true;
+
+	            for (var key in errors) {
+	                this.errors.push(errors[key][0]);
+	            }
+
+	            setTimeout(function () {
+	                this.hasError = false;
+	            }.bind(this), 2800);
 	        }
 	    }
 	};
@@ -15921,13 +15760,77 @@
 	//
 
 /***/ },
-/* 54 */
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(95)
+	__webpack_require__(97)
+	__vue_script__ = __webpack_require__(99)
+	__vue_template__ = __webpack_require__(100)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Series.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(55);
+	var content = __webpack_require__(96);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(14)(content, {});
@@ -15936,8 +15839,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=1!./Videos.vue", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=1!./Videos.vue");
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d9afcc8e&file=Series.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Series.vue", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d9afcc8e&file=Series.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Series.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -15947,7 +15850,47 @@
 	}
 
 /***/ },
-/* 55 */
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(13)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.delete {\n    color: #ee3939;\n}\n.delete:hover {\n    color: #ac2925;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(98);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(14)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d9afcc8e&file=Series.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=1!./Series.vue", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d9afcc8e&file=Series.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=1!./Series.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(13)();
@@ -15959,6 +15902,396 @@
 
 	// exports
 
+
+/***/ },
+/* 99 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom: 15px">
+	//     <div class="col-xs-12">
+	//         <button class="btn btn-success btn-lg"
+	//             @click="addSeries()">
+	//             <i class="fa fa-film"></i> 添加系列
+	//         </button>
+	//     </div>
+	// </div>
+	//
+	// <div class="row">
+	//     <div class="col-sm-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 系列列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in seriesColumns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-eye"></i></th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody v-for="serie in series">
+	//                         <tr>
+	//                             <td>{{ serie.id }}</td>
+	//                             <td width="15%"><img :src="serie.image" width="30px"></td>
+	//                             <td>{{ serie.title }}</td>
+	//                             <td>{{ serie.videos.length }}</td>
+	//                             <td>
+	//                                 <span v-for="category in serie.categories"
+	//                                     class="label label-primary">
+	//                                     {{ category.name }}
+	//                                 </span>
+	//                             </td>
+	//                             <td>{{ serie.created_at | date }}</td>
+	//                             <td>
+	//                                 <a @click.stop="toggleDescription(serie.id)">
+	//                                     <i class="fa"
+	//                                        :class="{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,
+	//                                                  'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }"
+	//                                     ></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td>
+	//                                 <a @click="editSeries(serie)">
+	//                                     <i class="fa fa-edit"></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click="deleteSeriesForm(serie.id)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                         <tr v-show="showDescription.indexOf(serie.id) > -1">
+	//                             <td colspan="9"><b>描述：</b>{{ serie.description }}</td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//             </div> <!-- panel-body -->
+	//         </div>
+	//     </div> <!-- col-12 -->
+	//
+	//     <form @submit.prevent="deleteSeries" id="deleteSeries">
+	//         <div class="modal fade" id="deleteSeriesModal">
+	//              <div class="modal-dialog modal-sm">
+	//                 <div class="modal-content">
+	//                     <div class="modal-header">
+	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                         <h4 class="modal-title">请输入密码</h4>
+	//                     </div>
+	//
+	//                     <div class="alert alert-danger" v-if="hasError">
+	//                         {{ error }}
+	//                     </div>
+	//
+	//                     <div class="modal-body">
+	//                         <div class="form-group">
+	//                             <input type="password" name="password" class="form-control" id="password">
+	//                         </div>
+	//                     </div>
+	//                     <div class="modal-footer">
+	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                         <input type="submit" class="btn btn-danger" value="确认"></input>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </form>
+	//
+	//     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
+	//         <div class="modal fade" id="createSeriesModal">
+	//             <div class="modal-dialog">
+	//                 <div class="modal-content">
+	//                     <div class="modal-header">
+	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                         <h4 class="modal-title">系列管理</h4>
+	//                     </div>
+	//                     <div class="modal-body">
+	//                         <div class="alert alert-danger" v-if="hasError">
+	//                             <ul>
+	//                                 <li v-for="error in errors">{{ error }}</li>
+	//                             </ul>
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieTitle">标题</label>
+	//                             <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieImage">图片</label>
+	//                             <input type="file" name="image" id="serieImage" class="form-control">
+	//                         </div>
+	//                         <div class="form-group" v-if="editing">
+	//                             <img :src="newSerie.image" id="editImageSrc">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieDescription">描述</label>
+	//                             <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+	//                         </div>
+	//                         <!-- Catego field -->
+	//                         <div class="form-group">
+	//                             <div class="select2-wrapper">
+	//                                 <select id="categories"
+	//                                     multiple
+	//                                     name="categories[]">
+	//                                     <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+	//                                 </select>
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                     <div class="modal-footer">
+	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                         <button type="submit" class="btn btn-primary">保存</button>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </form> <!-- form -->
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            seriesColumns: ['ID', '图片', '标题', '视频数', '分类', '创建时间'],
+	            newSerie: {
+	                id: '',
+	                title: '',
+	                description: '',
+	                image: '',
+	                created_at: '',
+	                updated_at: '',
+	                videos: [],
+	                categories: []
+	            },
+	            series: [],
+	            categories: [],
+
+	            showDescription: [],
+	            // message
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            error: '',
+	            errors: [],
+	            // edit series
+	            editing: false,
+	            editImageSrc: '',
+	            // delete series
+	            deleteId: '',
+
+	            newSeriesCategories: [],
+
+	            select2: null
+	        };
+	    },
+
+	    props: ['roles'],
+
+	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        }
+	    },
+	    ready: function ready() {
+	        this.getAllSeriesInfo();
+
+	        jQuery('#categories').select2({
+	            placeholder: '选择分类'
+	        });
+
+	        $('.select2').width('100%');
+	    },
+
+	    methods: {
+	        getAllSeriesInfo: function getAllSeriesInfo() {
+	            // es6 promise... how to?
+	            this.$http.get('/admin/series').then(function (response) {
+	                this.series = response.data.series;
+	                this.categories = response.data.categories;
+	            });
+	        },
+	        toggleDescription: function toggleDescription(id) {
+	            var index = this.showDescription.indexOf(id);
+
+	            if (index > -1) {
+	                this.showDescription.$remove(id);
+	            } else {
+	                this.showDescription.push(id);
+	            }
+	        },
+	        findIndexById: function findIndexById(id) {
+	            var ids = this.series.map(function (s) {
+	                return s.id;
+	            });
+
+	            return ids.indexOf(id);
+	        },
+	        saveSerie: function saveSerie(e) {
+	            var self = this;
+	            e.preventDefault();
+
+	            var request = new XMLHttpRequest();
+	            var formdata = new FormData(document.getElementById('serieForm'));
+	            if (!self.editing) {
+	                request.open('post', '/admin/series');
+	            } else {
+	                request.open('post', '/admin/series/update/' + self.newSerie.id);
+	            }
+	            request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
+	            request.send(formdata);
+
+	            request.onreadystatechange = function () {
+	                if (this.readyState == 4) {
+	                    // 对象读取服务器响应结束
+	                    if (request.status == 400) {
+	                        self.showErrors(JSON.parse(request.responseText).errors);
+	                    } else if (request.status == 200) {
+	                        jQuery('#createSeriesModal').modal('hide');
+
+	                        self.resetSeriesForm();
+
+	                        self.showMessage(JSON.parse(request.responseText).message);
+
+	                        var serie = JSON.parse(request.responseText).data;
+
+	                        if (self.editing) {
+	                            self.updateSeries(serie);
+	                        } else {
+	                            self.pushSeries(serie);
+	                        }
+	                    }
+	                }
+	            };
+	        },
+	        addSeries: function addSeries() {
+	            this.editing = false;
+	            this.resetSeriesForm();
+
+	            jQuery('#createSeriesModal').modal('show');
+	        },
+	        editSeries: function editSeries(serie) {
+	            this.editing = true;
+	            this.setSeriesForm(serie.id, serie.title, serie.description, serie.image, serie.created_at, serie.updated_at, serie.videos);
+	            jQuery('#categories').val(this.getSerieCateIds(serie.categories)).change();
+
+	            jQuery('#createSeriesModal').modal('show');
+	        },
+	        deleteSeriesForm: function deleteSeriesForm(id) {
+	            jQuery('#password').val('');
+	            this.deleteId = id;
+
+	            jQuery('#deleteSeriesModal').modal('show');
+	        },
+	        deleteSeries: function deleteSeries() {
+	            var self = this;
+	            var password = jQuery('#password').val();
+
+	            if (password.length == 0) {
+	                return;
+	            }
+
+	            self.$http.delete('/admin/series/' + self.deleteId, { password: password }).then(function (response) {
+	                self.showMessage(response.data.message);
+	                self.removeSeriesById(self.deleteId);
+
+	                jQuery('#deleteSeriesModal').modal('hide');
+	            }).catch(function (response) {
+	                self.hasError = true;
+	                self.error = response.data.error;
+
+	                setTimeout(function () {
+	                    self.hasError = false;
+
+	                    jQuery('#deleteSeriesModal').modal('hide');
+	                }, 2800);
+	            });
+	        },
+	        removeSeriesById: function removeSeriesById(id) {
+	            var index = this.findIndexById(id);
+
+	            this.series.splice(index, 1);
+	        },
+	        setSeriesForm: function setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
+	            this.newSerie = { id: id, title: title, description: description, image: image, created_at: created_at, updated_at: updated_at, videos: videos };
+	        },
+	        resetSeriesForm: function resetSeriesForm() {
+	            this.setSeriesForm('', '', '', '', '', '', '', []);
+	            jQuery('#serieImage').val('');
+	            jQuery('#categories').select2("val", "");
+	        },
+	        pushSeries: function pushSeries(serie) {
+	            this.series.unshift(serie);
+	        },
+	        updateSeries: function updateSeries(serie) {
+	            var index = this.findIndexById(serie.id);
+
+	            this.series.$set(index, serie);
+	        },
+	        getSerieCateIds: function getSerieCateIds(categories) {
+	            return categories.map(function (c) {
+	                return c.id;
+	            });
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        },
+	        showErrors: function showErrors(errors) {
+	            this.hasError = true;
+	            this.errors = [];
+
+	            for (var key in errors) {
+	                this.errors.push(errors[key][0]);
+	            }
+
+	            setTimeout(function () {
+	                this.hasError = false;
+	            }.bind(this), 2800);
+	        }
+	    }
+	};
+	// </script>
+	//
+	// <style>
+	// .delete {
+	//     color: #ee3939;
+	// }
+	// .delete:hover {
+	//     color: #ac2925;
+	// }
+	// </style>
+	//
+	// <style>
+	// .select2-wrapper {
+	//     width: 100% ! important;
+	// }
+	// </style>
+	//
+
+/***/ },
+/* 100 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <button class=\"btn btn-success btn-lg\"\n            @click=\"addSeries()\">\n            <i class=\"fa fa-film\"></i> 添加系列\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                系列列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in seriesColumns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-eye\"></i></th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody v-for=\"serie in series\">\n                        <tr>\n                            <td>{{ serie.id }}</td>\n                            <td width=\"15%\"><img :src=\"serie.image\" width=\"30px\"></td>\n                            <td>{{ serie.title }}</td>\n                            <td>{{ serie.videos.length }}</td>\n                            <td>\n                                <span v-for=\"category in serie.categories\"\n                                    class=\"label label-primary\">\n                                    {{ category.name }}\n                                </span>\n                            </td>\n                            <td>{{ serie.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"toggleDescription(serie.id)\">\n                                    <i class=\"fa\"\n                                       :class=\"{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,\n                                                 'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }\"\n                                    ></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"editSeries(serie)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(serie.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                        <tr v-show=\"showDescription.indexOf(serie.id) > -1\">\n                            <td colspan=\"9\"><b>描述：</b>{{ serie.description }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div> <!-- panel-body -->\n        </div>\n    </div> <!-- col-12 -->\n\n    <form @submit.prevent=\"deleteSeries\" id=\"deleteSeries\">\n        <div class=\"modal fade\" id=\"deleteSeriesModal\">\n             <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">请输入密码</h4>\n                    </div>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        {{ error }}\n                    </div>\n\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form>\n\n    <form @submit=\"saveSerie\" id=\"serieForm\" enctype=\"multipart/form-data\">\n        <div class=\"modal fade\" id=\"createSeriesModal\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">系列管理</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"alert alert-danger\" v-if=\"hasError\">\n                            <ul>\n                                <li v-for=\"error in errors\">{{ error }}</li>\n                            </ul>\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieTitle\">标题</label>\n                            <input type=\"text\" name=\"title\" v-model=\"newSerie.title\" id=\"serieTitle\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"serieImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newSerie.image\" id=\"editImageSrc\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieDescription\">描述</label>\n                            <textarea type=\"file\" name=\"description\" v-model=\"newSerie.description\" id=\"serieDescription\" class=\"form-control\" rows=\"6\"></textarea>\n                        </div>\n                        <!-- Catego field -->\n                        <div class=\"form-group\">\n                            <div class=\"select2-wrapper\">\n                                <select id=\"categories\"\n                                    multiple\n                                    name=\"categories[]\">\n                                    <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n                                </select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <button type=\"submit\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form> <!-- form -->\n</div>\n";
 
 /***/ }
 /******/ ]);

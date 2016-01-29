@@ -32,12 +32,16 @@
                     <i class="fa fa-gavel"></i> <span>分类</span>
                 </a>
             </li>
+            <li v-link="{name: 'series', activeClass: 'active'}">
+                <a>
+                    <i class="fa fa-globe"></i> <span>系列</span>
+                </a>
+            </li>
             <li v-link="{name: 'videos', activeClass: 'active'}">
                 <a>
                     <i class="fa fa-globe"></i> <span>视频</span>
                 </a>
             </li>
-
             <li v-link="{name: 'subscribers', activeClass: 'active'}">
                 <a>
                     <i class="fa fa-glass"></i> <span>订阅</span>

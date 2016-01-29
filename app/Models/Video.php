@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillables = [
+        'title', 'series_id', 'description', 'resource_type', 'resource_id', 'published_at'
+    ];
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $datas = ['published_at'];
 
     /**
      * A Video belongs to a serie.
