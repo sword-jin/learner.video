@@ -34,6 +34,11 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         return $this->model->orderBy('created_at', 'DESC')->get();
     }
 
+    public function listAll()
+    {
+        return $this->model->select('name', 'id')->get();
+    }
+
     public function create(array $data)
     {
         $new = $this->getNew();

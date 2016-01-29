@@ -12,7 +12,8 @@ class UpdateSeriesFormService extends CreateSeriesFormService
     protected $rules = [
         'title' => 'required|max:120',
         'description' => 'required',
-        'image' => 'image'
+        'image' => 'image',
+        'categories' => 'required|array'
     ];
 
     /**
@@ -23,7 +24,7 @@ class UpdateSeriesFormService extends CreateSeriesFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'id', 'title', 'description', 'image'
+            'id', 'title', 'description', 'categories'
         ]);
     }
 }

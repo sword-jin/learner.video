@@ -41,7 +41,10 @@
                             <td>{{ serie.title }}</td>
                             <td>{{ serie.videos.length }}</td>
                             <td>
-                                <span v-for="category in serie.categories">{{ category.name }}</span>
+                                <span v-for="category in serie.categories"
+                                    class="label label-primary">
+                                    {{ category.name }}
+                                </span>
                             </td>
                             <td>{{ serie.created_at | date }}</td>
                             <td>
@@ -130,8 +133,13 @@
                         </div>
                         <!-- Catego field -->
                         <div class="form-group">
-                            <label for="categories">分类</label>
-                            <input type="text" class="form-control" id="categories" name="categories[]">
+                            <div class="select2-wrapper">
+                                <select id="categories"
+                                    multiple
+                                    name="categories[]">
+                                    <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -181,7 +189,11 @@ module.exports = {
             editing: false,
             editImageSrc: '',
             // delete series
-            deleteId: ''
+            deleteId: '',
+
+            newSeriesCategories: [],
+
+            select2: null
         }
     },
 
@@ -195,7 +207,7 @@ module.exports = {
         },
         errorArray() {
             let errors = [];
-
+            // maybe a function.
             if (this.errors.title) {
                 errors.push(this.errors.title[0]);
             }
@@ -205,19 +217,31 @@ module.exports = {
             if (this.errors.description) {
                 errors.push(this.errors.description[0]);
             }
+            if (this.errors.categories) {
+                errors.push(this.errors.categories[0]);
+            }
 
             return errors;
         }
     },
-    created() {
+    ready() {
         this.getAllSeriesInfo();
+
+        jQuery('#categories')
+            .select2({
+                placeholder: '选择分类'
+            });
+
+        $('.select2').width('100%');
     },
+
     methods: {
         getAllSeriesInfo() {
             // es6 promise... how to?
             this.$http.get('/admin/series')
                 .then(function(response) {
-                    this.series = response.data;
+                    this.series = response.data.series;
+                    this.categories = response.data.categories;
                 });
         },
 
@@ -290,7 +314,8 @@ module.exports = {
         editSeries(serie) {
             this.editing = true;
             this.setSeriesForm(serie.id, serie.title, serie.description,
-                serie.image, serie.created_at, serie.updated_at, serie.videos, serie.categories);
+                serie.image, serie.created_at, serie.updated_at, serie.videos);
+            jQuery('#categories').val(this.getSerieCateIds(serie.categories)).change();
 
             jQuery('#createSeriesModal').modal('show');
         },
@@ -335,13 +360,14 @@ module.exports = {
             this.series.splice(index, 1);
         },
 
-        setSeriesForm(id, title, description, image, created_at, updated_at, videos, categories) {
-            this.newSerie = {id, title, description, image, created_at, updated_at, videos, categories};
+        setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
+            this.newSerie = {id, title, description, image, created_at, updated_at, videos};
         },
 
         resetSeriesForm() {
-            this.setSeriesForm('', '', '', '', '', '', '', [], []);
-            $('#serieImage').val('');
+            this.setSeriesForm('', '', '', '', '', '', '', []);
+            jQuery('#serieImage').val('');
+            jQuery('#categories').select2("val", "");
         },
 
         pushSeries(serie) {
@@ -352,6 +378,10 @@ module.exports = {
             let index = this.findIndexById(serie.id);
 
             this.series.$set(index, serie);
+        },
+
+        getSerieCateIds(categories) {
+            return categories.map(c => c.id);
         },
 
         showMessage(message) {
@@ -372,5 +402,11 @@ module.exports = {
 }
 .delete:hover {
     color: #ac2925;
+}
+</style>
+
+<style>
+.select2-wrapper {
+    width: 100% ! important;
 }
 </style>

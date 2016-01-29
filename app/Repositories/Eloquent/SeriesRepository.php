@@ -63,6 +63,8 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
         $newSeries->save();
 
+        $newSeries->categories()->sync($data['categories']);
+
         return $this->findByIdWithRelation($newSeries->id)->toArray();
     }
 
@@ -90,7 +92,9 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     {
         $series = $this->findById($id);
 
-        $series->update($data);
+        $series->update(array_only($data, ['title', 'description']));
+
+        $series->categories()->sync($data['categories']);
 
         return $this->findByIdWithRelation($series->id)->toArray();
     }

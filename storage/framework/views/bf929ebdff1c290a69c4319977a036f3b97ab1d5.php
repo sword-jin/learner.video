@@ -5,6 +5,7 @@
     <title>Learner 后台管理</title>
     <link rel="stylesheet" href="<?php echo e(elixir("css/lib.css")); ?>">
     <link rel="stylesheet" href="./css/admin/admin.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/select2/4.0.1/css/select2.min.css">
     <meta name="token" id="token" value="<?php echo e(csrf_token()); ?>">
 </head>
 <body id="app" class="skin-black">
@@ -23,6 +24,8 @@
 
     <script src="<?php echo e(elixir('js/lib.js')); ?>"></script>
     <script src="<?php echo e(asset('js/admin/director.js')); ?>" type="text/javascript"></script>
+    <script src="//cdn.bootcss.com/select2/4.0.1/js/select2.min.js"></script>
+    <script src="//cdn.bootcss.com/select2/4.0.1/js/i18n/zh-CN.js"></script>
     <script src="<?php echo e(asset('js/admin/build.js')); ?>"></script>
 </body>
 </html>

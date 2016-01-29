@@ -7,6 +7,7 @@ use Auth;
 use Hash;
 use ImageManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Learner\Http\Controllers\Admin\BaseController;
 use Learner\Repositories\SeriesRepositoryInterface;
 use Learner\Repositories\CategoryRepositoryInterface;
@@ -37,6 +38,7 @@ class SeriesController extends BaseController
                                 CategoryRepositoryInterface $categories)
     {
         $this->series = $series;
+        $this->categories = $categories;
     }
 
     /**
@@ -46,8 +48,10 @@ class SeriesController extends BaseController
      */
     public function index()
     {
-        $data['series'] = $this->series->findAllWithRelation();
-        $data['categories'] = $this->series->find();
+        $series = $this->series->findAllWithRelation();
+        $categories = $this->categories->listAll();
+
+        return $this->responseJson(compact('series', 'categories'));
     }
 
     /**
@@ -68,7 +72,8 @@ class SeriesController extends BaseController
         $series = $this->series->create([
             'title' => $seriesData['title'],
             'description' => $seriesData['description'],
-            'image' => ImageManager::saveSeriesImage($seriesData['image'])
+            'image' => ImageManager::saveSeriesImage($seriesData['image']),
+            'categories' => $seriesData['categories']
         ]);
 
         return $this->responseJson(['message' => '系列创建成功', 'data' => $series]);
@@ -88,9 +93,11 @@ class SeriesController extends BaseController
         }
 
         $seriesData = $form->getInputData();
+
         $data = [
             'title' => $seriesData['title'],
             'description' => $seriesData['description'],
+            'categories' => $seriesData['categories']
         ];
 
         if (key_exists('image', $seriesData)) {

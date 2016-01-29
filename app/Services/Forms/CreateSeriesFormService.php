@@ -12,7 +12,8 @@ class CreateSeriesFormService extends AbstractFormService
     protected $rules = [
         'title' => 'required|max:120',
         'description' => 'required',
-        'image' => 'required|image'
+        'image' => 'required|image',
+        'categories' => 'required|array'
     ];
 
     /**
@@ -25,7 +26,8 @@ class CreateSeriesFormService extends AbstractFormService
         return [
             'title' => lang('series.create.title', 'Title'),
             'description' => lang('series.create.description', 'Description'),
-            'image' => lang('series.create.image', 'Image')
+            'image' => lang('series.create.image', 'Image'),
+            'categories' => lang('series.create.category', 'Category')
         ];
     }
 
@@ -37,7 +39,7 @@ class CreateSeriesFormService extends AbstractFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'title', 'description', 'image'
+            'title', 'description', 'image', 'categories'
         ]);
     }
 }
