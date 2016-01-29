@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Forms;
 
-class CreateSeriesFormService extends AbstractFormService
+class CreateCategoryFormService extends AbstractFormService
 {
     /**
      * The validation rules to validate the input data against.
@@ -10,8 +10,7 @@ class CreateSeriesFormService extends AbstractFormService
      * @var array
      */
     protected $rules = [
-        'title' => 'required|max:120',
-        'description' => 'required',
+        'name' => 'required|max:22|unique:categories',
         'image' => 'required|image'
     ];
 
@@ -23,9 +22,8 @@ class CreateSeriesFormService extends AbstractFormService
     public function getAttributes()
     {
         return [
-            'title' => lang('series.create.title', 'Title'),
-            'description' => lang('series.create.description', 'Description'),
-            'image' => lang('series.create.image', 'Image')
+            'name' => lang('category.create.name', 'Name'),
+            'image' => lang('category.create.image', 'Image')
         ];
     }
 
@@ -37,7 +35,7 @@ class CreateSeriesFormService extends AbstractFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'title', 'description', 'image'
+            'name', 'image'
         ]);
     }
 }

@@ -14,7 +14,7 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
      *
      * @var string
      */
-    protected static $relations = 'videos';
+    protected static $relations = ['videos', 'categories'];
 
     /**
      * Create a new Series instance.
@@ -63,19 +63,7 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
         $newSeries->save();
 
-        return $newSeries->toArray();
-    }
-
-    /**
-     * Find series by gived id.
-     *
-     * @param integer  $id
-     *
-     * @return
-     */
-    public function findById($id)
-    {
-        return $this->model->findOrFail($id);
+        return $this->findByIdWithRelation($newSeries->id)->toArray();
     }
 
     /**
@@ -105,16 +93,6 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
         $series->update($data);
 
         return $this->findByIdWithRelation($series->id)->toArray();
-    }
-
-    /**
-     * Delete the series from the database.
-     *
-     * @return bool|null
-     */
-    public function deleteById($id)
-    {
-        return $this->findById($id)->delete();
     }
 
     /**

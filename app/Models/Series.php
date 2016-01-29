@@ -28,10 +28,10 @@ class Series extends Model
     /**
      * A Video belongs to a category.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('Learner\Models\Category');
+        return $this->belongsToMany('Learner\Models\Category');
     }
 }

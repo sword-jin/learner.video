@@ -27,9 +27,12 @@
                     <i class="fa fa-gavel"></i> <span>用户</span>
                 </a>
             </li>
-
-            <li v-link="{name: 'videos', activeClass: 'active'}"
-                v-if="isBoss">
+            <li v-link="{name: 'categories', activeClass: 'active'}">
+                <a>
+                    <i class="fa fa-gavel"></i> <span>分类</span>
+                </a>
+            </li>
+            <li v-link="{name: 'videos', activeClass: 'active'}">
                 <a>
                     <i class="fa fa-globe"></i> <span>视频</span>
                 </a>
@@ -55,14 +58,6 @@
 
 <script>
 module.exports = {
-    props: ['auth'],
-
-    computed: {
-        isBoss() {
-            let names = this.auth.roles.map(role => role.name);
-
-            return names.indexOf('boss') != -1;
-        }
-    }
+    props: ['auth']
 }
 </script>

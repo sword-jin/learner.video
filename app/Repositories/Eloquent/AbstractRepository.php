@@ -34,4 +34,26 @@ abstract class AbstractRepository
     {
         return $this->model->newInstance($attributes);
     }
+
+    /**
+     * Find instance by gived id.
+     *
+     * @param integer  $id
+     *
+     * @return
+     */
+    public function findById($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Delete the instance from the database.
+     *
+     * @return bool|null
+     */
+    public function deleteById($id)
+    {
+        return $this->findById($id)->delete();
+    }
 }

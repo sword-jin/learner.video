@@ -2,6 +2,8 @@
 
 namespace Learner\Http\Controllers\Admin;
 
+use Log;
+use Auth;
 use Learner\Models\User;
 use Illuminate\Http\Request;
 use Learner\Http\Controllers\Admin\BaseController;
@@ -76,6 +78,8 @@ class UserController extends BaseController
     {
         $this->users->remove($request->get('id'));
 
+        Log::info(Auth::user()->username . ': ' . lang('log.removeUserSuccess', 'delete a user to trash.'));
+
         return $this->responseJson(['message' => '该用户移动到回收站']);
     }
 
@@ -89,6 +93,8 @@ class UserController extends BaseController
     public function deleteUser(Request $request)
     {
         $this->users->delete($request->get('id'));
+
+        Log::info(Auth::user()->username . ': ' . lang('log.deleteUserSuccess', 'delete a user.'));
 
         return $this->responseJson(['message' => '该用户已经被完全删除']);
     }

@@ -28,15 +28,6 @@ interface SeriesRepositoryInterface
     public function create($data);
 
     /**
-     * Find series by gived id.
-     *
-     * @param integer  $id
-     *
-     * @return
-     */
-    public function findById($id);
-
-    /**
      * Find image path by id.
      *
      * @param  integer $id
@@ -54,13 +45,6 @@ interface SeriesRepositoryInterface
      * @return array
      */
     public function update($id, $data);
-
-    /**
-     * Delete the series from the database.
-     *
-     * @return bool|null
-     */
-    public function deleteById($id);
 
     /**
      * Return all series and relation.

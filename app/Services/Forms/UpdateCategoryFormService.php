@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Forms;
 
-class UpdateSeriesFormService extends CreateSeriesFormService
+class UpdateCategoryFormService extends AbstractFormService
 {
     /**
      * The validation rules to validate the input data against.
@@ -10,8 +10,7 @@ class UpdateSeriesFormService extends CreateSeriesFormService
      * @var array
      */
     protected $rules = [
-        'title' => 'required|max:120',
-        'description' => 'required',
+        'name' => 'required|max:22',
         'image' => 'image'
     ];
 
@@ -23,7 +22,7 @@ class UpdateSeriesFormService extends CreateSeriesFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'id', 'title', 'description', 'image'
+            'id', 'name', 'image'
         ]);
     }
 }

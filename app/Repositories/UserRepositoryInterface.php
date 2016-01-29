@@ -31,13 +31,13 @@ interface UserRepositoryInterface
     public function getRegisterForm();
 
     /**
-     * Find user by id.
+     * Find user by id with trashed.
      *
      * @param  integer $id
      *
      * @return \Learner\Models\User
      */
-    public function findById($id);
+    public function findWithTrashedById($id);
 
     /**
      * Find all users paginated.

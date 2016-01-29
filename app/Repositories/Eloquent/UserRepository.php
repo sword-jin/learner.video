@@ -71,20 +71,15 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     }
 
     /**
-     * Find user by id.
+     * Find user by id with trashed.
      *
      * @param  integer $id
      *
      * @return \Learner\Models\User
      */
-    public function findById($id)
+    public function findWithTrashedById($id)
     {
         return $this->model->withTrashed()->findOrFail($id);
-    }
-
-    public function getUserCount()
-    {
-        //..
     }
 
     /**
@@ -141,7 +136,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function update($id, array $attributes)
     {
-        $user = $this->findById($id);
+        $user = $this->findWithTrashedById($id);
 
         $user->update($attributes);
     }
@@ -165,7 +160,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function delete($id)
     {
-        $user = $this->findById($id);
+        $user = $this->findWithTrashedById($id);
 
         AvatarManager::delete($user->avatar);
 
@@ -193,7 +188,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function toggleActive($id)
     {
-        $user = $this->findById($id);
+        $user = $this->findWithTrashedById($id);
 
         $user->update([
             'is_active' => ! $user->is_active

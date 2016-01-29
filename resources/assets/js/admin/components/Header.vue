@@ -40,11 +40,11 @@
 
                         <li>
                             <a href="#">
-                            <i class="fa fa-user fa-fw pull-right"></i>
+                                <i class="fa fa-user fa-fw pull-right"></i>
                                 Profile
                             </a>
-                            <a data-toggle="modal" href="#modal-user-settings">
-                            <i class="fa fa-cog fa-fw pull-right"></i>
+                            <a href="/">
+                                <i class="fa fa-cog fa-fw pull-right"></i>
                                 返回前台
                             </a>
                         </li>

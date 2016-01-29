@@ -9,22 +9,32 @@ use ImageManager;
 use Illuminate\Http\Request;
 use Learner\Http\Controllers\Admin\BaseController;
 use Learner\Repositories\SeriesRepositoryInterface;
+use Learner\Repositories\CategoryRepositoryInterface;
 
 class SeriesController extends BaseController
 {
     /**
-     * Series repository
+     * Series repository.
      *
      * @var \Learner\Repositories\SeriesRepositoryInterface
      */
     protected $series;
 
     /**
+     * Category repository.
+     *
+     * @var \Learner\Repositories\CategoryRepositoryInterface $catetories
+     */
+    protected $categories;
+
+    /**
      * Create a new SeriesController instance.
      *
      * @param \Learner\Repositories\SeriesRepositoryInterface $series
+     * @param \Learner\Repositories\CategoryRepositoryInterface $catetories
      */
-    public function __construct(SeriesRepositoryInterface $series)
+    public function __construct(SeriesRepositoryInterface $series,
+                                CategoryRepositoryInterface $categories)
     {
         $this->series = $series;
     }
@@ -36,7 +46,8 @@ class SeriesController extends BaseController
      */
     public function index()
     {
-        return $this->series->findAllWithRelation();
+        $data['series'] = $this->series->findAllWithRelation();
+        $data['categories'] = $this->series->find();
     }
 
     /**
@@ -111,7 +122,8 @@ class SeriesController extends BaseController
             // remove from db.
             $this->series->deleteById($id);
 
-            Log::warning(lang("log.deleteSeriesSuccess", "You delete a series."));
+            Log::info(lang("log.deleteSeriesSuccess", "You delete a series."));
+
             return $this->responseJson(['message' => '删除成功！']);
         }
 

@@ -2,8 +2,8 @@
 
 return [
     'create' => [
-        'title' => '标题',
-        'description' => '描述',
-        'image' => '图片'
+        'title' => '系列标题',
+        'description' => '系列描述',
+        'image' => '系列图片'
     ],
 ];

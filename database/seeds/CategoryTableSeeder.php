@@ -12,22 +12,22 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = [
-            [
-                'name' => 'php',
-                'image' => '/img/category/php.png'
-            ],
-            [
-                'name' => 'javascript',
-                'image' => '/img/category/javascript.png'
-            ]
-        ];
+        // $categories = [
+        //     [
+        //         'name' => 'php',
+        //         'image' => '/img/category/php.png'
+        //     ],
+        //     [
+        //         'name' => 'javascript',
+        //         'image' => '/img/category/javascript.png'
+        //     ]
+        // ];
 
-        foreach ($categories as $c) {
-            Category::create([
-                'name' => $c['name'],
-                'image' => $c['image'],
-            ]);
-        }
+        // foreach ($categories as $c) {
+        //     Category::create([
+        //         'name' => $c['name'],
+        //         'image' => $c['image'],
+        //     ]);
+        // }
     }
 }

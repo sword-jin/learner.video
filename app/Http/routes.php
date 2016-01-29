@@ -21,7 +21,7 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'admin.',
         'prefix' => 'admin',
         'namespace' => 'Admin',
-        'middleware' => ['role:admin|boss']
+        'middleware' => ['role:boss|admin']
     ];
 
     Route::group($config, function() {
@@ -38,6 +38,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::put('/users/toggleActive', 'UserController@toggleUserActive');
         Route::DELETE('/users/remove', 'UserController@removeToTrash');
         Route::DELETE('/users/delete', 'UserController@deleteUser');
+
+        Route::get('/categories', 'CategoryController@index');
+        Route::post('/categories', 'CategoryController@store');
+        Route::post('/categories/update/{id}', 'CategoryController@update');
+        Route::delete('/categories/{id}', 'CategoryController@destory');
 
         Route::get('/series', 'SeriesController@index');
         Route::post('/series', 'SeriesController@store');

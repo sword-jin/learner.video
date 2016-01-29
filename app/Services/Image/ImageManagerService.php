@@ -22,9 +22,33 @@ class ImageManagerService
      */
     protected static $seriesHeight = 440;
 
+    /**
+     * The dimensions to width the category image to.
+     *
+     * @var int
+     */
+    protected static $cateWidth = 360;
+
+    /**
+     * The dimensions to height the category image to.
+     *
+     * @var int
+     */
+    protected static $cateHeight = 360;
+
+    /**
+     * The series image path in public folder.
+     *
+     * @var string
+     */
     protected static $seriesPath = 'img/series';
 
-    protected static $videoPath = 'img/video';
+    /**
+     * The category image path in public folder.
+     *
+     * @var string
+     */
+    protected static $catePath = 'img/category';
 
     /**
      * Create the directory.
@@ -43,14 +67,38 @@ class ImageManagerService
      */
     public function saveSeriesImage($image)
     {
-        $img = Image::make($image->getRealPath());;
+        return $this->saveImage($image, 'series');
+    }
 
-        $img->fit(self::$seriesWidth, self::$seriesHeight);
+    /**
+     * Save the category image.
+     *
+     * @param  Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return string
+     */
+    public function saveCategoryImage($image)
+    {
+        return $this->saveImage($image, 'category');
+    }
 
-        $filepath = $this->randomSeriesPath($image->getClientOriginalExtension());
-        $fullpath = $this->getFullpath($filepath);
+    protected function saveImage($image, $type = null)
+    {
+        if ($type == null) throw new Exception("Please specify a type image");
 
-        $img->save($fullpath);
+        $img = Image::make($image->getRealPath());
+
+        if ($type == 'series') {
+            $img->fit(self::$seriesWidth, self::$seriesHeight);
+
+            $filepath = $this->randomSeriesPath($image->getClientOriginalExtension());
+        } else if ($type == 'category') {
+            $img->fit(self::$cateWidth, self::$cateHeight);
+
+            $filepath = $this->randomCatePath($image->getClientOriginalExtension());
+        }
+
+        $img->save($this->getFullpath($filepath));
 
         return $filepath;
     }
@@ -71,6 +119,14 @@ class ImageManagerService
         return $this->saveSeriesImage($image);
     }
 
+    public function changeCategoryImage($image, $imagePath)
+    {
+        // remove origin image
+        $this->delete($imagePath);
+        // create new image
+        return $this->saveCategoryImage($image);
+    }
+
     /**
      * Get the series random path.
      *
@@ -84,13 +140,20 @@ class ImageManagerService
             $extension;
     }
 
+    protected function randomCatePath($extension)
+    {
+        return self::$catePath . '/' .
+            $this->randomName() . '.' .
+            $extension;
+    }
+
     /**
      * Create the dir.
      */
     protected function createDir()
     {
         $series = public_path() . '/' . self::$seriesPath;
-        $video = public_path() . '/' . self::$videoPath;
+        $video = public_path() . '/' . self::$catePath;
 
         if (! is_dir($series)) {
             mkdir($series, 0777, true);

@@ -1,21 +1,20 @@
 <template>
-<div class="row">
-    <div class="form-group" class="col-sm-3" style="text-align: center">
-        <button class="btn btn-success btn-lg"
-            @click="addSeries()">
-            <i class="fa fa-film"></i> 添加系列
-        </button>
-    </div>
-    <div class="form-group" style="text-align: center">
-        <button class="btn btn-success btn-lg">
-            <span class="fa fa-youtube-play"></span> 添加视频
-        </button>
+<div class="row" style="margin-bottom: 15px">
+    <div class="col-xs-12">
+        <div class="btn-group" role="group">
+            <button class="btn btn-success btn-lg"
+                @click="addSeries()">
+                <i class="fa fa-film"></i> 添加系列
+            </button>
+            <button class="btn btn-success btn-lg">
+                <span class="fa fa-youtube-play"></span> 添加视频
+            </button>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-12">
-
         <div class="alert alert-success" v-show="success">
             {{ message }}
         </div>
@@ -30,9 +29,9 @@
                     <thead>
                         <tr>
                             <th v-for="column in seriesColumns">{{ column }}</th>
-                            <th><i class="fa fa-eye"></i>展开</th>
-                            <th><i class="fa fa-edit"></i>编辑</th>
-                            <th><i class="fa fa-remove"></i>删除</th>
+                            <th width="1%"><i class="fa fa-eye"></i></th>
+                            <th width="1%"><i class="fa fa-edit"></i></th>
+                            <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
                         </tr>
                     </thead>
                     <tbody v-for="serie in series">
@@ -41,6 +40,9 @@
                             <td width="15%"><img :src="serie.image" width="30px"></td>
                             <td>{{ serie.title }}</td>
                             <td>{{ serie.videos.length }}</td>
+                            <td>
+                                <span v-for="category in serie.categories">{{ category.name }}</span>
+                            </td>
                             <td>{{ serie.created_at | date }}</td>
                             <td>
                                 <a @click.stop="toggleDescription(serie.id)">
@@ -55,8 +57,8 @@
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a @click="deleteSeriesForm(serie.id)" class="deleteSeries">
+                            <td v-if="isBoss">
+                                <a @click="deleteSeriesForm(serie.id)" class="delete">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
@@ -67,10 +69,6 @@
                     </tbody>
                 </table>
             </div> <!-- panel-body -->
-
-            <div class="table-foot">
-
-            </div> <!-- panel-foot -->
         </div>
     </div> <!-- col-12 -->
 
@@ -130,6 +128,11 @@
                             <label for="serieDescription">描述</label>
                             <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
                         </div>
+                        <!-- Catego field -->
+                        <div class="form-group">
+                            <label for="categories">分类</label>
+                            <input type="text" class="form-control" id="categories" name="categories[]">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -151,18 +154,22 @@ module.exports = {
                 '图片',
                 '标题',
                 '视频数',
+                '分类',
                 '创建时间'
             ],
             newSerie: {
-                'id': '',
-                'title': '',
-                'description': '',
-                'image': '',
-                'created_at': '',
-                'updated_at': '',
-                videos: []
+                id: '',
+                title: '',
+                description: '',
+                image: '',
+                created_at: '',
+                updated_at: '',
+                videos: [],
+                categories: []
             },
             series: [],
+            categories: [],
+
             showDescription: [],
             // message
             success: false,
@@ -177,7 +184,15 @@ module.exports = {
             deleteId: ''
         }
     },
+
+    props: ['roles'],
+
     computed: {
+        isBoss() {
+            let names = this.roles.map(role => role.name);
+
+            return names.indexOf('boss') != -1;
+        },
         errorArray() {
             let errors = [];
 
@@ -195,14 +210,15 @@ module.exports = {
         }
     },
     created() {
-        this.getSeries();
+        this.getAllSeriesInfo();
     },
     methods: {
-        getSeries() {
+        getAllSeriesInfo() {
+            // es6 promise... how to?
             this.$http.get('/admin/series')
-            .then(function(response) {
-                this.series = response.data;
-            });
+                .then(function(response) {
+                    this.series = response.data;
+                });
         },
 
         toggleDescription(id) {
@@ -274,7 +290,7 @@ module.exports = {
         editSeries(serie) {
             this.editing = true;
             this.setSeriesForm(serie.id, serie.title, serie.description,
-                serie.image, serie.created_at, serie.updated_at, serie.videos);
+                serie.image, serie.created_at, serie.updated_at, serie.videos, serie.categories);
 
             jQuery('#createSeriesModal').modal('show');
         },
@@ -296,14 +312,14 @@ module.exports = {
 
             self.$http.delete('/admin/series/' + self.deleteId, {password})
                 .then(function(response) {
-                    this.showMessage(response.data.message);
+                    self.showMessage(response.data.message);
+                    self.removeSeriesById(self.deleteId);
 
                     jQuery('#deleteSeriesModal').modal('hide');
                 })
                 .error(function(response) {
                     self.hasError = true;
                     self.error = response.error;
-                    console.log(self.error);
 
                     setTimeout(function() {
                         self.hasError = false;
@@ -311,15 +327,20 @@ module.exports = {
                         jQuery('#deleteSeriesModal').modal('hide');
                     }, 2800);
                 });
-
         },
 
-        setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
-            this.newSerie = {id, title, description, image, created_at, updated_at, videos};
+        removeSeriesById(id) {
+            let index = this.findIndexById(id);
+
+            this.series.splice(index, 1);
+        },
+
+        setSeriesForm(id, title, description, image, created_at, updated_at, videos, categories) {
+            this.newSerie = {id, title, description, image, created_at, updated_at, videos, categories};
         },
 
         resetSeriesForm() {
-            this.setSeriesForm('', '', '', '', '', '', '', []);
+            this.setSeriesForm('', '', '', '', '', '', '', [], []);
             $('#serieImage').val('');
         },
 
@@ -346,10 +367,10 @@ module.exports = {
 </script>
 
 <style>
-.deleteSeries {
+.delete {
     color: #ee3939;
 }
-.deleteSeries:hover {
+.delete:hover {
     color: #ac2925;
 }
 </style>

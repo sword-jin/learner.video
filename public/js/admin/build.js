@@ -62,24 +62,28 @@
 
 	var _Users2 = _interopRequireDefault(_Users);
 
+	var _Categories = __webpack_require__(51);
+
+	var _Categories2 = _interopRequireDefault(_Categories);
+
 	var _Videos = __webpack_require__(17);
 
 	var _Videos2 = _interopRequireDefault(_Videos);
 
-	var _Subscribers = __webpack_require__(18);
+	var _Subscribers = __webpack_require__(22);
 
 	var _Subscribers2 = _interopRequireDefault(_Subscribers);
 
-	var _Publish = __webpack_require__(19);
+	var _Publish = __webpack_require__(23);
 
 	var _Publish2 = _interopRequireDefault(_Publish);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(20);
-	var VueRouter = __webpack_require__(22);
+	var Vue = __webpack_require__(24);
+	var VueRouter = __webpack_require__(26);
 
-	Vue.use(__webpack_require__(23));
+	Vue.use(__webpack_require__(27));
 	Vue.use(VueRouter);
 
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
@@ -118,6 +122,10 @@
 	    '/users': {
 	        name: 'users',
 	        component: _Users2.default
+	    },
+	    '/categories': {
+	        name: 'categories',
+	        component: _Categories2.default
 	    },
 	    '/videos': {
 	        name: 'videos',
@@ -205,11 +213,11 @@
 	//
 	//                         <li>
 	//                             <a href="#">
-	//                             <i class="fa fa-user fa-fw pull-right"></i>
+	//                                 <i class="fa fa-user fa-fw pull-right"></i>
 	//                                 Profile
 	//                             </a>
-	//                             <a data-toggle="modal" href="#modal-user-settings">
-	//                             <i class="fa fa-cog fa-fw pull-right"></i>
+	//                             <a href="/">
+	//                                 <i class="fa fa-cog fa-fw pull-right"></i>
 	//                                 返回前台
 	//                             </a>
 	//                         </li>
@@ -240,7 +248,7 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<header class=\"header\">\n    <a v-link=\"{name: 'dashboard'}\" class=\"logo\">\n        <!-- Add the class icon to your logo image or logo icon to add the margining -->\n        Learner\n    </a>\n    <!-- Header Navbar: style can be found in header.less -->\n    <nav class=\"navbar navbar-static-top\" role=\"navigation\">\n        <!-- Sidebar toggle button-->\n        <a href=\"#\" class=\"navbar-btn sidebar-toggle\" data-toggle=\"offcanvas\" role=\"button\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </a>\n        <div class=\"navbar-right\">\n            <ul class=\"nav navbar-nav\">\n                <!-- User Account: style can be found in dropdown.less -->\n                <li class=\"dropdown user user-menu\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n                        <i class=\"fa fa-user\"></i>\n                        <span>{{ username }} <i class=\"caret\"></i></span>\n                    </a>\n                    <ul class=\"dropdown-menu dropdown-custom dropdown-menu-right\">\n                        <li class=\"dropdown-header text-center\">Account</li>\n                        <li>\n                            <a href=\"#\">\n                            <i class=\"fa fa-clock-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-success pull-right\">10</span> Updates</a>\n                            <a href=\"#\">\n                            <i class=\"fa fa-envelope-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-danger pull-right\">5</span> Messages</a>\n                            <a href=\"#\"><i class=\"fa fa-magnet fa-fw pull-right\"></i>\n                                <span class=\"badge badge-info pull-right\">3</span> Subscriptions</a>\n                            <a href=\"#\"><i class=\"fa fa-question fa-fw pull-right\"></i> <span class=\n                                \"badge pull-right\">11</span> FAQ</a>\n                        </li>\n\n                        <li class=\"divider\"></li>\n\n                        <li>\n                            <a href=\"#\">\n                            <i class=\"fa fa-user fa-fw pull-right\"></i>\n                                Profile\n                            </a>\n                            <a data-toggle=\"modal\" href=\"#modal-user-settings\">\n                            <i class=\"fa fa-cog fa-fw pull-right\"></i>\n                                返回前台\n                            </a>\n                        </li>\n                        <li class=\"divider\"></li>\n                        <li>\n                            <a href=\"/auth/logout\"><i class=\"fa fa-ban fa-fw pull-right\"></i> 退出</a>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header>\n";
+	module.exports = "\n<header class=\"header\">\n    <a v-link=\"{name: 'dashboard'}\" class=\"logo\">\n        <!-- Add the class icon to your logo image or logo icon to add the margining -->\n        Learner\n    </a>\n    <!-- Header Navbar: style can be found in header.less -->\n    <nav class=\"navbar navbar-static-top\" role=\"navigation\">\n        <!-- Sidebar toggle button-->\n        <a href=\"#\" class=\"navbar-btn sidebar-toggle\" data-toggle=\"offcanvas\" role=\"button\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </a>\n        <div class=\"navbar-right\">\n            <ul class=\"nav navbar-nav\">\n                <!-- User Account: style can be found in dropdown.less -->\n                <li class=\"dropdown user user-menu\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n                        <i class=\"fa fa-user\"></i>\n                        <span>{{ username }} <i class=\"caret\"></i></span>\n                    </a>\n                    <ul class=\"dropdown-menu dropdown-custom dropdown-menu-right\">\n                        <li class=\"dropdown-header text-center\">Account</li>\n                        <li>\n                            <a href=\"#\">\n                            <i class=\"fa fa-clock-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-success pull-right\">10</span> Updates</a>\n                            <a href=\"#\">\n                            <i class=\"fa fa-envelope-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-danger pull-right\">5</span> Messages</a>\n                            <a href=\"#\"><i class=\"fa fa-magnet fa-fw pull-right\"></i>\n                                <span class=\"badge badge-info pull-right\">3</span> Subscriptions</a>\n                            <a href=\"#\"><i class=\"fa fa-question fa-fw pull-right\"></i> <span class=\n                                \"badge pull-right\">11</span> FAQ</a>\n                        </li>\n\n                        <li class=\"divider\"></li>\n\n                        <li>\n                            <a href=\"#\">\n                                <i class=\"fa fa-user fa-fw pull-right\"></i>\n                                Profile\n                            </a>\n                            <a href=\"/\">\n                                <i class=\"fa fa-cog fa-fw pull-right\"></i>\n                                返回前台\n                            </a>\n                        </li>\n                        <li class=\"divider\"></li>\n                        <li>\n                            <a href=\"/auth/logout\"><i class=\"fa fa-ban fa-fw pull-right\"></i> 退出</a>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header>\n";
 
 /***/ },
 /* 4 */
@@ -299,9 +307,12 @@
 	//                     <i class="fa fa-gavel"></i> <span>用户</span>
 	//                 </a>
 	//             </li>
-	//
-	//             <li v-link="{name: 'videos', activeClass: 'active'}"
-	//                 v-if="isBoss">
+	//             <li v-link="{name: 'categories', activeClass: 'active'}">
+	//                 <a>
+	//                     <i class="fa fa-gavel"></i> <span>分类</span>
+	//                 </a>
+	//             </li>
+	//             <li v-link="{name: 'videos', activeClass: 'active'}">
 	//                 <a>
 	//                     <i class="fa fa-globe"></i> <span>视频</span>
 	//                 </a>
@@ -327,17 +338,7 @@
 	//
 	// <script>
 	module.exports = {
-	    props: ['auth'],
-
-	    computed: {
-	        isBoss: function isBoss() {
-	            var names = this.auth.roles.map(function (role) {
-	                return role.name;
-	            });
-
-	            return names.indexOf('boss') != -1;
-	        }
-	    }
+	    props: ['auth']
 	};
 	// </script>
 	//
@@ -346,7 +347,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\"\n                v-if=\"isBoss\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
+	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
 
 /***/ },
 /* 7 */
@@ -1203,9 +1204,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(52)
-	__vue_script__ = __webpack_require__(47)
-	__vue_template__ = __webpack_require__(48)
+	__webpack_require__(18)
+	__vue_script__ = __webpack_require__(20)
+	__vue_template__ = __webpack_require__(21)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -1223,26 +1224,438 @@
 
 /***/ },
 /* 18 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var __vue_script__, __vue_template__
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 
+	// load the styles
+	var content = __webpack_require__(19);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(14)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
 /* 19 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var __vue_script__, __vue_template__
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	exports = module.exports = __webpack_require__(13)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.delete {\n    color: #ee3939;\n}\n.delete:hover {\n    color: #ac2925;\n}\n", ""]);
+
+	// exports
 
 
 /***/ },
 /* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom: 15px">
+	//     <div class="col-xs-12">
+	//         <div class="btn-group" role="group">
+	//             <button class="btn btn-success btn-lg"
+	//                 @click="addSeries()">
+	//                 <i class="fa fa-film"></i> 添加系列
+	//             </button>
+	//             <button class="btn btn-success btn-lg">
+	//                 <span class="fa fa-youtube-play"></span> 添加视频
+	//             </button>
+	//         </div>
+	//     </div>
+	// </div>
+	//
+	// <div class="row">
+	//     <div class="col-sm-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 系列列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in seriesColumns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-eye"></i></th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody v-for="serie in series">
+	//                         <tr>
+	//                             <td>{{ serie.id }}</td>
+	//                             <td width="15%"><img :src="serie.image" width="30px"></td>
+	//                             <td>{{ serie.title }}</td>
+	//                             <td>{{ serie.videos.length }}</td>
+	//                             <td>
+	//                                 <span v-for="category in serie.categories">{{ category.name }}</span>
+	//                             </td>
+	//                             <td>{{ serie.created_at | date }}</td>
+	//                             <td>
+	//                                 <a @click.stop="toggleDescription(serie.id)">
+	//                                     <i class="fa"
+	//                                        :class="{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,
+	//                                                  'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }"
+	//                                     ></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td>
+	//                                 <a @click="editSeries(serie)">
+	//                                     <i class="fa fa-edit"></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click="deleteSeriesForm(serie.id)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                         <tr v-show="showDescription.indexOf(serie.id) > -1">
+	//                             <td colspan="8"><b>描述：</b>{{ serie.description }}</td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//             </div> <!-- panel-body -->
+	//         </div>
+	//     </div> <!-- col-12 -->
+	//
+	//     <form @submit.prevent="deleteSeries" id="deleteSeries">
+	//         <div class="modal fade" id="deleteSeriesModal">
+	//              <div class="modal-dialog modal-sm">
+	//                 <div class="modal-content">
+	//                     <div class="modal-header">
+	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                         <h4 class="modal-title">请输入密码</h4>
+	//                     </div>
+	//
+	//                     <div class="alert alert-danger" v-if="hasError">
+	//                         {{ error }}
+	//                     </div>
+	//
+	//                     <div class="modal-body">
+	//                         <div class="form-group">
+	//                             <input type="password" name="password" class="form-control" id="password">
+	//                         </div>
+	//                     </div>
+	//                     <div class="modal-footer">
+	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                         <input type="submit" class="btn btn-danger" value="确认"></input>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </form>
+	//
+	//     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
+	//         <div class="modal fade" id="createSeriesModal">
+	//             <div class="modal-dialog">
+	//                 <div class="modal-content">
+	//                     <div class="modal-header">
+	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                         <h4 class="modal-title">系列管理</h4>
+	//                     </div>
+	//                     <div class="modal-body">
+	//                         <div class="alert alert-danger" v-if="hasError">
+	//                             <ul>
+	//                                 <li v-for="error in errorArray">{{ error }}</li>
+	//                             </ul>
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieTitle">标题</label>
+	//                             <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieImage">图片</label>
+	//                             <input type="file" name="image" id="serieImage" class="form-control">
+	//                         </div>
+	//                         <div class="form-group" v-if="editing">
+	//                             <img :src="newSerie.image" id="editImageSrc">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <label for="serieDescription">描述</label>
+	//                             <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+	//                         </div>
+	//                         <!-- Catego field -->
+	//                         <div class="form-group">
+	//                             <label for="categories">分类</label>
+	//                             <input type="text" class="form-control" id="categories" name="categories[]">
+	//                         </div>
+	//                     </div>
+	//                     <div class="modal-footer">
+	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                         <button type="submit" class="btn btn-primary">保存</button>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </form> <!-- form -->
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            seriesColumns: ['ID', '图片', '标题', '视频数', '分类', '创建时间'],
+	            newSerie: {
+	                id: '',
+	                title: '',
+	                description: '',
+	                image: '',
+	                created_at: '',
+	                updated_at: '',
+	                videos: [],
+	                categories: []
+	            },
+	            series: [],
+	            categories: [],
+
+	            showDescription: [],
+	            // message
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            error: '',
+	            errors: [],
+	            // edit series
+	            editing: false,
+	            editImageSrc: '',
+	            // delete series
+	            deleteId: ''
+	        };
+	    },
+
+	    props: ['roles'],
+
+	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        },
+	        errorArray: function errorArray() {
+	            var errors = [];
+
+	            if (this.errors.title) {
+	                errors.push(this.errors.title[0]);
+	            }
+	            if (this.errors.image) {
+	                errors.push(this.errors.image[0]);
+	            }
+	            if (this.errors.description) {
+	                errors.push(this.errors.description[0]);
+	            }
+
+	            return errors;
+	        }
+	    },
+	    created: function created() {
+	        this.getAllSeriesInfo();
+	    },
+
+	    methods: {
+	        getAllSeriesInfo: function getAllSeriesInfo() {
+	            // es6 promise... how to?
+	            this.$http.get('/admin/series').then(function (response) {
+	                this.series = response.data;
+	            });
+	        },
+	        toggleDescription: function toggleDescription(id) {
+	            var index = this.showDescription.indexOf(id);
+
+	            if (index > -1) {
+	                this.showDescription.$remove(id);
+	            } else {
+	                this.showDescription.push(id);
+	            }
+	        },
+	        findIndexById: function findIndexById(id) {
+	            var ids = this.series.map(function (s) {
+	                return s.id;
+	            });
+
+	            return ids.indexOf(id);
+	        },
+	        saveSerie: function saveSerie(e) {
+	            var self = this;
+	            e.preventDefault();
+
+	            var request = new XMLHttpRequest();
+	            var formdata = new FormData(document.getElementById('serieForm'));
+	            if (!self.editing) {
+	                request.open('post', '/admin/series');
+	            } else {
+	                request.open('post', '/admin/series/update/' + self.newSerie.id);
+	            }
+	            request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
+	            request.send(formdata);
+
+	            request.onreadystatechange = function () {
+	                if (this.readyState == 4) {
+	                    // 对象读取服务器响应结束
+	                    if (request.status == 400) {
+	                        self.hasError = true;
+
+	                        self.errors = JSON.parse(request.responseText).errors;
+
+	                        setTimeout(function () {
+	                            self.hasError = false;
+	                        }, 2800);
+	                    } else if (request.status == 200) {
+	                        jQuery('#createSeriesModal').modal('hide');
+
+	                        self.resetSeriesForm();
+
+	                        self.showMessage(JSON.parse(request.responseText).message);
+
+	                        var serie = JSON.parse(request.responseText).data;
+
+	                        if (self.editing) {
+	                            self.updateSeries(serie);
+	                        } else {
+	                            self.pushSeries(serie);
+	                        }
+	                    }
+	                }
+	            };
+	        },
+	        addSeries: function addSeries() {
+	            this.editing = false;
+	            this.resetSeriesForm();
+
+	            jQuery('#createSeriesModal').modal('show');
+	        },
+	        editSeries: function editSeries(serie) {
+	            this.editing = true;
+	            this.setSeriesForm(serie.id, serie.title, serie.description, serie.image, serie.created_at, serie.updated_at, serie.videos, serie.categories);
+
+	            jQuery('#createSeriesModal').modal('show');
+	        },
+	        deleteSeriesForm: function deleteSeriesForm(id) {
+	            jQuery('#password').val('');
+	            this.deleteId = id;
+
+	            jQuery('#deleteSeriesModal').modal('show');
+	        },
+	        deleteSeries: function deleteSeries() {
+	            var self = this;
+	            var password = jQuery('#password').val();
+
+	            if (password.length == 0) {
+	                return;
+	            }
+
+	            self.$http.delete('/admin/series/' + self.deleteId, { password: password }).then(function (response) {
+	                self.showMessage(response.data.message);
+	                self.removeSeriesById(self.deleteId);
+
+	                jQuery('#deleteSeriesModal').modal('hide');
+	            }).error(function (response) {
+	                self.hasError = true;
+	                self.error = response.error;
+
+	                setTimeout(function () {
+	                    self.hasError = false;
+
+	                    jQuery('#deleteSeriesModal').modal('hide');
+	                }, 2800);
+	            });
+	        },
+	        removeSeriesById: function removeSeriesById(id) {
+	            var index = this.findIndexById(id);
+
+	            this.series.splice(index, 1);
+	        },
+	        setSeriesForm: function setSeriesForm(id, title, description, image, created_at, updated_at, videos, categories) {
+	            this.newSerie = { id: id, title: title, description: description, image: image, created_at: created_at, updated_at: updated_at, videos: videos, categories: categories };
+	        },
+	        resetSeriesForm: function resetSeriesForm() {
+	            this.setSeriesForm('', '', '', '', '', '', '', [], []);
+	            $('#serieImage').val('');
+	        },
+	        pushSeries: function pushSeries(serie) {
+	            this.series.push(serie);
+	        },
+	        updateSeries: function updateSeries(serie) {
+	            var index = this.findIndexById(serie.id);
+
+	            this.series.$set(index, serie);
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        }
+	    }
+	};
+	// </script>
+	//
+	// <style>
+	// .delete {
+	//     color: #ee3939;
+	// }
+	// .delete:hover {
+	//     color: #ac2925;
+	// }
+	// </style>
+	//
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\" role=\"group\">\n            <button class=\"btn btn-success btn-lg\"\n                @click=\"addSeries()\">\n                <i class=\"fa fa-film\"></i> 添加系列\n            </button>\n            <button class=\"btn btn-success btn-lg\">\n                <span class=\"fa fa-youtube-play\"></span> 添加视频\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                系列列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in seriesColumns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-eye\"></i></th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody v-for=\"serie in series\">\n                        <tr>\n                            <td>{{ serie.id }}</td>\n                            <td width=\"15%\"><img :src=\"serie.image\" width=\"30px\"></td>\n                            <td>{{ serie.title }}</td>\n                            <td>{{ serie.videos.length }}</td>\n                            <td>\n                                <span v-for=\"category in serie.categories\">{{ category.name }}</span>\n                            </td>\n                            <td>{{ serie.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"toggleDescription(serie.id)\">\n                                    <i class=\"fa\"\n                                       :class=\"{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,\n                                                 'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }\"\n                                    ></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"editSeries(serie)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(serie.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                        <tr v-show=\"showDescription.indexOf(serie.id) > -1\">\n                            <td colspan=\"8\"><b>描述：</b>{{ serie.description }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div> <!-- panel-body -->\n        </div>\n    </div> <!-- col-12 -->\n\n    <form @submit.prevent=\"deleteSeries\" id=\"deleteSeries\">\n        <div class=\"modal fade\" id=\"deleteSeriesModal\">\n             <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">请输入密码</h4>\n                    </div>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        {{ error }}\n                    </div>\n\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form>\n\n    <form @submit=\"saveSerie\" id=\"serieForm\" enctype=\"multipart/form-data\">\n        <div class=\"modal fade\" id=\"createSeriesModal\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">系列管理</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"alert alert-danger\" v-if=\"hasError\">\n                            <ul>\n                                <li v-for=\"error in errorArray\">{{ error }}</li>\n                            </ul>\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieTitle\">标题</label>\n                            <input type=\"text\" name=\"title\" v-model=\"newSerie.title\" id=\"serieTitle\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"serieImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newSerie.image\" id=\"editImageSrc\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieDescription\">描述</label>\n                            <textarea type=\"file\" name=\"description\" v-model=\"newSerie.description\" id=\"serieDescription\" class=\"form-control\" rows=\"6\"></textarea>\n                        </div>\n                        <!-- Catego field -->\n                        <div class=\"form-group\">\n                            <label for=\"categories\">分类</label>\n                            <input type=\"text\" class=\"form-control\" id=\"categories\" name=\"categories[]\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <button type=\"submit\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form> <!-- form -->\n</div>\n";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	var __vue_script__, __vue_template__
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	var __vue_script__, __vue_template__
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -10769,10 +11182,10 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10869,7 +11282,7 @@
 
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -13508,7 +13921,7 @@
 	}));
 
 /***/ },
-/* 23 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13517,16 +13930,16 @@
 
 	function install(Vue) {
 
-	    var _ = __webpack_require__(24);
+	    var _ = __webpack_require__(28);
 
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 
-	    Vue.url = __webpack_require__(25);
-	    Vue.http = __webpack_require__(31);
-	    Vue.resource = __webpack_require__(46);
-	    Vue.Promise = __webpack_require__(33);
+	    Vue.url = __webpack_require__(29);
+	    Vue.http = __webpack_require__(35);
+	    Vue.resource = __webpack_require__(50);
+	    Vue.Promise = __webpack_require__(37);
 
 	    Object.defineProperties(Vue.prototype, {
 
@@ -13567,7 +13980,7 @@
 
 
 /***/ },
-/* 24 */
+/* 28 */
 /***/ function(module, exports) {
 
 	/**
@@ -13695,14 +14108,14 @@
 
 
 /***/ },
-/* 25 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 
@@ -13738,10 +14151,10 @@
 	 */
 
 	Url.transforms = [
-	    __webpack_require__(26),
-	    __webpack_require__(28),
-	    __webpack_require__(29),
-	    __webpack_require__(30)
+	    __webpack_require__(30),
+	    __webpack_require__(32),
+	    __webpack_require__(33),
+	    __webpack_require__(34)
 	];
 
 	/**
@@ -13831,14 +14244,14 @@
 
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	var UrlTemplate = __webpack_require__(27);
+	var UrlTemplate = __webpack_require__(31);
 
 	module.exports = function (options) {
 
@@ -13853,7 +14266,7 @@
 
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/**
@@ -14009,14 +14422,14 @@
 
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = function (options, next) {
 
@@ -14061,14 +14474,14 @@
 
 
 /***/ },
-/* 29 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = function (options, next) {
 
@@ -14091,14 +14504,14 @@
 
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = function (options, next) {
 
@@ -14113,17 +14526,17 @@
 
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var _ = __webpack_require__(24);
-	var Client = __webpack_require__(32);
-	var Promise = __webpack_require__(33);
-	var interceptor = __webpack_require__(36);
+	var _ = __webpack_require__(28);
+	var Client = __webpack_require__(36);
+	var Promise = __webpack_require__(37);
+	var interceptor = __webpack_require__(40);
 	var jsonType = {'Content-Type': 'application/json'};
 
 	function Http(url, options) {
@@ -14176,13 +14589,13 @@
 	};
 
 	Http.interceptors = [
-	    __webpack_require__(37),
-	    __webpack_require__(38),
-	    __webpack_require__(39),
 	    __webpack_require__(41),
 	    __webpack_require__(42),
 	    __webpack_require__(43),
-	    __webpack_require__(44)
+	    __webpack_require__(45),
+	    __webpack_require__(46),
+	    __webpack_require__(47),
+	    __webpack_require__(48)
 	];
 
 	Http.headers = {
@@ -14217,16 +14630,16 @@
 
 
 /***/ },
-/* 32 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 
-	var _ = __webpack_require__(24);
-	var Promise = __webpack_require__(33);
-	var xhrClient = __webpack_require__(35);
+	var _ = __webpack_require__(28);
+	var Promise = __webpack_require__(37);
+	var xhrClient = __webpack_require__(39);
 
 	module.exports = function (request) {
 
@@ -14288,15 +14701,15 @@
 
 
 /***/ },
-/* 33 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 
-	var _ = __webpack_require__(24);
-	var PromiseObj = window.Promise || __webpack_require__(34);
+	var _ = __webpack_require__(28);
+	var PromiseObj = window.Promise || __webpack_require__(38);
 
 	function Promise(executor, context) {
 
@@ -14403,14 +14816,14 @@
 
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -14588,15 +15001,15 @@
 
 
 /***/ },
-/* 35 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 
-	var _ = __webpack_require__(24);
-	var Promise = __webpack_require__(33);
+	var _ = __webpack_require__(28);
+	var Promise = __webpack_require__(37);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -14644,15 +15057,15 @@
 
 
 /***/ },
-/* 36 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 
-	var _ = __webpack_require__(24);
-	var Promise = __webpack_require__(33);
+	var _ = __webpack_require__(28);
+	var Promise = __webpack_require__(37);
 
 	module.exports = function (handler, vm) {
 
@@ -14695,14 +15108,14 @@
 
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = {
 
@@ -14719,7 +15132,7 @@
 
 
 /***/ },
-/* 38 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -14755,14 +15168,14 @@
 
 
 /***/ },
-/* 39 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	var jsonpClient = __webpack_require__(40);
+	var jsonpClient = __webpack_require__(44);
 
 	module.exports = {
 
@@ -14779,15 +15192,15 @@
 
 
 /***/ },
-/* 40 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 
-	var _ = __webpack_require__(24);
-	var Promise = __webpack_require__(33);
+	var _ = __webpack_require__(28);
+	var Promise = __webpack_require__(37);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -14833,7 +15246,7 @@
 
 
 /***/ },
-/* 41 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/**
@@ -14856,14 +15269,14 @@
 
 
 /***/ },
-/* 42 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = {
 
@@ -14898,14 +15311,14 @@
 
 
 /***/ },
-/* 43 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	module.exports = {
 
@@ -14930,15 +15343,15 @@
 
 
 /***/ },
-/* 44 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var _ = __webpack_require__(24);
-	var xdrClient = __webpack_require__(45);
+	var _ = __webpack_require__(28);
+	var xdrClient = __webpack_require__(49);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 
@@ -14973,15 +15386,15 @@
 
 
 /***/ },
-/* 45 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 
-	var _ = __webpack_require__(24);
-	var Promise = __webpack_require__(33);
+	var _ = __webpack_require__(28);
+	var Promise = __webpack_require__(37);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -15016,14 +15429,14 @@
 
 
 /***/ },
-/* 46 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	var _ = __webpack_require__(24);
+	var _ = __webpack_require__(28);
 
 	function Resource(url, params, actions, options) {
 
@@ -15132,245 +15545,296 @@
 
 
 /***/ },
-/* 47 */
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(53)
+	__vue_template__ = __webpack_require__(52)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Categories.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom: 15px\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\" role=\"group\">\n            <button class=\"btn btn-success btn-lg\"\n                @click=\"addCategory()\">\n                <i class=\"fa fa-film\"></i> 添加分类\n            </button>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                分类列表\n            </header> <!-- panel-heading -->\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                         </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"category in categories\">\n                            <td>{{ category.id }}</td>\n                            <td width=\"15%\"><img :src=\"category.image\" width=\"30px\"></td>\n                            <td>{{ category.name }}</td>\n                            <td>{{ category.created_at | date }}</td>\n                            <td>\n                                <a @click=\"editCategory(category)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click=\"deleteSeriesForm(category.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveCategory\" id=\"saveCategoryForm\">\n    <div class=\"modal fade\" id=\"saveCategoryModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">保存分类</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    <ul>\n                        <li v-for=\"error in errorArray\">{{ error }}</li>\n                    </ul>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <!-- Name field -->\n                        <div class=\"form-group\">\n                            <label for=\"name\">名称</label>\n                            <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" v-model=\"newCategory.name\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"categoryImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"categoryImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newCategory.image\" id=\"editImageSrc\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n<form @submit.prevent=\"deleteCategory\" id=\"deleteCategory\">\n    <div class=\"modal fade\" id=\"deleteCateModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">请输入密码</h4>\n                </div>\n\n                <div class=\"alert alert-danger\" v-if=\"hasError\">\n                    {{ error }}\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                    <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
+
+/***/ },
+/* 53 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-	// <div class="row">
-	//     <div class="form-group" class="col-sm-3" style="text-align: center">
-	//         <button class="btn btn-success btn-lg"
-	//             @click="addSeries()">
-	//             <i class="fa fa-film"></i> 添加系列
-	//         </button>
-	//     </div>
-	//     <div class="form-group" style="text-align: center">
-	//         <button class="btn btn-success btn-lg">
-	//             <span class="fa fa-youtube-play"></span> 添加视频
-	//         </button>
+	// <div class="row" style="margin-bottom: 15px">
+	//     <div class="col-xs-12">
+	//         <div class="btn-group" role="group">
+	//             <button class="btn btn-success btn-lg"
+	//                 @click="addCategory()">
+	//                 <i class="fa fa-film"></i> 添加分类
+	//             </button>
+	//         </div>
 	//     </div>
 	// </div>
 	//
 	// <div class="row">
 	//     <div class="col-sm-12">
-	//
 	//         <div class="alert alert-success" v-show="success">
 	//             {{ message }}
 	//         </div>
 	//
 	//         <div class="panel">
 	//             <header class="panel-heading">
-	//                 系列列表
+	//                 分类列表
 	//             </header> <!-- panel-heading -->
-	//
 	//             <div class="panel-body">
 	//                 <table class="table table-bordered">
 	//                     <thead>
 	//                         <tr>
-	//                             <th v-for="column in seriesColumns">{{ column }}</th>
-	//                             <th><i class="fa fa-eye"></i>展开</th>
-	//                             <th><i class="fa fa-edit"></i>编辑</th>
-	//                             <th><i class="fa fa-remove"></i>删除</th>
-	//                         </tr>
+	//                             <th v-for="column in columns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                          </tr>
 	//                     </thead>
-	//                     <tbody v-for="serie in series">
-	//                         <tr>
-	//                             <td>{{ serie.id }}</td>
-	//                             <td width="15%"><img :src="serie.image" width="30px"></td>
-	//                             <td>{{ serie.title }}</td>
-	//                             <td>{{ serie.videos.length }}</td>
-	//                             <td>{{ serie.created_at | date }}</td>
+	//                     <tbody>
+	//                         <tr v-for="category in categories">
+	//                             <td>{{ category.id }}</td>
+	//                             <td width="15%"><img :src="category.image" width="30px"></td>
+	//                             <td>{{ category.name }}</td>
+	//                             <td>{{ category.created_at | date }}</td>
 	//                             <td>
-	//                                 <a @click.stop="toggleDescription(serie.id)">
-	//                                     <i class="fa"
-	//                                        :class="{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,
-	//                                                  'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }"
-	//                                     ></i>
-	//                                 </a>
-	//                             </td>
-	//                             <td>
-	//                                 <a @click="editSeries(serie)">
+	//                                 <a @click="editCategory(category)">
 	//                                     <i class="fa fa-edit"></i>
 	//                                 </a>
 	//                             </td>
-	//                             <td>
-	//                                 <a @click="deleteSeriesForm(serie.id)" class="deleteSeries">
+	//                             <td v-if="isBoss">
+	//                                 <a @click="deleteSeriesForm(category.id)" class="delete">
 	//                                     <i class="fa fa-remove"></i>
 	//                                 </a>
 	//                             </td>
 	//                         </tr>
-	//                         <tr v-show="showDescription.indexOf(serie.id) > -1">
-	//                             <td colspan="8"><b>描述：</b>{{ serie.description }}</td>
-	//                         </tr>
 	//                     </tbody>
 	//                 </table>
-	//             </div> <!-- panel-body -->
-	//
-	//             <div class="table-foot">
-	//
-	//             </div> <!-- panel-foot -->
-	//         </div>
-	//     </div> <!-- col-12 -->
-	//
-	//     <form @submit.prevent="deleteSeries" id="deleteSeries">
-	//         <div class="modal fade" id="deleteSeriesModal">
-	//              <div class="modal-dialog modal-sm">
-	//                 <div class="modal-content">
-	//                     <div class="modal-header">
-	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	//                         <h4 class="modal-title">请输入密码</h4>
-	//                     </div>
-	//
-	//                     <div class="alert alert-danger" v-if="hasError">
-	//                         {{ error }}
-	//                     </div>
-	//
-	//                     <div class="modal-body">
-	//                         <div class="form-group">
-	//                             <input type="password" name="password" class="form-control" id="password">
-	//                         </div>
-	//                     </div>
-	//                     <div class="modal-footer">
-	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	//                         <input type="submit" class="btn btn-danger" value="确认"></input>
-	//                     </div>
-	//                 </div>
 	//             </div>
 	//         </div>
-	//     </form>
+	//     </div>
+	// </div>
 	//
-	//     <form @submit="saveSerie" id="serieForm" enctype="multipart/form-data">
-	//         <div class="modal fade" id="createSeriesModal">
-	//             <div class="modal-dialog">
-	//                 <div class="modal-content">
-	//                     <div class="modal-header">
-	//                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	//                         <h4 class="modal-title">系列管理</h4>
-	//                     </div>
-	//                     <div class="modal-body">
-	//                         <div class="alert alert-danger" v-if="hasError">
-	//                             <ul>
-	//                                 <li v-for="error in errorArray">{{ error }}</li>
-	//                             </ul>
+	// <form @submit.prevent="saveCategory" id="saveCategoryForm">
+	//     <div class="modal fade" id="saveCategoryModal">
+	//          <div class="modal-dialog modal-sm">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                     <h4 class="modal-title">保存分类</h4>
+	//                 </div>
+	//
+	//                 <div class="alert alert-danger" v-if="hasError">
+	//                     <ul>
+	//                         <li v-for="error in errorArray">{{ error }}</li>
+	//                     </ul>
+	//                 </div>
+	//
+	//                 <div class="modal-body">
+	//                     <div class="form-group">
+	//                         <!-- Name field -->
+	//                         <div class="form-group">
+	//                             <label for="name">名称</label>
+	//                             <input type="text" class="form-control" id="name" name="name" v-model="newCategory.name">
 	//                         </div>
 	//                         <div class="form-group">
-	//                             <label for="serieTitle">标题</label>
-	//                             <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
-	//                         </div>
-	//                         <div class="form-group">
-	//                             <label for="serieImage">图片</label>
-	//                             <input type="file" name="image" id="serieImage" class="form-control">
+	//                             <label for="categoryImage">图片</label>
+	//                             <input type="file" name="image" id="categoryImage" class="form-control">
 	//                         </div>
 	//                         <div class="form-group" v-if="editing">
-	//                             <img :src="newSerie.image" id="editImageSrc">
-	//                         </div>
-	//                         <div class="form-group">
-	//                             <label for="serieDescription">描述</label>
-	//                             <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+	//                             <img :src="newCategory.image" id="editImageSrc">
 	//                         </div>
 	//                     </div>
-	//                     <div class="modal-footer">
-	//                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	//                         <button type="submit" class="btn btn-primary">保存</button>
-	//                     </div>
+	//                 </div>
+	//                 <div class="modal-footer">
+	//                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                     <input type="submit" class="btn btn-danger" value="确认"></input>
 	//                 </div>
 	//             </div>
 	//         </div>
-	//     </form> <!-- form -->
-	// </div>
+	//     </div>
+	// </form>
+	// <form @submit.prevent="deleteCategory" id="deleteCategory">
+	//     <div class="modal fade" id="deleteCateModal">
+	//          <div class="modal-dialog modal-sm">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                     <h4 class="modal-title">请输入密码</h4>
+	//                 </div>
+	//
+	//                 <div class="alert alert-danger" v-if="hasError">
+	//                     {{ error }}
+	//                 </div>
+	//
+	//                 <div class="modal-body">
+	//                     <div class="form-group">
+	//                         <input type="password" name="password" class="form-control" id="password">
+	//                     </div>
+	//                 </div>
+	//                 <div class="modal-footer">
+	//                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	//                     <input type="submit" class="btn btn-danger" value="确认"></input>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </form>
 	// </template>
 	//
 	// <script>
 	module.exports = {
 	    data: function data() {
 	        return {
-	            seriesColumns: ['ID', '图片', '标题', '视频数', '创建时间'],
-	            newSerie: {
-	                'id': '',
-	                'title': '',
-	                'description': '',
-	                'image': '',
-	                'created_at': '',
-	                'updated_at': '',
-	                videos: []
+	            columns: ['ID', '图片', '名称', '创建时间'],
+
+	            categories: [],
+
+	            newCategory: {
+	                id: '',
+	                name: '',
+	                image: '',
+	                created_at: '',
+	                updated_at: ''
 	            },
-	            series: [],
-	            showDescription: [],
-	            // message
+
+	            editing: false,
+
+	            hasError: false,
+	            errors: [],
+	            error: '',
+
 	            success: false,
 	            message: '',
-	            hasError: false,
-	            error: '',
-	            errors: [],
-	            // edit series
-	            editing: false,
+
 	            editImageSrc: '',
-	            // delete series
+
 	            deleteId: ''
 	        };
 	    },
 
+	    props: ['roles'],
+
+	    created: function created() {
+	        this.getCategories();
+	    },
+
 	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        },
 	        errorArray: function errorArray() {
 	            var errors = [];
 
-	            if (this.errors.title) {
-	                errors.push(this.errors.title[0]);
+	            if (this.errors.name) {
+	                errors.push(this.errors.name[0]);
 	            }
 	            if (this.errors.image) {
 	                errors.push(this.errors.image[0]);
-	            }
-	            if (this.errors.description) {
-	                errors.push(this.errors.description[0]);
 	            }
 
 	            return errors;
 	        }
 	    },
-	    created: function created() {
-	        this.getSeries();
-	    },
 
 	    methods: {
-	        getSeries: function getSeries() {
-	            this.$http.get('/admin/series').then(function (response) {
-	                this.series = response.data;
+	        getCategories: function getCategories() {
+	            this.$http.get('/admin/categories').then(function (response) {
+	                this.categories = response.data;
 	            });
 	        },
-	        toggleDescription: function toggleDescription(id) {
-	            var index = this.showDescription.indexOf(id);
+	        addCategory: function addCategory() {
+	            this.editing = false;
+	            this.resetCategoryForm();
 
-	            if (index > -1) {
-	                this.showDescription.$remove(id);
-	            } else {
-	                this.showDescription.push(id);
-	            }
+	            jQuery('#saveCategoryModal').modal('show');
 	        },
-	        findIndexById: function findIndexById(id) {
-	            var ids = this.series.map(function (s) {
-	                return s.id;
-	            });
+	        editCategory: function editCategory(cate) {
+	            this.editing = true;
+	            this.setCategoryForm(cate.id, cate.name, cate.image, cate.created_at, cate.updated_at);
 
-	            return ids.indexOf(id);
+	            jQuery('#saveCategoryModal').modal('show');
 	        },
-	        saveSerie: function saveSerie(e) {
+	        deleteSeriesForm: function deleteSeriesForm(id) {
+	            this.deleteId = id;
+	            jQuery('#password').val('');
+
+	            jQuery('#deleteCateModal').modal('show');
+	        },
+	        deleteCategory: function deleteCategory() {
 	            var self = this;
-	            e.preventDefault();
+	            var password = jQuery('#password').val();
 
-	            var request = new XMLHttpRequest();
-	            var formdata = new FormData(document.getElementById('serieForm'));
-	            if (!self.editing) {
-	                request.open('post', '/admin/series');
-	            } else {
-	                request.open('post', '/admin/series/update/' + self.newSerie.id);
+	            if (password.length == 0) {
+	                return;
 	            }
+
+	            self.$http.delete('/admin/categories/' + self.deleteId, { password: password }).then(function (response) {
+	                self.showMessage(response.data.message);
+	                self.removeCategoryById(self.deleteId);
+
+	                jQuery('#deleteCateModal').modal('hide');
+	            }).error(function (response) {
+	                self.hasError = true;
+	                self.error = response.error;
+
+	                setTimeout(function () {
+	                    self.hasError = false;
+
+	                    jQuery('#deleteSeriesModal').modal('hide');
+	                }, 2800);
+	            });
+	        },
+	        removeCategoryById: function removeCategoryById(id) {
+	            var index = this.findIndexById(id);
+
+	            this.categories.splice(index, 1);
+	        },
+	        setCategoryForm: function setCategoryForm(id, name, image, created_at, updated_at) {
+	            this.newCategory = { id: id, name: name, image: image, created_at: created_at, updated_at: updated_at };
+	        },
+	        resetCategoryForm: function resetCategoryForm() {
+	            this.setCategoryForm('', '', '', '', '');
+	            jQuery('#categoryImage').val('');
+	        },
+	        saveCategory: function saveCategory() {
+	            var self = this;
+	            var request = new XMLHttpRequest();
+	            var formdata = new FormData(document.getElementById('saveCategoryForm'));
+
+	            if (!self.editing) {
+	                request.open('post', '/admin/categories');
+	            } else {
+	                request.open('post', '/admin/categories/update/' + self.newCategory.id);
+	            }
+
 	            request.setRequestHeader("X-CSRF-Token", document.querySelector('#token').getAttribute('value'));
 	            request.send(formdata);
 
 	            request.onreadystatechange = function () {
 	                if (this.readyState == 4) {
-	                    // 对象读取服务器响应结束
 	                    if (request.status == 400) {
 	                        self.hasError = true;
 
@@ -15380,79 +15844,32 @@
 	                            self.hasError = false;
 	                        }, 2800);
 	                    } else if (request.status == 200) {
-	                        jQuery('#createSeriesModal').modal('hide');
-
-	                        self.resetSeriesForm();
+	                        jQuery('#saveCategoryModal').modal('hide');
 
 	                        self.showMessage(JSON.parse(request.responseText).message);
 
-	                        var serie = JSON.parse(request.responseText).data;
+	                        var category = JSON.parse(request.responseText).data;
 
-	                        if (self.editing) {
-	                            self.updateSeries(serie);
+	                        if (!self.editing) {
+	                            self.categories.push(category);
 	                        } else {
-	                            self.pushSeries(serie);
+	                            self.updateCategories(category);
 	                        }
 	                    }
 	                }
 	            };
 	        },
-	        addSeries: function addSeries() {
-	            this.editing = false;
-	            this.resetSeriesForm();
+	        updateCategories: function updateCategories(category) {
+	            var index = this.findIndexById(category.id);
 
-	            jQuery('#createSeriesModal').modal('show');
+	            this.categories.$set(index, category);
 	        },
-	        editSeries: function editSeries(serie) {
-	            this.editing = true;
-	            this.setSeriesForm(serie.id, serie.title, serie.description, serie.image, serie.created_at, serie.updated_at, serie.videos);
-
-	            jQuery('#createSeriesModal').modal('show');
-	        },
-	        deleteSeriesForm: function deleteSeriesForm(id) {
-	            jQuery('#password').val('');
-	            this.deleteId = id;
-
-	            jQuery('#deleteSeriesModal').modal('show');
-	        },
-	        deleteSeries: function deleteSeries() {
-	            var self = this;
-	            var password = jQuery('#password').val();
-
-	            if (password.length == 0) {
-	                return;
-	            }
-
-	            self.$http.delete('/admin/series/' + self.deleteId, { password: password }).then(function (response) {
-	                this.showMessage(response.data.message);
-
-	                jQuery('#deleteSeriesModal').modal('hide');
-	            }).error(function (response) {
-	                self.hasError = true;
-	                self.error = response.error;
-	                console.log(self.error);
-
-	                setTimeout(function () {
-	                    self.hasError = false;
-
-	                    jQuery('#deleteSeriesModal').modal('hide');
-	                }, 2800);
+	        findIndexById: function findIndexById(id) {
+	            var ids = this.categories.map(function (c) {
+	                return c.id;
 	            });
-	        },
-	        setSeriesForm: function setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
-	            this.newSerie = { id: id, title: title, description: description, image: image, created_at: created_at, updated_at: updated_at, videos: videos };
-	        },
-	        resetSeriesForm: function resetSeriesForm() {
-	            this.setSeriesForm('', '', '', '', '', '', '', []);
-	            $('#serieImage').val('');
-	        },
-	        pushSeries: function pushSeries(serie) {
-	            this.series.push(serie);
-	        },
-	        updateSeries: function updateSeries(serie) {
-	            var index = this.findIndexById(serie.id);
 
-	            this.series.$set(index, serie);
+	            return ids.indexOf(id);
 	        },
 	        showMessage: function showMessage(message) {
 	            this.success = true;
@@ -15466,64 +15883,6 @@
 	};
 	// </script>
 	//
-	// <style>
-	// .deleteSeries {
-	//     color: #ee3939;
-	// }
-	// .deleteSeries:hover {
-	//     color: #ac2925;
-	// }
-	// </style>
-	//
-
-/***/ },
-/* 48 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"row\">\n    <div class=\"form-group\" class=\"col-sm-3\" style=\"text-align: center\">\n        <button class=\"btn btn-success btn-lg\"\n            @click=\"addSeries()\">\n            <i class=\"fa fa-film\"></i> 添加系列\n        </button>\n    </div>\n    <div class=\"form-group\" style=\"text-align: center\">\n        <button class=\"btn btn-success btn-lg\">\n            <span class=\"fa fa-youtube-play\"></span> 添加视频\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                系列列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in seriesColumns\">{{ column }}</th>\n                            <th><i class=\"fa fa-eye\"></i>展开</th>\n                            <th><i class=\"fa fa-edit\"></i>编辑</th>\n                            <th><i class=\"fa fa-remove\"></i>删除</th>\n                        </tr>\n                    </thead>\n                    <tbody v-for=\"serie in series\">\n                        <tr>\n                            <td>{{ serie.id }}</td>\n                            <td width=\"15%\"><img :src=\"serie.image\" width=\"30px\"></td>\n                            <td>{{ serie.title }}</td>\n                            <td>{{ serie.videos.length }}</td>\n                            <td>{{ serie.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"toggleDescription(serie.id)\">\n                                    <i class=\"fa\"\n                                       :class=\"{ 'fa-arrow-circle-down': showDescription.indexOf(serie.id) === -1,\n                                                 'fa-arrow-circle-left': showDescription.indexOf(serie.id) !== -1 }\"\n                                    ></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"editSeries(serie)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td>\n                                <a @click=\"deleteSeriesForm(serie.id)\" class=\"deleteSeries\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                        <tr v-show=\"showDescription.indexOf(serie.id) > -1\">\n                            <td colspan=\"8\"><b>描述：</b>{{ serie.description }}</td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div> <!-- panel-body -->\n\n            <div class=\"table-foot\">\n\n            </div> <!-- panel-foot -->\n        </div>\n    </div> <!-- col-12 -->\n\n    <form @submit.prevent=\"deleteSeries\" id=\"deleteSeries\">\n        <div class=\"modal fade\" id=\"deleteSeriesModal\">\n             <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">请输入密码</h4>\n                    </div>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        {{ error }}\n                    </div>\n\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <input type=\"submit\" class=\"btn btn-danger\" value=\"确认\"></input>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form>\n\n    <form @submit=\"saveSerie\" id=\"serieForm\" enctype=\"multipart/form-data\">\n        <div class=\"modal fade\" id=\"createSeriesModal\">\n            <div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                        <h4 class=\"modal-title\">系列管理</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"alert alert-danger\" v-if=\"hasError\">\n                            <ul>\n                                <li v-for=\"error in errorArray\">{{ error }}</li>\n                            </ul>\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieTitle\">标题</label>\n                            <input type=\"text\" name=\"title\" v-model=\"newSerie.title\" id=\"serieTitle\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieImage\">图片</label>\n                            <input type=\"file\" name=\"image\" id=\"serieImage\" class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\" v-if=\"editing\">\n                            <img :src=\"newSerie.image\" id=\"editImageSrc\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"serieDescription\">描述</label>\n                            <textarea type=\"file\" name=\"description\" v-model=\"newSerie.description\" id=\"serieDescription\" class=\"form-control\" rows=\"6\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>\n                        <button type=\"submit\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </form> <!-- form -->\n</div>\n";
-
-/***/ },
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(53);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(14)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-503d3e1a&file=Videos.vue!./../../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Videos.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(13)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n.deleteSeries {\n    color: #ee3939;\n}\n.deleteSeries:hover {\n    color: #ac2925;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

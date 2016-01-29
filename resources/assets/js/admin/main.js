@@ -5,6 +5,7 @@ import MainHeader from "./components/Header.vue"
 import Siderbar from "./components/Siderbar.vue"
 import DashBoard from "./views/DashBoard.vue"
 import Users from "./views/Users.vue"
+import Categories from "./views/Categories.vue"
 import Videos from "./views/Videos.vue"
 import Subscribers from "./views/Subscribers.vue"
 import Publish from "./views/Publish.vue"
@@ -47,6 +48,10 @@ router.map({
     '/users': {
         name: 'users',
         component: Users
+    },
+    '/categories': {
+        name: 'categories',
+        component: Categories
     },
     '/videos': {
         name: 'videos',
