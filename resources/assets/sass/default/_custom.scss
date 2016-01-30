@@ -4,13 +4,17 @@ body {
 
 @media #{$sm} {
     body {
-        padding-top: 82px;
+        padding-top: 88px;
     }
 }
 @media #{$xs} {
     body {
         padding-top: 50px;
     }
+}
+
+.breadcrumb {
+    margin-bottom: 0;
 }
 
 ::selection {

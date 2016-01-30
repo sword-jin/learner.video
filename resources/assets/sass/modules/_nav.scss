@@ -81,6 +81,7 @@ a.learner-bread:active {
 @media #{$sm} {
     header nav.navbar {
         padding: 14px;
+        border-top: 2px solid $link-hover-color;
     }
     .navbar-nav {
         margin-left: 28px;

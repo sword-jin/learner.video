@@ -1,3 +1,5 @@
+<?php $navigation = app('Learner\Services\Layouts\Navigation'); ?>
+
 <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -18,18 +20,23 @@
 
             <div id="learner-toggle" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">系列</a></li>
-                    <li><a href="#">视频</a></li>
-                    <li><a href="#">博客</a></li>
-                    <li><a href="#">资源</a></li>
+                    <?php foreach($navigation->menus as $menu): ?>
+                        <li class="<?php echo e(isActive($menu['route'])); ?>">
+                            <a href="<?php echo e(route($menu['route'])); ?>"><?php echo e($menu['display_name']); ?></a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     <?php if(Auth::guest()): ?>
-                    <li><a href="<?php echo e(route('auth.login')); ?>">登陆</a></li>
-                    <li><a href="<?php echo e(route('auth.register')); ?>">注册</a></li>
+                    <li class="<?php echo e(isActive('auth/login')); ?>">
+                        <a href="<?php echo e(route('auth.login')); ?>">登陆</a>
+                    </li>
+                    <li  class="<?php echo e(isActive('auth/register')); ?>">
+                        <a href="<?php echo e(route('auth.register')); ?>">注册</a>
+                    </li>
                     <?php else: ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

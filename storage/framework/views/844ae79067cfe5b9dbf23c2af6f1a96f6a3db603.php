@@ -1,5 +1,19 @@
+<?php $__env->startSection('description'); ?>
+这里有丰富的web学习视频，资料，另外，本站开源在 https://github.com/RryLee/learner.video
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('title'); ?>
 欢迎来到Learner
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('style'); ?>
+<style>
+    @media (min-width: 768px) {
+        body {
+            padding-top: 84px;
+        }
+    }
+</style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('jumbotron'); ?>
@@ -129,4 +143,5 @@
         </div>
     </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts/master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

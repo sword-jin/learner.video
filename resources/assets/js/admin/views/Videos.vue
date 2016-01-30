@@ -101,7 +101,7 @@
                                     class="form-control"
                                     v-model="newVideo.resource_type"
                                 >
-                                    <option value="vimeo">Vimeo</option>
+                                    <option value="vimeo" selected>Vimeo</option>
                                     <option value="youtube">Youtube</option>
                                     <option value="youku">Youku</option>
                                 </select>
@@ -306,7 +306,7 @@ module.exports = {
         },
 
         resetVideoForm() {
-            this.setVideoForm('', '', '', '', '', '', '', '', '', '');
+            this.setVideoForm('', '', '', '', 'vimeo', '', '', '', '', '');
         },
 
         setVideoForm(id, series_id, title, description, resource_type,

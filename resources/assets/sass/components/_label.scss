@@ -31,3 +31,6 @@
 .label--other {
     @include label-variant(#f4645f);
 }
+.label--new {
+    line-height: 16px;
+}

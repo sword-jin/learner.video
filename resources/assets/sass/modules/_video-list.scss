@@ -1,0 +1,32 @@
+.videos {
+    margin-top: 30px;
+
+    &__icon {
+        text-align: center;
+        margin-bottom: 14px;
+        position: relative;
+
+        &>img {
+            width: 48px;
+            height: 48px;
+            box-shadow: 0 0 3px rgba(black, .3);
+        }
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            width: calc(50% - 32px);
+            border-bottom: 2px dashed #5ece80;
+        }
+
+        &::after {
+            left: 3px;
+        }
+
+        &::before {
+            right: 3px;
+        }
+    }
+}

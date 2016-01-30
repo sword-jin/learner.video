@@ -1,5 +1,7 @@
 <?php
 
+use Learner\Services\Videos\Video;
+
 Route::group(['middleware' => 'web'], function () {
 
     Route::controller('auth', 'Auth\AuthController', [
@@ -13,6 +15,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::controller('password', 'Auth\PasswordController');
 
     Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
+
+    Route::get('/series', ['as' => 'series', 'uses' => 'SeriesController@index']);
+    Route::get('/series/{id}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
+    Route::get('/series/{id}/videos/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
+
+    Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
+
+    Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
+
+    Route::get('/newsletter', ['as' => 'newsletter', 'uses' => 'NewsletterController@index']);
 });
 
 

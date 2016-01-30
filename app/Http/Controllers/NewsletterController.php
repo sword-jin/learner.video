@@ -4,10 +4,10 @@ namespace Learner\Http\Controllers;
 
 use Learner\Http\Controllers\BaseController;
 
-class PageController extends BaseController
+class NewsletterController extends BaseController
 {
     public function index()
     {
-        return view('pages.index');
+        return view('newsletters.index');
     }
 }

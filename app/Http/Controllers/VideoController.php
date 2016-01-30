@@ -4,10 +4,10 @@ namespace Learner\Http\Controllers;
 
 use Learner\Http\Controllers\BaseController;
 
-class PageController extends BaseController
+class VideoController extends BaseController
 {
     public function index()
     {
-        return view('pages.index');
+        return view('videos.index');
     }
 }

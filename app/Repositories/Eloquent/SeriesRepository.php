@@ -2,6 +2,8 @@
 
 namespace Learner\Repositories\Eloquent;
 
+use DB;
+use Carbon\Carbon;
 use Learner\Models\Series;
 use Learner\Repositories\SeriesRepositoryInterface;
 use Learner\Services\Forms\CreateSeriesFormService;
@@ -114,5 +116,15 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     public function findAllWithRelation()
     {
         return $this->model->with(self::$relations)->get();
+    }
+
+    /**
+     * Return series and relation by id.
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationById($id)
+    {
+        return $this->model->with(self::$relations)->findOrFail($id);
     }
 }
