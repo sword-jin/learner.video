@@ -4,8 +4,8 @@ namespace Learner\Repositories\Eloquent;
 
 use Carbon\Carbon;
 use Learner\Models\Video;
+use Learner\Services\Forms\SaveVideoFormService;
 use Learner\Repositories\VideoRepositoryInterface;
-use Learner\Services\Forms\CreateVideoFormService;
 
 class VideoRepository extends AbstractRepository implements VideoRepositoryInterface
 {
@@ -27,13 +27,13 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
     }
 
     /**
-     * Create video create-form service.
+     * Create video save-form service.
      *
      * @return \Learner\Services\Forms\CreateVideoFormService
      */
-    public function getCreateForm()
+    public function getSaveForm()
     {
-        return new CreateVideoFormService();
+        return new SaveVideoFormService();
     }
 
     /**
@@ -47,7 +47,7 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
     }
 
     /**
-     * Create a new Series.
+     * Create a video.
      *
      * @param  array $data
      *
@@ -66,7 +66,37 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
 
         $newVideo->save();
 
-        return $this->findByIdWithRelation($newVideo->id, static::$relations)
-                    ->toArray();
+        $newVideo->published_at = $newVideo->published_at->toDateTimeString();
+
+        return $newVideo;
+    }
+
+    /**
+     * Update video.
+     *
+     * @param  integer $id
+     * @param  array $data
+     *
+     * @return array
+     */
+    public function update($id, array $data)
+    {
+        $video = $this->findById($id);
+
+        $video->update($data);
+
+        return $video;
+    }
+
+    /**
+     * Delete video.
+     *
+     * @param  integer $id
+     *
+     * @return boolean|null
+     */
+    public function delete($id)
+    {
+        return $this->findById($id)->delete();
     }
 }

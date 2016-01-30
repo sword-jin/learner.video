@@ -51,6 +51,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/videos', 'VideoController@index');
         Route::post('/videos', 'VideoController@store');
+        Route::put('/videos/{id}', 'VideoController@update');
+        Route::delete('/videos/{id}', 'VideoController@restory');
     });
 });
 

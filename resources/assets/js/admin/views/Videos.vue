@@ -24,13 +24,14 @@
                         <tr>
                             <th v-for="column in columns">{{ column }}</th>
                             <th width="1%"><i class="fa fa-edit"></i></th>
+                            <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="video in videos">
                             <td>{{ video.id }}</td>
                             <td>{{ video.title }}</td>
-                            <td v-text="getTitleById(video.series_id)"></td>
+                            <td><span class="label label-success" v-text="getTitleById(video.series_id)"></span></td>
                             <td>
                                 <i v-if="video.resource_type == 'vimeo'" class="fa fa-vimeo"></i>
                                 <i v-if="video.resource_type == 'youtube'" class="fa fa-youtube"></i>
@@ -41,6 +42,11 @@
                             <td>
                                 <a @click.stop="editVideo(video)">
                                     <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                            <td v-if="isBoss">
+                                <a @click.stop="deleteVideo(video.id)" class="delete">
+                                    <i class="fa fa-remove"></i>
                                 </a>
                             </td>
                         </tr>
@@ -73,7 +79,6 @@
                         <input type="text"
                             class="form-control"
                             id="title"
-                            name="title"
                             v-model="newVideo.title"
                         >
                     </div>
@@ -81,8 +86,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="series">所属系列</label>
-                                <select name="series_id"
-                                    id="series"
+                                <select id="series"
                                     class="form-control"
                                     v-model="newVideo.series_id"
                                 >
@@ -93,8 +97,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="resource_type">视频来源</label>
-                                <select name="resource_type"
-                                    id="resource_type"
+                                <select id="resource_type"
                                     class="form-control"
                                     v-model="newVideo.resource_type"
                                 >
@@ -107,9 +110,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="resource_id">视频ID</label>
-                                <input type="text"
-                                    name="resource_id"
-                                    id="resource_id"
+                                <input id="resource_id"
                                     class="form-control"
                                     v-model="newVideo.resource_id"
                                 >
@@ -121,13 +122,11 @@
                         <input type="date"
                             class="form-control"
                             id="published_at"
-                            name="published_at"
-                            v-model="newVideo.published_at"
+                            v-model="newVideo.published_at | date"
                         >
                     </div>
                     <div class="form-group">
-                        <textarea name="description"
-                            rows="8"
+                        <textarea rows="8"
                             placeholder="请用 Markdown 格式填写视频下方的描述"
                             class="form-control"
                             v-model="newVideo.description">
@@ -186,6 +185,14 @@ module.exports = {
         this.getVideos();
     },
 
+    computed: {
+        isBoss() {
+            let names = this.roles.map(role => role.name);
+
+            return names.indexOf('boss') != -1;
+        }
+    },
+
     methods: {
         getVideos() {
             var self = this;
@@ -209,17 +216,31 @@ module.exports = {
         },
 
         saveVideo() {
-            this.$http.post('/admin/videos', this.getFormData())
-                .then(function(response) {
-                    jQuery('#saveVideoModal').modal('hide');
+            if (this.editing) {
+                this.$http.put('/admin/videos/' + this.newVideo.id, this.getFormData())
+                    .then(response => {
+                        jQuery('#saveVideoModal').modal('hide');
 
-                    this.videos.unshift(response.data.video);
+                        this.updateVideoList(response.data.video);
 
-                    this.showMessage(response.data.message);
-                })
-                .catch(function(response) {
-                    this.showErrors(response.data.errors);
-                });
+                        this.showMessage(response.data.message);
+                    })
+                    .catch(response => {
+                        this.showErrors(response.data.errors);
+                    });
+            } else {
+                this.$http.post('/admin/videos', this.getFormData())
+                    .then(response => {
+                        jQuery('#saveVideoModal').modal('hide');
+
+                        this.videos.unshift(response.data.video);
+
+                        this.showMessage(response.data.message);
+                    })
+                    .catch(response => {
+                        this.showErrors(response.data.errors);
+                    });
+            }
         },
 
         addVideo() {
@@ -238,11 +259,50 @@ module.exports = {
             jQuery('#saveVideoModal').modal('show');
         },
 
+        deleteVideo(id) {
+            var self = this;
+
+            self.$http.delete('/admin/videos/' + id)
+                .then(response => {
+                    if (response.status == 202) {
+                        self.hasError = true;
+
+                        self.errors.push(response.data.error);
+
+                        setTimeout(() => {
+                            self.hasError = false;
+                        }, 2800);
+                    } else if (response.status == 200) {
+                        self.showMessage(response.data.message);
+
+                        this.removeVideo(id);
+                    }
+                });
+        },
+
+        updateVideoList(video) {
+            let index = this.findIndexById(video.id);
+
+            this.videos.$set(index, video);
+        },
+
+        findIndexById(id) {
+            let ids = this.videos.map(v => v.id);
+
+            return ids.indexOf(id);
+        },
+
         getTitleById(id) {
             var ids = this.series.map(s => s.id);
             var index = ids.indexOf(parseInt(id));
 
             return this.series[index].title;
+        },
+
+        removeVideo(id) {
+            var index = this.findIndexById(id);
+
+            this.videos.splice(index, 1);
         },
 
         resetVideoForm() {
@@ -262,7 +322,7 @@ module.exports = {
 
             setTimeout(function() {
                 this.success = false;
-            }, 2800);
+            }.bind(this), 2800);
         },
 
         showErrors(errors) {
@@ -270,7 +330,6 @@ module.exports = {
             this.hasError = true;
 
             this.getErrors(errors);
-
 
             setTimeout(function() {
                 this.hasError = false;

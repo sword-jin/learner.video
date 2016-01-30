@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Forms;
 
-class CreateVideoFormService extends AbstractFormService
+class SaveVideoFormService extends AbstractFormService
 {
     /**
      * The validation rules to validate the input data against.
