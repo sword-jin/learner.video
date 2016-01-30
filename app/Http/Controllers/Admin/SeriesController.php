@@ -69,12 +69,9 @@ class SeriesController extends BaseController
 
         $seriesData = $form->getInputData();
 
-        $series = $this->series->create([
-            'title' => $seriesData['title'],
-            'description' => $seriesData['description'],
-            'image' => ImageManager::saveSeriesImage($seriesData['image']),
-            'categories' => $seriesData['categories']
-        ]);
+        $seriesData['image'] = ImageManager::saveSeriesImage($seriesData['image']);
+
+        $series = $this->series->create($seriesData);
 
         return $this->responseJson(['message' => '系列创建成功', 'data' => $series]);
     }
@@ -94,22 +91,16 @@ class SeriesController extends BaseController
 
         $seriesData = $form->getInputData();
 
-        $data = [
-            'title' => $seriesData['title'],
-            'description' => $seriesData['description'],
-            'categories' => $seriesData['categories']
-        ];
-
         if (key_exists('image', $seriesData)) {
             $imagePath = ImageManager::changeSeriesImage(
                     $seriesData['image'],
                     $this->series->findImageById($id)
             );
 
-            $data['image'] = $imagePath;
+            $seriesData['image'] = $imagePath;
         }
 
-        $series = $this->series->update($id, $data);
+        $series = $this->series->update($id, $seriesData);
 
         return $this->responseJson(['message' => '系列修改成功', 'data' => $series]);
     }
@@ -135,6 +126,7 @@ class SeriesController extends BaseController
         }
 
         Log::warning(lang("log.deleteSeriesError", "MayBe Someone want delete your series."));
+
         return $this->responseJson(['error' => '密码错误，记录日志'], 403);
     }
 }

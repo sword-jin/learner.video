@@ -65,6 +65,7 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
         $newSeries = $this->getNew();
 
         $newSeries->title = $data['title'];
+        $newSeries->slug = str_slug($data['slug']);
         $newSeries->description = $data['description'];
         $newSeries->image = $data['image'];
 
@@ -115,16 +116,21 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
      */
     public function findAllWithRelation()
     {
-        return $this->model->with(self::$relations)->get();
+        return $this->model
+                    ->with(self::$relations)
+                    ->get();
     }
 
     /**
-     * Return series and relation by id.
+     * Return series and relation by slug.
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
      */
-    public function findAllWithRelationById($id)
+    public function findAllWithRelationBySlug($slug)
     {
-        return $this->model->with(self::$relations)->findOrFail($id);
+        return $this->model
+                    ->with(self::$relations)
+                    ->whereSlug($slug)
+                    ->firstOrFail();
     }
 }

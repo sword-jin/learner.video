@@ -21,13 +21,13 @@ function lang($target, $default) {
  *
  * @return boolean
  */
-function seriesUpdated($publishd_at)
+function isNew($publishd_at)
 {
     return (Carbon::now()->diffInDays(Carbon::createFromFormat('Y-m-d H:i:s', $publishd_at))) <= 7;
 }
 
 /**
- * Active class.
+ * Navigation Active class.
  *
  * @param  string  $route
  *
@@ -36,4 +36,16 @@ function seriesUpdated($publishd_at)
 function isActive($route)
 {
     return Request::is($route . '/*') || Request::is($route) ? 'active' : '';
+}
+
+/**
+ * Format date to read.
+ *
+ * @param  string $time
+ *
+ * @return string
+ */
+function dateHuman($time)
+{
+    return Carbon::createFromFormat('Y-m-d H:i:s', $time)->diffForHumans();
 }

@@ -2,6 +2,7 @@
 
 namespace Learner\Http\Controllers\Admin;
 
+use VideoApi;
 use Illuminate\Support\Facades\Input;
 use Learner\Http\Controllers\Admin\BaseController;
 use Learner\Repositories\VideoRepositoryInterface;
@@ -38,7 +39,14 @@ class VideoController extends BaseController
             return $this->responseJson(['errors' => $form->getErrors()], 400);
         }
 
-        $video = $this->videos->create($form->getInputData());
+        $data = $form->getInputData();
+
+        $resourceInfo = $this->getResourceInfo($data['resource_type'], $data['resource_id']);
+
+        $data['image'] = $resourceInfo['thumbnail_url'];
+        $data['duration'] = $resourceInfo['duration'];
+
+        $video = $this->videos->create($data);
 
         return $this->responseJson(['message' => '成功添加视频', 'video' => $video]);
     }
@@ -63,5 +71,10 @@ class VideoController extends BaseController
         } else {
             return $this->responseJson(['error' => '未知错误'], 202);
         }
+    }
+
+    protected function getResourceInfo($type, $id)
+    {
+        return VideoApi::setType($type)->getVideoDetail($id);
     }
 }

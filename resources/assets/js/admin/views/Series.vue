@@ -116,6 +116,10 @@
                             <input type="text" name="title" v-model="newSerie.title" id="serieTitle" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="serieSlug">Slug(创建后不容许手动修改)</label>
+                            <input type="text" name="slug" v-model="newSerie.slug" id="serieSlug" class="form-control" placeholder="http://domain.com/learner-com/ 该learner-com就是slug" :disabled="editing">
+                        </div>
+                        <div class="form-group">
                             <label for="serieImage">图片</label>
                             <input type="file" name="image" id="serieImage" class="form-control">
                         </div>
@@ -124,10 +128,11 @@
                         </div>
                         <div class="form-group">
                             <label for="serieDescription">描述</label>
-                            <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6"></textarea>
+                            <textarea type="file" name="description" v-model="newSerie.description" id="serieDescription" class="form-control" rows="6" placeholder="支持 MarkDown"></textarea>
                         </div>
                         <!-- Catego field -->
                         <div class="form-group">
+                            <label for="categories">分类</label>
                             <div class="select2-wrapper">
                                 <select id="categories"
                                     multiple
@@ -163,6 +168,7 @@ module.exports = {
             newSerie: {
                 id: '',
                 title: '',
+                slug: '',
                 description: '',
                 image: '',
                 created_at: '',
@@ -284,7 +290,7 @@ module.exports = {
 
         editSeries(serie) {
             this.editing = true;
-            this.setSeriesForm(serie.id, serie.title, serie.description,
+            this.setSeriesForm(serie.id, serie.title, serie.slug, serie.description,
                 serie.image, serie.created_at, serie.updated_at, serie.videos);
             jQuery('#categories').val(this.getSerieCateIds(serie.categories)).change();
 
@@ -331,12 +337,12 @@ module.exports = {
             this.series.splice(index, 1);
         },
 
-        setSeriesForm(id, title, description, image, created_at, updated_at, videos) {
-            this.newSerie = {id, title, description, image, created_at, updated_at, videos};
+        setSeriesForm(id, title, slug, description, image, created_at, updated_at, videos) {
+            this.newSerie = {id, title, slug, description, image, created_at, updated_at, videos};
         },
 
         resetSeriesForm() {
-            this.setSeriesForm('', '', '', '', '', '', '', []);
+            this.setSeriesForm('', '', '', '', '', '', '', '', []);
             jQuery('#serieImage').val('');
             jQuery('#categories').select2("val", "");
         },

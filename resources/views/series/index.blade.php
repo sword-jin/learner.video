@@ -25,12 +25,12 @@ Learner视频学习资源
                     @if (count($series->videos))
                         <div class="col-lg-3 col-lg-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                             <div class="card">
-                                @if (seriesUpdated($series->videos[count($series->videos) - 1]->published_at))
+                                @if (isNew($series->videos->last()->published_at))
                                     <span class="card__update label label-danger">update!</span>
                                 @endif
                                 <span class="card__video-count">{{ count($series->videos) }} Videos</span>
                                 <div class="card__img">
-                                    <a href="{{ route('series.show', $series->id) }}">
+                                    <a href="{{ route('series.show', $series->slug) }}">
                                         <img
                                             class="img-responsive"
                                             src="{{ $series->image }}" alt="">
@@ -46,7 +46,7 @@ Learner视频学习资源
                                         @endforeach
                                     </ul>
                                     <h3 class="card__title">
-                                        <a href="{{ route('series.show', $series->id) }}" class="card__title--a">{{ $series->title }}</a>
+                                        <a href="{{ route('series.show', $series->slug) }}" class="card__title--a">{{ $series->title }}</a>
                                     </h3>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ class CreateSeriesFormService extends AbstractFormService
      */
     protected $rules = [
         'title' => 'required|max:120',
+        'slug' => 'required|max:200|unique:series',
         'description' => 'required',
         'image' => 'required|image',
         'categories' => 'required|array'
@@ -26,6 +27,7 @@ class CreateSeriesFormService extends AbstractFormService
         return [
             'title' => lang('series.create.title', 'Title'),
             'description' => lang('series.create.description', 'Description'),
+            'slug' => 'Slug',
             'image' => lang('series.create.image', 'Image'),
             'categories' => lang('series.create.category', 'Category')
         ];
@@ -39,7 +41,7 @@ class CreateSeriesFormService extends AbstractFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'title', 'description', 'image', 'categories'
+            'title', 'slug', 'description', 'image', 'categories'
         ]);
     }
 }

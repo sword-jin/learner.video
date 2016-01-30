@@ -42,13 +42,13 @@ class SeriesController extends BaseController
     /**
      * Route series.show /series/id
      *
-     * @param  integer $id
+     * @param  string $slug
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show($slug)
     {
-        $series = $this->series->findAllWithRelationById($id);
+        $series = $this->series->findAllWithRelationBySlug($slug);
 
         return view('series.show', compact('series'));
     }
@@ -61,10 +61,11 @@ class SeriesController extends BaseController
      *
      * @return \Illuminate\View\View
      */
-    public function showVideo($id, $vid)
+    public function showVideo($slug, $vid)
     {
         $video = $this->videos->findById($vid);
+        $series = $this->series->findAllWithRelationBySlug($slug);
 
-        return view('series.video', compact('video'));
+        return view('series.video', compact('video', 'series'));
     }
 }

@@ -43,10 +43,3 @@
         background: $content-bg-color;
     }
 }
-.series__description {
-    padding: 20px;
-    margin-bottom: 15px;
-    background: #FFF;
-    margin-top: 15px;
-    @include round(5px);
-}

@@ -1,5 +1,6 @@
-@inject('player', 'Learner\Services\Videos\Video')
+@inject('player', 'Learner\Services\Layouts\Videos\Video')
 @inject('category', 'Learner\Services\Layouts\Category')
+@inject('parsedown', 'Parsedown')
 
 @extends('layouts.master')
 
@@ -29,28 +30,11 @@
                    <li class="active">{{ $series->title }}</li>
                 </ol>
 
-                <p class="series__description">{!! $series->description !!}</p>
+                @include('partials.description', ['obj' => $series])
 
-                <div class="video-wrapper">
-                    {!! $player->setType($series->videos->first()->resource_type)
-                              ->getIFrame($series->videos->first()->resource_id) !!}
-                </div>
+                @include('partials.videoPlayer', ['video' => $series->videos->first()])
 
-                <div class="videos">
-                    <div class="videos__icon">
-                        <img src="/{{ $series->categories->first()->image }}" class="img-circle">
-                    </div>
-                    <ul class="list-group">
-                        @foreach ($series->videos as $video)
-                            <a class="list-group-item"
-                                href="{{ route('series.video.show', ['id' => $series->id, 'vid' => $video->id]) }}">
-                                {{ $video->title }}
-
-                                <i class="label label-danger label--new pull-right">New</i>
-                            </a>
-                        @endforeach
-                    </ul>
-                </div>
+                @include('partials.videoPlaylist')
             </div>
 
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">

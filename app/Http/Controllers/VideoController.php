@@ -8,6 +8,8 @@ class VideoController extends BaseController
 {
     public function index()
     {
+        //
+
         return view('videos.index');
     }
 }

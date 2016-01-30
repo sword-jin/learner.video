@@ -62,6 +62,8 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
         $newVideo->description = $data['description'];
         $newVideo->resource_type = $data['resource_type'];
         $newVideo->resource_id = $data['resource_id'];
+        $newVideo->image = $data['image'];
+        $newVideo->duration = $data['duration'];
         $newVideo->published_at = Carbon::createFromFormat('Y-m-d', $data['published_at']);
 
         $newVideo->save();

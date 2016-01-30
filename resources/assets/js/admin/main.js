@@ -16,9 +16,24 @@ Vue.use(VueRouter)
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value')
 
-Vue.filter('date', function(value) {
-    return value.substring(0, 10);
-});
+Vue.filter('date', value => value.substring(0, 10))
+
+Vue.filter('timeForHuman', value => {
+    if (value < 60) {
+        return value + '秒';
+    } else if (value >= 60 && value < 3600) {
+        let minutes = Math.floor(value / 60);
+        let seconds = value - minutes * 60;
+
+        return minutes + '分' + seconds + '秒';
+    } else if (value < 3600 * 24) {
+        let hours = Math.floor(value / 3600);
+        let minutes = Math.floor((value - hours * 3600) / 60);
+        let seconds = value - hours * 3600 - minutes * 60;
+
+        return hours + '时' + minutes + '分' + seconds + '秒';
+    }
+})
 
 var App = Vue.extend({
     data() {

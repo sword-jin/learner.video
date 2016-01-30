@@ -1,6 +1,6 @@
 <?php
 
-namespace Learner\Services\Videos;
+namespace Learner\Services\Layouts\Videos;
 
 use Exception;
 

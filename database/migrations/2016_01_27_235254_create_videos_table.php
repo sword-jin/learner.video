@@ -17,6 +17,8 @@ class CreateVideosTable extends Migration
             $table->integer('series_id')->unsigned()->index();
             $table->foreign('series_id')->references('id')->on('series')->onDelete('cascade');
             $table->string('title', 120);
+            $table->smallInteger('duration')->unsigned();
+            $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->enum('resource_type', ['vimeo', 'youtube', 'youku']);
             $table->integer('resource_id');

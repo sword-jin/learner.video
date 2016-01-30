@@ -37,6 +37,7 @@
                                 <i v-if="video.resource_type == 'youtube'" class="fa fa-youtube"></i>
                                 <span v-if="video.resource_type == 'youku'">优酷</span>
                             </td>
+                            <td>{{ video.duration | timeForHuman }}</td>
                             <td>{{ video.created_at | date }}</td>
                             <td>{{ video.published_at | date }}</td>
                             <td>
@@ -152,6 +153,7 @@ module.exports = {
                 '标题',
                 '系列',
                 '来源',
+                '长度',
                 '上传时间',
                 '发布时间'
             ],
@@ -160,6 +162,8 @@ module.exports = {
                 series_id: '',
                 title: '',
                 description: '',
+                image: '',
+                duration: '',
                 resource_type: '',
                 resource_id: '',
                 published_at: '',
@@ -253,8 +257,10 @@ module.exports = {
         editVideo(video) {
             this.editing = true;
 
-            this.setVideoForm(video.id, video.series_id, video.title, video.description, video.resource_type,
-                video.resource_id, video.published_at, video.created_at, video.updated_at);
+            this.setVideoForm(video.id, video.series_id, video.title, video.image,
+                video.duration, video.description, video.resource_type, video.resource_id,
+                video.published_at, video.created_at, video.updated_at
+            );
 
             jQuery('#saveVideoModal').modal('show');
         },
@@ -306,12 +312,12 @@ module.exports = {
         },
 
         resetVideoForm() {
-            this.setVideoForm('', '', '', '', 'vimeo', '', '', '', '', '');
+            this.setVideoForm('', '', '', '', '', '', 'vimeo', '', '', '', '', '');
         },
 
-        setVideoForm(id, series_id, title, description, resource_type,
+        setVideoForm(id, series_id, title, image, duration, description, resource_type,
             resource_id, published_at, created_at, updated_at) {
-            this.newVideo = {id, series_id, title, description, resource_type,
+            this.newVideo = {id, series_id, title, image, duration, description, resource_type,
             resource_id, published_at, created_at, updated_at};
         },
 

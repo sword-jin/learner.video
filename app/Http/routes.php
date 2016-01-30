@@ -1,6 +1,10 @@
 <?php
 
-use Learner\Services\Videos\Video;
+Carbon\Carbon::setLocale('zh');
+
+Route::get('test', function() {
+    dd(VideoApi::setType('vimeo')->getVideoDetail(152530921));
+});
 
 Route::group(['middleware' => 'web'], function () {
 
@@ -17,8 +21,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
 
     Route::get('/series', ['as' => 'series', 'uses' => 'SeriesController@index']);
-    Route::get('/series/{id}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
-    Route::get('/series/{id}/videos/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
+    Route::get('/series/{slug}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
+    Route::get('/series/{slug}/videos/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
 
     Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
 
@@ -67,4 +71,3 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('/videos/{id}', 'VideoController@restory');
     });
 });
-

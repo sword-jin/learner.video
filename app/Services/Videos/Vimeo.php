@@ -2,86 +2,79 @@
 
 namespace Learner\Services\Videos;
 
+use Learner\Exceptions\JsonNotValidException;
+use Learner\Exceptions\VideoNotFoundException;
+
 class Vimeo
 {
     /**
-     * Id
+     * Video Id
      *
-     * @var integer
+     * @var String
      */
     private $id;
 
     /**
-     * Width
+     * The vimeo base api url.
      *
-     * @var integer
+     * @var string
      */
-    private $width = 1280;
+    private $baseUrl = 'https://vimeo.com/api/oembed.json?url=https://vimeo.com/';
 
-    /**
-     * Height
-     *
-     * @var integer
-     */
-    private $height = 720;
-
-    /**
-     * Get the iframe code.
-     *
-     * @param  integer $id
-     *
-     * @return string
-     */
-    public function getIFrame($id)
+    public function getVideoDetail($id)
     {
-        return '<iframe src="https://player.vimeo.com/video/' . $id . '"width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        $this->setId($id);
+
+        $data = $this->getData($this->baseUrl . '' . $this->id);
+
+        if (! $data) {
+            throw new VideoNotFoundException("Video not found.");
+        }
+
+        return [
+            'html' => $data->html,
+            'title' => $data->title,
+            'duration' => $data->duration,
+            'author_url' => $data->author_url,
+            'upload_date' => $data->upload_date,
+            'author_name' => $data->author_name,
+            'thumbnail_url' => $data->thumbnail_url
+        ];
     }
 
-    /**
-     * Set width.
-     *
-     * @param integer $width
-     *
-     * @return $this
-     */
-    public function setWidth($width)
+    private function setId($id)
     {
-        $this->width = $width;
-
-        return $this;
+        $this->id = $id;
     }
 
-    /**
-     * Set height.
-     *
-     * @param integer $height
-     *
-     * @return $this
-     */
-    public function setHeight($height)
+    private function getData($url)
     {
-        $this->height = $height;
+        $json = null;
 
-        return $this;
+        if(extension_loaded('curl')) {
+            $ch = curl_init(str_replace('{id}', $this->id, $url));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = curl_exec($ch);
+        } else {
+            $json = @file_get_contents(str_replace('{id}', $this->id, $url));
+        }
+
+        if(! $json) {
+            throw new VideoNotFoundException("Video id is not found");
+        }
+
+        return $this->parseData($json);
     }
 
-    /**
-     * Get width.
-     *
-     * @return integer
-     */
-    public function getWidth()
+    private function parseData($json)
     {
-        return $this->width;
-    }
+        $data = json_decode($json);
 
-    /**
-     * Get width
-     *
-     * @return integer
-     */
-    public function getHeight()
-    {
-        return $this->height;
+        if(json_last_error() === JSON_ERROR_NONE)
+        {
+            return $data;
+        }
+
+        throw new JsonNotValidException("Video id is not found. (Invalid json)");
     }
 }

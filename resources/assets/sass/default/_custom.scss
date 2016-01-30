@@ -17,6 +17,20 @@ body {
     margin-bottom: 0;
 }
 
+.description {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: #FFF;
+    margin-top: 15px;
+    @include round(5px);
+}
+
+.dateHuman {
+    padding: 0 15px;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
 ::selection {
     background: #c0ecf4;
 }
