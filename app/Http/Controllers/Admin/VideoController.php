@@ -59,7 +59,16 @@ class VideoController extends BaseController
             return $this->responseJson(['errors' => $form->getErrors()], 400);
         }
 
-        $video = $this->videos->update($id, $form->getInputData());
+        $data = $form->getInputData();
+        // if resource_type and resource_id not change, then not request api.
+        if ($this->videos->hasChanged($id, $data['resource_type'], $data['resource_id'])) {
+            $resourceInfo = $this->getResourceInfo($data['resource_type'], $data['resource_id']);
+
+            $data['image'] = $resourceInfo['thumbnail_url'];
+            $data['duration'] = $resourceInfo['duration'];
+        }
+
+        $video = $this->videos->update($id, $data);
 
         return $this->responseJson(['message' => '成功修改视频', 'video' => $video]);
     }

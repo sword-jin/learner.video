@@ -2,8 +2,7 @@
 
 namespace Learner\Services\Videos;
 
-use Learner\Exceptions\JsonNotValidException;
-use Learner\Exceptions\VideoNotFoundException;
+use Learner\Exceptions\VideoNotValidException;
 
 class Vimeo
 {
@@ -28,7 +27,11 @@ class Vimeo
         $data = $this->getData($this->baseUrl . '' . $this->id);
 
         if (! $data) {
-            throw new VideoNotFoundException("Video not found.");
+            throw new VideoNotValidException("Video not found.");
+        }
+
+        if (! isset($data->title)) {
+            throw new VideoNotValidException("This is a private video.");
         }
 
         return [
@@ -60,7 +63,7 @@ class Vimeo
         }
 
         if(! $json) {
-            throw new VideoNotFoundException("Video id is not found");
+            throw new VideoNotValidException("Video id is not found");
         }
 
         return $this->parseData($json);
@@ -75,6 +78,6 @@ class Vimeo
             return $data;
         }
 
-        throw new JsonNotValidException("Video id is not found. (Invalid json)");
+        throw new VideoNotValidException("Video id is not found. (Invalid json)");
     }
 }

@@ -46,6 +46,14 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
         return $this->model->orderBy('published_at', 'DESC')->get();
     }
 
+    public function hasChanged($id, $resource_type, $resource_id)
+    {
+        $oldVideo = $this->findById($id);
+
+        return ($oldVideo->resource_type !== $resource_type) ||
+                ($oldVideo->resource_id !== $resource_id);
+    }
+
     /**
      * Create a video.
      *

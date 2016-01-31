@@ -2,7 +2,8 @@
 
 namespace Learner\Services\Videos;
 
-use Learner\Exceptions\VideoTypeNotValidException;
+use Learner\Exceptions\VideoNotValidException;
+
 
 class VideoApi
 {
@@ -41,7 +42,7 @@ class VideoApi
                 break;
 
             default:
-                throw new VideoTypeNotValidException("$type is not a valid video site");
+                throw new VideoNotValidException("$type is not a valid video site");
         }
     }
 }

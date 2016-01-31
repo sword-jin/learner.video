@@ -12,7 +12,14 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'series_id', 'description', 'resource_type', 'resource_id', 'published_at'
+        'title',
+        'series_id',
+        'duration',
+        'image',
+        'description',
+        'resource_type',
+        'resource_id',
+        'published_at'
     ];
     /**
      * The attributes that should be mutated to dates.

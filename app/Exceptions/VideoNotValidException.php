@@ -4,7 +4,7 @@ namespace Learner\Exceptions;
 
 use Exception;
 
-class JsonNotValidException extends Exception
+class VideoNotValidException extends Exception
 {
     //
 }
