@@ -8,6 +8,8 @@ import Users from "./views/Users.vue"
 import Categories from "./views/Categories.vue"
 import Series from "./views/Series.vue"
 import Videos from "./views/Videos.vue"
+import Blogs from "./views/Blogs.vue"
+import CreateBlog from "./views/CreateBlog.vue"
 import Subscribers from "./views/Subscribers.vue"
 import Publish from "./views/Publish.vue"
 
@@ -76,6 +78,14 @@ router.map({
     '/videos': {
         name: 'videos',
         component: Videos
+    },
+    '/blogs': {
+        name: 'blogs',
+        component: Blogs
+    },
+    '/blogs/create': {
+        name: 'blog.create',
+        component: CreateBlog
     },
     '/subscribers': {
         name: 'subscribers',

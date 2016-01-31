@@ -23,33 +23,8 @@ Learner视频学习资源
             @foreach (array_chunk($series->all(), 4) as $row)
                 @foreach ($row as $series)
                     @if (count($series->videos))
-                        <div class="col-lg-3 col-lg-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                            <div class="card">
-                                @if (isNew($series->videos->last()->published_at))
-                                    <span class="card__update label label-danger">update!</span>
-                                @endif
-                                <span class="card__video-count">{{ count($series->videos) }} Videos</span>
-                                <div class="card__img">
-                                    <a href="{{ route('series.show', $series->slug) }}">
-                                        <img
-                                            class="img-responsive"
-                                            src="{{ $series->image }}" alt="">
-                                        <div class="card__overlay">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card__details">
-                                    <ul class="card__category">
-                                        @foreach ($series->categories as $category)
-                                            <li class="label label--{{ $category->name }}">{{ $category->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <h3 class="card__title">
-                                        <a href="{{ route('series.show', $series->slug) }}" class="card__title--a">{{ $series->title }}</a>
-                                    </h3>
-                                </div>
-                            </div>
+                        <div class="col-lg-3 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                            @include('partials.seriesCard')
                         </div>
                     @endif
                 @endforeach

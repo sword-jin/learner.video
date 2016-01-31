@@ -31,7 +31,7 @@ class Category
         $this->cateRepository = $cateRepository;
 
         if (! Cache::has('categories')) {
-            $categories = $this->cateRepository->listName();
+            $categories = $this->cateRepository->listNameAndImageWithRelation();
 
             Cache::put('categories', $categories, 24 * 60);
         }

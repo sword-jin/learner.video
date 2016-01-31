@@ -1,7 +1,3 @@
-@inject('player', 'Learner\Services\Layouts\Videos\Video')
-@inject('category', 'Learner\Services\Layouts\Category')
-@inject('parsedown', 'Parsedown')
-
 @extends('layouts.master')
 
 @section('description')
@@ -47,7 +43,7 @@
             </div>
 
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-                @include('partials.categoryList', ['video' => $video])
+                @include('partials.categoryList')
             </div>
         </div>
     </div>

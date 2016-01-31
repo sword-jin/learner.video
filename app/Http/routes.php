@@ -2,10 +2,6 @@
 
 Carbon\Carbon::setLocale('zh');
 
-Route::get('test', function() {
-    dd(VideoApi::setType('vimeo')->getVideoDetail(152530921));
-});
-
 Route::group(['middleware' => 'web'], function () {
 
     Route::controller('auth', 'Auth\AuthController', [
@@ -25,6 +21,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/series/{slug}/episodes/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
 
     Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
+
+    Route::get('/categories/{name}', ['as' => 'category', 'uses' => 'CategoryController@show']);
 
     Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
 

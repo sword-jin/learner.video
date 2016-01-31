@@ -1,5 +1,11 @@
 .page-jumbotron {
     font-family: 'Montserrat', sans-serif;
+    color: #FFF;
+    text-align: center;
+
+    h1 {
+        margin: 0;
+    }
     @media #{$sm} {
         & {
             padding: 60px 0;
@@ -11,3 +17,16 @@
         }
     }
 }
+
+.series-page-jumbotron {
+    background: $bread-letter-two;
+}
+
+.category-page-jumbotron {
+    background: #231F20;
+}
+
+.video-page-jumbotron {
+    background: #C8A667;
+}
+

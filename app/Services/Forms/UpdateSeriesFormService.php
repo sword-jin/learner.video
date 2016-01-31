@@ -24,7 +24,7 @@ class UpdateSeriesFormService extends CreateSeriesFormService
     public function getInputData()
     {
         return array_only($this->inputData, [
-            'id', 'title', 'description', 'categories'
+            'id', 'title', 'image', 'description', 'categories'
         ]);
     }
 }

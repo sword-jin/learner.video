@@ -74,20 +74,28 @@
 
 	var _Videos2 = _interopRequireDefault(_Videos);
 
-	var _Subscribers = __webpack_require__(30);
+	var _Blogs = __webpack_require__(30);
+
+	var _Blogs2 = _interopRequireDefault(_Blogs);
+
+	var _CreateBlog = __webpack_require__(62);
+
+	var _CreateBlog2 = _interopRequireDefault(_CreateBlog);
+
+	var _Subscribers = __webpack_require__(33);
 
 	var _Subscribers2 = _interopRequireDefault(_Subscribers);
 
-	var _Publish = __webpack_require__(31);
+	var _Publish = __webpack_require__(34);
 
 	var _Publish2 = _interopRequireDefault(_Publish);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(32);
-	var VueRouter = __webpack_require__(34);
+	var Vue = __webpack_require__(35);
+	var VueRouter = __webpack_require__(37);
 
-	Vue.use(__webpack_require__(35));
+	Vue.use(__webpack_require__(38));
 	Vue.use(VueRouter);
 
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
@@ -155,6 +163,14 @@
 	    '/videos': {
 	        name: 'videos',
 	        component: _Videos2.default
+	    },
+	    '/blogs': {
+	        name: 'blogs',
+	        component: _Blogs2.default
+	    },
+	    '/blogs/create': {
+	        name: 'blog.create',
+	        component: _CreateBlog2.default
 	    },
 	    '/subscribers': {
 	        name: 'subscribers',
@@ -329,33 +345,38 @@
 	//             </li>
 	//             <li v-link="{name: 'users', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-gavel"></i> <span>用户</span>
+	//                     <i class="fa fa-users"></i> <span>用户</span>
 	//                 </a>
 	//             </li>
 	//             <li v-link="{name: 'categories', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-gavel"></i> <span>分类</span>
+	//                     <i class="fa fa-tags"></i> <span>分类</span>
 	//                 </a>
 	//             </li>
 	//             <li v-link="{name: 'series', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-globe"></i> <span>系列</span>
+	//                     <i class="fa fa-film"></i> <span>系列</span>
 	//                 </a>
 	//             </li>
 	//             <li v-link="{name: 'videos', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-globe"></i> <span>视频</span>
+	//                     <i class="fa fa-youtube-play"></i> <span>视频</span>
+	//                 </a>
+	//             </li>
+	//             <li v-link="{name: 'blogs', activeClass: 'active'}">
+	//                 <a>
+	//                     <i class="fa fa-book"></i> <span>博客</span>
 	//                 </a>
 	//             </li>
 	//             <li v-link="{name: 'subscribers', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-glass"></i> <span>订阅</span>
+	//                     <i class="fa fa-newspaper-o"></i> <span>订阅</span>
 	//                 </a>
 	//             </li>
 	//
 	//             <li v-link="{name: 'publish', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-glass"></i> <span>发布</span>
+	//                     <i class="fa fa-pencil"></i> <span>发布</span>
 	//                 </a>
 	//             </li>
 	//
@@ -376,7 +397,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-gavel\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'series', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>系列</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-globe\"></i> <span>视频</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-glass\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
+	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-users\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-tags\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'series', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-film\"></i> <span>系列</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-youtube-play\"></i> <span>视频</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'blogs', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-book\"></i> <span>博客</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-newspaper-o\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-pencil\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
 
 /***/ },
 /* 7 */
@@ -2430,18 +2451,62 @@
 
 /***/ },
 /* 30 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(31)
+	__vue_template__ = __webpack_require__(32)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Blogs.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 31 */
 /***/ function(module, exports) {
 
+	"use strict";
+
+	// <template>
+	// <div class="row" style="margin-bottom:15px;">
+	//     <div class="col-xs-12">
+	//         <a class="btn btn-success btn-lg" v-link="{name: 'blog.create'}">
+	//             <span class="fa fa-edit"></span> 发表博客
+	//         </a>
+	//     </div>
+	// </div>
+	//
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {};
+	    }
+	};
+	// </script>
+	//
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <a class=\"btn btn-success btn-lg\" v-link=\"{name: 'blog.create'}\">\n            <span class=\"fa fa-edit\"></span> 发表博客\n        </a>\n    </div>\n</div>\n\n";
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
 	var __vue_script__, __vue_template__
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -2449,7 +2514,17 @@
 
 
 /***/ },
-/* 32 */
+/* 34 */
+/***/ function(module, exports) {
+
+	var __vue_script__, __vue_template__
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+
+
+/***/ },
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -11976,10 +12051,10 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -12076,7 +12151,7 @@
 
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -14715,7 +14790,7 @@
 	}));
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14724,16 +14799,16 @@
 
 	function install(Vue) {
 
-	    var _ = __webpack_require__(36);
+	    var _ = __webpack_require__(39);
 
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 
-	    Vue.url = __webpack_require__(37);
-	    Vue.http = __webpack_require__(43);
-	    Vue.resource = __webpack_require__(58);
-	    Vue.Promise = __webpack_require__(45);
+	    Vue.url = __webpack_require__(40);
+	    Vue.http = __webpack_require__(46);
+	    Vue.resource = __webpack_require__(61);
+	    Vue.Promise = __webpack_require__(48);
 
 	    Object.defineProperties(Vue.prototype, {
 
@@ -14774,7 +14849,7 @@
 
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports) {
 
 	/**
@@ -14902,14 +14977,14 @@
 
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 
@@ -14945,10 +15020,10 @@
 	 */
 
 	Url.transforms = [
-	    __webpack_require__(38),
-	    __webpack_require__(40),
 	    __webpack_require__(41),
-	    __webpack_require__(42)
+	    __webpack_require__(43),
+	    __webpack_require__(44),
+	    __webpack_require__(45)
 	];
 
 	/**
@@ -15038,14 +15113,14 @@
 
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	var UrlTemplate = __webpack_require__(39);
+	var UrlTemplate = __webpack_require__(42);
 
 	module.exports = function (options) {
 
@@ -15060,7 +15135,7 @@
 
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -15216,14 +15291,14 @@
 
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = function (options, next) {
 
@@ -15268,14 +15343,14 @@
 
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = function (options, next) {
 
@@ -15298,14 +15373,14 @@
 
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = function (options, next) {
 
@@ -15320,17 +15395,17 @@
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var _ = __webpack_require__(36);
-	var Client = __webpack_require__(44);
-	var Promise = __webpack_require__(45);
-	var interceptor = __webpack_require__(48);
+	var _ = __webpack_require__(39);
+	var Client = __webpack_require__(47);
+	var Promise = __webpack_require__(48);
+	var interceptor = __webpack_require__(51);
 	var jsonType = {'Content-Type': 'application/json'};
 
 	function Http(url, options) {
@@ -15383,13 +15458,13 @@
 	};
 
 	Http.interceptors = [
-	    __webpack_require__(49),
-	    __webpack_require__(50),
-	    __webpack_require__(51),
+	    __webpack_require__(52),
 	    __webpack_require__(53),
 	    __webpack_require__(54),
-	    __webpack_require__(55),
-	    __webpack_require__(56)
+	    __webpack_require__(56),
+	    __webpack_require__(57),
+	    __webpack_require__(58),
+	    __webpack_require__(59)
 	];
 
 	Http.headers = {
@@ -15424,16 +15499,16 @@
 
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 
-	var _ = __webpack_require__(36);
-	var Promise = __webpack_require__(45);
-	var xhrClient = __webpack_require__(47);
+	var _ = __webpack_require__(39);
+	var Promise = __webpack_require__(48);
+	var xhrClient = __webpack_require__(50);
 
 	module.exports = function (request) {
 
@@ -15495,15 +15570,15 @@
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 
-	var _ = __webpack_require__(36);
-	var PromiseObj = window.Promise || __webpack_require__(46);
+	var _ = __webpack_require__(39);
+	var PromiseObj = window.Promise || __webpack_require__(49);
 
 	function Promise(executor, context) {
 
@@ -15610,14 +15685,14 @@
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -15795,15 +15870,15 @@
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 
-	var _ = __webpack_require__(36);
-	var Promise = __webpack_require__(45);
+	var _ = __webpack_require__(39);
+	var Promise = __webpack_require__(48);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -15851,15 +15926,15 @@
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 
-	var _ = __webpack_require__(36);
-	var Promise = __webpack_require__(45);
+	var _ = __webpack_require__(39);
+	var Promise = __webpack_require__(48);
 
 	module.exports = function (handler, vm) {
 
@@ -15902,14 +15977,14 @@
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = {
 
@@ -15926,7 +16001,7 @@
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/**
@@ -15962,14 +16037,14 @@
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	var jsonpClient = __webpack_require__(52);
+	var jsonpClient = __webpack_require__(55);
 
 	module.exports = {
 
@@ -15986,15 +16061,15 @@
 
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 
-	var _ = __webpack_require__(36);
-	var Promise = __webpack_require__(45);
+	var _ = __webpack_require__(39);
+	var Promise = __webpack_require__(48);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16040,7 +16115,7 @@
 
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports) {
 
 	/**
@@ -16063,14 +16138,14 @@
 
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = {
 
@@ -16105,14 +16180,14 @@
 
 
 /***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	module.exports = {
 
@@ -16137,15 +16212,15 @@
 
 
 /***/ },
-/* 56 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var _ = __webpack_require__(36);
-	var xdrClient = __webpack_require__(57);
+	var _ = __webpack_require__(39);
+	var xdrClient = __webpack_require__(60);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 
@@ -16180,15 +16255,15 @@
 
 
 /***/ },
-/* 57 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 
-	var _ = __webpack_require__(36);
-	var Promise = __webpack_require__(45);
+	var _ = __webpack_require__(39);
+	var Promise = __webpack_require__(48);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16223,14 +16298,14 @@
 
 
 /***/ },
-/* 58 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	var _ = __webpack_require__(36);
+	var _ = __webpack_require__(39);
 
 	function Resource(url, params, actions, options) {
 
@@ -16337,6 +16412,143 @@
 
 	module.exports = _.resource = Resource;
 
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(64)
+	__vue_template__ = __webpack_require__(63)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/CreateBlog.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 63 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"saveBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>\n            <input type=\"date\" class=\"form-control\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
+
+/***/ },
+/* 64 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom:30px;">
+	//     <div class="col-xs-12">
+	//         <div class="btn-group">
+	//             <a class="btn btn-primary btn-lg" v-link="{name: 'blogs'}">
+	//                 <span class="fa fa-book"></span> 返回博客列表
+	//             </a>
+	//             <a href="/blogs" class="btn btn-info btn-lg">
+	//                 <span class="fa fa-home"></span> 返回前台博客
+	//             </a>
+	//         </div>
+	//     </div>
+	// </div>
+	//
+	// <div>
+	//     <form @submit.prevent="saveBlog()">
+	//         <div class="form-group">
+	//             <label>标题</label>
+	//             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
+	//         </div>
+	//         <div class="form-group">
+	//             <label>正文</label>
+	//             <textarea v-model="blog.body" class="form-control" rows="18" placeholder="Markdown!!!建议在其他环境下书写"></textarea>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>选择分类</label>
+	//             <select v-model="blog.category_id" class="form-control">
+	//                 <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+	//             </select>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>
+	//             <input type="date" class="form-control">
+	//         </div>
+	//         <div class="form-group">
+	//             <div class="checkbox">
+	//                 <label>
+	//                     <input type="checkbox" v-model="blog.is_published"> 是否马上发表
+	//                 </label>
+	//             </div>
+	//             <button type="submit" class="btn btn-primary" :disabled="canSubmit">
+	//                 {{　blog.is_published ? '发表' : '保存' }}
+	//             </button>
+	//         </div>
+	//     </form>
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            blog: {
+	                category_id: null,
+	                title: '',
+	                body: '',
+	                is_published: true,
+	                created_at: ''
+	            },
+	            categories: []
+	        };
+	    },
+	    created: function created() {
+	        this.getCategories();
+	    },
+
+	    computed: {
+	        canSubmit: function canSubmit() {
+	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '') {
+	                return true;
+	            }
+
+	            return false;
+	        }
+	    },
+
+	    methods: {
+	        getCategories: function getCategories() {
+	            var _this = this;
+
+	            this.$http.get('/admin/categories').then(function (response) {
+	                _this.categories = response.data;
+	            });
+	        },
+	        saveBlog: function saveBlog() {
+	            this.$http.post('/admin/blogs', this.getFormData()).then(function (response) {
+	                //
+	            });
+	        },
+	        getFormData: function getFormData() {
+	            return {
+	                series_id: this.blog.series_id,
+	                title: this.blog.title,
+	                body: this.blog.body,
+	                is_published: this.blog.is_published,
+	                created_at: this.blog.created_at
+	            };
+	        }
+	    }
+	};
+	// </script>
+	//
 
 /***/ }
 /******/ ]);

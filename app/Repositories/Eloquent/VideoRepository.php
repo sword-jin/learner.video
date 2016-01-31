@@ -21,9 +21,9 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
      *
      * @param \Learner\Models\Video $video
      */
-    public function __construct(Video $vide)
+    public function __construct(Video $video)
     {
-        $this->model = $vide;
+        $this->model = $video;
     }
 
     /**
@@ -108,5 +108,14 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
     public function delete($id)
     {
         return $this->findById($id)->delete();
+    }
+
+    public function findAllPublishedPaginated($perPage = 50)
+    {
+        return $this->model
+                    ->where('published_at', '<=', Carbon::now())
+                    ->with(self::$relations)
+                    ->orderBy('published_at', 'desc')
+                    ->paginate($perPage);
     }
 }

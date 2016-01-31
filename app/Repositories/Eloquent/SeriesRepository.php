@@ -101,7 +101,7 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     {
         $series = $this->findById($id);
 
-        $series->update(array_only($data, ['title', 'description']));
+        $series->update(array_only($data, ['title', 'image', 'description']));
 
         $series->categories()->sync($data['categories']);
 

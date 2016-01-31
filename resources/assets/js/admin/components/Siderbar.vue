@@ -24,33 +24,38 @@
             </li>
             <li v-link="{name: 'users', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-gavel"></i> <span>用户</span>
+                    <i class="fa fa-users"></i> <span>用户</span>
                 </a>
             </li>
             <li v-link="{name: 'categories', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-gavel"></i> <span>分类</span>
+                    <i class="fa fa-tags"></i> <span>分类</span>
                 </a>
             </li>
             <li v-link="{name: 'series', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-globe"></i> <span>系列</span>
+                    <i class="fa fa-film"></i> <span>系列</span>
                 </a>
             </li>
             <li v-link="{name: 'videos', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-globe"></i> <span>视频</span>
+                    <i class="fa fa-youtube-play"></i> <span>视频</span>
+                </a>
+            </li>
+            <li v-link="{name: 'blogs', activeClass: 'active'}">
+                <a>
+                    <i class="fa fa-book"></i> <span>博客</span>
                 </a>
             </li>
             <li v-link="{name: 'subscribers', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-glass"></i> <span>订阅</span>
+                    <i class="fa fa-newspaper-o"></i> <span>订阅</span>
                 </a>
             </li>
 
             <li v-link="{name: 'publish', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-glass"></i> <span>发布</span>
+                    <i class="fa fa-pencil"></i> <span>发布</span>
                 </a>
             </li>
 

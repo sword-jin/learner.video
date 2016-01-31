@@ -1,7 +1,3 @@
-@inject('player', 'Learner\Services\Layouts\Videos\Video')
-@inject('category', 'Learner\Services\Layouts\Category')
-@inject('parsedown', 'Parsedown')
-
 @extends('layouts.master')
 
 @section('description')

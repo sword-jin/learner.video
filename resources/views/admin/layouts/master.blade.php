@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ elixir("css/lib.css") }}">
     <link rel="stylesheet" href="./css/admin/admin.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/select2/4.0.1/css/select2.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="token" id="token" value="{{ csrf_token() }}">
 </head>
 <body id="app" class="skin-black">

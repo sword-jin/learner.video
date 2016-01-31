@@ -89,7 +89,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
-    public function findAllActivePaginated($perPage = 10)
+    public function findAllActivePaginated($perPage = 50)
     {
         return $this->model
                     ->with(self::$relations)
@@ -105,7 +105,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
-    public function findNotActivePaginated($perPage = 10)
+    public function findNotActivePaginated($perPage = 50)
     {
         return $this->model
                     ->with(self::$relations)
@@ -119,7 +119,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
-    public function findTrashedPaginated($perPage = 10)
+    public function findTrashedPaginated($perPage = 50)
     {
         return $this->model
             ->with(self::$relations)

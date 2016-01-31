@@ -1,6 +1,6 @@
 <div class="videos">
     <div class="videos__icon">
-        <img src="/{{ $series->categories->first()->image }}" class="img-circle">
+        <img src="{{ asset($series->categories->first()->image) }}" class="img-circle">
     </div>
     <ul class="list-group">
         @foreach ($series->videos as $video)
@@ -14,6 +14,7 @@
                     @if (isNew($video->published_at))
                         <i class="label label-danger label--new pull-right">New</i>
                     @endif
+                    <span class="video__list-time pull-right">{{ secondForHuman($video->duration) }}</span>
                     {{ $video->title }}
                 </a>
         @endforeach

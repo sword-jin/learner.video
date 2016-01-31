@@ -18,10 +18,20 @@ class Category extends Model
     /**
      * A category has many series
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function series()
     {
-        return $this->hasMany('Learner\Models\Serie');
+        return $this->belongsToMany('Learner\Models\Series');
+    }
+
+    /**
+     * A Category has many blogs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blogs()
+    {
+        return $this->hasMany('Learner\Models\Blog');
     }
 }

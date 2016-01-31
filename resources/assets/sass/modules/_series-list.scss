@@ -24,22 +24,3 @@
         }
     }
 }
-
-.right-category {
-    h4 {
-        margin-top: 0;
-        margin-bottom: 15px;
-        padding-right: 12px;
-        font-size: 13px;
-        // text-align: center;
-        font-weight: 700;
-    }
-
-    .category__wrapper {
-        margin-bottom: 20px;
-    }
-
-    .list--item:hover {
-        background: $content-bg-color;
-    }
-}
