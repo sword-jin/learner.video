@@ -22,7 +22,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/series', ['as' => 'series', 'uses' => 'SeriesController@index']);
     Route::get('/series/{slug}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
-    Route::get('/series/{slug}/videos/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
+    Route::get('/series/{slug}/episodes/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
 
     Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
 

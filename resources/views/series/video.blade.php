@@ -42,6 +42,8 @@
                 @include('partials.description', ['obj' => $video])
 
                 @include('partials.videoPlaylist', ['vid' => $video->id])
+
+                @include('partials.comments')
             </div>
 
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">

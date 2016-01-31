@@ -49,3 +49,8 @@ function dateHuman($time)
 {
     return Carbon::createFromFormat('Y-m-d H:i:s', $time)->diffForHumans();
 }
+
+// function havePublishedVideo()
+// {
+//     # code...
+// }

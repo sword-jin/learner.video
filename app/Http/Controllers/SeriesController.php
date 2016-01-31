@@ -34,7 +34,17 @@ class SeriesController extends BaseController
      */
     public function index()
     {
-        $series = $this->series->findAllWithRelation();
+        $series = $this->series->findAllWithRelationHavePublishedVideo();
+
+        // $series = $series->filter(function($s) {
+        //     $s->videos->filter(function($video) {
+
+        //     });
+
+        //     return count($s->videos->all()) > 0;
+        // });
+
+        // dd($series);
 
         return view('series.index', compact('series'));
     }

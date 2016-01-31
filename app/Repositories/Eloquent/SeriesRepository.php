@@ -122,14 +122,32 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     }
 
     /**
-     * Return series and relation by slug.
+     * Return series and relation. (video is published.)
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationHavePublishedVideo()
+    {
+        return $this->model
+                    ->with(['videos' => function($query) {
+                        $query->where('published_at', '<=', Carbon::now());
+                    }])
+                    ->with('categories')
+                    ->get();
+    }
+
+    /**
+     * Return series and relation by slug. (video is published.)
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
      */
     public function findAllWithRelationBySlug($slug)
     {
         return $this->model
-                    ->with(self::$relations)
+                    ->with('categories')
+                    ->with(['videos' => function($query) {
+                        $query->where('published_at', '<=', Carbon::now());
+                    }])
                     ->whereSlug($slug)
                     ->firstOrFail();
     }

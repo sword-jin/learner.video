@@ -1,0 +1,19 @@
+.comments {
+    margin-top: 30px;
+    h2 {
+        text-align: center;
+        font-size: 22px;
+        position: relative;
+        margin-bottom: 40px;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: calc(50% - 141px);
+            height: 3px;
+            width: 282px;
+            background: #7f929c;
+        }
+    }
+}
