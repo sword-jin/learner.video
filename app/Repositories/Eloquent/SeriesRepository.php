@@ -133,6 +133,24 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
                         $query->where('published_at', '<=', Carbon::now());
                     }])
                     ->with('categories')
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
+    }
+
+    /**
+     * Limit series and relation. (video is published.)
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationHavePublishedVideoLimit($limit = 4)
+    {
+        return $this->model
+                    ->with(['videos' => function($query) {
+                        $query->where('published_at', '<=', Carbon::now());
+                    }])
+                    ->with('categories')
+                    ->orderBy('created_at', 'DESC')
+                    ->limit(4)
                     ->get();
     }
 

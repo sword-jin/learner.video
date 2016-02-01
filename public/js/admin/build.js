@@ -82,24 +82,24 @@
 
 	var _CreateBlog2 = _interopRequireDefault(_CreateBlog);
 
-	var _EditBlog = __webpack_require__(65);
+	var _EditBlog = __webpack_require__(36);
 
 	var _EditBlog2 = _interopRequireDefault(_EditBlog);
 
-	var _Subscribers = __webpack_require__(36);
+	var _Subscribers = __webpack_require__(39);
 
 	var _Subscribers2 = _interopRequireDefault(_Subscribers);
 
-	var _Publish = __webpack_require__(37);
+	var _Publish = __webpack_require__(40);
 
 	var _Publish2 = _interopRequireDefault(_Publish);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(38);
-	var VueRouter = __webpack_require__(40);
+	var Vue = __webpack_require__(41);
+	var VueRouter = __webpack_require__(43);
 
-	Vue.use(__webpack_require__(41));
+	Vue.use(__webpack_require__(44));
 	Vue.use(VueRouter);
 
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
@@ -434,7 +434,7 @@
 	//         <div class="sm-st clearfix">
 	//             <span class="sm-st-icon st-violet"><i class="fa fa-newspaper-o"></i></span>
 	//             <div class="sm-st-info">
-	//                 <span></span>
+	//                 <span>{{ subscriber_count }}</span>
 	//                 订阅
 	//             </div>
 	//         </div>
@@ -443,7 +443,7 @@
 	//         <div class="sm-st clearfix">
 	//             <span class="sm-st-icon st-green"><i class="fa fa-film"></i></span>
 	//             <div class="sm-st-info">
-	//                 <span></span>
+	//                 <span>{{ series_count }}</span>
 	//                 系列
 	//             </div>
 	//         </div>
@@ -452,7 +452,7 @@
 	//         <div class="sm-st clearfix">
 	//             <span class="sm-st-icon st-blue"><i class="fa fa-youtube-play"></i></span>
 	//             <div class="sm-st-info">
-	//                 <span></span>
+	//                 <span>{{ video_count }}</span>
 	//                 视频
 	//             </div>
 	//         </div>
@@ -496,10 +496,16 @@
 	    data: function data() {
 	        return {
 	            user_count: 0,
+	            video_count: 0,
+	            subscriber_count: 0,
+	            series_count: 0,
 	            all_roles: [],
 	            all_perms: []
 	        };
 	    },
+
+	    props: ['roles'],
+
 	    created: function created() {
 	        this.getInformation();
 	    },
@@ -510,6 +516,9 @@
 	                var data = response.data;
 
 	                this.user_count = data.info.user_count;
+	                this.video_count = data.info.video_count;
+	                this.subscriber_count = data.info.subscriber_count;
+	                this.series_count = data.info.series_count;
 	                this.all_roles = data.info.all_roles;
 	                this.all_perms = data.info.all_perms;
 	            });
@@ -523,7 +532,7 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                系列\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span></span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ subscriber_count }}</span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ series_count }}</span>\n                系列\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ video_count }}</span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n</div>\n";
 
 /***/ },
 /* 10 */
@@ -907,18 +916,13 @@
 	// <template>
 	// <div class="row" style="margin-bottom:5px;">
 	//     <div class="form-group">
-	//         <form class="form-horizontal" role="form">
-	//             <label class="col-xs-2 control-label">
-	//                 选择查看模式
-	//             </label>
-	//             <div class="col-xs-10">
-	//                 <select v-model="model" class="form-control">
-	//                     <option selected value="active">活跃会员</option>
-	//                     <option value="notActive">冻结会员</option>
-	//                     <option value="trashed" v-if="isBoss">回收站</option>
-	//                 </select>
+	//         <div class="col-xs-12">
+	//             <div class="btn-group">
+	//                 <button class="btn btn-default" @click="model = 'active'">活跃会员</button>
+	//                 <button class="btn btn-info" @click="model = 'notActive'">冻结会员</button>
+	//                 <button class="btn btn-danger" @click="model = 'trashed'">回收站</button>
 	//             </div>
-	//         </form>
+	//         </div>
 	//     </div>
 	// </div>
 	// <div class="row">
@@ -1239,7 +1243,7 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <form class=\"form-horizontal\" role=\"form\">\n            <label class=\"col-xs-2 control-label\">\n                选择查看模式\n            </label>\n            <div class=\"col-xs-10\">\n                <select v-model=\"model\" class=\"form-control\">\n                    <option selected value=\"active\">活跃会员</option>\n                    <option value=\"notActive\">冻结会员</option>\n                    <option value=\"trashed\" v-if=\"isBoss\">回收站</option>\n                </select>\n            </div>\n        </form>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <div class=\"col-xs-12\">\n            <div class=\"btn-group\">\n                <button class=\"btn btn-default\" @click=\"model = 'active'\">活跃会员</button>\n                <button class=\"btn btn-info\" @click=\"model = 'notActive'\">冻结会员</button>\n                <button class=\"btn btn-danger\" @click=\"model = 'trashed'\">回收站</button>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
 
 /***/ },
 /* 17 */
@@ -2820,18 +2824,185 @@
 
 /***/ },
 /* 36 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(37)
+	__vue_template__ = __webpack_require__(38)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/EditBlog.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 37 */
 /***/ function(module, exports) {
 
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom:30px;">
+	//     <div class="col-xs-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//         <div class="btn-group">
+	//             <a class="btn btn-primary btn-lg" v-link="{name: 'blogs'}">
+	//                 <span class="fa fa-book"></span> 返回博客列表
+	//             </a>
+	//             <a href="/blogs" class="btn btn-info btn-lg">
+	//                 <span class="fa fa-home"></span> 返回前台博客
+	//             </a>
+	//         </div>
+	//     </div>
+	// </div>
+	//
+	// <div>
+	//     <form @submit.prevent="updateBlog()">
+	//         <div class="form-group">
+	//             <label>标题</label>
+	//             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
+	//         </div>
+	//         <div class="form-group">
+	//             <label>正文</label>
+	//             <textarea v-model="blog.body" class="form-control" rows="18" placeholder="Markdown!!!建议在其他环境下书写"></textarea>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>选择分类</label>
+	//             <select v-model="blog.category_id" class="form-control">
+	//                 <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+	//             </select>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>创建日期(有需要请手动修改日期)</label>
+	//             <input type="date" class="form-control" v-model="blog.created_at | date">
+	//         </div>
+	//         <div class="form-group">
+	//             <div class="checkbox">
+	//                 <label>
+	//                     <input type="checkbox" v-model="blog.is_published"> 是否马上发表
+	//                 </label>
+	//             </div>
+	//             <button type="submit" class="btn btn-primary" :disabled="canSubmit">
+	//                 {{　blog.is_published ? '发表' : '保存' }}
+	//             </button>
+	//         </div>
+	//     </form>
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            id: null,
+	            blog: {
+	                category_id: null,
+	                title: '',
+	                body: '',
+	                is_published: true,
+	                created_at: ''
+	            },
+	            categories: [],
+	            success: false,
+	            message: ''
+	        };
+	    },
+	    created: function created() {
+	        this.id = this.$route.params.id;
+
+	        this.getCategories();
+	    },
+
+	    computed: {
+	        canSubmit: function canSubmit() {
+	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '' || this.blog.created_at === '') {
+	                return true;
+	            }
+
+	            return false;
+	        }
+	    },
+
+	    methods: {
+	        getCategories: function getCategories() {
+	            var _this = this;
+
+	            this.$http.get('/admin/categories').then(function (response) {
+	                _this.categories = response.data;
+	            });
+	            this.$http.get('/admin/blogs/' + this.id).then(function (response) {
+	                _this.blog = response.data.blog;
+	            });
+	        },
+	        updateBlog: function updateBlog() {
+	            var self = this;
+
+	            self.$http.put('/admin/blogs/' + self.id, self.getFormData()).then(function (response) {
+	                self.success = true;
+	                self.message = response.data.message;
+
+	                setTimeout(function () {
+	                    self.$router.go({ name: 'blogs' });
+	                }, 1200);
+	            });
+	        },
+	        getFormData: function getFormData() {
+	            return {
+	                category_id: this.blog.category_id,
+	                title: this.blog.title,
+	                body: this.blog.body,
+	                is_published: this.blog.is_published,
+	                created_at: this.blog.created_at
+	            };
+	        }
+	    }
+	};
+	// </script>
+	//
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"updateBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期)</label>\n            <input type=\"date\" class=\"form-control\" v-model=\"blog.created_at | date\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(68)
+	__vue_template__ = __webpack_require__(69)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Subscribers.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
 	var __vue_script__, __vue_template__
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -2839,7 +3010,7 @@
 
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -12366,10 +12537,10 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(42)))
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -12466,7 +12637,7 @@
 
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -15105,7 +15276,7 @@
 	}));
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15114,16 +15285,16 @@
 
 	function install(Vue) {
 
-	    var _ = __webpack_require__(42);
+	    var _ = __webpack_require__(45);
 
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 
-	    Vue.url = __webpack_require__(43);
-	    Vue.http = __webpack_require__(49);
-	    Vue.resource = __webpack_require__(64);
-	    Vue.Promise = __webpack_require__(51);
+	    Vue.url = __webpack_require__(46);
+	    Vue.http = __webpack_require__(52);
+	    Vue.resource = __webpack_require__(67);
+	    Vue.Promise = __webpack_require__(54);
 
 	    Object.defineProperties(Vue.prototype, {
 
@@ -15164,7 +15335,7 @@
 
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/**
@@ -15292,14 +15463,14 @@
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 
@@ -15335,10 +15506,10 @@
 	 */
 
 	Url.transforms = [
-	    __webpack_require__(44),
-	    __webpack_require__(46),
 	    __webpack_require__(47),
-	    __webpack_require__(48)
+	    __webpack_require__(49),
+	    __webpack_require__(50),
+	    __webpack_require__(51)
 	];
 
 	/**
@@ -15428,14 +15599,14 @@
 
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	var UrlTemplate = __webpack_require__(45);
+	var UrlTemplate = __webpack_require__(48);
 
 	module.exports = function (options) {
 
@@ -15450,7 +15621,7 @@
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports) {
 
 	/**
@@ -15606,14 +15777,14 @@
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = function (options, next) {
 
@@ -15658,14 +15829,14 @@
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = function (options, next) {
 
@@ -15688,14 +15859,14 @@
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = function (options, next) {
 
@@ -15710,17 +15881,17 @@
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var _ = __webpack_require__(42);
-	var Client = __webpack_require__(50);
-	var Promise = __webpack_require__(51);
-	var interceptor = __webpack_require__(54);
+	var _ = __webpack_require__(45);
+	var Client = __webpack_require__(53);
+	var Promise = __webpack_require__(54);
+	var interceptor = __webpack_require__(57);
 	var jsonType = {'Content-Type': 'application/json'};
 
 	function Http(url, options) {
@@ -15773,13 +15944,13 @@
 	};
 
 	Http.interceptors = [
-	    __webpack_require__(55),
-	    __webpack_require__(56),
-	    __webpack_require__(57),
+	    __webpack_require__(58),
 	    __webpack_require__(59),
 	    __webpack_require__(60),
-	    __webpack_require__(61),
-	    __webpack_require__(62)
+	    __webpack_require__(62),
+	    __webpack_require__(63),
+	    __webpack_require__(64),
+	    __webpack_require__(65)
 	];
 
 	Http.headers = {
@@ -15814,16 +15985,16 @@
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 
-	var _ = __webpack_require__(42);
-	var Promise = __webpack_require__(51);
-	var xhrClient = __webpack_require__(53);
+	var _ = __webpack_require__(45);
+	var Promise = __webpack_require__(54);
+	var xhrClient = __webpack_require__(56);
 
 	module.exports = function (request) {
 
@@ -15885,15 +16056,15 @@
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 
-	var _ = __webpack_require__(42);
-	var PromiseObj = window.Promise || __webpack_require__(52);
+	var _ = __webpack_require__(45);
+	var PromiseObj = window.Promise || __webpack_require__(55);
 
 	function Promise(executor, context) {
 
@@ -16000,14 +16171,14 @@
 
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -16185,15 +16356,15 @@
 
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 
-	var _ = __webpack_require__(42);
-	var Promise = __webpack_require__(51);
+	var _ = __webpack_require__(45);
+	var Promise = __webpack_require__(54);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16241,15 +16412,15 @@
 
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 
-	var _ = __webpack_require__(42);
-	var Promise = __webpack_require__(51);
+	var _ = __webpack_require__(45);
+	var Promise = __webpack_require__(54);
 
 	module.exports = function (handler, vm) {
 
@@ -16292,14 +16463,14 @@
 
 
 /***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = {
 
@@ -16316,7 +16487,7 @@
 
 
 /***/ },
-/* 56 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -16352,14 +16523,14 @@
 
 
 /***/ },
-/* 57 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	var jsonpClient = __webpack_require__(58);
+	var jsonpClient = __webpack_require__(61);
 
 	module.exports = {
 
@@ -16376,15 +16547,15 @@
 
 
 /***/ },
-/* 58 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 
-	var _ = __webpack_require__(42);
-	var Promise = __webpack_require__(51);
+	var _ = __webpack_require__(45);
+	var Promise = __webpack_require__(54);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16430,7 +16601,7 @@
 
 
 /***/ },
-/* 59 */
+/* 62 */
 /***/ function(module, exports) {
 
 	/**
@@ -16453,14 +16624,14 @@
 
 
 /***/ },
-/* 60 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = {
 
@@ -16495,14 +16666,14 @@
 
 
 /***/ },
-/* 61 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	module.exports = {
 
@@ -16527,15 +16698,15 @@
 
 
 /***/ },
-/* 62 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var _ = __webpack_require__(42);
-	var xdrClient = __webpack_require__(63);
+	var _ = __webpack_require__(45);
+	var xdrClient = __webpack_require__(66);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 
@@ -16570,15 +16741,15 @@
 
 
 /***/ },
-/* 63 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 
-	var _ = __webpack_require__(42);
-	var Promise = __webpack_require__(51);
+	var _ = __webpack_require__(45);
+	var Promise = __webpack_require__(54);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16613,14 +16784,14 @@
 
 
 /***/ },
-/* 64 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	var _ = __webpack_require__(42);
+	var _ = __webpack_require__(45);
 
 	function Resource(url, params, actions, options) {
 
@@ -16729,81 +16900,44 @@
 
 
 /***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(66)
-	__vue_template__ = __webpack_require__(67)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/EditBlog.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-	// <div class="row" style="margin-bottom:30px;">
-	//     <div class="col-xs-12">
+	// <div class="row">
+	//     <div class="col-sm-6">
 	//         <div class="alert alert-success" v-show="success">
 	//             {{ message }}
 	//         </div>
-	//         <div class="btn-group">
-	//             <a class="btn btn-primary btn-lg" v-link="{name: 'blogs'}">
-	//                 <span class="fa fa-book"></span> 返回博客列表
-	//             </a>
-	//             <a href="/blogs" class="btn btn-info btn-lg">
-	//                 <span class="fa fa-home"></span> 返回前台博客
-	//             </a>
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 视频列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in columns">{{ column }}</th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody>
+	//                         <tr v-for="email in emails">
+	//                             <td>{{ email }}</td>
+	//                             <td>
+	//                                 <a @click.stop="deleteSubscribers(email)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//             </div>
 	//         </div>
 	//     </div>
-	// </div>
-	//
-	// <div>
-	//     <form @submit.prevent="updateBlog()">
-	//         <div class="form-group">
-	//             <label>标题</label>
-	//             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
-	//         </div>
-	//         <div class="form-group">
-	//             <label>正文</label>
-	//             <textarea v-model="blog.body" class="form-control" rows="18" placeholder="Markdown!!!建议在其他环境下书写"></textarea>
-	//         </div>
-	//         <div class="form-group">
-	//             <label>选择分类</label>
-	//             <select v-model="blog.category_id" class="form-control">
-	//                 <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
-	//             </select>
-	//         </div>
-	//         <div class="form-group">
-	//             <label>创建日期(有需要请手动修改日期)</label>
-	//             <input type="date" class="form-control" v-model="blog.created_at | date">
-	//         </div>
-	//         <div class="form-group">
-	//             <div class="checkbox">
-	//                 <label>
-	//                     <input type="checkbox" v-model="blog.is_published"> 是否马上发表
-	//                 </label>
-	//             </div>
-	//             <button type="submit" class="btn btn-primary" :disabled="canSubmit">
-	//                 {{　blog.is_published ? '发表' : '保存' }}
-	//             </button>
-	//         </div>
-	//     </form>
 	// </div>
 	// </template>
 	//
@@ -16811,66 +16945,59 @@
 	module.exports = {
 	    data: function data() {
 	        return {
-	            id: null,
-	            blog: {
-	                category_id: null,
-	                title: '',
-	                body: '',
-	                is_published: true,
-	                created_at: ''
-	            },
-	            categories: [],
+	            columns: ['Email'],
+	            emails: [],
+
 	            success: false,
 	            message: ''
 	        };
 	    },
-	    created: function created() {
-	        this.id = this.$route.params.id;
 
-	        this.getCategories();
+	    props: ['roles'],
+
+	    ready: function ready() {
+	        this.getAllSubscribers();
 	    },
 
 	    computed: {
-	        canSubmit: function canSubmit() {
-	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '' || this.blog.created_at === '') {
-	                return true;
-	            }
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
 
-	            return false;
+	            return names.indexOf('boss') != -1;
 	        }
 	    },
 
 	    methods: {
-	        getCategories: function getCategories() {
-	            var _this = this;
-
-	            this.$http.get('/admin/categories').then(function (response) {
-	                _this.categories = response.data;
-	            });
-	            this.$http.get('/admin/blogs/' + this.id).then(function (response) {
-	                _this.blog = response.data.blog;
-	            });
-	        },
-	        updateBlog: function updateBlog() {
+	        getAllSubscribers: function getAllSubscribers() {
 	            var self = this;
 
-	            self.$http.put('/admin/blogs/' + self.id, self.getFormData()).then(function (response) {
-	                self.success = true;
-	                self.message = response.data.message;
-
-	                setTimeout(function () {
-	                    self.$router.go({ name: 'blogs' });
-	                }, 1200);
+	            self.$http.get('/admin/subscribers').then(function (response) {
+	                self.emails = response.data.emails;
 	            });
 	        },
-	        getFormData: function getFormData() {
-	            return {
-	                category_id: this.blog.category_id,
-	                title: this.blog.title,
-	                body: this.blog.body,
-	                is_published: this.blog.is_published,
-	                created_at: this.blog.created_at
-	            };
+	        deleteSubscribers: function deleteSubscribers(email) {
+	            if (!window.confirm('确定删除吗?')) {
+	                return;
+	            }
+
+	            var self = this;
+
+	            self.$http.delete('/admin/subscribers/' + email).then(function (response) {
+	                self.showMessage(response.data.message);
+
+	                self.emails.$remove(email);
+	            });
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
 	        }
 	    }
 	};
@@ -16878,10 +17005,10 @@
 	//
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"updateBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期)</label>\n            <input type=\"date\" class=\"form-control\" v-model=\"blog.created_at | date\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
+	module.exports = "\n<div class=\"row\">\n    <div class=\"col-sm-6\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                视频列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"email in emails\">\n                            <td>{{ email }}</td>\n                            <td>\n                                <a @click.stop=\"deleteSubscribers(email)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

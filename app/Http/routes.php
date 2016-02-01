@@ -2,6 +2,10 @@
 
 Carbon\Carbon::setLocale('zh');
 
+Route::get('test', function() {
+    // dd(News::subscribe('qq215672398@126.com'));
+});
+
 Route::group(['middleware' => 'web'], function () {
 
     Route::controller('auth', 'Auth\AuthController', [
@@ -28,6 +32,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/blogs/{id}', ['as' => 'blogs.show', 'uses' => 'BlogController@show']);
 
     Route::get('/newsletter', ['as' => 'newsletter', 'uses' => 'NewsletterController@index']);
+
+    Route::post('/newsletter/subscribe', ['as' => 'subscribe', 'uses' => 'NewsletterController@subscribe']);
+    Route::post('/newsletter/unsubscribe', ['as' => 'unsubscribe', 'uses' => 'NewsletterController@unsubscribe']);
 });
 
 
@@ -76,5 +83,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('/blogs/{id}', 'BlogController@destory');
         Route::put('/blogs/togglePublished/{id}', 'BlogController@togglePublished');
         Route::put('/blogs/toggleTop/{id}', 'BlogController@toggleTop');
+
+        Route::get('/subscribers', 'SubscriberController@index');
+        Route::delete('/subscribers/{email}', 'SubscriberController@destory');
     });
 });

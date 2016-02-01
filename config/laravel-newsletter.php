@@ -30,14 +30,14 @@ return [
                  * how to get this value:
                  * http://kb.mailchimp.com/lists/managing-subscribers/find-your-list-id
                  */
-                'id' => '',
+                'id' => 'd619de6683',
 
                 /*
                  * These values will be used when creating a new campaign.
                  */
                 'createCampaign' => [
-                    'fromEmail' => '',
-                    'fromName' => '',
+                    'fromEmail' => 'learnervideo@gmail.com',
+                    'fromName' => 'Learner.video',
                     'toName' => '',
                 ],
 
@@ -47,7 +47,7 @@ return [
                 'subscribe' => [
                     'emailType' => 'html',
                     'requireDoubleOptin' => false,
-                    'updateExistingUser' => false,
+                    'updateExistingUser' => true,
                 ],
 
                 /*

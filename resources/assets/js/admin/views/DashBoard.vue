@@ -13,7 +13,7 @@
         <div class="sm-st clearfix">
             <span class="sm-st-icon st-violet"><i class="fa fa-newspaper-o"></i></span>
             <div class="sm-st-info">
-                <span></span>
+                <span>{{ subscriber_count }}</span>
                 订阅
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="sm-st clearfix">
             <span class="sm-st-icon st-green"><i class="fa fa-film"></i></span>
             <div class="sm-st-info">
-                <span></span>
+                <span>{{ series_count }}</span>
                 系列
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="sm-st clearfix">
             <span class="sm-st-icon st-blue"><i class="fa fa-youtube-play"></i></span>
             <div class="sm-st-info">
-                <span></span>
+                <span>{{ video_count }}</span>
                 视频
             </div>
         </div>
@@ -75,10 +75,15 @@ module.exports = {
     data() {
         return {
             user_count: 0,
+            video_count: 0,
+            subscriber_count: 0,
+            series_count: 0,
             all_roles: [],
             all_perms: []
         }
     },
+
+    props: ['roles'],
 
     created() {
         this.getInformation();
@@ -91,6 +96,9 @@ module.exports = {
                     let data = response.data;
 
                     this.user_count = data.info.user_count;
+                    this.video_count = data.info.video_count;
+                    this.subscriber_count = data.info.subscriber_count;
+                    this.series_count = data.info.series_count;
                     this.all_roles = data.info.all_roles;
                     this.all_perms = data.info.all_perms;
                 });

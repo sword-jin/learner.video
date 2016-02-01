@@ -16,6 +16,13 @@ class SeriesController extends BaseController
     protected $series;
 
     /**
+     * Video repository
+     *
+     * @var Learner\Repositories\VideoRepositoryInterface
+     */
+    protected $videos;
+
+    /**
      * Instance series repository.
      *
      * @param \Learner\Repositories\SeriesRepositoryInterface $series

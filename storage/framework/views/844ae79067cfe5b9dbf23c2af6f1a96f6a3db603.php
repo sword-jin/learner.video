@@ -34,7 +34,9 @@
                 <div class="col-sm-6">
                     <div class="newsletter__form">
                         <p>从现在开始!</p>
-                        <form action="#">
+                        <form action="<?php echo e(route('subscribe')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+
                             <!-- Name field -->
                             <div class="form-group">
                                 <input type="email" class="form-control newsletter__form__address" name="email" placeholder="name@domain.com">
@@ -59,81 +61,13 @@
                 <p class="technique__bar__decription">这里没有太多基础，有的是实用的技巧，最新的技术，有趣的项目</p>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-lg-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                    <div class="card">
-                        <span class="card__update label label-danger">update!</span>
-                        <span class="card__video-count">10 Videos</span>
-                        <div class="card__img">
-                            <a href="#">
-                                <img
-                                        class="img-responsive"
-                                        src="http://ww1.sinaimg.cn/mw690/baa3278fgw1f0al4c1df8j20iw0c8jrp.jpg" alt="">
-                                <div class="card__overlay">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
+                <?php foreach($series as $row): ?>
+                    <?php if(count($row->videos)): ?>
+                        <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                            <?php echo $__env->make('partials.seriesCard', ['series' => $row], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         </div>
-                        <div class="card__details">
-                            <ul class="card__category">
-                                <li class="label label--php">php</li>
-                                <li class="label label--javascript">javascript</li>
-                            </ul>
-                            <h3 class="card__title">
-                                <a href="#" class="card__title--a">JavaScript处理数据</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-lg-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                    <div class="card">
-                        <span class="card__update label label-danger">update!</span>
-                        <span class="card__video-count">10 Videos</span>
-                        <div class="card__img">
-                            <a href="#">
-                                <img
-                                        class="img-responsive"
-                                        src="http://ww1.sinaimg.cn/mw690/baa3278fgw1f0al4c1df8j20iw0c8jrp.jpg" alt="">
-                                <div class="card__overlay">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card__details">
-                            <ul class="card__category">
-                                <li class="label label--php">php</li>
-                                <li class="label label--javascript">javascript</li>
-                            </ul>
-                            <h3 class="card__title">
-                                <a href="#" class="card__title--a">JavaScript处理数据</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-lg-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                    <div class="card">
-                        <span class="card__update label label-danger">update!</span>
-                        <span class="card__video-count">10 Videos</span>
-                        <div class="card__img">
-                            <a href="#">
-                                <img
-                                        class="img-responsive"
-                                        src="http://ww1.sinaimg.cn/mw690/baa3278fgw1f0al4c1df8j20iw0c8jrp.jpg" alt="">
-                                <div class="card__overlay">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card__details">
-                            <ul class="card__category">
-                                <li class="label label--php">php</li>
-                                <li class="label label--javascript">javascript</li>
-                            </ul>
-                            <h3 class="card__title">
-                                <a href="#" class="card__title--a">JavaScript处理数据</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
 
             <div>

@@ -160,6 +160,7 @@ return [
         Learner\Providers\ImageManagerServiceProvider::class,
         Learner\Providers\AuthBladeServiceProvider::class,
         Learner\Providers\VideoApiServiceProvider::class,
+        Learner\Providers\NewsServiceProvider::class,
 
         /************************************
         * Packages
@@ -222,9 +223,10 @@ return [
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'AvatarManager' => Learner\Facades\AvatarManager::class,
-        'ImageManager' => Learner\Facades\ImageManager::class,
-        'VideoApi' => Learner\Facades\VideoApiFacade::class,
+        'ImageManager'  => Learner\Facades\ImageManager::class,
+        'VideoApi'   => Learner\Facades\VideoApiFacade::class,
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
+        'News'       => Learner\Facades\NewsFacade::class,
 
     ],
 

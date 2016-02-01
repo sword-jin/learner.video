@@ -40,6 +40,12 @@ class InfoController extends BaseController
         $this->data['all_roles'] = Role::with(['users', 'perms'])->get();
         // get all permissions ... now not work for me.
         // $this->data['all_perms'] = Permission::all();
+        // get video count.
+        $this->data['video_count'] = DB::table('videos')->count();
+        // get series count.
+        $this->data['series_count'] = DB::table('series')->count();
+        // get subscriber count.
+        $this->data['subscriber_count'] = DB::table('subscribers')->count();
 
         return $this->responseJson(['info' => $this->data]);
     }

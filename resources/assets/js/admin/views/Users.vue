@@ -1,18 +1,13 @@
 <template>
 <div class="row" style="margin-bottom:5px;">
     <div class="form-group">
-        <form class="form-horizontal" role="form">
-            <label class="col-xs-2 control-label">
-                选择查看模式
-            </label>
-            <div class="col-xs-10">
-                <select v-model="model" class="form-control">
-                    <option selected value="active">活跃会员</option>
-                    <option value="notActive">冻结会员</option>
-                    <option value="trashed" v-if="isBoss">回收站</option>
-                </select>
+        <div class="col-xs-12">
+            <div class="btn-group">
+                <button class="btn btn-default" @click="model = 'active'">活跃会员</button>
+                <button class="btn btn-info" @click="model = 'notActive'">冻结会员</button>
+                <button class="btn btn-danger" @click="model = 'trashed'">回收站</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 <div class="row">
