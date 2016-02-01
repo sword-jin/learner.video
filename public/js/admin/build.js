@@ -78,24 +78,28 @@
 
 	var _Blogs2 = _interopRequireDefault(_Blogs);
 
-	var _CreateBlog = __webpack_require__(62);
+	var _CreateBlog = __webpack_require__(33);
 
 	var _CreateBlog2 = _interopRequireDefault(_CreateBlog);
 
-	var _Subscribers = __webpack_require__(33);
+	var _EditBlog = __webpack_require__(65);
+
+	var _EditBlog2 = _interopRequireDefault(_EditBlog);
+
+	var _Subscribers = __webpack_require__(36);
 
 	var _Subscribers2 = _interopRequireDefault(_Subscribers);
 
-	var _Publish = __webpack_require__(34);
+	var _Publish = __webpack_require__(37);
 
 	var _Publish2 = _interopRequireDefault(_Publish);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(35);
-	var VueRouter = __webpack_require__(37);
+	var Vue = __webpack_require__(38);
+	var VueRouter = __webpack_require__(40);
 
-	Vue.use(__webpack_require__(38));
+	Vue.use(__webpack_require__(41));
 	Vue.use(VueRouter);
 
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
@@ -172,6 +176,10 @@
 	        name: 'blog.create',
 	        component: _CreateBlog2.default
 	    },
+	    '/blogs/edit/:id': {
+	        name: 'blog.edit',
+	        component: _EditBlog2.default
+	    },
 	    '/subscribers': {
 	        name: 'subscribers',
 	        component: _Subscribers2.default
@@ -236,29 +244,13 @@
 	//                         <span>{{ username }} <i class="caret"></i></span>
 	//                     </a>
 	//                     <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-	//                         <li class="dropdown-header text-center">Account</li>
-	//                         <li>
-	//                             <a href="#">
-	//                             <i class="fa fa-clock-o fa-fw pull-right"></i>
-	//                                 <span class="badge badge-success pull-right">10</span> Updates</a>
-	//                             <a href="#">
-	//                             <i class="fa fa-envelope-o fa-fw pull-right"></i>
-	//                                 <span class="badge badge-danger pull-right">5</span> Messages</a>
-	//                             <a href="#"><i class="fa fa-magnet fa-fw pull-right"></i>
-	//                                 <span class="badge badge-info pull-right">3</span> Subscriptions</a>
-	//                             <a href="#"><i class="fa fa-question fa-fw pull-right"></i> <span class=
-	//                                 "badge pull-right">11</span> FAQ</a>
-	//                         </li>
+	//                         <li class="dropdown-header text-center">账户</li>
 	//
 	//                         <li class="divider"></li>
 	//
 	//                         <li>
-	//                             <a href="#">
-	//                                 <i class="fa fa-user fa-fw pull-right"></i>
-	//                                 Profile
-	//                             </a>
 	//                             <a href="/">
-	//                                 <i class="fa fa-cog fa-fw pull-right"></i>
+	//                                 <i class="fa fa-cog fa-home pull-right"></i>
 	//                                 返回前台
 	//                             </a>
 	//                         </li>
@@ -289,7 +281,7 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<header class=\"header\">\n    <a v-link=\"{name: 'dashboard'}\" class=\"logo\">\n        <!-- Add the class icon to your logo image or logo icon to add the margining -->\n        Learner\n    </a>\n    <!-- Header Navbar: style can be found in header.less -->\n    <nav class=\"navbar navbar-static-top\" role=\"navigation\">\n        <!-- Sidebar toggle button-->\n        <a href=\"#\" class=\"navbar-btn sidebar-toggle\" data-toggle=\"offcanvas\" role=\"button\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </a>\n        <div class=\"navbar-right\">\n            <ul class=\"nav navbar-nav\">\n                <!-- User Account: style can be found in dropdown.less -->\n                <li class=\"dropdown user user-menu\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n                        <i class=\"fa fa-user\"></i>\n                        <span>{{ username }} <i class=\"caret\"></i></span>\n                    </a>\n                    <ul class=\"dropdown-menu dropdown-custom dropdown-menu-right\">\n                        <li class=\"dropdown-header text-center\">Account</li>\n                        <li>\n                            <a href=\"#\">\n                            <i class=\"fa fa-clock-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-success pull-right\">10</span> Updates</a>\n                            <a href=\"#\">\n                            <i class=\"fa fa-envelope-o fa-fw pull-right\"></i>\n                                <span class=\"badge badge-danger pull-right\">5</span> Messages</a>\n                            <a href=\"#\"><i class=\"fa fa-magnet fa-fw pull-right\"></i>\n                                <span class=\"badge badge-info pull-right\">3</span> Subscriptions</a>\n                            <a href=\"#\"><i class=\"fa fa-question fa-fw pull-right\"></i> <span class=\n                                \"badge pull-right\">11</span> FAQ</a>\n                        </li>\n\n                        <li class=\"divider\"></li>\n\n                        <li>\n                            <a href=\"#\">\n                                <i class=\"fa fa-user fa-fw pull-right\"></i>\n                                Profile\n                            </a>\n                            <a href=\"/\">\n                                <i class=\"fa fa-cog fa-fw pull-right\"></i>\n                                返回前台\n                            </a>\n                        </li>\n                        <li class=\"divider\"></li>\n                        <li>\n                            <a href=\"/auth/logout\"><i class=\"fa fa-ban fa-fw pull-right\"></i> 退出</a>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header>\n";
+	module.exports = "\n<header class=\"header\">\n    <a v-link=\"{name: 'dashboard'}\" class=\"logo\">\n        <!-- Add the class icon to your logo image or logo icon to add the margining -->\n        Learner\n    </a>\n    <!-- Header Navbar: style can be found in header.less -->\n    <nav class=\"navbar navbar-static-top\" role=\"navigation\">\n        <!-- Sidebar toggle button-->\n        <a href=\"#\" class=\"navbar-btn sidebar-toggle\" data-toggle=\"offcanvas\" role=\"button\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n        </a>\n        <div class=\"navbar-right\">\n            <ul class=\"nav navbar-nav\">\n                <!-- User Account: style can be found in dropdown.less -->\n                <li class=\"dropdown user user-menu\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n                        <i class=\"fa fa-user\"></i>\n                        <span>{{ username }} <i class=\"caret\"></i></span>\n                    </a>\n                    <ul class=\"dropdown-menu dropdown-custom dropdown-menu-right\">\n                        <li class=\"dropdown-header text-center\">账户</li>\n\n                        <li class=\"divider\"></li>\n\n                        <li>\n                            <a href=\"/\">\n                                <i class=\"fa fa-cog fa-home pull-right\"></i>\n                                返回前台\n                            </a>\n                        </li>\n                        <li class=\"divider\"></li>\n                        <li>\n                            <a href=\"/auth/logout\"><i class=\"fa fa-ban fa-fw pull-right\"></i> 退出</a>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header>\n";
 
 /***/ },
 /* 4 */
@@ -591,7 +583,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.label-boss {\n    background-color: #7dd999;\n}\n.label-user {\n    background-color: #dcbeaa;\n}\n.label-admin {\n    background-color: #65643a;\n}\n.pagination__text {\n    text-align: right;\n}\n.modal>.modal-dialog {\n    padding-top: 50px;\n}\n.toggle_active input {\n    position: absolute;\n    left: -9999px;\n}\n.toggle_active label {\n    display: block;\n    position: relative;\n    padding: 10px;\n    border-radius: 50%;\n    width: 20px;\n    margin: 0;\n    background-color: #ccc;\n    box-shadow: 0 0 20px rgba(0,0,0,.2);\n    white-space: nowrap;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    -webkit-transition: background .2s, box-shadow .2s;\n    transition: background .2s, box-shadow .2s;\n}\n.toggle_active label::before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 3px solid #fff;\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n    transiton: background-color .2s;\n}\n.toggle_active label:hover,\n.toggle_active input:focus + .toggle_active label {\n    box-shadow: 0 0 10px rgba(0,0,0,.6);\n}\n.toggle_active input:checked + .toggle_active label {\n    background-color: #FFF;\n}\n.toggle_active input:checked + label::before {\n    background-color: #7dd999;\n}\n", ""]);
+	exports.push([module.id, "\n.label-boss {\n    background-color: #7dd999;\n}\n.label-user {\n    background-color: #dcbeaa;\n}\n.label-admin {\n    background-color: #65643a;\n}\n.pagination__text {\n    text-align: right;\n}\n.modal>.modal-dialog {\n    padding-top: 50px;\n}\n.toggle_active input {\n    position: absolute;\n    left: -9999px;\n}\n.toggle_active label {\n    display: block;\n    position: relative;\n    padding: 10px;\n    border-radius: 50%;\n    width: 20px;\n    margin: 0;\n    background-color: #ccc;\n    box-shadow: 0 0 8px rgba(0,0,0,.2);\n    white-space: nowrap;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    -webkit-transition: background .2s, box-shadow .2s;\n    transition: background .2s, box-shadow .2s;\n}\n.toggle_active label::before {\n    content: \"\";\n    display: block;\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 3px solid #fff;\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n    transiton: background-color .2s;\n}\n.toggle_active label:hover,\n.toggle_active input:focus + .toggle_active label {\n    box-shadow: 0 0 8px rgba(0,0,0,.6);\n}\n.toggle_active input:checked + .toggle_active label {\n    background-color: #FFF;\n}\n.toggle_active input:checked + label::before {\n    background-color: #7dd999;\n}\n", ""]);
 
 	// exports
 
@@ -1136,21 +1128,21 @@
 	            }
 	        },
 	        removeUser: function removeUser(user) {
-	            this.$http.delete('/admin/users/remove', { id: user.id }).then(function (response) {
+	            this.$http.delete('/admin/users/remove/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
 	                this.displayMessage(response.data.message);
 	            });
 	        },
 	        deleteUser: function deleteUser(user) {
-	            this.$http.delete('/admin/users/delete', { id: user.id }).then(function (response) {
+	            this.$http.delete('/admin/users/delete/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
 	                this.displayMessage(response.data.message);
 	            });
 	        },
 	        restoreUser: function restoreUser(user) {
-	            this.$http.put('/admin/users/restore', { id: user.id }).then(function (response) {
+	            this.$http.put('/admin/users/restore/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
 	                this.displayMessage(response.data.message);
@@ -1163,7 +1155,7 @@
 
 	            this.toggling = true;
 
-	            this.$http.put('/admin/users/toggleActive', { id: user.id }).then(function (response) {
+	            this.$http.put('/admin/users/toggleActive/' + user.id).then(function (response) {
 	                this.displayMessage(response.data.message);
 	                this.toggling = false;
 	                // this.removeUserFromUserList(user);
@@ -1212,7 +1204,7 @@
 	//     width: 20px;
 	//     margin: 0;
 	//     background-color: #ccc;
-	//     box-shadow: 0 0 20px rgba(0,0,0,.2);
+	//     box-shadow: 0 0 8px rgba(0,0,0,.2);
 	//     white-space: nowrap;
 	//     cursor: pointer;
 	//     user-select: none;
@@ -1232,7 +1224,7 @@
 	// }
 	// .toggle_active label:hover,
 	// .toggle_active input:focus + .toggle_active label {
-	//     box-shadow: 0 0 10px rgba(0,0,0,.6);
+	//     box-shadow: 0 0 8px rgba(0,0,0,.6);
 	// }
 	// .toggle_active input:checked + .toggle_active label {
 	//     background-color: #FFF;
@@ -2364,6 +2356,10 @@
 	        deleteVideo: function deleteVideo(id) {
 	            var _this2 = this;
 
+	            if (!window.confirm("确定要删除吗?")) {
+	                return;
+	            }
+
 	            var self = this;
 
 	            self.$http.delete('/admin/videos/' + id).then(function (response) {
@@ -2475,14 +2471,78 @@
 /* 31 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	// <template>
 	// <div class="row" style="margin-bottom:15px;">
 	//     <div class="col-xs-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//         <div class="alert alert-danger" v-show="hasError">
+	//             {{ error }}
+	//         </div>
 	//         <a class="btn btn-success btn-lg" v-link="{name: 'blog.create'}">
 	//             <span class="fa fa-edit"></span> 发表博客
 	//         </a>
+	//     </div>
+	// </div>
+	//
+	// <div class="row">
+	//     <div class="col-sm-12">
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 视频列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in columns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody>
+	//                         <tr v-for="blog in blogs">
+	//                             <td>{{ blog.id }}</td>
+	//                             <td>
+	//                                 <span class="label label-primary">{{ blog.category.name }}</span>
+	//                             </td>
+	//                             <td>{{ blog.title }}</td>
+	//                             <td class="toggle_active">
+	//                                 <input type="checkbox"
+	//                                     id="is_published{{$index}}"
+	//                                     @click="toggleBlogPublished(blog.id)"
+	//                                     :disabled="published_toggling"
+	//                                     checked="{{ blog.is_published }}"/>
+	//                                 <label for="is_published{{$index}}"></label>
+	//                             </td>
+	//                             <td class="toggle_active">
+	//                                 <input type="checkbox"
+	//                                     id="is_top{{$index}}"
+	//                                     @click="toggleBlogTop(blog.id)"
+	//                                     :disabled="top_toggling"
+	//                                     checked="{{ blog.is_top }}"/>
+	//                                 <label for="is_top{{$index}}"></label>
+	//                             </td>
+	//                             <td>{{ blog.created_at | date }}</td>
+	//                             <td>
+	//                                 <a @click.stop="editBlog(blog.id)">
+	//                                     <i class="fa fa-edit"></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click.stop="deleteBlog(blog.id)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//             </div>
+	//         </div>
 	//     </div>
 	// </div>
 	//
@@ -2491,7 +2551,113 @@
 	// <script>
 	module.exports = {
 	    data: function data() {
-	        return {};
+	        return {
+	            columns: ['ID', '分类', '标题', '发布', '顶置', '创建时间'],
+	            blogs: [],
+
+	            published_toggling: false,
+	            top_toggling: false,
+
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            error: ''
+	        };
+	    },
+
+	    props: ['roles'],
+
+	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        }
+	    },
+
+	    ready: function ready() {
+	        var self = this;
+
+	        self.$http.get('/admin/blogs').then(function (response) {
+	            self.blogs = response.data.blogs;
+	        });
+	    },
+
+	    methods: {
+	        editBlog: function editBlog(id) {
+	            this.$router.go({ 'name': 'blog.edit', params: { id: id } });
+	        },
+	        deleteBlog: function deleteBlog(id) {
+	            var _this = this;
+
+	            if (!window.confirm('确定要删除嘛')) {
+	                return;
+	            }
+
+	            var self = this;
+
+	            this.$http.delete('admin/blogs/' + id).then(function (response) {
+	                if (response.status == 200) {
+	                    _this.showMessage(response.data.message);
+
+	                    _this.removeBlog(id);
+	                } else if (response.status == 202) {
+	                    _this.showError(response.data.error);
+	                }
+	            });
+	        },
+	        toggleBlogPublished: function toggleBlogPublished(id) {
+	            var self = this;
+	            self.published_toggling = true;
+
+	            self.$http.put('/admin/blogs/togglePublished/' + id).then(function (response) {
+	                self.showMessage(response.data.message);
+
+	                self.published_toggling = false;
+	            });
+	        },
+	        toggleBlogTop: function toggleBlogTop(id) {
+	            var self = this;
+	            self.top_toggling = true;
+
+	            self.$http.put('/admin/blogs/toggleTop/' + id).then(function (response) {
+	                self.showMessage(response.data.message);
+
+	                self.top_toggling = false;
+	            });
+	        },
+	        removeBlog: function removeBlog(id) {
+	            var index = this.findIndexById(id);
+
+	            this.blogs.splice(index, 1);
+	        },
+	        findIndexById: function findIndexById(id) {
+	            var ids = this.blogs.map(function (v) {
+	                return v.id;
+	            });
+
+	            return ids.indexOf(id);
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        },
+	        showError: function showError(error) {
+	            this.error = true;
+
+	            this.error = error;
+
+	            setTimeout(function () {
+	                this.error = false;
+	            }.bind(this), 2800);
+	        }
 	    }
 	};
 	// </script>
@@ -2501,22 +2667,161 @@
 /* 32 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <a class=\"btn btn-success btn-lg\" v-link=\"{name: 'blog.create'}\">\n            <span class=\"fa fa-edit\"></span> 发表博客\n        </a>\n    </div>\n</div>\n\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"alert alert-danger\" v-show=\"hasError\">\n            {{ error }}\n        </div>\n        <a class=\"btn btn-success btn-lg\" v-link=\"{name: 'blog.create'}\">\n            <span class=\"fa fa-edit\"></span> 发表博客\n        </a>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                视频列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"blog in blogs\">\n                            <td>{{ blog.id }}</td>\n                            <td>\n                                <span class=\"label label-primary\">{{ blog.category.name }}</span>\n                            </td>\n                            <td>{{ blog.title }}</td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_published{{$index}}\"\n                                    @click=\"toggleBlogPublished(blog.id)\"\n                                    :disabled=\"published_toggling\"\n                                    checked=\"{{ blog.is_published }}\"/>\n                                <label for=\"is_published{{$index}}\"></label>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_top{{$index}}\"\n                                    @click=\"toggleBlogTop(blog.id)\"\n                                    :disabled=\"top_toggling\"\n                                    checked=\"{{ blog.is_top }}\"/>\n                                <label for=\"is_top{{$index}}\"></label>\n                            </td>\n                            <td>{{ blog.created_at | date }}</td>\n                            <td>\n                                <a @click.stop=\"editBlog(blog.id)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteBlog(blog.id)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n\n";
 
 /***/ },
 /* 33 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(34)
+	__vue_template__ = __webpack_require__(35)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/CreateBlog.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 34 */
 /***/ function(module, exports) {
 
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom:30px;">
+	//     <div class="col-xs-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//         <div class="btn-group">
+	//             <a class="btn btn-primary btn-lg" v-link="{name: 'blogs'}">
+	//                 <span class="fa fa-book"></span> 返回博客列表
+	//             </a>
+	//             <a href="/blogs" class="btn btn-info btn-lg">
+	//                 <span class="fa fa-home"></span> 返回前台博客
+	//             </a>
+	//         </div>
+	//     </div>
+	// </div>
+	//
+	// <div>
+	//     <form @submit.prevent="saveBlog()">
+	//         <div class="form-group">
+	//             <label>标题</label>
+	//             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
+	//         </div>
+	//         <div class="form-group">
+	//             <label>正文</label>
+	//             <textarea v-model="blog.body" class="form-control" rows="18" placeholder="Markdown!!!建议在其他环境下书写"></textarea>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>选择分类</label>
+	//             <select v-model="blog.category_id" class="form-control">
+	//                 <option v-for="c in categories" v-bind:value="c.id">{{ c.name }}</option>
+	//             </select>
+	//         </div>
+	//         <div class="form-group">
+	//             <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>
+	//             <input type="date" class="form-control" v-model="blog.created_at">
+	//         </div>
+	//         <div class="form-group">
+	//             <div class="checkbox">
+	//                 <label>
+	//                     <input type="checkbox" v-model="blog.is_published"> 是否马上发表
+	//                 </label>
+	//             </div>
+	//             <button type="submit" class="btn btn-primary" :disabled="canSubmit">
+	//                 {{　blog.is_published ? '发表' : '保存' }}
+	//             </button>
+	//         </div>
+	//     </form>
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            blog: {
+	                category_id: null,
+	                title: '',
+	                body: '',
+	                is_published: true,
+	                created_at: ''
+	            },
+	            categories: [],
+	            success: false,
+	            message: ''
+	        };
+	    },
+	    created: function created() {
+	        this.getCategories();
+	    },
+
+	    computed: {
+	        canSubmit: function canSubmit() {
+	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '') {
+	                return true;
+	            }
+
+	            return false;
+	        }
+	    },
+
+	    methods: {
+	        getCategories: function getCategories() {
+	            var _this = this;
+
+	            this.$http.get('/admin/categories').then(function (response) {
+	                _this.categories = response.data;
+	            });
+	        },
+	        saveBlog: function saveBlog() {
+	            var self = this;
+
+	            self.$http.post('/admin/blogs', self.getFormData()).then(function (response) {
+	                self.success = true;
+	                self.message = response.data.message;
+
+	                setTimeout(function () {
+	                    self.$router.go({ name: 'blogs' });
+	                }, 1200);
+	            });
+	        },
+	        getFormData: function getFormData() {
+	            return {
+	                category_id: this.blog.category_id,
+	                title: this.blog.title,
+	                body: this.blog.body,
+	                is_published: this.blog.is_published,
+	                created_at: this.blog.created_at
+	            };
+	        }
+	    }
+	};
+	// </script>
+	//
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"saveBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>\n            <input type=\"date\" class=\"form-control\" v-model=\"blog.created_at\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
 	var __vue_script__, __vue_template__
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -2524,7 +2829,17 @@
 
 
 /***/ },
-/* 35 */
+/* 37 */
+/***/ function(module, exports) {
+
+	var __vue_script__, __vue_template__
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+
+
+/***/ },
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -12051,10 +12366,10 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -12151,7 +12466,7 @@
 
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -14790,7 +15105,7 @@
 	}));
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14799,16 +15114,16 @@
 
 	function install(Vue) {
 
-	    var _ = __webpack_require__(39);
+	    var _ = __webpack_require__(42);
 
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 
-	    Vue.url = __webpack_require__(40);
-	    Vue.http = __webpack_require__(46);
-	    Vue.resource = __webpack_require__(61);
-	    Vue.Promise = __webpack_require__(48);
+	    Vue.url = __webpack_require__(43);
+	    Vue.http = __webpack_require__(49);
+	    Vue.resource = __webpack_require__(64);
+	    Vue.Promise = __webpack_require__(51);
 
 	    Object.defineProperties(Vue.prototype, {
 
@@ -14849,7 +15164,7 @@
 
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -14977,14 +15292,14 @@
 
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 
@@ -15020,10 +15335,10 @@
 	 */
 
 	Url.transforms = [
-	    __webpack_require__(41),
-	    __webpack_require__(43),
 	    __webpack_require__(44),
-	    __webpack_require__(45)
+	    __webpack_require__(46),
+	    __webpack_require__(47),
+	    __webpack_require__(48)
 	];
 
 	/**
@@ -15113,14 +15428,14 @@
 
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	var UrlTemplate = __webpack_require__(42);
+	var UrlTemplate = __webpack_require__(45);
 
 	module.exports = function (options) {
 
@@ -15135,7 +15450,7 @@
 
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/**
@@ -15291,14 +15606,14 @@
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = function (options, next) {
 
@@ -15343,14 +15658,14 @@
 
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = function (options, next) {
 
@@ -15373,14 +15688,14 @@
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = function (options, next) {
 
@@ -15395,17 +15710,17 @@
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var _ = __webpack_require__(39);
-	var Client = __webpack_require__(47);
-	var Promise = __webpack_require__(48);
-	var interceptor = __webpack_require__(51);
+	var _ = __webpack_require__(42);
+	var Client = __webpack_require__(50);
+	var Promise = __webpack_require__(51);
+	var interceptor = __webpack_require__(54);
 	var jsonType = {'Content-Type': 'application/json'};
 
 	function Http(url, options) {
@@ -15458,13 +15773,13 @@
 	};
 
 	Http.interceptors = [
-	    __webpack_require__(52),
-	    __webpack_require__(53),
-	    __webpack_require__(54),
+	    __webpack_require__(55),
 	    __webpack_require__(56),
 	    __webpack_require__(57),
-	    __webpack_require__(58),
-	    __webpack_require__(59)
+	    __webpack_require__(59),
+	    __webpack_require__(60),
+	    __webpack_require__(61),
+	    __webpack_require__(62)
 	];
 
 	Http.headers = {
@@ -15499,16 +15814,16 @@
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 
-	var _ = __webpack_require__(39);
-	var Promise = __webpack_require__(48);
-	var xhrClient = __webpack_require__(50);
+	var _ = __webpack_require__(42);
+	var Promise = __webpack_require__(51);
+	var xhrClient = __webpack_require__(53);
 
 	module.exports = function (request) {
 
@@ -15570,15 +15885,15 @@
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 
-	var _ = __webpack_require__(39);
-	var PromiseObj = window.Promise || __webpack_require__(49);
+	var _ = __webpack_require__(42);
+	var PromiseObj = window.Promise || __webpack_require__(52);
 
 	function Promise(executor, context) {
 
@@ -15685,14 +16000,14 @@
 
 
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -15870,15 +16185,15 @@
 
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 
-	var _ = __webpack_require__(39);
-	var Promise = __webpack_require__(48);
+	var _ = __webpack_require__(42);
+	var Promise = __webpack_require__(51);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -15926,15 +16241,15 @@
 
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 
-	var _ = __webpack_require__(39);
-	var Promise = __webpack_require__(48);
+	var _ = __webpack_require__(42);
+	var Promise = __webpack_require__(51);
 
 	module.exports = function (handler, vm) {
 
@@ -15977,14 +16292,14 @@
 
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = {
 
@@ -16001,7 +16316,7 @@
 
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports) {
 
 	/**
@@ -16037,14 +16352,14 @@
 
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	var jsonpClient = __webpack_require__(55);
+	var jsonpClient = __webpack_require__(58);
 
 	module.exports = {
 
@@ -16061,15 +16376,15 @@
 
 
 /***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 
-	var _ = __webpack_require__(39);
-	var Promise = __webpack_require__(48);
+	var _ = __webpack_require__(42);
+	var Promise = __webpack_require__(51);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16115,7 +16430,7 @@
 
 
 /***/ },
-/* 56 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -16138,14 +16453,14 @@
 
 
 /***/ },
-/* 57 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = {
 
@@ -16180,14 +16495,14 @@
 
 
 /***/ },
-/* 58 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	module.exports = {
 
@@ -16212,15 +16527,15 @@
 
 
 /***/ },
-/* 59 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var _ = __webpack_require__(39);
-	var xdrClient = __webpack_require__(60);
+	var _ = __webpack_require__(42);
+	var xdrClient = __webpack_require__(63);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 
@@ -16255,15 +16570,15 @@
 
 
 /***/ },
-/* 60 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 
-	var _ = __webpack_require__(39);
-	var Promise = __webpack_require__(48);
+	var _ = __webpack_require__(42);
+	var Promise = __webpack_require__(51);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16298,14 +16613,14 @@
 
 
 /***/ },
-/* 61 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	var _ = __webpack_require__(39);
+	var _ = __webpack_require__(42);
 
 	function Resource(url, params, actions, options) {
 
@@ -16414,12 +16729,12 @@
 
 
 /***/ },
-/* 62 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(64)
-	__vue_template__ = __webpack_require__(63)
+	__vue_script__ = __webpack_require__(66)
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16427,7 +16742,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/CreateBlog.vue"
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/EditBlog.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16436,13 +16751,7 @@
 	})()}
 
 /***/ },
-/* 63 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"saveBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>\n            <input type=\"date\" class=\"form-control\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
-
-/***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16450,6 +16759,9 @@
 	// <template>
 	// <div class="row" style="margin-bottom:30px;">
 	//     <div class="col-xs-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
 	//         <div class="btn-group">
 	//             <a class="btn btn-primary btn-lg" v-link="{name: 'blogs'}">
 	//                 <span class="fa fa-book"></span> 返回博客列表
@@ -16462,7 +16774,7 @@
 	// </div>
 	//
 	// <div>
-	//     <form @submit.prevent="saveBlog()">
+	//     <form @submit.prevent="updateBlog()">
 	//         <div class="form-group">
 	//             <label>标题</label>
 	//             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
@@ -16478,8 +16790,8 @@
 	//             </select>
 	//         </div>
 	//         <div class="form-group">
-	//             <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>
-	//             <input type="date" class="form-control">
+	//             <label>创建日期(有需要请手动修改日期)</label>
+	//             <input type="date" class="form-control" v-model="blog.created_at | date">
 	//         </div>
 	//         <div class="form-group">
 	//             <div class="checkbox">
@@ -16499,6 +16811,7 @@
 	module.exports = {
 	    data: function data() {
 	        return {
+	            id: null,
 	            blog: {
 	                category_id: null,
 	                title: '',
@@ -16506,16 +16819,20 @@
 	                is_published: true,
 	                created_at: ''
 	            },
-	            categories: []
+	            categories: [],
+	            success: false,
+	            message: ''
 	        };
 	    },
 	    created: function created() {
+	        this.id = this.$route.params.id;
+
 	        this.getCategories();
 	    },
 
 	    computed: {
 	        canSubmit: function canSubmit() {
-	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '') {
+	            if (this.blog.category_id == null || this.blog.title.length == 0 || this.blog.title.length > 128 || this.blog.body === '' || this.blog.created_at === '') {
 	                return true;
 	            }
 
@@ -16530,15 +16847,25 @@
 	            this.$http.get('/admin/categories').then(function (response) {
 	                _this.categories = response.data;
 	            });
+	            this.$http.get('/admin/blogs/' + this.id).then(function (response) {
+	                _this.blog = response.data.blog;
+	            });
 	        },
-	        saveBlog: function saveBlog() {
-	            this.$http.post('/admin/blogs', this.getFormData()).then(function (response) {
-	                //
+	        updateBlog: function updateBlog() {
+	            var self = this;
+
+	            self.$http.put('/admin/blogs/' + self.id, self.getFormData()).then(function (response) {
+	                self.success = true;
+	                self.message = response.data.message;
+
+	                setTimeout(function () {
+	                    self.$router.go({ name: 'blogs' });
+	                }, 1200);
 	            });
 	        },
 	        getFormData: function getFormData() {
 	            return {
-	                series_id: this.blog.series_id,
+	                category_id: this.blog.category_id,
 	                title: this.blog.title,
 	                body: this.blog.body,
 	                is_published: this.blog.is_published,
@@ -16549,6 +16876,12 @@
 	};
 	// </script>
 	//
+
+/***/ },
+/* 67 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:30px;\">\n    <div class=\"col-xs-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"btn-group\">\n            <a class=\"btn btn-primary btn-lg\" v-link=\"{name: 'blogs'}\">\n                <span class=\"fa fa-book\"></span> 返回博客列表\n            </a>\n            <a href=\"/blogs\" class=\"btn btn-info btn-lg\">\n                <span class=\"fa fa-home\"></span> 返回前台博客\n            </a>\n        </div>\n    </div>\n</div>\n\n<div>\n    <form @submit.prevent=\"updateBlog()\">\n        <div class=\"form-group\">\n            <label>标题</label>\n            <input v-model=\"blog.title\" class=\"form-control\" placeholder=\"128个字符以内.\">\n        </div>\n        <div class=\"form-group\">\n            <label>正文</label>\n            <textarea v-model=\"blog.body\" class=\"form-control\" rows=\"18\" placeholder=\"Markdown!!!建议在其他环境下书写\"></textarea>\n        </div>\n        <div class=\"form-group\">\n            <label>选择分类</label>\n            <select v-model=\"blog.category_id\" class=\"form-control\">\n                <option v-for=\"c in categories\" v-bind:value=\"c.id\">{{ c.name }}</option>\n            </select>\n        </div>\n        <div class=\"form-group\">\n            <label>创建日期(有需要请手动修改日期)</label>\n            <input type=\"date\" class=\"form-control\" v-model=\"blog.created_at | date\">\n        </div>\n        <div class=\"form-group\">\n            <div class=\"checkbox\">\n                <label>\n                    <input type=\"checkbox\" v-model=\"blog.is_published\"> 是否马上发表\n                </label>\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" :disabled=\"canSubmit\">\n                {{　blog.is_published ? '发表' : '保存' }}\n            </button>\n        </div>\n    </form>\n</div>\n";
 
 /***/ }
 /******/ ]);

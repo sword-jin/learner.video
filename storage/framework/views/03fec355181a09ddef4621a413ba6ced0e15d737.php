@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="<?php echo e(elixir("css/app.css")); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="<?php echo e(asset('layouts.meta_title')); ?>"/>
+    <meta property="og:image" content="<?php echo e(asset('img/logo.png')); ?>" />
     <meta property="og:description" content="<?php echo $__env->yieldContent('description'); ?>" />
     <meta name="keywords" content="<?php echo $__env->yieldContent('keywords', trans('layouts.meta_keywords')); ?>">
     <meta name="author" content="<?php echo e(trans('layouts.meta_author')); ?>">
@@ -27,7 +29,9 @@
 
 <?php echo $__env->make('layouts/partial/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-<script src="<?php echo e(elixir("js/lib.js")); ?>"></script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<?php echo $__env->yieldContent('script'); ?>
 <?php echo $__env->make('flashy::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </body>
 </html>

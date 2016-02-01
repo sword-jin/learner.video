@@ -10,7 +10,8 @@
         "Zizaco/Entrust": "dev-laravel-5",
         "mercuryseries/flashy": "^1.0",
         "laravolt/avatar": "^1.2",
-        "erusev/parsedown": "^1.6"
+        "erusev/parsedown": "^1.6",
+        "spatie/laravel-newsletter": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -168,6 +168,7 @@ return [
         MercurySeries\Flashy\FlashyServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
     ],
 
     /*
@@ -223,6 +224,7 @@ return [
         'AvatarManager' => Learner\Facades\AvatarManager::class,
         'ImageManager' => Learner\Facades\ImageManager::class,
         'VideoApi' => Learner\Facades\VideoApiFacade::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
 
     ],
 

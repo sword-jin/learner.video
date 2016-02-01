@@ -110,6 +110,13 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
         return $this->findById($id)->delete();
     }
 
+    /**
+     * Paniaget the all videos.
+     *
+     * @param  integer $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function findAllPublishedPaginated($perPage = 50)
     {
         return $this->model

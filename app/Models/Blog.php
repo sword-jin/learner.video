@@ -12,7 +12,17 @@ class Blog extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'category_id', 'is_published'
+        'title', 'body', 'category_id', 'is_published', 'is_top'
+    ];
+
+    /**
+     * Format the output.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_published' => 'bool',
+        'is_top' => 'bool'
     ];
 
     /**

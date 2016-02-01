@@ -3,9 +3,9 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass('app.scss')
        .sass('lib.scss')
-       // .browserify('lib.js', 'public/js/lib.js')
-       // .browserify('admin/main.js', 'public/js/admin/admin.js')
        .copy('node_modules/font-awesome/fonts', 'public/build/fonts');
+
+    mix.copy('resources/assets/css/prism-cop.css', 'public/build/css/prism-cop.css');
 
     mix.styles([
         'lib/ionicons.min.css',
@@ -14,9 +14,6 @@ elixir(function(mix) {
 
     mix.version([
         'css/lib.css',
-        'css/app.css',
-        'js/lib.js',
-
-        'js/admin/admin.js'
+        'css/app.css'
     ]);
 });

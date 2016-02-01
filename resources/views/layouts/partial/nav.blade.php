@@ -40,6 +40,7 @@
                     @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <img class="nav-avatar hidden-xs" src="{{ asset(Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}">
                             {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 

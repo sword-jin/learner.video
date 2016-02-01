@@ -38,7 +38,7 @@ abstract class AbstractRepository
     /**
      * Find instance by gived id.
      *
-     * @param integer  $id
+     * @param integer $id
      *
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection
      */

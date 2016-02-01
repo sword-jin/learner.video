@@ -7,27 +7,22 @@
     </p>
     <ul class="social">
         <li class="social-link">
-            <a href="#" target="_blank" title="Twitter">
+            <a href="https://twitter.com/Rry_Lee" target="_blank" title="Twitter">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li class="social-link">
-            <a href="#" target="_blank" title="Vimeos">
+            <a href="https://vimeo.com/learner" target="_blank" title="Vimeos">
                 <i class="fa fa-vimeo"></i>
             </a>
         </li>
         <li class="social-link">
-            <a href="#" target="_blank" title="Github">
+            <a href="https://github.com/RryLee/learner.video" target="_blank" title="Github">
                 <i class="fa fa-github-alt"></i>
             </a>
         </li>
         <li class="social-link">
-            <a href="#" target="_blank" title="Weibo">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-        <li class="social-link">
-            <a href="#" target="_blank" title="Contact">
+            <a href="mailto:rrylee1994@gmail.com" target="_blank" title="Contact">
                 <i class="fa fa-envelope-o"></i>
             </a>
         </li>

@@ -25,7 +25,6 @@
                 <div class="col-sm-6">
                     <div class="newsletter__letter">
                         <h1>订阅Learner.</h1>
-                        <h1>丰富学习资料.</h1>
                         <ul>
                             <li>半月一期</li>
                             <li>学习视频:laravel,angular,vue..</li>

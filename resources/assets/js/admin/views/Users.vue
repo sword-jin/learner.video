@@ -230,7 +230,7 @@ module.exports = {
         },
 
         removeUser(user) {
-            this.$http.delete('/admin/users/remove', {id: user.id})
+            this.$http.delete('/admin/users/remove/' + user.id)
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
@@ -239,7 +239,7 @@ module.exports = {
         },
 
         deleteUser(user) {
-            this.$http.delete('/admin/users/delete', {id: user.id})
+            this.$http.delete('/admin/users/delete/' + user.id)
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
@@ -248,7 +248,7 @@ module.exports = {
         },
 
         restoreUser(user) {
-            this.$http.put('/admin/users/restore', {id: user.id})
+            this.$http.put('/admin/users/restore/' + user.id)
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
@@ -263,7 +263,7 @@ module.exports = {
 
             this.toggling = true;
 
-            this.$http.put('/admin/users/toggleActive', {id: user.id})
+            this.$http.put('/admin/users/toggleActive/' + user.id)
                 .then(function(response) {
                     this.displayMessage(response.data.message);
                     this.toggling = false;
@@ -315,7 +315,7 @@ module.exports = {
     width: 20px;
     margin: 0;
     background-color: #ccc;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
@@ -335,7 +335,7 @@ module.exports = {
 }
 .toggle_active label:hover,
 .toggle_active input:focus + .toggle_active label {
-    box-shadow: 0 0 10px rgba(0,0,0,.6);
+    box-shadow: 0 0 8px rgba(0,0,0,.6);
 }
 .toggle_active input:checked + .toggle_active label {
     background-color: #FFF;

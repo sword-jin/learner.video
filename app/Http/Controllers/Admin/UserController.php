@@ -12,6 +12,8 @@ use Learner\Repositories\UserRepositoryInterface;
 class UserController extends BaseController
 {
     /**
+     * User repository.
+     *
      * @var \Learner\Repositories\UserRepositoryInterface
      */
     protected $users;
@@ -56,9 +58,16 @@ class UserController extends BaseController
         return $this->users->findTrashedPaginated();
     }
 
-    public function toggleUserActive(Request $request)
+    /**
+     * Toggle user active.
+     *
+     * @param  integer $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function toggleUserActive($id)
     {
-        if ($this->users->toggleActive($request->get('id'))) {
+        if ($this->users->toggleActive($id)) {
             $message = '用户被重新激活';
         } else {
             $message = '用户冻结成功';
@@ -70,13 +79,13 @@ class UserController extends BaseController
     /**
      * Remove user to trash.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeToTrash(Request $request)
+    public function removeToTrash($id)
     {
-        $this->users->remove($request->get('id'));
+        $this->users->remove($id);
 
         Log::info(Auth::user()->username . ': ' . lang('log.removeUserSuccess', 'delete a user to trash.'));
 
@@ -86,13 +95,13 @@ class UserController extends BaseController
     /**
      * Delete user from database.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deleteUser(Request $request)
+    public function deleteUser($id)
     {
-        $this->users->delete($request->get('id'));
+        $this->users->delete($id);
 
         Log::info(Auth::user()->username . ': ' . lang('log.deleteUserSuccess', 'delete a user.'));
 
@@ -102,11 +111,13 @@ class UserController extends BaseController
     /**
      * Restore the user.
      *
+     * @param  integer $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function restoreUser(Request $request)
+    public function restoreUser($id)
     {
-        $this->users->restore($request->get('id'));
+        $this->users->restore($id);
 
         return $this->responseJson(['message' => '恢复成功']);
     }

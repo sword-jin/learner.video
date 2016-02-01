@@ -266,6 +266,10 @@ module.exports = {
         },
 
         deleteVideo(id) {
+            if (! window.confirm("确定要删除吗?")) {
+                return;
+            }
+
             var self = this;
 
             self.$http.delete('/admin/videos/' + id)

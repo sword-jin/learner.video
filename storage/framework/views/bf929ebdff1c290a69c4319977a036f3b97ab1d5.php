@@ -24,7 +24,8 @@
         </aside>
     </div>
 
-    <script src="<?php echo e(elixir('js/lib.js')); ?>"></script>
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="<?php echo e(asset('js/admin/director.js')); ?>" type="text/javascript"></script>
     <script src="//cdn.bootcss.com/select2/4.0.1/js/select2.min.js"></script>
     <script src="//cdn.bootcss.com/select2/4.0.1/js/i18n/zh-CN.js"></script>

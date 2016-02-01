@@ -2,6 +2,7 @@
 
 namespace Learner\Http\Controllers\Admin;
 
+use Log;
 use VideoApi;
 use Illuminate\Support\Facades\Input;
 use Learner\Http\Controllers\Admin\BaseController;
@@ -73,12 +74,14 @@ class VideoController extends BaseController
         return $this->responseJson(['message' => '成功修改视频', 'video' => $video]);
     }
 
-    public function restory($id)
+    public function destory($id)
     {
         if ($this->videos->delete($id)) {
+            Log::info(lang('log.deleteVideoSuccess', 'Delete a video.'));
+
             return $this->responseJson(['message' => '视频删除成功']);
         } else {
-            return $this->responseJson(['error' => '未知错误'], 202);
+            return $this->responseJson(['error' => '出现未知问题'], 202);
         }
     }
 

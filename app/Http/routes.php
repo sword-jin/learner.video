@@ -25,6 +25,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/categories/{name}', ['as' => 'category', 'uses' => 'CategoryController@show']);
 
     Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
+    Route::get('/blogs/{id}', ['as' => 'blogs.show', 'uses' => 'BlogController@show']);
 
     Route::get('/newsletter', ['as' => 'newsletter', 'uses' => 'NewsletterController@index']);
 });
@@ -48,10 +49,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/users', 'UserController@activeUsers');
         Route::get('/users/notActive', 'UserController@notActiveUsers');
         Route::get('/users/trashed', 'UserController@trashedUsers');
-        Route::put('/users/restore', 'UserController@restoreUser');
-        Route::put('/users/toggleActive', 'UserController@toggleUserActive');
-        Route::DELETE('/users/remove', 'UserController@removeToTrash');
-        Route::DELETE('/users/delete', 'UserController@deleteUser');
+        Route::put('/users/restore/{id}', 'UserController@restoreUser');
+        Route::put('/users/toggleActive/{id}', 'UserController@toggleUserActive');
+        Route::DELETE('/users/remove/{id}', 'UserController@removeToTrash');
+        Route::DELETE('/users/delete/{id}', 'UserController@deleteUser');
 
         Route::get('/categories', 'CategoryController@index');
         Route::post('/categories', 'CategoryController@store');
@@ -66,6 +67,14 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/videos', 'VideoController@index');
         Route::post('/videos', 'VideoController@store');
         Route::put('/videos/{id}', 'VideoController@update');
-        Route::delete('/videos/{id}', 'VideoController@restory');
+        Route::delete('/videos/{id}', 'VideoController@destory');
+
+        Route::get('/blogs', 'BlogController@index');
+        Route::post('/blogs', 'BlogController@store');
+        Route::get('/blogs/{id}', 'BlogController@edit');
+        Route::put('/blogs/{id}', 'BlogController@update');
+        Route::delete('/blogs/{id}', 'BlogController@destory');
+        Route::put('/blogs/togglePublished/{id}', 'BlogController@togglePublished');
+        Route::put('/blogs/toggleTop/{id}', 'BlogController@toggleTop');
     });
 });

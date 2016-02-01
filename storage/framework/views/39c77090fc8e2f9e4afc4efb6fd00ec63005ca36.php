@@ -40,6 +40,7 @@
                     <?php else: ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <img class="nav-avatar hidden-xs" src="<?php echo e(asset(Auth::user()->avatar)); ?>" alt="<?php echo e(Auth::user()->username); ?>">
                             <?php echo e(Auth::user()->username); ?> <span class="caret"></span>
                         </a>
 

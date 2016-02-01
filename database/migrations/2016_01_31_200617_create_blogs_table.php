@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
             $table->string('title', 128);
             $table->text('body');
             $table->boolean('is_published')->default(1);
+            $table->boolean('is_top')->default(0);
             $table->timestamps();
         });
     }

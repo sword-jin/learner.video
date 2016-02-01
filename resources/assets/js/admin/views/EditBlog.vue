@@ -16,7 +16,7 @@
 </div>
 
 <div>
-    <form @submit.prevent="saveBlog()">
+    <form @submit.prevent="updateBlog()">
         <div class="form-group">
             <label>标题</label>
             <input v-model="blog.title" class="form-control" placeholder="128个字符以内.">
@@ -32,8 +32,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label>创建日期(有需要请手动修改日期，默认为当前时间)</label>
-            <input type="date" class="form-control" v-model="blog.created_at">
+            <label>创建日期(有需要请手动修改日期)</label>
+            <input type="date" class="form-control" v-model="blog.created_at | date">
         </div>
         <div class="form-group">
             <div class="checkbox">
@@ -53,6 +53,7 @@
 module.exports = {
     data() {
         return {
+            id: null,
             blog: {
                 category_id: null,
                 title: '',
@@ -67,6 +68,8 @@ module.exports = {
     },
 
     created() {
+        this.id = this.$route.params.id;
+
         this.getCategories();
     },
 
@@ -75,7 +78,8 @@ module.exports = {
             if (this.blog.category_id == null ||
                 this.blog.title.length == 0 ||
                 this.blog.title.length > 128 ||
-                this.blog.body === '') {
+                this.blog.body === '' ||
+                this.blog.created_at === '') {
                 return true;
             }
 
@@ -89,12 +93,16 @@ module.exports = {
                 .then(response => {
                     this.categories = response.data;
                 });
+            this.$http.get('/admin/blogs/' + this.id)
+                .then(response => {
+                    this.blog = response.data.blog;
+                });
         },
 
-        saveBlog() {
+        updateBlog() {
             let self = this;
 
-            self.$http.post('/admin/blogs', self.getFormData())
+            self.$http.put('/admin/blogs/' + self.id, self.getFormData())
                 .then(response => {
                     self.success = true;
                     self.message = response.data.message;
