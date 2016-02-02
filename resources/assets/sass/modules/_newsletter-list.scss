@@ -1,0 +1,30 @@
+.newsletter__item {
+    &:hover {
+        box-shadow: 0 0 3px rgba(#000, .13);
+    }
+    background: #FFF;
+    padding: 20px 14px;
+    margin-bottom: 20px;
+    @include round(6px);
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    h3 {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #576366;
+
+        &:hover {
+            color: darken(#576366, 15%);
+        }
+    }
+
+    p {
+        text-align: right;
+        font-style: italic;
+        color: #aaa8a2;
+        margin-bottom: 0;
+    }
+}

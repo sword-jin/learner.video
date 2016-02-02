@@ -42,8 +42,8 @@ class InfoController extends BaseController
         // $this->data['all_perms'] = Permission::all();
         // get video count.
         $this->data['video_count'] = DB::table('videos')->count();
-        // get series count.
-        $this->data['series_count'] = DB::table('series')->count();
+        // get blog count.
+        $this->data['blog_count'] = DB::table('blogs')->count();
         // get subscriber count.
         $this->data['subscriber_count'] = DB::table('subscribers')->count();
 

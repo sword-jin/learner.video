@@ -45,6 +45,13 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('user') }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ lang('navigation.user_center', 'User Center') }}
+                                </a>
+                            </li>
+
                             @role(['admin', 'boss'])
                             <li>
                                 <a href="{{ route('admin.dashboard') }}">

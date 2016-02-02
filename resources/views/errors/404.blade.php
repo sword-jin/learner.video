@@ -5,23 +5,17 @@
 @stop
 
 @section('title')
-未找到你想要的
+404
 @stop
 
 @section('style')
-<style>
-    @media (min-width: 768px) {
-        body {
-            padding-top: 84px;
-        }
-    }
-</style>
+@include('partials.body-padding-fix')
 @stop
 
 @section('jumbotron')
 <section class="page-jumbotron not-found-page-jumbotron">
     <div class="container">
-        <h1>404</h1>
+        <h1>lt looks like you're lost...</h1>
     </div>
 </section>
 @stop

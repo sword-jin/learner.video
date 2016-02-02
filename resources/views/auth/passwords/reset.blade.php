@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('style')
-    <style>
-        body {
-            padding-top: 130px;
-        }
-    </style>
+<style>
+    body {
+        padding-top: 130px;
+    }
+</style>
 @stop
 
 @section('title')

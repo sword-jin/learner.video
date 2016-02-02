@@ -19,7 +19,7 @@ class Navigation
         ],
         [
             'display_name' => '资源',
-            'route' => 'newsletter'
+            'route' => 'newsletters'
         ]
     ];
 }

@@ -53,9 +53,9 @@
                 </a>
             </li>
 
-            <li v-link="{name: 'publish', activeClass: 'active'}">
+            <li v-link="{name: 'links', activeClass: 'active'}">
                 <a>
-                    <i class="fa fa-pencil"></i> <span>发布</span>
+                    <i class="fa fa-link"></i> <span>链接</span>
                 </a>
             </li>
 

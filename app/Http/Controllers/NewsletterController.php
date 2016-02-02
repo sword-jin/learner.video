@@ -5,21 +5,11 @@ namespace Learner\Http\Controllers;
 use News;
 use Illuminate\Http\Request;
 use Learner\Http\Controllers\BaseController;
-use Learner\Service\Newsletter\NewsletterInterface;
+use Learner\Repositories\NewsletterRepositoryInterface;
 use Learner\Repositories\SubscriberRepositoryInterface;
 
 class NewsletterController extends BaseController
 {
-    /**
-     * Get newsletters list.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('newsletters.index');
-    }
-
     /**
      * Subscriber repository
      *
@@ -27,9 +17,49 @@ class NewsletterController extends BaseController
      */
     protected $subscribers;
 
-    public function __construct(SubscriberRepositoryInterface $subscribers)
+    /**
+     * Newsletter repository
+     *
+     * @var \Learner\Repositories\NewsRepositoryInterface
+     */
+    protected $news;
+
+    /**
+     * Instance subsciber repository.
+     *
+     * @param \Learner\Repositories\SubscriberRepositoryInterface $subscribers
+     * @param \Spatie\Newsletter\Interfaces\NewsletterInterface $news
+     */
+    public function __construct(SubscriberRepositoryInterface $subscribers, NewsletterRepositoryInterface $news)
     {
         $this->subscribers = $subscribers;
+        $this->news = $news;
+    }
+
+     /**
+     * Get newsletters list.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $newsletters = $this->news->findAllPublishedWithPaginator(10);
+
+        return view('newsletters.index', compact('newsletters'));
+    }
+
+    /**
+     * Show a newsletter.
+     *
+     * @param  integer $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $newsletter = $this->news->findPublishedWithRelationById($id);
+
+        return view('newsletters.show', compact('newsletter'));
     }
 
     /**

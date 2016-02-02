@@ -84,7 +84,17 @@ class BlogRepository extends AbstractRepository implements BlogRepositoryInterfa
      */
     public function create(array $data)
     {
-        $blog = $this->model->create($data);
+        $blog = $this->getNew();
+
+        $blog->title = $data['title'];
+        $blog->body = $data['body'];
+        $blog->category_id = $data['category_id'];
+
+        if (key_exists('created_at', $data)) {
+            $blog->created_at = $data['created_at'];
+        }
+
+        $blog->save();
     }
 
     /**
@@ -95,9 +105,16 @@ class BlogRepository extends AbstractRepository implements BlogRepositoryInterfa
     public function update($id, array $data)
     {
         $blog = $this->findById($id);
-        $data['created_at'] = Carbon::createFromFormat('Y-m-d', $data['created_at']);
 
-        $blog->update($data);
+        $blog->title = $data['title'];
+        $blog->body = $data['body'];
+        $blog->category_id = $data['category_id'];
+
+        if (key_exists('created_at', $data)) {
+            $blog->created_at = $data['created_at'];
+        }
+
+        $blog->save();
     }
 
     /**

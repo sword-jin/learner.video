@@ -90,16 +90,16 @@
 
 	var _Subscribers2 = _interopRequireDefault(_Subscribers);
 
-	var _Publish = __webpack_require__(40);
+	var _Links = __webpack_require__(42);
 
-	var _Publish2 = _interopRequireDefault(_Publish);
+	var _Links2 = _interopRequireDefault(_Links);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(41);
-	var VueRouter = __webpack_require__(43);
+	var Vue = __webpack_require__(45);
+	var VueRouter = __webpack_require__(47);
 
-	Vue.use(__webpack_require__(44));
+	Vue.use(__webpack_require__(48));
 	Vue.use(VueRouter);
 
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
@@ -184,9 +184,9 @@
 	        name: 'subscribers',
 	        component: _Subscribers2.default
 	    },
-	    '/publish': {
-	        name: 'publish',
-	        component: _Publish2.default
+	    '/links': {
+	        name: 'links',
+	        component: _Links2.default
 	    }
 	});
 
@@ -366,9 +366,9 @@
 	//                 </a>
 	//             </li>
 	//
-	//             <li v-link="{name: 'publish', activeClass: 'active'}">
+	//             <li v-link="{name: 'links', activeClass: 'active'}">
 	//                 <a>
-	//                     <i class="fa fa-pencil"></i> <span>发布</span>
+	//                     <i class="fa fa-link"></i> <span>链接</span>
 	//                 </a>
 	//             </li>
 	//
@@ -389,7 +389,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-users\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-tags\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'series', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-film\"></i> <span>系列</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-youtube-play\"></i> <span>视频</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'blogs', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-book\"></i> <span>博客</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-newspaper-o\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'publish', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-pencil\"></i> <span>发布</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
+	module.exports = "\n<aside class=\"left-side sidebar-offcanvas\">\n    <section class=\"sidebar\">\n        <!-- Sidebar user panel -->\n        <div class=\"user-panel\">\n            <div class=\"pull-left image\">\n                <img :src=\"auth.avatar\" class=\"img-circle\" alt=\"User Image\" />\n            </div>\n            <div class=\"pull-left info\">\n                <p>{{ auth.username }}</p>\n\n                <a href=\"#\">\n                    <i class=\"fa fa-circle text-success\"></i>\n                    <span v-for=\"role in auth.roles\">{{ role.display_name }}</span>\n                </a>\n            </div>\n        </div>\n        <!-- sidebar menu: : style can be found in sidebar.less -->\n        <ul class=\"sidebar-menu\">\n            <li v-link=\"{name: 'dashboard', activeClass: 'active', exact: true}\">\n                <a>\n                    <i class=\"fa fa-dashboard\"></i> <span>控制台</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'users', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-users\"></i> <span>用户</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'categories', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-tags\"></i> <span>分类</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'series', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-film\"></i> <span>系列</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'videos', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-youtube-play\"></i> <span>视频</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'blogs', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-book\"></i> <span>博客</span>\n                </a>\n            </li>\n            <li v-link=\"{name: 'subscribers', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-newspaper-o\"></i> <span>订阅</span>\n                </a>\n            </li>\n\n            <li v-link=\"{name: 'links', activeClass: 'active'}\">\n                <a>\n                    <i class=\"fa fa-link\"></i> <span>链接</span>\n                </a>\n            </li>\n\n        </ul>\n    </section>\n    <!-- /.sidebar -->\n</aside>\n";
 
 /***/ },
 /* 7 */
@@ -443,8 +443,8 @@
 	//         <div class="sm-st clearfix">
 	//             <span class="sm-st-icon st-green"><i class="fa fa-film"></i></span>
 	//             <div class="sm-st-info">
-	//                 <span>{{ series_count }}</span>
-	//                 系列
+	//                 <span>{{ blog_count }}</span>
+	//                 博客
 	//             </div>
 	//         </div>
 	//     </div>
@@ -498,7 +498,7 @@
 	            user_count: 0,
 	            video_count: 0,
 	            subscriber_count: 0,
-	            series_count: 0,
+	            blog_count: 0,
 	            all_roles: [],
 	            all_perms: []
 	        };
@@ -518,7 +518,7 @@
 	                this.user_count = data.info.user_count;
 	                this.video_count = data.info.video_count;
 	                this.subscriber_count = data.info.subscriber_count;
-	                this.series_count = data.info.series_count;
+	                this.blog_count = data.info.blog_count;
 	                this.all_roles = data.info.all_roles;
 	                this.all_perms = data.info.all_perms;
 	            });
@@ -532,7 +532,7 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ subscriber_count }}</span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ series_count }}</span>\n                系列\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ video_count }}</span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-red\"><i class=\"fa fa-users\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ user_count }}</span>\n                会员\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-violet\"><i class=\"fa fa-newspaper-o\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ subscriber_count }}</span>\n                订阅\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-green\"><i class=\"fa fa-film\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ blog_count }}</span>\n                博客\n            </div>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <div class=\"sm-st clearfix\">\n            <span class=\"sm-st-icon st-blue\"><i class=\"fa fa-youtube-play\"></i></span>\n            <div class=\"sm-st-info\">\n                <span>{{ video_count }}</span>\n                视频\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-md-9\">\n        <section class=\"panel\">\n            <header class=\"panel-heading\">\n                角色浏览\n            </header>\n            <div class=\"panel-body table-responsive\">\n                <table class=\"table table-hover\">\n                    <thead>\n                        <tr>\n                            <th>#</th>\n                            <th>名称</th>\n                            <th>显示名称</th>\n                            <th>描述</th>\n                            <th>人数</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"role in all_roles\">\n                            <td>{{ role.id }}</td>\n                            <td>{{ role.name }}</td>\n                            <td>{{ role.display_name }}</td>\n                            <td>{{ role.description }}</td>\n                            <td>{{ role.users.length }}</td>\n                        </tr>\n                    </tbody>\n              </table>\n            </div>\n        </section>\n    </div><!--end col-9 -->\n</div>\n";
 
 /***/ },
 /* 10 */
@@ -920,7 +920,7 @@
 	//             <div class="btn-group">
 	//                 <button class="btn btn-default" @click="model = 'active'">活跃会员</button>
 	//                 <button class="btn btn-info" @click="model = 'notActive'">冻结会员</button>
-	//                 <button class="btn btn-danger" @click="model = 'trashed'">回收站</button>
+	//                 <button class="btn btn-danger" @click="model = 'trashed'" v-if="isBoss">回收站</button>
 	//             </div>
 	//         </div>
 	//     </div>
@@ -1243,7 +1243,7 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <div class=\"col-xs-12\">\n            <div class=\"btn-group\">\n                <button class=\"btn btn-default\" @click=\"model = 'active'\">活跃会员</button>\n                <button class=\"btn btn-info\" @click=\"model = 'notActive'\">冻结会员</button>\n                <button class=\"btn btn-danger\" @click=\"model = 'trashed'\">回收站</button>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <div class=\"col-xs-12\">\n            <div class=\"btn-group\">\n                <button class=\"btn btn-default\" @click=\"model = 'active'\">活跃会员</button>\n                <button class=\"btn btn-info\" @click=\"model = 'notActive'\">冻结会员</button>\n                <button class=\"btn btn-danger\" @click=\"model = 'trashed'\" v-if=\"isBoss\">回收站</button>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
 
 /***/ },
 /* 17 */
@@ -2982,8 +2982,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(68)
-	__vue_template__ = __webpack_require__(69)
+	__vue_script__ = __webpack_require__(40)
+	__vue_template__ = __webpack_require__(41)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -3003,14 +3003,788 @@
 /* 40 */
 /***/ function(module, exports) {
 
-	var __vue_script__, __vue_template__
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	'use strict';
 
+	// <template>
+	// <div class="row">
+	//     <div class="alert alert-success" v-show="success">
+	//         {{ message }}
+	//     </div>
+	//     <div class="alert alert-danger" v-show="hasError">
+	//         {{ error }}
+	//     </div>
+	//     <div class="col-sm-4">
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 订阅邮箱
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in subscriberColumns">{{ column }}</th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody>
+	//                         <tr v-for="subscriber in subscribers">
+	//                             <td>{{ subscriber.email }}</td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click.stop="deleteSubscribers(subscriber)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//                 <div class="table-foot">
+	//                     <ul class="pagination pagination-sm no-margin pull-right">
+	//                         <p class="pagination__text">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('first')"
+	//                                 :disabled="prev_page_url == null">首页</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('prev')"
+	//                                 :disabled="prev_page_url == null">«</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('next')"
+	//                                 :disabled="next_page_url == null">»</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('last')"
+	//                                 :disabled="next_page_url == null">尾页</button>
+	//                         </li>
+	//                     </ul>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	//
+	//     <div class="col-sm-8">
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 Newsletter 列表
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in newsletterColumns">{{ column }}</th>
+	//                             <th><i class="fa fa-send"></i></th>
+	//                             <th v-if="isBoss" width="1%"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody>
+	//                         <tr v-for="newsletter in newsletters">
+	//                             <td>{{ newsletter.id }}</td>
+	//                             <td>{{ newsletter.title }}</td>
+	//                             <td v-if="newsletter.is_published">
+	//                                 <span class="label label-success">已发布</span>
+	//                             </td>
+	//                             <td v-else>
+	//                                 <span class="label label-danger">未发布</span>
+	//                             </td>
+	//                             <td v-if="newsletter.is_published">
+	//                                 <a href="/newsletter/{{ newsletter.id }}">查看</a>
+	//                             </td>
+	//                             <td v-else>
+	//                                 <a @click.stop="publishNewsletter(newsletter)" class="btn btn-primary btn-xs" :disabled="publishing">发布</a>
+	//                             </td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click.stop="deleteNewsletter(newsletter)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//                 <tfoot>
+	//                     <form @submit.prevent="addNewsletter">
+	//                         <div class="form-group">
+	//                             <input type="text"
+	//                                 v-model="title"
+	//                                 placeholder="learner.video newsletter 第一期"
+	//                                 class="form-control">
+	//                         </div>
+	//                         <div class="form-group">
+	//                             <button type="submit" class="btn btn-success" :disabled="! title">添加</button>
+	//                         </div>
+	//                     </form>
+	//                 </tfoot>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </div>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            subscriberColumns: ['Email'],
+	            newsletterColumns: ['ID', '标题', '状态'],
+	            subscribers: [],
+
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            error: '',
+
+	            total: 0,
+	            current_page: 1,
+	            last_page: 1,
+	            total_page: 0,
+	            first_page_url: '/admin/subscribers',
+	            prev_page_url: '',
+	            next_page_url: '',
+	            last_page_url: '',
+
+	            // newsletters.
+	            newsletters: [],
+
+	            title: '', // init newsletter title
+
+	            publishing: false
+	        };
+	    },
+
+	    props: ['roles'],
+
+	    ready: function ready() {
+	        this.getAllSubscribers(this.first_page_url);
+
+	        this.getAllNewsletters();
+	    },
+
+	    computed: {
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        }
+	    },
+
+	    methods: {
+	        addNewsletter: function addNewsletter() {
+	            var self = this;
+
+	            self.$http.post('/admin/newsletters', { title: self.title }).then(function (response) {
+	                self.showMessage(response.data.message);
+
+	                self.newsletters.push(response.data.newsletter);
+
+	                self.title = '';
+	            });
+	        },
+	        getAllSubscribers: function getAllSubscribers(url) {
+	            var _this = this;
+
+	            this.$http.get(url).then(function (response) {
+	                var data = response.data.subscribers;
+
+	                _this.subscribers = data.data;
+	                _this.total = data.total;
+	                _this.last_page = data.last_page;
+	                _this.current_page = data.current_page;
+	                _this.total_page = _this.getTotalPage(data.total, data.per_page);
+	                _this.prev_page_url = data.prev_page_url;
+	                _this.next_page_url = data.next_page_url;
+	                _this.last_page_url = _this.first_page_url + '?page=' + _this.total_page;
+	            });
+	        },
+	        getAllNewsletters: function getAllNewsletters() {
+	            var _this2 = this;
+
+	            this.$http.get('/admin/newsletters').then(function (response) {
+	                _this2.newsletters = response.data.newsletters;
+	            });
+	        },
+	        getTotalPage: function getTotalPage(total, per_page) {
+	            return Math.ceil(total / per_page);
+	        },
+	        deleteSubscribers: function deleteSubscribers(subscriber) {
+	            var _this3 = this;
+
+	            if (!window.confirm('确定删除吗?')) {
+	                return;
+	            }
+
+	            this.$http.delete('/admin/subscribers/' + subscriber.email).then(function (response) {
+	                _this3.showMessage(response.data.message);
+
+	                _this3.subscribers.$remove(subscriber);
+	            });
+	        },
+	        deleteNewsletter: function deleteNewsletter(newsletter) {
+	            var _this4 = this;
+
+	            if (!window.confirm('确定要删除吗')) {
+	                return;
+	            }
+
+	            this.$http.delete('/admin/newsletters/' + newsletter.id).then(function (response) {
+	                _this4.showMessage(response.data.message);
+
+	                _this4.newsletters.$remove(newsletter);
+	            });
+	        },
+	        paginate: function paginate(direction) {
+	            switch (direction) {
+	                case 'prev':
+	                    this.getAllSubscribers(this.prev_page_url);
+	                    this.current_page--;
+	                    break;
+	                case 'next':
+	                    this.getAllSubscribers(this.next_page_url);
+	                    this.current_page++;
+	                    break;
+	                case 'first':
+	                    this.getAllSubscribers(this.first_page_url);
+	                    this.current_page = 1;
+	                    break;
+	                case 'last':
+	                    this.getAllSubscribers(this.last_page_url);
+	                    this.current_page = this.last_page;
+	                    break;
+	            }
+	        },
+	        publishNewsletter: function publishNewsletter(newsletter) {
+	            var _this5 = this;
+
+	            this.publishing = true;
+
+	            this.$http.post('/admin/newsletters/publish/' + newsletter.id).then(function (response) {
+	                _this5.showMessage(response.data.message);
+
+	                newsletter.is_published = true;
+
+	                _this5.publishing = false;
+	            }).catch(function (response) {
+	                _this5.showError(response.data.error);
+
+	                _this5.publishing = false;
+	            });
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        },
+	        showError: function showError(error) {
+	            this.hasError = true;
+
+	            this.error = error;
+
+	            setTimeout(function () {
+	                this.hasError = false;
+	            }.bind(this), 2800);
+	        }
+	    }
+	};
+	// </script>
+	//
 
 /***/ },
 /* 41 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\">\n    <div class=\"alert alert-success\" v-show=\"success\">\n        {{ message }}\n    </div>\n    <div class=\"alert alert-danger\" v-show=\"hasError\">\n        {{ error }}\n    </div>\n    <div class=\"col-sm-4\">\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                订阅邮箱\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in subscriberColumns\">{{ column }}</th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"subscriber in subscribers\">\n                            <td>{{ subscriber.email }}</td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteSubscribers(subscriber)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-sm-8\">\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                Newsletter 列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in newsletterColumns\">{{ column }}</th>\n                            <th><i class=\"fa fa-send\"></i></th>\n                            <th v-if=\"isBoss\" width=\"1%\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"newsletter in newsletters\">\n                            <td>{{ newsletter.id }}</td>\n                            <td>{{ newsletter.title }}</td>\n                            <td v-if=\"newsletter.is_published\">\n                                <span class=\"label label-success\">已发布</span>\n                            </td>\n                            <td v-else>\n                                <span class=\"label label-danger\">未发布</span>\n                            </td>\n                            <td v-if=\"newsletter.is_published\">\n                                <a href=\"/newsletter/{{ newsletter.id }}\">查看</a>\n                            </td>\n                            <td v-else>\n                                <a @click.stop=\"publishNewsletter(newsletter)\" class=\"btn btn-primary btn-xs\" :disabled=\"publishing\">发布</a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteNewsletter(newsletter)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <tfoot>\n                    <form @submit.prevent=\"addNewsletter\">\n                        <div class=\"form-group\">\n                            <input type=\"text\"\n                                v-model=\"title\"\n                                placeholder=\"learner.video newsletter 第一期\"\n                                class=\"form-control\">\n                        </div>\n                        <div class=\"form-group\">\n                            <button type=\"submit\" class=\"btn btn-success\" :disabled=\"! title\">添加</button>\n                        </div>\n                    </form>\n                </tfoot>\n            </div>\n        </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(43)
+	__vue_template__ = __webpack_require__(44)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/home/rry/code/RryLee/Learner/resources/assets/js/admin/views/Links.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	// <div class="row" style="margin-bottom:15px;">
+	//     <div class="col-xs-12">
+	//         <button class="btn btn-success btn-lg" @click="addLink()">
+	//             <span class="fa fa-link"></span> 添加链接
+	//         </button>
+	//     </div>
+	// </div>
+	//
+	// <div class="row">
+	//     <div class="col-sm-12">
+	//         <div class="alert alert-success" v-show="success">
+	//             {{ message }}
+	//         </div>
+	//         <div class="alert alert-danger" v-show="hasError">
+	//             {{ error }}
+	//         </div>
+	//         <div class="panel">
+	//             <header class="panel-heading">
+	//                 本期链接
+	//             </header> <!-- panel-heading -->
+	//
+	//             <div class="panel-body">
+	//                 <table class="table table-bordered">
+	//                     <thead>
+	//                         <tr>
+	//                             <th v-for="column in columns">{{ column }}</th>
+	//                             <th width="1%"><i class="fa fa-edit"></i></th>
+	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
+	//                         </tr>
+	//                     </thead>
+	//                     <tbody>
+	//                         <tr v-for="link in links">
+	//                             <td>{{ getNewsTitle(link.newsletter_id) }}</td>
+	//                             <td>{{ link.title }}</td>
+	//                             <td>
+	//                                 <a href="{{ link.link }}" target="_blank">
+	//                                     {{ link.link }}
+	//                                 </a>
+	//                             </td>
+	//                             <td>{{ link.type | type }}</td>
+	//                             <td>{{ link.note }}</td>
+	//                             <td>
+	//                                 <a @click.stop="editLink(link)">
+	//                                     <i class="fa fa-edit"></i>
+	//                                 </a>
+	//                             </td>
+	//                             <td v-if="isBoss">
+	//                                 <a @click.stop="deleteLink(link)" class="delete">
+	//                                     <i class="fa fa-remove"></i>
+	//                                 </a>
+	//                             </td>
+	//                         </tr>
+	//                     </tbody>
+	//                 </table>
+	//                 <div class="table-foot">
+	//                     <ul class="pagination pagination-sm no-margin pull-right">
+	//                         <p class="pagination__text">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('first')"
+	//                                 :disabled="prev_page_url == null">首页</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('prev')"
+	//                                 :disabled="prev_page_url == null">«</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('next')"
+	//                                 :disabled="next_page_url == null">»</button>
+	//                         </li>
+	//                         <li>
+	//                             <button class="btn"
+	//                                 @click.stop="paginate('last')"
+	//                                 :disabled="next_page_url == null">尾页</button>
+	//                         </li>
+	//                     </ul>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </div>
+	//
+	// <form @submit.prevent="saveLink" id="saveLink">
+	//     <div class="modal fade" id="saveLinkModal">
+	//          <div class="modal-dialog">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                     <h4 class="modal-title">链接管理</h4>
+	//
+	//                     <div class="alert alert-danger" v-if="hasError">
+	//                         <ul>
+	//                             <li v-for="error in errors">{{ error }}</li>
+	//                         </ul>
+	//                     </div>
+	//                 </div>
+	//
+	//                 <div class="modal-body">
+	//                     <div class="form-group">
+	//                         <label for="title">标题</label>
+	//                         <input type="text"
+	//                             class="form-control"
+	//                             id="title"
+	//                             placeholder="GitHub Pages now faster and simpler with Jekyll 3.0"
+	//                             v-model="link.title">
+	//                     </div>
+	//                     <div class="row">
+	//                         <div class="col-sm-6">
+	//                             <div class="form-group">
+	//                                 <label for="link">链接</label>
+	//                                 <input type="text"
+	//                                     class="form-control"
+	//                                     id="link"
+	//                                     placeholder="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0"
+	//                                     v-model="link.link">
+	//                             </div>
+	//                         </div>
+	//                         <div class="col-sm-6">
+	//                             <div class="form-group">
+	//                                 <label for="type">类型</label>
+	//                                 <select id="type" v-model="link.type" class="form-control">
+	//                                     <option value="article" selected>文章</option>
+	//                                     <option value="tutorial">教程</option>
+	//                                     <option value="video">视频</option>
+	//                                     <option value="project">项目</option>
+	//                                 </select>
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                     <div class="row">
+	//                         <div class="col-sm-6">
+	//                             <div class="form-group">
+	//                                 <label for="domain">主页</label>
+	//                                 <input type="text"
+	//                                     v-model="link.domain"
+	//                                     id="domain"
+	//                                     placeholder="https://github.com/"
+	//                                     class="form-control">
+	//                             </div>
+	//                         </div>
+	//                         <div class="col-sm-6">
+	//                             <div class="form-group">
+	//                                 <label for="note">备注</label>
+	//                                 <input type="text"
+	//                                     v-model="link.note"
+	//                                     id="note"
+	//                                     placeholder="jekyll3.0发布"
+	//                                     class="form-control">
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                     <div class="form-group">
+	//                         <label>选择对应的newsletter</label>
+	//                         <select class="form-control" v-model="link.newsletter_id">
+	//                             <option v-for="newsletter in notPublishedNewsletters" v-bind:value="newsletter.id">
+	//                                 {{ newsletter.title }}
+	//                             </option>
+	//                         </select>
+	//                     </div>
+	//                     <div class="form-group">
+	//                         <input type="submit" value="添加" class="btn btn-primary">
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </form>
+	// </template>
+	//
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            columns: ['订阅', '标题', '链接', '类型', '备注'],
+
+	            links: [],
+
+	            link: {
+	                id: null,
+	                newsletter_id: null,
+	                title: '',
+	                link: '',
+	                type: '',
+	                domain: '',
+	                note: ''
+	            },
+
+	            newsletters: [],
+
+	            // paginator
+	            total: 0,
+	            current_page: 1,
+	            last_page: 1,
+	            total_page: 0,
+	            first_page_url: '/admin/links',
+	            prev_page_url: '',
+	            next_page_url: '',
+	            last_page_url: '',
+
+	            // message
+	            success: false,
+	            message: '',
+	            hasError: false,
+	            errors: [],
+	            error: '',
+
+	            editing: false
+	        };
+	    },
+
+	    props: ['roles'],
+
+	    created: function created() {
+	        this.getNewsletters();
+
+	        this.getLinks(this.first_page_url);
+	    },
+
+	    computed: {
+	        notPublishedNewsletters: function notPublishedNewsletters() {
+	            return this.newsletters.filter(function (n) {
+	                return n.is_published == false;
+	            });
+	        },
+	        isBoss: function isBoss() {
+	            var names = this.roles.map(function (role) {
+	                return role.name;
+	            });
+
+	            return names.indexOf('boss') != -1;
+	        }
+	    },
+
+	    filters: {
+	        type: function type(val) {
+	            switch (val) {
+	                case 'project':
+	                    return '项目';
+	                    break;
+	                case 'video':
+	                    return '视频';
+	                    break;
+	                case 'article':
+	                    return '文章';
+	                    break;
+	                case 'tutorial':
+	                    return '教程';
+	                    break;
+	                default:
+	                    return '其他';
+	            }
+	        }
+	    },
+
+	    methods: {
+	        getNewsletters: function getNewsletters() {
+	            var _this = this;
+
+	            this.$http.get('/admin/newsletters').then(function (response) {
+	                _this.newsletters = response.data.newsletters;
+	            });
+	        },
+	        getLinks: function getLinks(url) {
+	            var _this2 = this;
+
+	            this.$http.get(url).then(function (response) {
+	                var data = response.data.links;
+
+	                _this2.links = data.data;
+	                _this2.total = data.total;
+	                _this2.last_page = data.last_page;
+	                _this2.current_page = data.current_page;
+	                _this2.total_page = _this2.getTotalPage(data.total, data.per_page);
+	                _this2.prev_page_url = data.prev_page_url;
+	                _this2.next_page_url = data.next_page_url;
+	                _this2.last_page_url = _this2.first_page_url + '?page=' + _this2.total_page;
+	            });
+	        },
+	        saveLink: function saveLink() {
+	            var _this3 = this;
+
+	            if (!this.editing) {
+	                this.$http.post('/admin/links', this.getFormData()).then(function (response) {
+	                    _this3.showMessage(response.data.message);
+
+	                    _this3.links.unshift(response.data.link);
+
+	                    jQuery('#saveLinkModal').modal('hide');
+	                }).catch(function (response) {
+	                    _this3.showErrors(response.data.errors);
+	                });
+	            } else {
+	                this.$http.put('/admin/links/' + this.link.id, this.getFormData()).then(function (response) {
+	                    _this3.showMessage(response.data.message);
+
+	                    _this3.updateLinkList(response.data.link);
+
+	                    jQuery('#saveLinkModal').modal('hide');
+	                }).catch(function (response) {
+	                    _this3.showErrors(response.data.errors);
+	                });
+	            }
+	        },
+	        editLink: function editLink(link) {
+	            this.editing = true;
+	            jQuery('#saveLinkModal').modal('show');
+
+	            this.setLinkForm(link.id, link.newsletter_id, link.title, link.link, link.type, link.domain, link.note);
+	        },
+	        deleteLink: function deleteLink(link) {
+	            var _this4 = this;
+
+	            if (!window.confirm('确定要删除吗')) {
+	                return;
+	            }
+
+	            this.$http.delete('/admin/links/' + link.id).then(function (response) {
+	                _this4.showMessage(response.data.message);
+
+	                _this4.links.$remove(link);
+	            });
+	        },
+	        getFormData: function getFormData() {
+	            return {
+	                newsletter_id: this.link.newsletter_id,
+	                type: this.link.type,
+	                title: this.link.title,
+	                link: this.link.link,
+	                note: this.link.note,
+	                domain: this.link.domain
+	            };
+	        },
+	        addLink: function addLink() {
+	            if (this.allNewsletterPublished()) {
+	                this.showError('请先添加一期, 点击【订阅栏】可以找到');
+
+	                return;
+	            }
+
+	            this.editing = false;
+	            this.resetLinkForm();
+
+	            jQuery('#saveLinkModal').modal('show');
+	        },
+	        resetLinkForm: function resetLinkForm() {
+	            this.setLinkForm(null, null, '', '', 'article', '', '');
+	        },
+	        setLinkForm: function setLinkForm(id, newsletter_id, title, link, type, domain, note) {
+	            this.link = { id: id, newsletter_id: newsletter_id, title: title, link: link, type: type, domain: domain, note: note };
+	        },
+	        getTotalPage: function getTotalPage(total, per_page) {
+	            return Math.ceil(total / per_page);
+	        },
+	        paginate: function paginate(direction) {
+	            switch (direction) {
+	                case 'prev':
+	                    this.getLinks(this.prev_page_url);
+	                    this.current_page--;
+	                    break;
+	                case 'next':
+	                    this.getLinks(this.next_page_url);
+	                    this.current_page++;
+	                    break;
+	                case 'first':
+	                    this.getLinks(this.first_page_url);
+	                    this.current_page = 1;
+	                    break;
+	                case 'last':
+	                    this.getLinks(this.last_page_url);
+	                    this.current_page = this.last_page;
+	                    break;
+	            }
+	        },
+	        getNewsTitle: function getNewsTitle(id) {
+	            var index = this.findNewsIndexById(id);
+
+	            return this.newsletters[index].title;
+	        },
+	        allNewsletterPublished: function allNewsletterPublished() {
+	            var is_published_array = this.newsletters.map(function (n) {
+	                return n.is_published;
+	            });
+
+	            return is_published_array.indexOf(false) === -1;
+	        },
+	        updateLinkList: function updateLinkList(link) {
+	            var index = this.findLinksIndexById(link.id);
+
+	            this.links.$set(index, link);
+	        },
+	        findLinksIndexById: function findLinksIndexById(id) {
+	            var ids = this.links.map(function (n) {
+	                return n.id;
+	            });
+
+	            return ids.indexOf(parseInt(id));
+	        },
+	        findNewsIndexById: function findNewsIndexById(id) {
+	            var ids = this.newsletters.map(function (n) {
+	                return n.id;
+	            });
+
+	            return ids.indexOf(parseInt(id));
+	        },
+	        showMessage: function showMessage(message) {
+	            this.success = true;
+
+	            this.message = message;
+
+	            setTimeout(function () {
+	                this.success = false;
+	            }.bind(this), 2800);
+	        },
+	        showError: function showError(error) {
+	            this.hasError = true;
+
+	            this.error = error;
+
+	            setTimeout(function () {
+	                this.hasError = false;
+	            }.bind(this), 2800);
+	        },
+	        showErrors: function showErrors(errors) {
+	            this.errors = [];
+	            this.hasError = true;
+
+	            this.getErrors(errors);
+
+	            setTimeout(function () {
+	                this.hasError = false;
+	            }.bind(this), 2800);
+	        },
+	        getErrors: function getErrors(errors) {
+	            for (var key in errors) {
+	                this.errors.push(errors[key][0]);
+	            }
+	        }
+	    }
+	};
+	// </script>
+	//
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <button class=\"btn btn-success btn-lg\" @click=\"addLink()\">\n            <span class=\"fa fa-link\"></span> 添加链接\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"alert alert-danger\" v-show=\"hasError\">\n            {{ error }}\n        </div>\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                本期链接\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"link in links\">\n                            <td>{{ getNewsTitle(link.newsletter_id) }}</td>\n                            <td>{{ link.title }}</td>\n                            <td>\n                                <a href=\"{{ link.link }}\" target=\"_blank\">\n                                    {{ link.link }}\n                                </a>\n                            </td>\n                            <td>{{ link.type | type }}</td>\n                            <td>{{ link.note }}</td>\n                            <td>\n                                <a @click.stop=\"editLink(link)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteLink(link)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveLink\" id=\"saveLink\">\n    <div class=\"modal fade\" id=\"saveLinkModal\">\n         <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">链接管理</h4>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        <ul>\n                            <li v-for=\"error in errors\">{{ error }}</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <label for=\"title\">标题</label>\n                        <input type=\"text\"\n                            class=\"form-control\"\n                            id=\"title\"\n                            placeholder=\"GitHub Pages now faster and simpler with Jekyll 3.0\"\n                            v-model=\"link.title\">\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"link\">链接</label>\n                                <input type=\"text\"\n                                    class=\"form-control\"\n                                    id=\"link\"\n                                    placeholder=\"https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0\"\n                                    v-model=\"link.link\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"type\">类型</label>\n                                <select id=\"type\" v-model=\"link.type\" class=\"form-control\">\n                                    <option value=\"article\" selected>文章</option>\n                                    <option value=\"tutorial\">教程</option>\n                                    <option value=\"video\">视频</option>\n                                    <option value=\"project\">项目</option>\n                                </select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"domain\">主页</label>\n                                <input type=\"text\"\n                                    v-model=\"link.domain\"\n                                    id=\"domain\"\n                                    placeholder=\"https://github.com/\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"note\">备注</label>\n                                <input type=\"text\"\n                                    v-model=\"link.note\"\n                                    id=\"note\"\n                                    placeholder=\"jekyll3.0发布\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label>选择对应的newsletter</label>\n                        <select class=\"form-control\" v-model=\"link.newsletter_id\">\n                            <option v-for=\"newsletter in notPublishedNewsletters\" v-bind:value=\"newsletter.id\">\n                                {{ newsletter.title }}\n                            </option>\n                        </select>\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"submit\" value=\"添加\" class=\"btn btn-primary\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
+
+/***/ },
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -12537,10 +13311,10 @@
 	}
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(42)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(46)))
 
 /***/ },
-/* 42 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -12637,7 +13411,7 @@
 
 
 /***/ },
-/* 43 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -15276,7 +16050,7 @@
 	}));
 
 /***/ },
-/* 44 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15285,16 +16059,16 @@
 
 	function install(Vue) {
 
-	    var _ = __webpack_require__(45);
+	    var _ = __webpack_require__(49);
 
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 
-	    Vue.url = __webpack_require__(46);
-	    Vue.http = __webpack_require__(52);
-	    Vue.resource = __webpack_require__(67);
-	    Vue.Promise = __webpack_require__(54);
+	    Vue.url = __webpack_require__(50);
+	    Vue.http = __webpack_require__(56);
+	    Vue.resource = __webpack_require__(71);
+	    Vue.Promise = __webpack_require__(58);
 
 	    Object.defineProperties(Vue.prototype, {
 
@@ -15335,7 +16109,7 @@
 
 
 /***/ },
-/* 45 */
+/* 49 */
 /***/ function(module, exports) {
 
 	/**
@@ -15463,14 +16237,14 @@
 
 
 /***/ },
-/* 46 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 
@@ -15506,10 +16280,10 @@
 	 */
 
 	Url.transforms = [
-	    __webpack_require__(47),
-	    __webpack_require__(49),
-	    __webpack_require__(50),
-	    __webpack_require__(51)
+	    __webpack_require__(51),
+	    __webpack_require__(53),
+	    __webpack_require__(54),
+	    __webpack_require__(55)
 	];
 
 	/**
@@ -15599,14 +16373,14 @@
 
 
 /***/ },
-/* 47 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	var UrlTemplate = __webpack_require__(48);
+	var UrlTemplate = __webpack_require__(52);
 
 	module.exports = function (options) {
 
@@ -15621,7 +16395,7 @@
 
 
 /***/ },
-/* 48 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/**
@@ -15777,14 +16551,14 @@
 
 
 /***/ },
-/* 49 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = function (options, next) {
 
@@ -15829,14 +16603,14 @@
 
 
 /***/ },
-/* 50 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = function (options, next) {
 
@@ -15859,14 +16633,14 @@
 
 
 /***/ },
-/* 51 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = function (options, next) {
 
@@ -15881,17 +16655,17 @@
 
 
 /***/ },
-/* 52 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var _ = __webpack_require__(45);
-	var Client = __webpack_require__(53);
-	var Promise = __webpack_require__(54);
-	var interceptor = __webpack_require__(57);
+	var _ = __webpack_require__(49);
+	var Client = __webpack_require__(57);
+	var Promise = __webpack_require__(58);
+	var interceptor = __webpack_require__(61);
 	var jsonType = {'Content-Type': 'application/json'};
 
 	function Http(url, options) {
@@ -15944,13 +16718,13 @@
 	};
 
 	Http.interceptors = [
-	    __webpack_require__(58),
-	    __webpack_require__(59),
-	    __webpack_require__(60),
 	    __webpack_require__(62),
 	    __webpack_require__(63),
 	    __webpack_require__(64),
-	    __webpack_require__(65)
+	    __webpack_require__(66),
+	    __webpack_require__(67),
+	    __webpack_require__(68),
+	    __webpack_require__(69)
 	];
 
 	Http.headers = {
@@ -15985,16 +16759,16 @@
 
 
 /***/ },
-/* 53 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 
-	var _ = __webpack_require__(45);
-	var Promise = __webpack_require__(54);
-	var xhrClient = __webpack_require__(56);
+	var _ = __webpack_require__(49);
+	var Promise = __webpack_require__(58);
+	var xhrClient = __webpack_require__(60);
 
 	module.exports = function (request) {
 
@@ -16056,15 +16830,15 @@
 
 
 /***/ },
-/* 54 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 
-	var _ = __webpack_require__(45);
-	var PromiseObj = window.Promise || __webpack_require__(55);
+	var _ = __webpack_require__(49);
+	var PromiseObj = window.Promise || __webpack_require__(59);
 
 	function Promise(executor, context) {
 
@@ -16171,14 +16945,14 @@
 
 
 /***/ },
-/* 55 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -16356,15 +17130,15 @@
 
 
 /***/ },
-/* 56 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 
-	var _ = __webpack_require__(45);
-	var Promise = __webpack_require__(54);
+	var _ = __webpack_require__(49);
+	var Promise = __webpack_require__(58);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16412,15 +17186,15 @@
 
 
 /***/ },
-/* 57 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 
-	var _ = __webpack_require__(45);
-	var Promise = __webpack_require__(54);
+	var _ = __webpack_require__(49);
+	var Promise = __webpack_require__(58);
 
 	module.exports = function (handler, vm) {
 
@@ -16463,14 +17237,14 @@
 
 
 /***/ },
-/* 58 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = {
 
@@ -16487,7 +17261,7 @@
 
 
 /***/ },
-/* 59 */
+/* 63 */
 /***/ function(module, exports) {
 
 	/**
@@ -16523,14 +17297,14 @@
 
 
 /***/ },
-/* 60 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	var jsonpClient = __webpack_require__(61);
+	var jsonpClient = __webpack_require__(65);
 
 	module.exports = {
 
@@ -16547,15 +17321,15 @@
 
 
 /***/ },
-/* 61 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 
-	var _ = __webpack_require__(45);
-	var Promise = __webpack_require__(54);
+	var _ = __webpack_require__(49);
+	var Promise = __webpack_require__(58);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16601,7 +17375,7 @@
 
 
 /***/ },
-/* 62 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/**
@@ -16624,14 +17398,14 @@
 
 
 /***/ },
-/* 63 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = {
 
@@ -16666,14 +17440,14 @@
 
 
 /***/ },
-/* 64 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	module.exports = {
 
@@ -16698,15 +17472,15 @@
 
 
 /***/ },
-/* 65 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var _ = __webpack_require__(45);
-	var xdrClient = __webpack_require__(66);
+	var _ = __webpack_require__(49);
+	var xdrClient = __webpack_require__(70);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 
@@ -16741,15 +17515,15 @@
 
 
 /***/ },
-/* 66 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 
-	var _ = __webpack_require__(45);
-	var Promise = __webpack_require__(54);
+	var _ = __webpack_require__(49);
+	var Promise = __webpack_require__(58);
 
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -16784,14 +17558,14 @@
 
 
 /***/ },
-/* 67 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	var _ = __webpack_require__(45);
+	var _ = __webpack_require__(49);
 
 	function Resource(url, params, actions, options) {
 
@@ -16898,117 +17672,6 @@
 
 	module.exports = _.resource = Resource;
 
-
-/***/ },
-/* 68 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	// <template>
-	// <div class="row">
-	//     <div class="col-sm-6">
-	//         <div class="alert alert-success" v-show="success">
-	//             {{ message }}
-	//         </div>
-	//         <div class="panel">
-	//             <header class="panel-heading">
-	//                 视频列表
-	//             </header> <!-- panel-heading -->
-	//
-	//             <div class="panel-body">
-	//                 <table class="table table-bordered">
-	//                     <thead>
-	//                         <tr>
-	//                             <th v-for="column in columns">{{ column }}</th>
-	//                             <th width="1%" v-if="isBoss"><i class="fa fa-remove"></i></th>
-	//                         </tr>
-	//                     </thead>
-	//                     <tbody>
-	//                         <tr v-for="email in emails">
-	//                             <td>{{ email }}</td>
-	//                             <td>
-	//                                 <a @click.stop="deleteSubscribers(email)" class="delete">
-	//                                     <i class="fa fa-remove"></i>
-	//                                 </a>
-	//                             </td>
-	//                         </tr>
-	//                     </tbody>
-	//                 </table>
-	//             </div>
-	//         </div>
-	//     </div>
-	// </div>
-	// </template>
-	//
-	// <script>
-	module.exports = {
-	    data: function data() {
-	        return {
-	            columns: ['Email'],
-	            emails: [],
-
-	            success: false,
-	            message: ''
-	        };
-	    },
-
-	    props: ['roles'],
-
-	    ready: function ready() {
-	        this.getAllSubscribers();
-	    },
-
-	    computed: {
-	        isBoss: function isBoss() {
-	            var names = this.roles.map(function (role) {
-	                return role.name;
-	            });
-
-	            return names.indexOf('boss') != -1;
-	        }
-	    },
-
-	    methods: {
-	        getAllSubscribers: function getAllSubscribers() {
-	            var self = this;
-
-	            self.$http.get('/admin/subscribers').then(function (response) {
-	                self.emails = response.data.emails;
-	            });
-	        },
-	        deleteSubscribers: function deleteSubscribers(email) {
-	            if (!window.confirm('确定删除吗?')) {
-	                return;
-	            }
-
-	            var self = this;
-
-	            self.$http.delete('/admin/subscribers/' + email).then(function (response) {
-	                self.showMessage(response.data.message);
-
-	                self.emails.$remove(email);
-	            });
-	        },
-	        showMessage: function showMessage(message) {
-	            this.success = true;
-
-	            this.message = message;
-
-	            setTimeout(function () {
-	                this.success = false;
-	            }.bind(this), 2800);
-	        }
-	    }
-	};
-	// </script>
-	//
-
-/***/ },
-/* 69 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"row\">\n    <div class=\"col-sm-6\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                视频列表\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"email in emails\">\n                            <td>{{ email }}</td>\n                            <td>\n                                <a @click.stop=\"deleteSubscribers(email)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ]);

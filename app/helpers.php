@@ -31,11 +31,24 @@ function isNew($publishd_at)
  *
  * @param  string  $route
  *
- * @return boolean
+ * @return string
  */
 function isActive($route)
 {
     return Request::is($route . '/*') || Request::is($route) ? 'active' : '';
+}
+
+/**
+ * Category list active class.
+ *
+ * @param  string $name
+ *
+ * @return string
+ */
+function categoryIsActive($name)
+{
+    return route('category', $name) == url('categories/' . $name) ||
+        route('category', $name) == url('categories/' . $name . '#*') ? ' active' : ':';
 }
 
 /**
@@ -50,6 +63,25 @@ function dateHuman($date)
     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->diffForHumans();
 }
 
+/**
+ * Format time for newsletter.
+ *
+ * @param  string $date
+ *
+ * @return string
+ */
+function dateForNewsletter($date)
+{
+    return Carbon::createFromFormat('Y-m-d H:i:s', $date)->toDateString();
+}
+
+/**
+ * Format the video duration.
+ *
+ * @param  integer $duration
+ *
+ * @return string
+ */
 function secondForHuman($duration) {
     if ($duration < 10) {
         return '00:0' . $duration;

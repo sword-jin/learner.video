@@ -32,9 +32,9 @@ class SubscriberController extends BaseController
      */
     public function index()
     {
-        $emails = $this->subscribers->listEmail();
+        $subscribers = $this->subscribers->listEmailPaginated(50);
 
-        return $this->responseJson(compact('emails'));
+        return $this->responseJson(compact('subscribers'));
     }
 
     /**

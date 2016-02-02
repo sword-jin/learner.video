@@ -3,6 +3,7 @@
 namespace Learner\Http\Controllers\Admin;
 
 use Log;
+use Carbon\Carbon;
 use Learner\Repositories\BlogRepositoryInterface;
 use Learner\Http\Controllers\Admin\BaseController;
 
@@ -52,7 +53,9 @@ class BlogController extends BaseController
 
         $formData = $form->getInputData();
 
-        if ($formData['created_at'] == '') {
+        if ($formData['created_at'] !== '') {
+            $formData['created_at'] = Carbon::createFromFormat('Y-m-d', $formData['created_at']);
+        } else {
             unset($formData['created_at']);
         }
 

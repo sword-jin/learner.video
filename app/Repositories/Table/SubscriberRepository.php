@@ -48,11 +48,13 @@ class SubscriberRepository extends AbstractTableRepository implements Subscriber
     /**
      * Find all email.
      *
+     * @param integer $perPage
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function listEmail()
+    public function listEmailPaginated($perPage = 50)
     {
-        return $this->table->lists('email');
+        return $this->table->paginate($perPage);
     }
 
     /**

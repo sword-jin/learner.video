@@ -7,13 +7,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('style'); ?>
-<style>
-    @media (min-width: 768px) {
-        body {
-            padding-top: 84px;
-        }
-    }
-</style>
+<?php echo $__env->make('partials.body-padding-fix', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('jumbotron'); ?>

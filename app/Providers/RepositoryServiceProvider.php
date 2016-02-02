@@ -45,5 +45,15 @@ class RepositoryServiceProvider extends ServiceProvider
             'Learner\Repositories\SubscriberRepositoryInterface',
             'Learner\Repositories\Table\SubscriberRepository'
         );
+
+        $this->app->bind(
+            'Learner\Repositories\NewsletterRepositoryInterface',
+            'Learner\Repositories\Eloquent\NewsletterRepository'
+        );
+
+        $this->app->bind(
+            'Learner\Repositories\LinkRepositoryInterface',
+            'Learner\Repositories\Eloquent\LinkRepository'
+        );
     }
 }

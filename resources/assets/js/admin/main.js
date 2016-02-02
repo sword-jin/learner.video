@@ -12,7 +12,7 @@ import Blogs from "./views/Blogs.vue"
 import CreateBlog from "./views/CreateBlog.vue"
 import EditBlog from "./views/EditBlog.vue"
 import Subscribers from "./views/Subscribers.vue"
-import Publish from "./views/Publish.vue"
+import Links from "./views/Links.vue"
 
 Vue.use(require('vue-resource'))
 Vue.use(VueRouter)
@@ -96,9 +96,9 @@ router.map({
         name: 'subscribers',
         component: Subscribers
     },
-    '/publish': {
-        name: 'publish',
-        component: Publish
+    '/links': {
+        name: 'links',
+        component: Links
     }
 })
 

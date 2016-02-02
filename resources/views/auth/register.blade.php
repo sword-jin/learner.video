@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('description')
+注册 - Learner.video
+@stop
+
 @section('style')
     <style>
         body {

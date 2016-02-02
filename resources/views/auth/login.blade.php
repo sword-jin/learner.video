@@ -1,15 +1,19 @@
 @extends('layouts.master')
 
+@section('description')
+登陆 - Learner.video
+@stop
+
 @section('style')
-    <style>
-        body {
-            padding-top: 130px;
-        }
-    </style>
+<style>
+    body {
+        padding-top: 130px;
+    }
+</style>
 @stop
 
 @section('title')
-	{{ lang('login.panel_title', 'Login') }}
+{{ lang('login.panel_title', 'Login') }}
 @stop
 
 @section('content')

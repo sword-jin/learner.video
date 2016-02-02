@@ -5,7 +5,7 @@
             <div class="btn-group">
                 <button class="btn btn-default" @click="model = 'active'">活跃会员</button>
                 <button class="btn btn-info" @click="model = 'notActive'">冻结会员</button>
-                <button class="btn btn-danger" @click="model = 'trashed'">回收站</button>
+                <button class="btn btn-danger" @click="model = 'trashed'" v-if="isBoss">回收站</button>
             </div>
         </div>
     </div>

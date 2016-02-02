@@ -45,6 +45,14 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="<?php echo e(route('user')); ?>">
+                                    <i class="fa fa-user"></i>
+                                    <?php echo e(lang('navigation.user_center', 'User Center')); ?>
+
+                                </a>
+                            </li>
+
                             <?php if(Auth::check() && Auth::user()->hasRole(['admin', 'boss'])): ?>
                             <li>
                                 <a href="<?php echo e(route('admin.dashboard')); ?>">

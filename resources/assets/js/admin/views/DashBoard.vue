@@ -22,8 +22,8 @@
         <div class="sm-st clearfix">
             <span class="sm-st-icon st-green"><i class="fa fa-film"></i></span>
             <div class="sm-st-info">
-                <span>{{ series_count }}</span>
-                系列
+                <span>{{ blog_count }}</span>
+                博客
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@ module.exports = {
             user_count: 0,
             video_count: 0,
             subscriber_count: 0,
-            series_count: 0,
+            blog_count: 0,
             all_roles: [],
             all_perms: []
         }
@@ -98,7 +98,7 @@ module.exports = {
                     this.user_count = data.info.user_count;
                     this.video_count = data.info.video_count;
                     this.subscriber_count = data.info.subscriber_count;
-                    this.series_count = data.info.series_count;
+                    this.blog_count = data.info.blog_count;
                     this.all_roles = data.info.all_roles;
                     this.all_perms = data.info.all_perms;
                 });

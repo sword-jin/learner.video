@@ -2,10 +2,6 @@
 
 Carbon\Carbon::setLocale('zh');
 
-Route::get('test', function() {
-    // dd(News::subscribe('qq215672398@126.com'));
-});
-
 Route::group(['middleware' => 'web'], function () {
 
     Route::controller('auth', 'Auth\AuthController', [
@@ -31,10 +27,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
     Route::get('/blogs/{id}', ['as' => 'blogs.show', 'uses' => 'BlogController@show']);
 
-    Route::get('/newsletter', ['as' => 'newsletter', 'uses' => 'NewsletterController@index']);
+    Route::get('/newsletters', ['as' => 'newsletters', 'uses' => 'NewsletterController@index']);
+    Route::get('/newsletters/{id}', ['as' => 'newsletters.show', 'uses' => 'NewsletterController@show']);
 
-    Route::post('/newsletter/subscribe', ['as' => 'subscribe', 'uses' => 'NewsletterController@subscribe']);
-    Route::post('/newsletter/unsubscribe', ['as' => 'unsubscribe', 'uses' => 'NewsletterController@unsubscribe']);
+    Route::post('/newsletters/subscribe', ['as' => 'subscribe', 'uses' => 'NewsletterController@subscribe']);
+    Route::post('/newsletters/unsubscribe', ['as' => 'unsubscribe', 'uses' => 'NewsletterController@unsubscribe']);
+
+    Route::get('/user', ['as' => 'user', 'uses' => 'UserController@index']);
 });
 
 
@@ -86,5 +85,15 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/subscribers', 'SubscriberController@index');
         Route::delete('/subscribers/{email}', 'SubscriberController@destory');
+
+        Route::get('/newsletters', 'NewsletterController@index');
+        Route::post('/newsletters', 'NewsletterController@store');
+        Route::post('/newsletters/publish/{id}', 'NewsletterController@publish');
+        Route::delete('/newsletters/{id}', 'NewsletterController@destory');
+
+        Route::get('/links', 'LinkController@index');
+        Route::post('/links', 'LinkController@store');
+        Route::put('/links/{id}', 'LinkController@update');
+        Route::delete('/links/{id}', 'LinkController@destory');
     });
 });

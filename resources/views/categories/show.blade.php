@@ -9,13 +9,7 @@ Learner.video 下 {{ $category->name }} 的所有系列
 @stop
 
 @section('style')
-<style>
-    @media (min-width: 768px) {
-        body {
-            padding-top: 84px;
-        }
-    }
-</style>
+@include('partials.body-padding-fix')
 @stop
 
 @section('jumbotron')

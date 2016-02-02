@@ -21,6 +21,7 @@ class Video extends Model
         'resource_id',
         'published_at'
     ];
+
     /**
      * The attributes that should be mutated to dates.
      *

@@ -12,5 +12,9 @@ return [
 
     'deleteVideoSuccess' => '删除了一个视频',
 
-    'deleteBlogSuccess' => '删除了一篇博客'
+    'deleteBlogSuccess' => '删除了一篇博客',
+
+    'deleteLinkSuccess' => '删除了一个链接',
+
+    'deleteNewsletterSuccess' => '删除了一封newsletter'
 ];
