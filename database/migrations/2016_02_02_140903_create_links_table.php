@@ -18,7 +18,7 @@ class CreateLinksTable extends Migration
             $table->foreign('newsletter_id')->references('id')->on('newsletters')->onDelete('cascade');
             $table->string('title');
             $table->string('link');
-            $table->enum('type', ['article', 'tutorial', 'video', 'project']);
+            $table->enum('type', ['article', 'tutorial', 'video', 'project', 'other']);
             $table->string('domain')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

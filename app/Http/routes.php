@@ -60,6 +60,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::DELETE('/users/remove/{id}', 'UserController@removeToTrash');
         Route::DELETE('/users/delete/{id}', 'UserController@deleteUser');
 
+        Route::get('/roles', 'RoleController@index');
+        Route::post('/roles/user/{id}', 'RoleController@assign');
+
         Route::get('/categories', 'CategoryController@index');
         Route::post('/categories', 'CategoryController@store');
         Route::post('/categories/update/{id}', 'CategoryController@update');

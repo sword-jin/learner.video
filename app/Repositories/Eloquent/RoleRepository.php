@@ -28,4 +28,14 @@ class RoleRepository extends AbstractRepository implements RoleRepositoryInterfa
     {
         return $this->model->whereName($name)->firstOrFail();
     }
+
+    /**
+     * List all role.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function listAll()
+    {
+        return $this->model->all();
+    }
 }

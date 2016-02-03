@@ -83,6 +83,25 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     }
 
     /**
+     * Find user with relation.
+     *
+     * @param  integer $userId
+     * @param  array $roleIds
+     *
+     * @return \Learner\Models\User
+     */
+    public function attachRoleById($userId, $roleIds)
+    {
+        $user = $this->findWithTrashedById($userId);
+        $user->roles()->sync($roleIds);
+
+        return $this->model
+                    ->withTrashed()
+                    ->with(['roles'])
+                    ->findOrFail($userId);
+    }
+
+    /**
      * Find all active users paginated.
      *
      * @param int $perPage

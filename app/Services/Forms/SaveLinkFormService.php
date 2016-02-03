@@ -12,7 +12,7 @@ class SaveLinkFormService extends AbstractFormService
     protected $rules = [
         'title' => 'required|max:255',
         'link' => 'required|url',
-        'type' => 'required|in:article,tutorial,video,project',
+        'type' => 'required|in:article,tutorial,video,project,other',
         'domain' => 'url',
         'newsletter_id' => 'required|exists:newsletters,id'
     ];

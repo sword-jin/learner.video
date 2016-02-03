@@ -68,7 +68,9 @@ class AvatarManagerService extends ImageManagerService
      */
     protected function getFilePath($name)
     {
-        return self::$directory . '/' . $name . '.' . self::$extension;
+        return self::$directory . '/'
+            . '_' . str_random(12) . '_' . $name . '.' .
+            self::$extension;
     }
 
     /**

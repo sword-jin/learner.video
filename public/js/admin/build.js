@@ -941,10 +941,12 @@
 	//                     <thead>
 	//                         <tr>
 	//                             <td v-for="column in columns">{{ column }}</td>
+	//                             <td v-if="isBoss">冻结</td>
+	//                             <td v-if="isBoss">删除</td>
 	//                         </tr>
 	//                     </thead>
 	//                     <tbody>
-	//                         <tr v-for="user in notContainBoss">
+	//                         <tr v-for="user in users">
 	//                             <td>{{ user.id }}</td>
 	//                             <td><img :src="user.avatar" width="20"></td>
 	//                             <td>{{ user.username }}</td>
@@ -954,8 +956,14 @@
 	//                                     class="label label-{{ role.name }}">
 	//                                     {{ role.display_name }}
 	//                                 </span>
+	//                                 <button class="btn btn-danger btn-xs pull-right"
+	//                                     v-if="isBoss"
+	//                                     @click="assignRole(user)">
+	//                                     <i class="fa fa-user"></i>
+	//                                 </button>
 	//                             </td>
-	//                             <td class="toggle_active">
+	//                             <td>{{ user.created_at | date }}</td>
+	//                             <td class="toggle_active" v-if="isBoss">
 	//                                 <input type="checkbox"
 	//                                     id="is_active{{$index}}"
 	//                                     @click="toggleUserActive(user)"
@@ -964,8 +972,7 @@
 	//                                 <label for="is_active{{$index}}"
 	//                                     ></label>
 	//                             </td>
-	//                             <td>{{ user.created_at | date }}</td>
-	//                             <td>
+	//                             <td v-if="isBoss">
 	//                                 <button class="btn btn-danger btn-xs"
 	//                                         v-if="removeAble"
 	//                                         data-toggle="tooltip"
@@ -1020,13 +1027,47 @@
 	//         </div><!-- /.panel -->
 	//     </div>
 	// </div>
+	//
+	// <form @submit.prevent="saveRoleToUser" id="saveRoleToUser">
+	//     <div class="modal fade" id="assignRoleModal">
+	//          <div class="modal-dialog modal-sm">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	//                     <h4 class="modal-title">选择角色</h4>
+	//                 </div>
+	//                 <div class="modal-body">
+	//                     <div class="alert alert-danger" v-if="hasError">
+	//                         {{ error }}
+	//                     </div>
+	//                     <!-- Title field -->
+	//                     <div class="form-group">
+	//                         <div class="checkbox" v-for="role in allRoles">
+	//                             <label>
+	//                                 <input type="checkbox"
+	//                                     v-model="saveRoles"
+	//                                     value="{{ role.id }}">
+	//                                 {{ role.display_name }}
+	//                             </label>
+	//                         </div>
+	//                     </div>
+	//                     <div class="form-group">
+	//                         <input type="submit"
+	//                             value="确定"
+	//                             class="btn btn-success form-control">
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </form>
 	// </template>
 	//
 	// <script>
 	module.exports = {
 	    data: function data() {
 	        return {
-	            columns: ['ID', '图像', '用户名', '邮箱', '身份', '状态', '注册时间', '操作'],
+	            columns: ['ID', '图像', '用户名', '邮箱', '身份', '注册时间'],
 	            users: [],
 	            total: 0,
 	            current_page: 1,
@@ -1039,9 +1080,15 @@
 
 	            success: false,
 	            message: '',
+	            hasError: false,
+	            error: '',
 
 	            model: 'active',
-	            toggling: false
+	            toggling: false,
+
+	            allRoles: [], // all roles from db.
+	            saveRoles: [], // roles form form.
+	            user: {} // to assign user.
 	        };
 	    },
 
@@ -1049,6 +1096,8 @@
 
 	    created: function created() {
 	        this.getData(this.first_page_url);
+
+	        this.getAllRoles();
 	    },
 
 	    computed: {
@@ -1064,11 +1113,6 @@
 	            });
 
 	            return names.indexOf('boss') != -1;
-	        },
-	        notContainBoss: function notContainBoss() {
-	            return this.users.filter(function (user) {
-	                return user.roles[0].name != 'boss';
-	            });
 	        }
 	    },
 
@@ -1094,19 +1138,28 @@
 	    },
 
 	    methods: {
+	        getAllRoles: function getAllRoles() {
+	            var _this = this;
+
+	            this.$http.get('/admin/roles').then(function (response) {
+	                _this.allRoles = response.data.roles;
+	            });
+	        },
 	        getData: function getData(url) {
+	            var _this2 = this;
+
 	            this.$http.get(url).then(function (response) {
 	                var data = response.data;
 
-	                this.users = data.data;
-	                this.total = data.total;
-	                this.last_page = data.last_page;
-	                this.current_page = data.current_page;
-	                this.total_page = this.getTotalPage(data.total, data.per_page);
-	                this.prev_page_url = data.prev_page_url;
-	                this.next_page_url = data.next_page_url;
-	                this.last_page_url = this.first_page_url + '?page=' + this.total_page;
-	            }.bind(this));
+	                _this2.users = data.data;
+	                _this2.total = data.total;
+	                _this2.last_page = data.last_page;
+	                _this2.current_page = data.current_page;
+	                _this2.total_page = _this2.getTotalPage(data.total, data.per_page);
+	                _this2.prev_page_url = data.prev_page_url;
+	                _this2.next_page_url = data.next_page_url;
+	                _this2.last_page_url = _this2.first_page_url + '?page=' + _this2.total_page;
+	            });
 	        },
 	        getTotalPage: function getTotalPage(total, per_page) {
 	            return Math.ceil(total / per_page);
@@ -1135,37 +1188,37 @@
 	            this.$http.delete('/admin/users/remove/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
-	                this.displayMessage(response.data.message);
+	                this.showMessage(response.data.message);
 	            });
 	        },
 	        deleteUser: function deleteUser(user) {
 	            this.$http.delete('/admin/users/delete/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
-	                this.displayMessage(response.data.message);
+	                this.showMessage(response.data.message);
 	            });
 	        },
 	        restoreUser: function restoreUser(user) {
 	            this.$http.put('/admin/users/restore/' + user.id).then(function (response) {
 	                this.removeUserFromUserList(user);
 
-	                this.displayMessage(response.data.message);
+	                this.showMessage(response.data.message);
 	            });
 	        },
 	        toggleUserActive: function toggleUserActive(user) {
 	            if (this.toggling) {
-	                this.displayMessage('正在修改用户状态');
+	                this.showMessage('正在修改用户状态');
 	            }
 
 	            this.toggling = true;
 
 	            this.$http.put('/admin/users/toggleActive/' + user.id).then(function (response) {
-	                this.displayMessage(response.data.message);
+	                this.showMessage(response.data.message);
 	                this.toggling = false;
 	                // this.removeUserFromUserList(user);
 	            });
 	        },
-	        displayMessage: function displayMessage(message) {
+	        showMessage: function showMessage(message) {
 	            this.success = true;
 	            this.message = message;
 
@@ -1175,6 +1228,49 @@
 	        },
 	        removeUserFromUserList: function removeUserFromUserList(user) {
 	            this.users.$remove(user);
+	        },
+	        assignRole: function assignRole(user) {
+	            jQuery('#assignRoleModal').modal('show');
+	            this.user = user;
+
+	            this.saveRoles = user.roles.map(function (role) {
+	                return '' + role.id;
+	            });
+	        },
+	        saveRoleToUser: function saveRoleToUser() {
+	            var _this3 = this;
+
+	            this.$http.post('/admin/roles/user/' + this.user.id, {
+	                roles: this.saveRoles
+	            }).then(function (response) {
+	                var data = response.data;
+	                var index = _this3.findIndexById(data.user.id);
+
+	                _this3.showMessage(data.message);
+
+	                _this3.users.$set(index, data.user);
+
+	                jQuery('#assignRoleModal').modal('hide');
+	            }).catch(function (response) {
+	                _this3.showError(response.data.error);
+	            });
+	        },
+	        findIndexById: function findIndexById(id) {
+	            var ids = this.users.map(function (u) {
+	                return u.id;
+	            });
+
+	            return ids.indexOf(parseInt(id));
+	        },
+	        showError: function showError(error) {
+	            var _this4 = this;
+
+	            this.hasError = true;
+	            this.error = error;
+
+	            setTimeout(function () {
+	                _this4.hasError = false;
+	            }, 2000);
 	        }
 	    }
 	};
@@ -1243,7 +1339,7 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <div class=\"col-xs-12\">\n            <div class=\"btn-group\">\n                <button class=\"btn btn-default\" @click=\"model = 'active'\">活跃会员</button>\n                <button class=\"btn btn-info\" @click=\"model = 'notActive'\">冻结会员</button>\n                <button class=\"btn btn-danger\" @click=\"model = 'trashed'\" v-if=\"isBoss\">回收站</button>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in notContainBoss\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                            </td>\n                            <td class=\"toggle_active\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:5px;\">\n    <div class=\"form-group\">\n        <div class=\"col-xs-12\">\n            <div class=\"btn-group\">\n                <button class=\"btn btn-default\" @click=\"model = 'active'\">活跃会员</button>\n                <button class=\"btn btn-info\" @click=\"model = 'notActive'\">冻结会员</button>\n                <button class=\"btn btn-danger\" @click=\"model = 'trashed'\" v-if=\"isBoss\">回收站</button>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col-xs-12\">\n        <div class=\"panel\">\n\n            <div class=\"alert alert-success\" v-show=\"success\">\n                {{ message }}\n            </div>\n\n            <header class=\"panel-heading\">\n                会员列表\n            </header>\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <td v-for=\"column in columns\">{{ column }}</td>\n                            <td v-if=\"isBoss\">冻结</td>\n                            <td v-if=\"isBoss\">删除</td>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"user in users\">\n                            <td>{{ user.id }}</td>\n                            <td><img :src=\"user.avatar\" width=\"20\"></td>\n                            <td>{{ user.username }}</td>\n                            <td>{{ user.email }}</td>\n                            <td>\n                                <span v-for=\"role in user.roles\"\n                                    class=\"label label-{{ role.name }}\">\n                                    {{ role.display_name }}\n                                </span>\n                                <button class=\"btn btn-danger btn-xs pull-right\"\n                                    v-if=\"isBoss\"\n                                    @click=\"assignRole(user)\">\n                                    <i class=\"fa fa-user\"></i>\n                                </button>\n                            </td>\n                            <td>{{ user.created_at | date }}</td>\n                            <td class=\"toggle_active\" v-if=\"isBoss\">\n                                <input type=\"checkbox\"\n                                    id=\"is_active{{$index}}\"\n                                    @click=\"toggleUserActive(user)\"\n                                    :disabled=\"toggling\"\n                                    checked=\"{{ user.is_active }}\"/>\n                                <label for=\"is_active{{$index}}\"\n                                    ></label>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"removeAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"移至回收站!\"\n                                        @click.stop=\"removeUser(user)\">\n                                    <i class=\"fa fa-trash\"></i>\n                                </button>\n                                <button class=\"btn btn-danger btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"彻底删除!\"\n                                        @click.stop=\"deleteUser(user)\">\n                                    <i class=\"fa fa-close\"></i>\n                                </button>\n                                <button class=\"btn btn-success btn-xs\"\n                                        v-if=\"deleteAble\"\n                                        data-toggle=\"tooltip\"\n                                        title=\"恢复用户!\"\n                                        @click.stop=\"restoreUser(user)\">\n                                    <i class=\"fa fa-plus-circle\"></i>\n                                </button>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div><!-- /.panel-body -->\n        </div><!-- /.panel -->\n    </div>\n</div>\n\n<form @submit.prevent=\"saveRoleToUser\" id=\"saveRoleToUser\">\n    <div class=\"modal fade\" id=\"assignRoleModal\">\n         <div class=\"modal-dialog modal-sm\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">选择角色</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        {{ error }}\n                    </div>\n                    <!-- Title field -->\n                    <div class=\"form-group\">\n                        <div class=\"checkbox\" v-for=\"role in allRoles\">\n                            <label>\n                                <input type=\"checkbox\"\n                                    v-model=\"saveRoles\"\n                                    value=\"{{ role.id }}\">\n                                {{ role.display_name }}\n                            </label>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"submit\"\n                            value=\"确定\"\n                            class=\"btn btn-success form-control\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
 
 /***/ },
 /* 17 */
@@ -3460,6 +3556,7 @@
 	//                                     <option value="tutorial">教程</option>
 	//                                     <option value="video">视频</option>
 	//                                     <option value="project">项目</option>
+	//                                     <option value="other">其他</option>
 	//                                 </select>
 	//                             </div>
 	//                         </div>
@@ -3781,7 +3878,7 @@
 /* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <button class=\"btn btn-success btn-lg\" @click=\"addLink()\">\n            <span class=\"fa fa-link\"></span> 添加链接\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"alert alert-danger\" v-show=\"hasError\">\n            {{ error }}\n        </div>\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                本期链接\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"link in links\">\n                            <td>{{ getNewsTitle(link.newsletter_id) }}</td>\n                            <td>{{ link.title }}</td>\n                            <td>\n                                <a href=\"{{ link.link }}\" target=\"_blank\">\n                                    {{ link.link }}\n                                </a>\n                            </td>\n                            <td>{{ link.type | type }}</td>\n                            <td>{{ link.note }}</td>\n                            <td>\n                                <a @click.stop=\"editLink(link)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteLink(link)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveLink\" id=\"saveLink\">\n    <div class=\"modal fade\" id=\"saveLinkModal\">\n         <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">链接管理</h4>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        <ul>\n                            <li v-for=\"error in errors\">{{ error }}</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <label for=\"title\">标题</label>\n                        <input type=\"text\"\n                            class=\"form-control\"\n                            id=\"title\"\n                            placeholder=\"GitHub Pages now faster and simpler with Jekyll 3.0\"\n                            v-model=\"link.title\">\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"link\">链接</label>\n                                <input type=\"text\"\n                                    class=\"form-control\"\n                                    id=\"link\"\n                                    placeholder=\"https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0\"\n                                    v-model=\"link.link\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"type\">类型</label>\n                                <select id=\"type\" v-model=\"link.type\" class=\"form-control\">\n                                    <option value=\"article\" selected>文章</option>\n                                    <option value=\"tutorial\">教程</option>\n                                    <option value=\"video\">视频</option>\n                                    <option value=\"project\">项目</option>\n                                </select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"domain\">主页</label>\n                                <input type=\"text\"\n                                    v-model=\"link.domain\"\n                                    id=\"domain\"\n                                    placeholder=\"https://github.com/\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"note\">备注</label>\n                                <input type=\"text\"\n                                    v-model=\"link.note\"\n                                    id=\"note\"\n                                    placeholder=\"jekyll3.0发布\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label>选择对应的newsletter</label>\n                        <select class=\"form-control\" v-model=\"link.newsletter_id\">\n                            <option v-for=\"newsletter in notPublishedNewsletters\" v-bind:value=\"newsletter.id\">\n                                {{ newsletter.title }}\n                            </option>\n                        </select>\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"submit\" value=\"添加\" class=\"btn btn-primary\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
+	module.exports = "\n<div class=\"row\" style=\"margin-bottom:15px;\">\n    <div class=\"col-xs-12\">\n        <button class=\"btn btn-success btn-lg\" @click=\"addLink()\">\n            <span class=\"fa fa-link\"></span> 添加链接\n        </button>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"alert alert-success\" v-show=\"success\">\n            {{ message }}\n        </div>\n        <div class=\"alert alert-danger\" v-show=\"hasError\">\n            {{ error }}\n        </div>\n        <div class=\"panel\">\n            <header class=\"panel-heading\">\n                本期链接\n            </header> <!-- panel-heading -->\n\n            <div class=\"panel-body\">\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th v-for=\"column in columns\">{{ column }}</th>\n                            <th width=\"1%\"><i class=\"fa fa-edit\"></i></th>\n                            <th width=\"1%\" v-if=\"isBoss\"><i class=\"fa fa-remove\"></i></th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr v-for=\"link in links\">\n                            <td>{{ getNewsTitle(link.newsletter_id) }}</td>\n                            <td>{{ link.title }}</td>\n                            <td>\n                                <a href=\"{{ link.link }}\" target=\"_blank\">\n                                    {{ link.link }}\n                                </a>\n                            </td>\n                            <td>{{ link.type | type }}</td>\n                            <td>{{ link.note }}</td>\n                            <td>\n                                <a @click.stop=\"editLink(link)\">\n                                    <i class=\"fa fa-edit\"></i>\n                                </a>\n                            </td>\n                            <td v-if=\"isBoss\">\n                                <a @click.stop=\"deleteLink(link)\" class=\"delete\">\n                                    <i class=\"fa fa-remove\"></i>\n                                </a>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div class=\"table-foot\">\n                    <ul class=\"pagination pagination-sm no-margin pull-right\">\n                        <p class=\"pagination__text\">共 {{ total_page }} 页， 当前 {{ current_page }} 页</p>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('first')\"\n                                :disabled=\"prev_page_url == null\">首页</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('prev')\"\n                                :disabled=\"prev_page_url == null\">«</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('next')\"\n                                :disabled=\"next_page_url == null\">»</button>\n                        </li>\n                        <li>\n                            <button class=\"btn\"\n                                @click.stop=\"paginate('last')\"\n                                :disabled=\"next_page_url == null\">尾页</button>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<form @submit.prevent=\"saveLink\" id=\"saveLink\">\n    <div class=\"modal fade\" id=\"saveLinkModal\">\n         <div class=\"modal-dialog\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n                    <h4 class=\"modal-title\">链接管理</h4>\n\n                    <div class=\"alert alert-danger\" v-if=\"hasError\">\n                        <ul>\n                            <li v-for=\"error in errors\">{{ error }}</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"modal-body\">\n                    <div class=\"form-group\">\n                        <label for=\"title\">标题</label>\n                        <input type=\"text\"\n                            class=\"form-control\"\n                            id=\"title\"\n                            placeholder=\"GitHub Pages now faster and simpler with Jekyll 3.0\"\n                            v-model=\"link.title\">\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"link\">链接</label>\n                                <input type=\"text\"\n                                    class=\"form-control\"\n                                    id=\"link\"\n                                    placeholder=\"https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0\"\n                                    v-model=\"link.link\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"type\">类型</label>\n                                <select id=\"type\" v-model=\"link.type\" class=\"form-control\">\n                                    <option value=\"article\" selected>文章</option>\n                                    <option value=\"tutorial\">教程</option>\n                                    <option value=\"video\">视频</option>\n                                    <option value=\"project\">项目</option>\n                                    <option value=\"other\">其他</option>\n                                </select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"domain\">主页</label>\n                                <input type=\"text\"\n                                    v-model=\"link.domain\"\n                                    id=\"domain\"\n                                    placeholder=\"https://github.com/\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"form-group\">\n                                <label for=\"note\">备注</label>\n                                <input type=\"text\"\n                                    v-model=\"link.note\"\n                                    id=\"note\"\n                                    placeholder=\"jekyll3.0发布\"\n                                    class=\"form-control\">\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label>选择对应的newsletter</label>\n                        <select class=\"form-control\" v-model=\"link.newsletter_id\">\n                            <option v-for=\"newsletter in notPublishedNewsletters\" v-bind:value=\"newsletter.id\">\n                                {{ newsletter.title }}\n                            </option>\n                        </select>\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"submit\" value=\"添加\" class=\"btn btn-primary\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</form>\n";
 
 /***/ },
 /* 45 */

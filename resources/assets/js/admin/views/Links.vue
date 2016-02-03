@@ -126,6 +126,7 @@
                                     <option value="tutorial">教程</option>
                                     <option value="video">视频</option>
                                     <option value="project">项目</option>
+                                    <option value="other">其他</option>
                                 </select>
                             </div>
                         </div>

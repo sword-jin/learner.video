@@ -14,19 +14,18 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $people = [
-            ['username' => 'user', 'email' => 'user@user.com', 'password' => '121212'],
-            ['username' => 'admin', 'email' => 'admin@admin.com', 'password' => '121212'],
-            ['username' => 'boss', 'email' => 'boss@boss.com', 'password' => '121212'],
+            'username' => 'boss',
+            'email' => 'boss@boss.com',
+            'password' => '121212'
         ];
-        foreach($people as $index => $person) {
-            $user = User::create([
-                'username' => $person['username'],
-                'email' => $person['email'],
-                'password' => Hash::make($person['password']),
-                'avatar' => AvatarManager::generateAvatar($person['username'])
-            ]);
 
-            $user->roles()->attach($index + 1);
-        }
+        $user = User::create([
+            'username' => $people['username'],
+            'email' => $people['email'],
+            'password' => Hash::make($people['password']),
+            'avatar' => AvatarManager::generateAvatar($people['username'])
+        ]);
+
+        $user->roles()->attach(3);
     }
 }

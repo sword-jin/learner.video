@@ -26,10 +26,12 @@
                     <thead>
                         <tr>
                             <td v-for="column in columns">{{ column }}</td>
+                            <td v-if="isBoss">冻结</td>
+                            <td v-if="isBoss">删除</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="user in notContainBoss">
+                        <tr v-for="user in users">
                             <td>{{ user.id }}</td>
                             <td><img :src="user.avatar" width="20"></td>
                             <td>{{ user.username }}</td>
@@ -39,8 +41,14 @@
                                     class="label label-{{ role.name }}">
                                     {{ role.display_name }}
                                 </span>
+                                <button class="btn btn-danger btn-xs pull-right"
+                                    v-if="isBoss"
+                                    @click="assignRole(user)">
+                                    <i class="fa fa-user"></i>
+                                </button>
                             </td>
-                            <td class="toggle_active">
+                            <td>{{ user.created_at | date }}</td>
+                            <td class="toggle_active" v-if="isBoss">
                                 <input type="checkbox"
                                     id="is_active{{$index}}"
                                     @click="toggleUserActive(user)"
@@ -49,8 +57,7 @@
                                 <label for="is_active{{$index}}"
                                     ></label>
                             </td>
-                            <td>{{ user.created_at | date }}</td>
-                            <td>
+                            <td v-if="isBoss">
                                 <button class="btn btn-danger btn-xs"
                                         v-if="removeAble"
                                         data-toggle="tooltip"
@@ -105,6 +112,40 @@
         </div><!-- /.panel -->
     </div>
 </div>
+
+<form @submit.prevent="saveRoleToUser" id="saveRoleToUser">
+    <div class="modal fade" id="assignRoleModal">
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">选择角色</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" v-if="hasError">
+                        {{ error }}
+                    </div>
+                    <!-- Title field -->
+                    <div class="form-group">
+                        <div class="checkbox" v-for="role in allRoles">
+                            <label>
+                                <input type="checkbox"
+                                    v-model="saveRoles"
+                                    value="{{ role.id }}">
+                                {{ role.display_name }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit"
+                            value="确定"
+                            class="btn btn-success form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 </template>
 
 <script>
@@ -117,9 +158,7 @@ module.exports = {
                 '用户名',
                 '邮箱',
                 '身份',
-                '状态',
-                '注册时间',
-                '操作'
+                '注册时间'
             ],
             users: [],
             total: 0,
@@ -133,9 +172,15 @@ module.exports = {
 
             success: false,
             message: '',
+            hasError: false,
+            error: '',
 
             model: 'active',
-            toggling: false
+            toggling: false,
+
+            allRoles: [], // all roles from db.
+            saveRoles: [], // roles form form.
+            user: {} // to assign user.
         }
     },
 
@@ -143,6 +188,8 @@ module.exports = {
 
     created() {
         this.getData(this.first_page_url);
+
+        this.getAllRoles();
     },
 
     computed: {
@@ -156,9 +203,6 @@ module.exports = {
             let names = this.roles.map(role => role.name);
 
             return names.indexOf('boss') != -1;
-        },
-        notContainBoss() {
-            return this.users.filter(user => user.roles[0].name != 'boss');
         }
     },
 
@@ -184,8 +228,15 @@ module.exports = {
     },
 
     methods: {
+        getAllRoles() {
+            this.$http.get('/admin/roles')
+                .then(response => {
+                    this.allRoles = response.data.roles;
+                });
+        },
+
         getData(url) {
-            this.$http.get(url).then(function(response) {
+            this.$http.get(url).then(response => {
                 let data = response.data;
 
                 this.users = data.data;
@@ -196,7 +247,7 @@ module.exports = {
                 this.prev_page_url = data.prev_page_url;
                 this.next_page_url = data.next_page_url;
                 this.last_page_url = this.first_page_url + '?page=' + this.total_page;
-            }.bind(this));
+            });
         },
 
         getTotalPage(total, per_page) {
@@ -229,7 +280,7 @@ module.exports = {
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
-                    this.displayMessage(response.data.message);
+                    this.showMessage(response.data.message);
                 });
         },
 
@@ -238,7 +289,7 @@ module.exports = {
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
-                    this.displayMessage(response.data.message);
+                    this.showMessage(response.data.message);
                 });
         },
 
@@ -247,26 +298,26 @@ module.exports = {
                 .then(function(response) {
                     this.removeUserFromUserList(user);
 
-                    this.displayMessage(response.data.message);
+                    this.showMessage(response.data.message);
                 });
         },
 
         toggleUserActive(user) {
             if (this.toggling) {
-                this.displayMessage('正在修改用户状态');
+                this.showMessage('正在修改用户状态');
             }
 
             this.toggling = true;
 
             this.$http.put('/admin/users/toggleActive/' + user.id)
                 .then(function(response) {
-                    this.displayMessage(response.data.message);
+                    this.showMessage(response.data.message);
                     this.toggling = false;
                     // this.removeUserFromUserList(user);
                 });
         },
 
-        displayMessage(message) {
+        showMessage(message) {
             this.success = true;
             this.message = message;
 
@@ -277,6 +328,47 @@ module.exports = {
 
         removeUserFromUserList(user) {
             this.users.$remove(user);
+        },
+
+        assignRole(user) {
+            jQuery('#assignRoleModal').modal('show');
+            this.user = user;
+
+            this.saveRoles = user.roles.map(role => '' + role.id);
+        },
+
+        saveRoleToUser() {
+            this.$http.post('/admin/roles/user/' + this.user.id, {
+                roles: this.saveRoles
+            })
+            .then(response => {
+                let data = response.data;
+                let index = this.findIndexById(data.user.id);
+
+                this.showMessage(data.message);
+
+                this.users.$set(index, data.user);
+
+                jQuery('#assignRoleModal').modal('hide');
+            })
+            .catch(response => {
+                this.showError(response.data.error);
+            });
+        },
+
+        findIndexById(id) {
+            var ids = this.users.map(u => u.id);
+
+            return ids.indexOf(parseInt(id));
+        },
+
+        showError(error) {
+            this.hasError = true;
+            this.error = error;
+
+            setTimeout(() => {
+                this.hasError = false;
+            }, 2000);
         }
     }
 }
