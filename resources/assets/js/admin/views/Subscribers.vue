@@ -86,7 +86,7 @@
                                 <span class="label label-danger">未发布</span>
                             </td>
                             <td v-if="newsletter.is_published">
-                                <a href="/newsletter/{{ newsletter.id }}">查看</a>
+                                <a href="/newsletters/{{ newsletter.id }}">查看</a>
                             </td>
                             <td v-else>
                                 <a @click.stop="publishNewsletter(newsletter)" class="btn btn-primary btn-xs" :disabled="publishing">发布</a>

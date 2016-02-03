@@ -6,7 +6,7 @@
         <ul class="list-group">
             @foreach ($category->getCategories() as $category)
                 @if (count($category->series))
-                    <a href="{{ route('category', $category->name) }}"
+                    <a href="{{ route('categories', $category->name) }}"
                         class="list-group-item list--item{{ categoryIsActive($category->name) }}"
                     >
                         <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" width="30">

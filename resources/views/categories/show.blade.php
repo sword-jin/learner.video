@@ -32,9 +32,11 @@ Learner.video 下 {{ $category->name }} 的所有系列
                     @if (count($category->series))
                         @foreach (array_chunk($category->series->all(), 4) as $row)
                             @foreach ($row as $series)
-                                <div class="col-md-4 col-sm-6">
-                                    @include('partials.seriesCard')
-                                </div>
+                                @if (count($series->videos))
+                                    <div class="col-md-4 col-sm-6">
+                                        @include('partials.seriesCard')
+                                    </div>
+                                @endif
                             @endforeach
                         @endforeach
                     @else
