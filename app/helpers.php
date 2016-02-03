@@ -47,8 +47,8 @@ function isActive($route)
  */
 function categoryIsActive($name)
 {
-    return route('category', $name) == url('categories/' . $name) ||
-        route('category', $name) == url('categories/' . $name . '#*') ? ' active' : ':';
+    return route('categories', $name) == URL::current() ||
+        route('categories', $name) == URL::current() . '#*' ? ' active' : ':';
 }
 
 /**
