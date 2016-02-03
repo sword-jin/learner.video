@@ -33,5 +33,7 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 @yield('script')
 @include('flashy::message')
+@yield('partials.analytics.baidu')
+@yield('partials.analytics.google')
 </body>
 </html>
