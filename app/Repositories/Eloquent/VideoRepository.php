@@ -43,7 +43,10 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
      */
     public function findAll()
     {
-        return $this->model->orderBy('published_at', 'DESC')->get();
+        return $this->model
+                    ->orderBy('series_id', 'DESC')
+                    ->orderBy('published_at', 'DESC')
+                    ->get();
     }
 
     public function hasChanged($id, $resource_type, $resource_id)

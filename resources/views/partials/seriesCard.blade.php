@@ -16,7 +16,7 @@
     <div class="card__details">
         <ul class="card__category">
             @foreach ($series->categories as $category)
-                <li class="label label--{{ $category->name }}">{{ $category->name }}</li>
+                <li class="label label--other label--{{ $category->name }}">{{ $category->name }}</li>
             @endforeach
         </ul>
         <h3 class="card__title">
