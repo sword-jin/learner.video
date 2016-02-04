@@ -13,18 +13,42 @@ use Learner\Repositories\CategoryRepositoryInterface;
 
 class CategoryController extends BaseController
 {
+    /**
+     * Category repository.
+     *
+     * @var \Learner\Repositories\CategoryRepositoryInterface $categories
+     */
     protected $categories;
 
+    /**
+     * Instance category repository.
+     *
+     * @param \Learner\Repositories\CategoryRepositoryInterface $categories
+     */
     public function __construct(CategoryRepositoryInterface $categories)
     {
         $this->categories = $categories;
     }
 
+    /**
+     * Get all categories.
+     *
+     * /admin/categories get
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Category[]
+     */
     public function index()
     {
         return $this->categories->findAll();
     }
 
+    /**
+     * Store a category.
+     *
+     * /admin/categories post
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store()
     {
         $form = $this->categories->getCreateForm();
@@ -43,6 +67,15 @@ class CategoryController extends BaseController
         return $this->responseJson(['message' => '分类创建成功', 'data' => $data]);
     }
 
+    /**
+     * Update a category.
+     *
+     * /admin/categories/update/{id}
+     *
+     * @param  integer $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update($id)
     {
         $form = $this->categories->getUpdateForm();
@@ -70,6 +103,16 @@ class CategoryController extends BaseController
         return $this->responseJson(['message' => '分类修改成功', 'data' => $category]);
     }
 
+    /**
+     * Delete a category.
+     *
+     * /admin/categories/{id}
+     *
+     * @param  Request $request
+     * @param  integer  $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destory(Request $request, $id)
     {
         $truePassword = Auth::user()->password;

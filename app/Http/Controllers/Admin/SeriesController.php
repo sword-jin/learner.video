@@ -44,6 +44,8 @@ class SeriesController extends BaseController
     /**
      * Return all series and relation.
      *
+     * /admin/series get
+     *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
      */
     public function index()
@@ -56,6 +58,8 @@ class SeriesController extends BaseController
 
     /**
      * Create a new series.
+     *
+     * /admin/series post
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -78,6 +82,8 @@ class SeriesController extends BaseController
 
     /**
      * Update series.
+     *
+     * /admin/series/{id} put
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -107,6 +113,8 @@ class SeriesController extends BaseController
 
     /**
      * Delete series.
+     *
+     * /admin/series/{id} delete
      *
      * @return \Illuminate\Http\JsonResponse
      */

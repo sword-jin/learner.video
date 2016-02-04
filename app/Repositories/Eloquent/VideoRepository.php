@@ -49,6 +49,15 @@ class VideoRepository extends AbstractRepository implements VideoRepositoryInter
                     ->get();
     }
 
+    /**
+     * Check the video resource changed.
+     *
+     * @param  integer  $id
+     * @param  string  $resource_type
+     * @param  string  $resource_id
+     *
+     * @return boolean
+     */
     public function hasChanged($id, $resource_type, $resource_id)
     {
         $oldVideo = $this->findById($id);

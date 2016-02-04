@@ -7,6 +7,13 @@ use Learner\Models\User;
 interface UserRepositoryInterface
 {
     /**
+     * Get the user creation form service.
+     *
+     * @return \Learner\Services\Forms\UserRegisterFormService.
+     */
+    public function getRegisterForm();
+
+    /**
      * Create a new user in the database.
      *
      * @param  array  $data
@@ -24,11 +31,14 @@ interface UserRepositoryInterface
     public function attachRole(User $user, $roleOrRoleId);
 
     /**
-     * Get the user creation form service.
+     * Give user one or more roles.
      *
-     * @return \Learner\Services\Forms\UserRegisterFormService.
+     * @param  integer $userId
+     * @param  array $roleIds
+     *
+     * @return \Learner\Models\User
      */
-    public function getRegisterForm();
+    public function attachRoleById($userId, $roleIds);
 
     /**
      * Find user by id with trashed.

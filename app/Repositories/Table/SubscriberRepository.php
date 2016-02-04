@@ -34,18 +34,6 @@ class SubscriberRepository extends AbstractTableRepository implements Subscriber
     }
 
     /**
-     * Whether the email exists in db.
-     *
-     * @param  integer $email
-     *
-     * @return boolean
-     */
-    public function exists($email)
-    {
-        return $this->table->whereEmail($email)->count() !== 0;
-    }
-
-    /**
      * Find all email.
      *
      * @param integer $perPage
@@ -67,5 +55,17 @@ class SubscriberRepository extends AbstractTableRepository implements Subscriber
     public function deleteByEmail($email)
     {
         return $this->table->whereEmail($email)->delete();
+    }
+
+    /**
+     * Whether the email exists in db.
+     *
+     * @param  integer $email
+     *
+     * @return boolean
+     */
+    protected function exists($email)
+    {
+        return $this->table->whereEmail($email)->count() !== 0;
     }
 }

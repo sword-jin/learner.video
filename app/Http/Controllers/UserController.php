@@ -7,6 +7,9 @@ use Learner\Http\Controllers\BaseController;
 
 class UserController extends BaseController
 {
+    /**
+     * User must login to get own home.
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -14,6 +17,8 @@ class UserController extends BaseController
 
     /**
      * Personal home page.
+     *
+     * /user get
      *
      * @return \Illuminate\View\View
      */

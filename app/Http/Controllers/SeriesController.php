@@ -35,7 +35,9 @@ class SeriesController extends BaseController
     }
 
     /**
-     * Route series. /series
+     * Route series.
+     *
+     * /series get
      *
      * @return \Illuminate\View\View
      */
@@ -47,7 +49,9 @@ class SeriesController extends BaseController
     }
 
     /**
-     * Route series.show /series/id
+     * Route series.show
+     *
+     * /series/{id} get
      *
      * @param  string $slug
      *
@@ -61,7 +65,9 @@ class SeriesController extends BaseController
     }
 
     /**
-     * Show series.video.show /series/id/videos/id
+     * Show series.video.show
+     *
+     * /series/id/videos/{id} get
      *
      * @param  integer $id
      * @param  integer $uid

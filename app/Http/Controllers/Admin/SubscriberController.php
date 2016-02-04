@@ -28,6 +28,8 @@ class SubscriberController extends BaseController
     /**
      * Get all subscribers.
      *
+     * /admin/subscribers get
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -39,6 +41,8 @@ class SubscriberController extends BaseController
 
     /**
      * Remove a subscriber from database.
+     *
+     * /admin/subscribers/{email} delete
      *
      * @param  integer $email
      *

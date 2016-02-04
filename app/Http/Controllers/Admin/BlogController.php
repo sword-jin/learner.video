@@ -29,6 +29,8 @@ class BlogController extends BaseController
     /**
      * Get all blogs with relation.
      *
+     * /admin/blogs get
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -40,6 +42,8 @@ class BlogController extends BaseController
 
     /**
      * Save created blog.
+     *
+     * /admin/blogs post
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -67,6 +71,8 @@ class BlogController extends BaseController
     /**
      * Edit the blog.
      *
+     * /admin/blogs/{id} get
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -80,6 +86,8 @@ class BlogController extends BaseController
 
     /**
      * Update the blog.
+     *
+     * /admin/blogs/{id} put
      *
      * @param  integer $id
      *
@@ -101,6 +109,8 @@ class BlogController extends BaseController
     /**
      * Delete a video.
      *
+     * /admin/blogs/{id} delete
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -119,6 +129,8 @@ class BlogController extends BaseController
     /**
      * Toggle blog published.
      *
+     * /admin/blogs/togglePublished/{id} put
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -136,6 +148,8 @@ class BlogController extends BaseController
 
     /**
      * Toggle blog toped.
+     *
+     * /admin/blogs/toggleTop/{id} put
      *
      * @param  integer $id
      *

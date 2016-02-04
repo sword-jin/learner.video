@@ -11,14 +11,14 @@ use Learner\Repositories\SubscriberRepositoryInterface;
 class NewsletterController extends BaseController
 {
     /**
-     * Subscriber repository
+     * Subscriber repository.
      *
      * @var \Learner\Repositories\SubscriberRepositoryInterface
      */
     protected $subscribers;
 
     /**
-     * Newsletter repository
+     * Newsletter repository.
      *
      * @var \Learner\Repositories\NewsRepositoryInterface
      */
@@ -39,6 +39,8 @@ class NewsletterController extends BaseController
      /**
      * Get newsletters list.
      *
+     * /newsletters get
+     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -50,6 +52,8 @@ class NewsletterController extends BaseController
 
     /**
      * Show a newsletter.
+     *
+     * /newsletters/{id} get
      *
      * @param  integer $id
      *
@@ -63,7 +67,9 @@ class NewsletterController extends BaseController
     }
 
     /**
-     * Subscribe a user to list.
+     * User subscribe to learner.
+     *
+     * /newsletters/subscribe post
      *
      * @param  \Illuminate\Http\Request $request
      *
@@ -89,7 +95,9 @@ class NewsletterController extends BaseController
     }
 
     /**
+     * User unsubscribe to learner.
      *
+     * /newsletters/unsubscribe post
      *
      * @param  \Illuminate\Http\Request $request
      *

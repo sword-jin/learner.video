@@ -22,6 +22,15 @@ class CategoryController extends BaseController
         $this->categories = $categories;
     }
 
+    /**
+     * Find all series in a category.
+     *
+     * /categories/{name} get
+     *
+     * @param  string $name
+     *
+     * @return \Illuminate\View\View
+     */
     public function show($name)
     {
         $category = $this->categories->findRelationByName($name);

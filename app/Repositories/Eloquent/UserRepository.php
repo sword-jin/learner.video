@@ -83,7 +83,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     }
 
     /**
-     * Find user with relation.
+     * Give user one or more roles.
      *
      * @param  integer $userId
      * @param  array $roleIds

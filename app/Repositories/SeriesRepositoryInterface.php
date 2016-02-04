@@ -19,6 +19,13 @@ interface SeriesRepositoryInterface
     public function getUpdateForm();
 
     /**
+     * List all series' id and title for categories list.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function listIdAndTitle();
+
+    /**
      * Create a new Series.
      *
      * @param  array $data
@@ -52,4 +59,25 @@ interface SeriesRepositoryInterface
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
      */
     public function findAllWithRelation();
+
+    /**
+     * Return series and relation. (video is published.)
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationHavePublishedVideo();
+
+    /**
+     * Limit series and relation for home page. (video is published.)
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationHavePublishedVideoLimit($limit = 4);
+
+    /**
+     * Return series and relation by slug. (video is published.)
+     *
+     * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Series[]
+     */
+    public function findAllWithRelationBySlug($slug);
 }
