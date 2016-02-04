@@ -27,7 +27,7 @@
                             <h3>{{ $link->title }}</h3>
                         </a>
                         <p>{{ $link->note }}</p>
-                        <p>{{ dateForNewsletter($newsletter->updated_at) }}</p>
+                        <p>{{ timeToDate($newsletter->updated_at) }}</p>
                     </article>
                 </div>
             @endforeach

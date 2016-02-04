@@ -30,7 +30,7 @@ RryLee 的博客
                         </div>
                         <div class="blog__content">
                             <div class="blog__created_at">
-                                {{ dateHuman($blog->created_at) }}
+                                {{ timeToDate($blog->created_at) }}
                             </div>
                             <h2 class="blog__title">
                                 <a href="{{ route('blogs.show', $blog->id) }}">{{ $blog->title }}</a>

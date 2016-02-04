@@ -64,13 +64,13 @@ function dateHuman($date)
 }
 
 /**
- * Format time for newsletter.
+ * Format time to date.
  *
  * @param  string $date
  *
  * @return string
  */
-function dateForNewsletter($date)
+function timeToDate($date)
 {
     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->toDateString();
 }

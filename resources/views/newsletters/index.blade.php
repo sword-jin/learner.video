@@ -26,7 +26,7 @@ learner.video newsletter
                         <a href="{{ route('newsletters.show', $newsletter->id) }}">
                             <h3>{{ $newsletter->title }}</h3>
                         </a>
-                        <p>{{ dateForNewsletter($newsletter->updated_at) }}</p>
+                        <p>{{ timeToDate($newsletter->updated_at) }}</p>
                     </article>
                 </div>
             @endforeach
