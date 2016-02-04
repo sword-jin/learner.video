@@ -37,6 +37,7 @@
         left: 18%;
         @media #{$xs} {
             left: 8%;
+            width: 85%;
         }
     }
 
@@ -52,7 +53,16 @@
         a {
             color: $font-color;
         }
+        @media #{$xs} {
+            & {
+                padding-top: 0;
+            }
+            a {
+                font-size: 15px;
+            }
+        }
     }
+
 }
 
 .blog__body {

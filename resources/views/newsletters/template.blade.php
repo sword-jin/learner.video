@@ -40,7 +40,7 @@
                           <td class="hi" style="font-size: 16px; line-height: 21px; padding: 30px 20px; vertical-align: top" align="center" valign="top">
                             <h2 style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; color: #454547; display: block !important; font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif !important; font-size: 16px; font-weight: 400; line-height: 21px; margin: 0; padding: 0">
                               {{ $newsletter->title }} &nbsp;
-                              <i style="color: #77777b;">{{ dateForNewsletter($newsletter->updated_at) }}</i>
+                              <i style="color: #77777b;">{{ timeToDate($newsletter->updated_at) }}</i>
                             </h2>
                           </td>
                         </tr>
