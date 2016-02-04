@@ -58,7 +58,7 @@
             <div class="row">
                 @foreach ($series as $row)
                     @if (count($row->videos))
-                        <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                        <div class="col-lg-3 col-md-3 col-sm-6">
                             @include('partials.seriesCard', ['series' => $row])
                         </div>
                     @endif
@@ -66,7 +66,7 @@
             </div>
 
             <div>
-                <a href="#" class="btn btn-success btn-wiggle">浏览更多</a>
+                <a href="{{ route('series') }}" class="btn btn-success btn-wiggle">浏览更多</a>
             </div>
         </div>
     </section>

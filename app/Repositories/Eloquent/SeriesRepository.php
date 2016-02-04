@@ -30,7 +30,10 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
 
     public function listIdAndTitle()
     {
-        return $this->model->select('id', 'title')->get();
+        return $this->model
+                    ->select('id', 'title')
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
     }
 
     /**

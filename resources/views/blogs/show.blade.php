@@ -11,8 +11,12 @@
 @stop
 
 @section('style')
-<link rel="stylesheet" href="//cdn.bootcss.com/prism/0.0.1/prism.min.css">
-<link rel="stylesheet" type="text/css" href="{{ asset('build/css/prism-cop.css') }}">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.1.0/styles/github-gist.min.css">
+<style>
+pre {
+    background-color: transparent;
+}
+</style>
 @stop
 
 @section('jumbotron')
@@ -26,7 +30,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="blog__body">
                 {!! $parsedown->text($blog->body) !!}
             </div>
@@ -38,5 +42,6 @@
 @stop
 
 @section('script')
-<script src="//cdn.bootcss.com/prism/0.0.1/prism.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.1.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 @stop
