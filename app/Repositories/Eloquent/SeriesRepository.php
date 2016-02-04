@@ -28,14 +28,6 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
         $this->model = $series;
     }
 
-    public function listIdAndTitle()
-    {
-        return $this->model
-                    ->select('id', 'title')
-                    ->orderBy('created_at', 'DESC')
-                    ->get();
-    }
-
     /**
      * Get the user creation form service.
      *
@@ -54,6 +46,19 @@ class SeriesRepository extends AbstractRepository implements SeriesRepositoryInt
     public function getUpdateForm()
     {
         return new UpdateSeriesFormService;
+    }
+
+    /**
+     * List all series' id and title for categories list.
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function listIdAndTitle()
+    {
+        return $this->model
+                    ->select('id', 'title')
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
     }
 
     /**

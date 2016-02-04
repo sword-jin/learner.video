@@ -5,8 +5,6 @@ elixir(function(mix) {
        .sass('lib.scss')
        .copy('node_modules/font-awesome/fonts', 'public/build/fonts');
 
-    mix.copy('resources/assets/css/prism-cop.css', 'public/build/css/prism-cop.css');
-
     mix.styles([
         'lib/ionicons.min.css',
         'lib/style.css'

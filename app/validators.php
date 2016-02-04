@@ -1,5 +1,6 @@
 <?php
 
+// filter custom username.
 $validator->extend(
     'valid_username',
     function($attribute, $value, $parameters) {

@@ -31,6 +31,8 @@ class UserController extends BaseController
     /**
      * Get all active users.
      *
+     * /admin/users get
+     *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
     public function activeUsers()
@@ -40,6 +42,8 @@ class UserController extends BaseController
 
     /**
      * Find all not active users paginated.
+     *
+     * /admin/users/notActive get
      *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
@@ -51,6 +55,8 @@ class UserController extends BaseController
     /**
      * Find all users in trash paginated.
      *
+     * /admin/users/trashed get
+     *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\User[]
      */
     public function trashedUsers()
@@ -60,6 +66,8 @@ class UserController extends BaseController
 
     /**
      * Toggle user active.
+     *
+     * /admin/users/toggleActive/{id} put
      *
      * @param  integer $id
      *
@@ -79,6 +87,8 @@ class UserController extends BaseController
     /**
      * Remove user to trash.
      *
+     * /admin/users/remove/{id} delete
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -95,6 +105,8 @@ class UserController extends BaseController
     /**
      * Delete user from database.
      *
+     * /admin/users/delete/{id} delete
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -110,6 +122,8 @@ class UserController extends BaseController
 
     /**
      * Restore the user.
+     *
+     * /users/restore/{id} put
      *
      * @param  integer $id
      *

@@ -28,6 +28,8 @@ class LinkController extends BaseController
     /**
      * Get all links.
      *
+     * /admin/links get
+     *
      * @return Illuminate\Database\Eloquent\Collection|\Learner\Models\Link[]
      */
     public function index()
@@ -39,6 +41,8 @@ class LinkController extends BaseController
 
     /**
      * Store the link.
+     *
+     * /admin/links post
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -62,6 +66,8 @@ class LinkController extends BaseController
 
     /**
      * Update link by id.
+     *
+     * /admin/links/{id} put
      *
      * @param  integer $id
      *
@@ -87,6 +93,8 @@ class LinkController extends BaseController
 
     /**
      * Delete a link.
+     *
+     * /admin/links/{id} delete
      *
      * @param  integer $id
      *

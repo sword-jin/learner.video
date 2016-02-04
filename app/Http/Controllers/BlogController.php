@@ -25,8 +25,10 @@ class BlogController extends BaseController
     }
 
     /**
-     * Get all published blogs. /blogs
-     * s
+     * Get all published blogs.
+     *
+     * /blogs get
+     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -38,6 +40,8 @@ class BlogController extends BaseController
 
     /**
      * Show blog.
+     *
+     * /blogs/{id} get
      *
      * @param  integer $id
      *

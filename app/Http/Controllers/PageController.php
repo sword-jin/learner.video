@@ -25,7 +25,9 @@ class PageController extends BaseController
     }
 
     /**
-     * Home page. /
+     * Home page.
+     *
+     * / get
      *
      * @return \Illuminate\View\View
      */

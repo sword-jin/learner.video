@@ -31,6 +31,8 @@ class NewsletterController extends BaseController
     /**
      * All newsletter.
      *
+     * /admin/newsletters get
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -41,7 +43,9 @@ class NewsletterController extends BaseController
     }
 
     /**
-     * Init the first newsletter.
+     * Store the first newsletter.
+     *
+     * /admin/newsletters post
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -58,6 +62,8 @@ class NewsletterController extends BaseController
     /**
      * Delete a newsletter.
      *
+     * /newsletters/publish/{id} delete
+     *
      * @param  integer $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -73,6 +79,8 @@ class NewsletterController extends BaseController
 
     /**
      * Publish a newsletter.
+     *
+     * /admin/newsletters/publish/{id} post
      *
      * @param  integer $id
      *

@@ -20,7 +20,9 @@ class InfoController extends BaseController
     /**
      * Get the auth user information.
      *
-     * @return [type] [description]
+     * /admin/fetchAuth get
+     *
+     * @return \Learner\Models\User
      */
     public function auth()
     {
@@ -29,6 +31,8 @@ class InfoController extends BaseController
 
     /**
      * Get some data to dashboard.
+     *
+     * /amdmin/dashboard/information get
      *
      * @return \Illuminate\Http\JsonResponse
      */

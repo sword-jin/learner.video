@@ -1,27 +1,62 @@
-## Laravel PHP Framework
+## learner.video
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(Vue 主要用在了后台的部分)， 方便的搭建个人 CMS。
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## 日志
 
-## Official Documentation
+## 主要功能
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+* 视频管理 (vimeo(清晰，快，无障碍), youtube(未), youku(未))
 
-## Contributing
+* 博客管理
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+* 发布 newsletter
 
-## Security Vulnerabilities
+## 安装
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+克隆之后　[composer install]，然后 migrate 导入数据库，你就可以使用
+
+账号: boss
+密码: 121212
+
+登陆到后台了。
+
+## 一些依赖
+
+* [Zizaco/Entrust](https://github.com/Zizaco/entrust) -- 待移除
+
+* [mercuryseries/flashy](https://github.com/mercuryseries/flashy)
+
+* [laravolt/avatar](https://github.com/laravolt/avatar)
+
+* [erusev/parsedown](https://github.com/erusev/parsedown)
+
+* [spatie/laravel-newsletter](https://github.com/spatie/laravel-newsletter)
+
+## 注意
+
+可能不是都会出现的问题，　表默认的　created_at 都会有个　current timestamp 属性，需要手动移除，不然每次　update 都会自动重置　created 到当前时间。
+
+    ALTER table [表名] modify created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+然后就是　laravel5.2 之后移除　bindShared() 的问题，请手动修改安装滞之后的错误提示。
+
+## 角色
+
+目前有 user, admin, boss 三个角色，并不能通过后台添加更多。
+
+## Newsletter
+
+使用的 [Mailchimp](http://mailchimp.com/) 请手动设置你的 list-id 以及 app_key。
+
+当然欢迎订阅 [learner newsletter](http://learner.video/)
+
+## 贡献
+
+[讨论贴](http://learner.video/blogs/34).
 
 ### License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+learner.video [MIT license](http://opensource.org/licenses/MIT)

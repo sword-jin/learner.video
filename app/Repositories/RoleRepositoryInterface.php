@@ -12,4 +12,11 @@ interface RoleRepositoryInterface
      * @return \Learner\Models\Role
      */
     public function findByName($name);
+
+    /**
+     * List all role.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function listAll();
 }

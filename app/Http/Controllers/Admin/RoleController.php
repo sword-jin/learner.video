@@ -38,6 +38,8 @@ class RoleController extends BaseController
     /**
      * Get all roles.
      *
+     * /admin/roles get
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -49,6 +51,8 @@ class RoleController extends BaseController
 
     /**
      * Assign user roles.
+     *
+     * /roles/user/{id} post
      *
      * @param  interger $id
      *

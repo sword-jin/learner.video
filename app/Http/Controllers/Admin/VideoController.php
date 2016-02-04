@@ -12,18 +12,38 @@ use Learner\Repositories\SeriesRepositoryInterface;
 class VideoController extends BaseController
 {
     /**
-     * Video repository
+     * Video repository.
      *
-     * @var
+     * @var \Learner\Repositories\VideoRepositoryInterface
      */
     protected $videos;
 
+    /**
+     * Series repository.
+     *
+     * @var \Learner\Repositories\SeriesRepositoryInterface
+     */
+    protected $series;
+
+    /**
+     * Instance video repository and series repository.
+     *
+     * @param \Learner\Repositories\VideoRepositoryInterface  $videos
+     * @param \Learner\Repositories\SeriesRepositoryInterface $series
+     */
     public function __construct(VideoRepositoryInterface $videos, SeriesRepositoryInterface $series)
     {
         $this->videos = $videos;
         $this->series = $series;
     }
 
+    /**
+     * Get all videos.
+     *
+     * /admin/videos get
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $videos = $this->videos->findAll();
@@ -32,6 +52,13 @@ class VideoController extends BaseController
         return $this->responseJson(compact('videos', 'series'));
     }
 
+    /**
+     * Store a video.
+     *
+     * /admin/videos post
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store()
     {
         $form = $this->videos->getSaveForm();
@@ -52,6 +79,15 @@ class VideoController extends BaseController
         return $this->responseJson(['message' => '成功添加视频', 'video' => $video]);
     }
 
+    /**
+     * Update a video.
+     *
+     * /admin/videos/{id} put
+     *
+     * @param  integer $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update($id)
     {
         $form = $this->videos->getSaveForm();
@@ -74,6 +110,15 @@ class VideoController extends BaseController
         return $this->responseJson(['message' => '成功修改视频', 'video' => $video]);
     }
 
+    /**
+     * Delete a video
+     *
+     * /admin/videos/{id} delete
+     *
+     * @param  integer $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destory($id)
     {
         if ($this->videos->delete($id)) {
@@ -85,6 +130,14 @@ class VideoController extends BaseController
         }
     }
 
+    /**
+     * Get video information from remote api. (vimeo. youtube. youku)
+     *
+     * @param  string $type
+     * @param  integer $id
+     *
+     * @return array
+     */
     protected function getResourceInfo($type, $id)
     {
         return VideoApi::setType($type)->getVideoDetail($id);
