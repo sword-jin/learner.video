@@ -25,7 +25,7 @@ learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(V
 
 ## 一些依赖
 
-* [Zizaco/Entrust](https://github.com/Zizaco/entrust) -- 待移除
+* [Zizaco/Entrust](https://github.com/Zizaco/entrust)
 
 * [mercuryseries/flashy](https://github.com/mercuryseries/flashy)
 
