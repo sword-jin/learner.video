@@ -25,7 +25,7 @@ learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(V
 
 ## 一些依赖
 
-* [Zizaco/Entrust](https://github.com/Zizaco/entrust) -- 待移除
+* [Zizaco/Entrust](https://github.com/Zizaco/entrust)
 
 * [mercuryseries/flashy](https://github.com/mercuryseries/flashy)
 
@@ -41,7 +41,7 @@ learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(V
 
     ALTER table [表名] modify created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
-然后就是　laravel5.2 之后移除　bindShared() 的问题，请手动修改安装滞之后的错误提示。
+然后就是　laravel5.2 之后移除　bindShared() 的问题，请安装之后手动修改`bindShared`为`singleton` 。(vendor/zizaco/entrust/src/Entrust/EntrustServiceProvider.php:72)
 
 ## 角色
 
