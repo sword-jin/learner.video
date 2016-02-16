@@ -4,7 +4,11 @@
 
 learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(Vue 主要用在了后台的部分)， 方便的搭建个人 CMS。
 
+<iframe src="https://player.vimeo.com/video/155513106" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 日志
+
+* 2016-02-16 修改导航样式
 
 ## 主要功能
 
