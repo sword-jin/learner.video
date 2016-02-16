@@ -1,10 +1,10 @@
+> [部署learner.video](http://learner.video/series/learner-video/episodes/52)
+
 ## learner.video
 
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
 learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(Vue 主要用在了后台的部分)， 方便的搭建个人 CMS。
-
-<iframe src="https://player.vimeo.com/video/155513106" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ## 日志
 
