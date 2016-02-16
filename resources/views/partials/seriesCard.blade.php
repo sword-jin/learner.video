@@ -7,7 +7,7 @@
         <a href="{{ route('series.show', $series->slug) }}">
             <img
                 class="img-responsive"
-                src="{{ asset($series->image) }}" alt="">
+                src="{{ asset($series->image) }}" alt="{{ $series->title }}">
             <div class="card__overlay">
                 <i class="fa fa-play-circle-o"></i>
             </div>
