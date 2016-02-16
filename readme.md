@@ -1,3 +1,5 @@
+> [部署learner.video](http://learner.video/series/learner-video/episodes/52)
+
 ## learner.video
 
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
@@ -5,6 +7,8 @@
 learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(Vue 主要用在了后台的部分)， 方便的搭建个人 CMS。
 
 ## 日志
+
+* 2016-02-16 修改导航样式
 
 ## 主要功能
 

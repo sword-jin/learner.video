@@ -1,5 +1,5 @@
  <div class="comments">
-    <h2>Leave your everything. QAQ.</h2>
+    <h2>Leave your anything. QAQ.</h2>
     <div id="disqus_thread"></div>
  </div>
 <script>
