@@ -8,10 +8,6 @@
 欢迎来到Learner
 @stop
 
-@section('style')
-@include('partials.body-padding-fix')
-@stop
-
 @section('jumbotron')
     <section class="page-jumbotron newsletter">
         <div class="container">

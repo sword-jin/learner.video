@@ -8,10 +8,6 @@ Learner.video 下 {{ $category->name }} 的所有系列
 {{ $category->name }}
 @stop
 
-@section('style')
-@include('partials.body-padding-fix')
-@stop
-
 @section('jumbotron')
 <section class="page-jumbotron category-page-jumbotron">
     <div class="container">

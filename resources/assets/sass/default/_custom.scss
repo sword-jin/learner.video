@@ -10,12 +10,12 @@ body {
 
 @media #{$sm} {
     body {
-        padding-top: 88px;
+        padding-top: 87px;
     }
 }
 @media #{$xs} {
     body {
-        padding-top: 50px;
+        padding-top: 57px;
     }
 }
 
@@ -40,6 +40,10 @@ body {
 .video__list-time {
     font-style: italic;
     margin-right: 12px;
+}
+
+.no-margin {
+    margin: 0;
 }
 
 ::selection {

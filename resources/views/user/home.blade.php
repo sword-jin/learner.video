@@ -8,10 +8,6 @@
 {{ $user->username }} 的个人中心
 @stop
 
-@section('style')
-@include('partials.body-padding-fix')
-@stop
-
 @section('jumbotron')
 <section class="page-jumbotron user-page-jumbotron">
     <div class="container">
