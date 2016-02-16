@@ -8,10 +8,6 @@
 404
 @stop
 
-@section('style')
-@include('partials.body-padding-fix')
-@stop
-
 @section('jumbotron')
 <section class="page-jumbotron not-found-page-jumbotron">
     <div class="container">

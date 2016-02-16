@@ -18,7 +18,7 @@ class Navigation
             'route' => 'blogs'
         ],
         [
-            'display_name' => '资源',
+            'display_name' => 'Newletter',
             'route' => 'newsletters'
         ]
     ];

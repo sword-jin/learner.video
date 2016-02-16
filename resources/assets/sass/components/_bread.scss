@@ -1,5 +1,6 @@
 .learner-bread {
     font-family: 'Lobster', cursive;
+    font-size: 28px;
     @include anim(color, .18);
     .learner-bread--one {
         color: $bread-letter-one;

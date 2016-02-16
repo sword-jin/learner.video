@@ -1,158 +1,264 @@
-header nav.navbar {
-    margin: 0;
-    box-shadow: 0 1px 3px rgba(black, .2);
-    @include round(0);
-    @include anim(all, .3s);
+.learner-nav {
+    position: fixed;
+    top: 0px;
+    display: inline-table;
+    height: 87px;
+    background: #fff;
+    border-radius: 0;
+    border-bottom: none;
+    border-top: 2px solid #5ece80;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
 
-    &-default {
-        border: none;
-        background-color: #FFF;
+header nav.navbar-default .navbar-nav .active a {
+    color: #343b3d;
+    background: transparent;
+    border-bottom: 4px solid #5ece80;
+    text-shadow: none;
+}
 
-        & .navbar-nav {
-            & li {
-                margin-top: 4px;
-            }
+header .navbar-default .navbar-nav>.active>a,
+header .navbar-default .navbar-nav>.active>a:focus,
+header .navbar-default .navbar-nav>.active>a:hover {
+    color: $font-hover-color;
+    background-color: transparent;
+}
 
-            & a:hover {
-                color: $font-hover-color;
-                background-color: #fff;
-            }
+nav {
+    width: 100%;
+}
 
-            & .active a {
-                color: $font-hover-color;
-                background: transparent;
-                border-bottom: 4px solid $link-hover-color;
-                text-shadow: none;
+nav .container {
+    position: relative;
+    width: 1024px;
+    display: table-cell;
+    vertical-align: middle;
+    height: 80px;
+}
 
-                &:hover,
-                &:focus {
-                    background: transparent;
-                    text-shadow: none;
-                }
+.navbar-nav.navbar-right:last-child {
+    margin-right: -10px;
+}
 
-                .dropdown-menu>li>a:focus,
-                .dropdown-menu>li>a:hover {
-                    background-color: #FFF;
-                }
-            }
-            &>.open>a,
-            &>.open>a:focus,
-            &>.open>a:hover {
-                background-color: #FFF;
-                color: $font-hover-color;
-            }
-            &>.open>li {
-                margin-top: 0;
-            }
-        }
+.logo-light {
+    opacity: 1;
+    display: table-cell;
+    vertical-align: middle;
+    height: 55px;
 
-        & .navbar-toggle {
-            border: none;
-            &:focus,
-            &:hover {
-                background: none;
-            }
-            & .icon-bar {
-                background: $font-color;
-            }
-            &:hover .icon-bar {
-                background: $font-hover-color;
-            }
-        }
+    &:hover {
+        text-decoration: none;
     }
 }
 
-a.learner-bread:hover,
-a.learner-bread:active {
-    text-decoration: none;
-}
-
-.navbar-right li a {
-    // heigth: 80px;
-    // line-height: 50px;
-    color: $font-color;
-}
-
-.learner-logo {
+.logo {
     width: 32px;
-    box-shadow: 0 0 3px 1px rgba(0,0,0,.2), 0 0 2px 2px rgba(#5fcf80,.2);
 }
 
-@media #{$sm} {
-    header nav.navbar {
-        padding: 14px;
-        border-top: 2px solid $link-hover-color;
-    }
-    .navbar-nav {
-        margin-left: 28px;
-    }
-    .learner-bread {
-        font-size: 28px;
-    }
-    header nav.navbar .navbar-header {
-        margin-top: 6px;
+.auth-header {
+    z-index: 9;
+    padding-top: 14px;
+    padding-left: 0px;
+    letter-spacing: 1px;
+}
+
+.nav-avatar-header {
+    margin-left: 20px;
+}
+
+.login-header,
+.register-header {
+    padding-top: 2px;
+    margin-left: 20px;
+
+    a {
+        color: $font-color;
+        padding: 6px;
+
+        &:hover {
+            text-decoration: none;
+            color: $font-hover-color;
+        }
     }
 }
 
-// 小屏适配
-// small screen
-@media #{$xs} {
-    header nav.navbar-default {
-        .navbar-header {
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            margin: 0;
-            text-align: center;
-            line-height: 48px;
-            transform: translateX(25px);
+.register-header {
+    float: right;
+    margin: 0 0 0 18px;
+    position: relative;
+    padding-bottom: 17px;
 
-            .learner-bread {
-                font-size: 20px;
-            }
-        }
-        .navbar-collapse {
-            z-index: 99;
-            position: absolute;
-            right: 15px;
-            top: 38px;
-            border: none;
-            box-shadow: 0 5px 10px 2px rgba(0,0,0,.2);
-            box-shadow: rgba(0,0,0,.117647) 0 1px 6px,rgba(0,0,0,.239216) 0 1px 4px;
-            border-radius: 2px;
-            width: 170px;
-            float: right;
-            margin: 0;
-            background: #FFF;
-        }
-        .navbar-nav li {
-            margin: 0;
-        }
-        .navbar-nav li a:hover {
-            color: $link-hover-color;
-        }
-        .navbar-nav .active a {
-            border: none;
-            color: $link-hover-color;
-        }
+    a {
+        background-color: #637b94;
+        color: #FFF;
+        border-radius: 2px;
 
-        .navbar-toggle {
-        }
-
-        .navbar-nav .open .dropdown-menu>li>a {
-            &:focus,
-            &:hover　{
-                color: $link-hover-color;
-            }
+        &:hover {
+            color: #FFF;
+            background-color: darken(#637b94, 6%);
         }
     }
+}
+
+.login-header {
+    float: right;
+    position: relative;
+    padding-bottom: 17px;
+}
+
+.accordion-menu {
+    padding-right: 0px;
+}
+
+.nav > li {
+    margin-right: 6px;
+    margin-left: 6px;
+}
+
+.learner-dropdown {
+    left: -130px;
+    top: 44px;
+    background-color: rgba(27, 22, 28, 0.95);
+    clear: both;
+    min-height: 0;
+}
+
+.learner-dropdown li a {
+    color: #FFF;
+
+    &:hover,
+    &:focus {
+        color: #FFF;
+        background-color: rgba(#000, .39);
+    }
+}
+
+.nav-avatar-header {
+    float: right;
 }
 
 .nav-avatar {
-    width: 36px;
-    float: left;
     position: relative;
-    top: -8px;
-    right: 5px;
+    top: -4px;
+    left: -8px;
+}
+.avatar {
+    width: 30px;
+    border-radius: 3px;
+}
+
+@media screen and (min-width: 992px) {
+    .nav > li {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    .navbar-nav.navbar-right:last-child {
+        margin-right: -50px;
+    }
+    .nav-avatar-header {
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-header.pull-right {
+        padding-right: 0;
+    }
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0px;
+    }
+    .navbar-default .navbar-toggle {
+        background-color: #5ece80;
+    }
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: darken(#5ece80, 2%);
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #FFF;
+    }
+    .learner-nav {
+        height: 55px !important;
+    }
+    .learner-nav .container {
+        height: 55px !important;
+    }
+    .navbar .text-right {
+        background-color: rgba(27, 22, 28, 0.95);
+        clear: both;
+        min-height: 0;
+        padding: 0;
+        position: absolute;
+        top: 80px;
+        width: 100%;
+    }
+    .learner-nav .text-right {
+        top: 55px;
+    }
+    .learner-nav .nav li {
+        float: left;
+        width: 100% !important;
+        margin: 0 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+        transition: all .16s ease;
+
+        &:hover {
+            border-left: 4px solid #5ece80;
+            background-color: rgba(#000, .39);
+        }
+    }
+    .learner-nav .nav li.active {
+        float: right;
+
+        &:hover {
+            border-left: 0px solid #5ece80;
+            background-color: rgba(#000, .39);
+        }
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #fff;
+        display: block;
+        height: 38px;
+        line-height: 38px;
+        padding: 0 0 0 15px;
+        text-align: left;
+    }
+    .nav-avatar {
+        position: relative;
+        top: -4px;
+        left: -8px;
+    }
+    .avatar {
+        width: 30px;
+        border-radius: 4px;
+    }
+    .navbar-collapse {
+        margin: 0;
+        padding: 0;
+    }
+    .login-header {
+        margin-left: 0;
+    }
+    .collapse.in {
+        width: 100%;
+        clear: both;
+        overflow: hidden;
+    }
+
+    header nav.navbar-default .navbar-nav li a {
+        &:hover {
+            color: #FFF;
+        }
+    }
+
+    header nav.navbar-default .navbar-nav li.active a {
+        color: #FFF;
+        background: transparent;
+        border-bottom: none;
+        border-left: 4px solid #5ece80;
+        text-shadow: none;
+
+        &:hover {
+            color: #FFF;
+        }
+    }
 }
