@@ -20,6 +20,13 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     /**
+     * Password reset subject
+     *
+     * @var string
+     */
+    protected $subject = 'learnervideo密码找回';
+
+    /**
      * Create a new password controller instance.
      *
      * @return void
