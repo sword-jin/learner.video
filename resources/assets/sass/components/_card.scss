@@ -75,12 +75,11 @@
     &__title {
         margin: 0;
         padding-top: 4px;
-        height: 42px;
-        line-height: 1.3;
-        vertical-align:middle;
-        display:table-cell;
         font-size: 15px;
         text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     &__title--a {
