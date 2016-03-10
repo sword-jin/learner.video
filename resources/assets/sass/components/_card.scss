@@ -29,6 +29,7 @@
 
     &__img {
         position: relative;
+        overflow: hidden;
         &:hover {
             .card__overlay {
                 background-color: rgba(0,0,0,0.7);
@@ -37,6 +38,12 @@
             .card__overlay>i {
                 transform: scale(1);
             }
+            img {
+                transform: scale(1.12);
+            }
+        }
+        img {
+            @include anim(all, .22s);
         }
     }
 

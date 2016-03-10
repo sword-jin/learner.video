@@ -102,7 +102,7 @@
                                     class="form-control"
                                     v-model="newVideo.resource_type"
                                 >
-                                    <option value="vimeo" selected>Vimeo</option>
+                                    <option value="vimeo">Vimeo</option>
                                     <option value="youtube">Youtube</option>
                                     <option value="youku">Youku</option>
                                 </select>
@@ -164,7 +164,7 @@ module.exports = {
                 description: '',
                 image: '',
                 duration: '',
-                resource_type: '',
+                resource_type: 'vimeo',
                 resource_id: '',
                 published_at: '',
                 created_at: '',
@@ -242,7 +242,20 @@ module.exports = {
                         this.showMessage(response.data.message);
                     })
                     .catch(response => {
-                        this.showErrors(response.data.errors);
+                        let data = response.data;
+
+                        if (data.id == 'video_not_found') { // fix vimeo, youtube
+                            this.hasError = true;
+
+                            this.errors.push(data.title);
+                            this.errors.push(data.detail);
+
+                            setTimeout(function() {
+                                this.hasError = false;
+                            }.bind(this), 2800);
+                        } else {
+                            this.showErrors(data.errors);
+                        }
                     });
             }
         },

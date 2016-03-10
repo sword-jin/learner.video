@@ -37,6 +37,8 @@
 
                 @include('partials.description', ['obj' => $video])
 
+                @include('partials.share.share')
+
                 @include('partials.videoPlaylist', ['vid' => $video->id])
 
                 @include('partials.comments')
@@ -48,4 +50,8 @@
         </div>
     </div>
 </section>
+@stop
+
+@section('script')
+@include('partials.share.shareScript')
 @stop

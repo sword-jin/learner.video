@@ -8,13 +8,54 @@ Learner 全部视频列表,　涵盖各个方面
 视频列表
 @stop
 
+@section('style')
+<style>
+/* style for waterfall grid */
+.wf-container {
+    margin: 0 auto;
+}
+.wf-container:before,.wf-container:after {
+    content: '';
+    display: table;
+}
+.wf-container:after {
+    clear: both;
+}
+.wf-box {
+    margin: 10px;
+}
+.wf-box img {
+    display: block;
+    width: 100%;
+}
+.wf-box .content {
+    border: 1px solid #ccc;
+    border-top-width: 0;
+    padding: 5px 8px;
+}
+.wf-column {
+    float: left;
+}
+
+@media screen and (min-width: 768px) {
+    .wf-container { width: 750px; }
+}
+@media screen  and (min-width: 992px) {
+    .wf-container { width: 970px; }
+}
+@media screen and (min-width: 1200px) {
+    .wf-container { width: 1170px; }
+}
+</style>
+@stop
+
 @section('content')
 <section class="series series--show">
     <div class="container">
         <div class="row">
-            @foreach (array_chunk($videos->all(), 4) as $row)
-                @foreach ($row as $video)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="waterfall-container">
+                    @foreach ($videos as $video)
                         <div class="card">
                             @if (isNew($video->published_at))
                                 <span class="card__update label label-danger">new!</span>
@@ -24,7 +65,8 @@ Learner 全部视频列表,　涵盖各个方面
                                 <a href="{{ route('series.video.show', ['slug' => $video->series->slug, 'vid' => $video->id]) }}">
                                     <img
                                         class="img-responsive"
-                                        src="{{ $video->image }}" alt="{{ $video->title }}">
+                                        src="{{ $video->image }}"
+                                        alt="{{ $video->title }}">
                                     <div class="card__overlay">
                                         <i class="fa fa-play-circle-o"></i>
                                     </div>
@@ -38,9 +80,9 @@ Learner 全部视频列表,　涵盖各个方面
                                 </h3>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            @endforeach
+                    @endforeach
+                </div>
+            </div>
         </div>
 
         <div class="pull-right">
@@ -48,4 +90,17 @@ Learner 全部视频列表,　涵盖各个方面
         </div>
     </div>
 </section>
+@stop
+
+@section('script')
+<script src="{{ asset('js/waterfall.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        var waterfall = new Waterfall({
+            containerSelector: '.waterfall-container',
+            boxSelector: '.card',
+            minBoxWidth: 250
+        });
+    });
+</script>
 @stop

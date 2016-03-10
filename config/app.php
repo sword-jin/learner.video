@@ -24,9 +24,12 @@ return [
     | stack traces will be shown on every error that occurs within your
     | application. If disabled, a simple generic error page is shown.
     |
+    | 生产环境请直接改为 false
     */
 
-    'debug' => env('APP_DEBUG', false),
+    // 'debug' => env('APP_DEBUG', false),
+    'debug' => true,
+    // 'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +173,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*

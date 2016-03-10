@@ -20,6 +20,13 @@ class Video
      */
     const YOUTUBE = 'youtube';
 
+    /**
+     * Youku
+     *
+     * @var Const
+     */
+    const YOUKU = 'youku';
+
     public function setType($type)
     {
         switch($type) {
@@ -29,6 +36,10 @@ class Video
 
             case self::YOUTUBE:
                 return new Youtube;
+                break;
+
+            case self::YOUKU:
+                return new Youku;
                 break;
 
             default:
