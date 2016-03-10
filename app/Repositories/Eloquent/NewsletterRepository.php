@@ -41,6 +41,7 @@ class NewsletterRepository extends AbstractRepository implements NewsletterRepos
     {
         return $this->model
                     ->where('is_published', 1)
+                    ->orderBy('created_at', 'DESC')
                     ->paginate($perPage);
     }
 

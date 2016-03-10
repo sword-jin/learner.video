@@ -32,5 +32,14 @@
                 </div>
             @endforeach
     </div>
+    <div class="container">
+        <div class="text-center">
+        @include('partials.share.share')
+        </div>
+    </div>
 </div>
+@stop
+
+@section('script')
+@include('partials.share.shareScript')
 @stop

@@ -2,8 +2,7 @@
 
 namespace Learner\Services\Videos;
 
-use Learner\Exceptions\VideoNotValidException;
-
+use Learner\Exceptions\VideoNotFoundException;
 
 class VideoApi
 {
@@ -20,6 +19,13 @@ class VideoApi
      * @var Const
      */
     const VIMEO = 'vimeo';
+
+    /**
+     * Youku
+     *
+     * @var Const
+     */
+    const YOUKU = 'youku';
 
     /**
      * Set Type
@@ -41,8 +47,12 @@ class VideoApi
                 return new Vimeo;
                 break;
 
+            case self::YOUKU:
+                return new Youku;
+                break;
+
             default:
-                throw new VideoNotValidException("$type is not a valid video site");
+                throw new VideoNotFoundException("video_not_found");
         }
     }
 }

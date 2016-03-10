@@ -3,12 +3,13 @@
 namespace Learner\Exceptions;
 
 use Exception;
+use Learner\Exceptions\CribbbException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -22,6 +23,7 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        CribbbException::class,
     ];
 
     /**
@@ -46,6 +48,35 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if (config('app.debug')) {
+            return parent::render($request, $e);
+        }
+
+        return $this->handle($request, $e);
+    }
+
+    /**
+     * Convert the Exception into a JSON HTTP Response
+     *
+     * @param Request $request
+     * @param Exception $e
+     * @return JSONResponse
+     */
+    private function handle($request, Exception $e) {
+        if ($e instanceOf CribbbException) {
+            $data   = $e->toArray();
+            $status = $e->getStatus();
+        }
+
+        if ($e instanceOf VideoNotFoundHttpException) {
+            $data = array_merge([
+                'id'     => 'video_not_found',
+                'status' => '404'
+            ], config('errors.video_not_found'));
+
+            $status = 404;
+        }
+
+        return response()->json($data, $status);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Learner\Services\Layouts\Videos;
 
-class Vimeo
+class Youku
 {
     use VideoTrait;
 
@@ -36,6 +36,6 @@ class Vimeo
      */
     public function getIFrame($id)
     {
-        return '<iframe src="https://player.vimeo.com/video/' . $id . '" width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        return '<iframe src="http://player.youku.com/embed/' . $id . '" width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
     }
 }

@@ -30,6 +30,8 @@
 
                 @include('partials.videoPlayer', ['video' => $series->videos->first()])
 
+                @include('partials.share.share')
+
                 @include('partials.videoPlaylist')
             </div>
 
@@ -39,4 +41,8 @@
         </div>
     </div>
 </section>
+@stop
+
+@section('script')
+@include('partials.share.shareScript')
 @stop

@@ -35,6 +35,8 @@ pre {
                 {!! $parsedown->text($blog->body) !!}
             </div>
 
+            @include('partials.share.share')
+
             @include('partials.comments')
         </div>
     </div>
@@ -43,5 +45,6 @@ pre {
 
 @section('script')
 <script src="//cdn.bootcss.com/highlight.js/9.1.0/highlight.min.js"></script>
+@include('partials.share.shareScript')
 <script>hljs.initHighlightingOnLoad();</script>
 @stop

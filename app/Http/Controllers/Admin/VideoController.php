@@ -71,6 +71,7 @@ class VideoController extends BaseController
 
         $resourceInfo = $this->getResourceInfo($data['resource_type'], $data['resource_id']);
 
+        // add info from remote serve to data.
         $data['image'] = $resourceInfo['thumbnail_url'];
         $data['duration'] = $resourceInfo['duration'];
 
