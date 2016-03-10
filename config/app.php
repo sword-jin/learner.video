@@ -28,7 +28,7 @@ return [
     */
 
     // 'debug' => env('APP_DEBUG', false),
-    'debug' => true,
+    'debug' => false,
     // 'debug' => false,
 
     /*
@@ -173,7 +173,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
