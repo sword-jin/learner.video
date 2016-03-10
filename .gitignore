@@ -9,4 +9,3 @@ Homestead.json
 /public/img/category
 /public/img/series
 /config/app.php
-/resources/views/pages/index.blade.php

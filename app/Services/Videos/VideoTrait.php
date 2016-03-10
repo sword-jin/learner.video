@@ -2,7 +2,6 @@
 
 namespace Learner\Services\Videos;
 
-use Config;
 use Learner\Exceptions\VideoNotFoundException;
 
 trait VideoTrait
@@ -30,7 +29,7 @@ trait VideoTrait
         if(extension_loaded('curl')) {
             $ch = curl_init(str_replace('{id}', $this->id, $url));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, Config::get('video.video_timeout'));
+            curl_setopt($ch, CURLOPT_TIMEOUT, config('video.video_timeout'));
             $json = curl_exec($ch);
         } else {
             $json = @file_get_contents(str_replace('{id}', $this->id, $url));

@@ -1,0 +1,93 @@
+.user-setting {
+    .panel-body {
+        padding: 0;
+    }
+    .list-group {
+        margin-bottom: 0;
+    }
+    .list-group-item {
+        border: 0;
+        border-bottom: 2px solid #ddd;
+
+        &:last-child,
+        &:first-child {
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .selected {
+        border-left: 2px $link-hover-color solid;
+    }
+}
+
+.user-page-jumbotron {
+    padding: 28px;
+
+    img {
+        @include round(5px);
+    }
+}
+
+// A css3 animated loading...
+// .loading {
+//     font-size: 3em;
+//     font-weight: 400;
+// }
+// span[class^='dot-'] {
+//     opacity: 0;
+// }
+// .dot-one {
+//     animation: dot-one 2s infinite;
+// }
+// .dot-two {
+//     animation: dot-two 2s infinite;
+// }
+// .dot-three {
+//     animation: dot-three 2s infinite;
+// }
+// @keyframes dot-one {
+//   0% {
+//     opacity: 0;
+//   }
+//   15% {
+//     opacity: 0;
+//   }
+//   25% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+// @keyframes dot-two {
+//   0% {
+//     opacity: 0;
+//   }
+//   40% {
+//     opacity: 0;
+//   }
+//   50% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+// @keyframes dot-three {
+//   0% {
+//     opacity: 0;
+//   }
+//   65% {
+//     opacity: 0;
+//   }
+//   75% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }

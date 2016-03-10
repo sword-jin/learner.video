@@ -48,11 +48,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if (config('app.debug')) {
-            return parent::render($request, $e);
+        if ($e instanceOf CribbbException) {
+            $data   = $e->toArray();
+            $status = $e->getStatus();
+
+            if ($e instanceOf VideoNotFoundHttpException) {
+                $data = array_merge([
+                    'id'     => 'video_not_found',
+                    'status' => '404'
+                ], config('errors.video_not_found'));
+
+                $status = 404;
+
+            }
+
+            return response()->json($data, $status);
         }
 
-        return $this->handle($request, $e);
+
+        return parent::render($request, $e);
     }
 
     /**

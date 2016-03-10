@@ -2,8 +2,46 @@
 
 Carbon\Carbon::setLocale('zh');
 
+// Route::get('/test', function() {
+    // return VideoApi::setType('youku')->getVideoDetail('XMTQ0MzU4MDMwOA==');
+    // return VideoApi::setType('vimeo')->getVideoDetail('146522326');
+    // return VideoApi::setType('youtube')->getVideoDetail('8ItNE_DX6Cc');
+// });
+
 Route::group(['middleware' => 'web'], function () {
 
+    /************************************
+    * Home Page.
+    ************************************/
+    Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
+
+    /************************************
+    * Github
+    ************************************/
+    Route::get('/auth/github', [
+        'as' => 'auth.github.login',
+        'uses' => 'Auth\SocialController@redirectToGithub'
+    ]);
+    Route::get('/auth/github/callback', [
+        'as' => 'auth.github.login.callback',
+        'uses' => 'Auth\SocialController@handleGithubOAuth'
+    ]);
+
+    /************************************
+    * Twitter
+    ************************************/
+    Route::get('/auth/twitter', [
+        'as' => 'auth.twitter.login',
+        'uses' => 'Auth\SocialController@redirectToTwitter'
+    ]);
+    Route::get('/auth/twitter/callback', [
+        'as' => 'auth.twitter.login.callback',
+        'uses' => 'Auth\SocialController@handleTwitterOAuth'
+    ]);
+
+    /************************************
+    * Auth
+    ************************************/
     Route::controller('auth', 'Auth\AuthController', [
         'getRegister'  => 'auth.register',
         'postRegister' => 'auth.register.post',
@@ -12,31 +50,55 @@ Route::group(['middleware' => 'web'], function () {
         'getLogout'    => 'auth.logout',
     ]);
 
+    /************************************
+    * Password
+    ************************************/
     Route::controller('password', 'Auth\PasswordController');
 
-    Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
-
+    /************************************
+    * Series
+    ************************************/
     Route::get('/series', ['as' => 'series', 'uses' => 'SeriesController@index']);
     Route::get('/series/{slug}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
     Route::get('/series/{slug}/episodes/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
 
+    /************************************
+    * Videos
+    ************************************/
     Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
 
+    /************************************
+    * Categories
+    ************************************/
     Route::get('/categories/{name}', ['as' => 'categories', 'uses' => 'CategoryController@show']);
 
+    /************************************
+    * Blogs
+    ************************************/
     Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
     Route::get('/blogs/{id}', ['as' => 'blogs.show', 'uses' => 'BlogController@show']);
 
+    /************************************
+    * Newsletters
+    ************************************/
     Route::get('/newsletters', ['as' => 'newsletters', 'uses' => 'NewsletterController@index']);
     Route::get('/newsletters/{id}', ['as' => 'newsletters.show', 'uses' => 'NewsletterController@show']);
-
     Route::post('/newsletters/subscribe', ['as' => 'subscribe', 'uses' => 'NewsletterController@subscribe']);
     Route::post('/newsletters/unsubscribe', ['as' => 'unsubscribe', 'uses' => 'NewsletterController@unsubscribe']);
 
-    Route::get('/user', ['as' => 'user', 'uses' => 'UserController@index']);
+    /************************************
+    * User
+    ************************************/
+    Route::get('/user/profile', ['as' => 'user.profile', 'uses' => 'UserController@index']);
+    Route::post('/user/profile', ['as' => 'user.profile.update', 'uses' => 'UserController@updateProfile']);
+    Route::get('/user/account', ['as' => 'user.account', 'uses' => 'UserController@account']);
+    Route::post('/user/account', ['as' => 'user.account.update', 'uses' => 'UserController@updateAccount']);
 });
 
 
+/************************************
+* Admin
+************************************/
 Route::group(['middleware' => 'web'], function () {
     $config = [
         'as' => 'admin.',

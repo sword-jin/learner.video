@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'avatar', 'is_active', 'deleted_at'
+        'username', 'email', 'nickname', 'avatar', 'is_active', 'deleted_at'
     ];
 
     /**
@@ -62,5 +62,15 @@ class User extends Authenticatable
     public function isNotActive()
     {
         return (boolean) ! $this->is_active;
+    }
+
+    /**
+     * Display user's nickname, if not exist display username.
+     *
+     * @return string
+     */
+    public function displayName()
+    {
+        return $this->nickname ?: $this->username;
     }
 }

@@ -48,7 +48,19 @@ function isActive($route)
 function categoryIsActive($name)
 {
     return route('categories', $name) == URL::current() ||
-        route('categories', $name) == URL::current() . '#*' ? ' active' : ':';
+        route('categories', $name) == URL::current() . '#*' ? ' active' : '';
+}
+
+/**
+ * User setting menu active class.
+ *
+ * @param  string $routeName
+ *
+ * @return string
+ */
+function useSettingActive($routeName)
+{
+    return URL::current() == route($routeName) ? ' selected' : '';
 }
 
 /**

@@ -1,5 +1,5 @@
 <footer>
-    <a href="#" class="navbar-bread learner-bread">
+    <a href="#" class="navbar-bread learner-bread no-hover-decoration">
         L<span class="learner-bread--one">e</span><span class="learner-bread--two">a</span><span class="learner-bread--three">r</span><span class="learner-bread--four">n</span><span class="learner-bread--five">e</span><span class="learner-bread--six">r</span>
     </a>
     <p>
