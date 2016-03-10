@@ -8,6 +8,13 @@
 欢迎来到Learner
 @stop
 
+@section('head')
+<!-- weibo -->
+<meta property="wb:webmaster" content="b733e02cb824c3cb" />
+<!-- qq -->
+<meta property="qc:admins" content="2516554551265266145771540711" />
+@stop
+
 @section('jumbotron')
     <section class="page-jumbotron newsletter">
         <div class="container">

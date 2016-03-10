@@ -12,6 +12,8 @@
     <meta property="og:description" content="@yield('description')" />
     <meta name="keywords" content="@yield('keywords', trans('layouts.meta_keywords'))">
     <meta name="author" content="{{ trans('layouts.meta_author') }}">
+
+    @yield('head')
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>

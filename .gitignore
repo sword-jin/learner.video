@@ -8,3 +8,4 @@ Homestead.json
 /public/img/avatar
 /public/img/category
 /public/img/series
+/resources/views/pages/index.blade.php
