@@ -2442,6 +2442,7 @@
 	                        // fix vimeo, youtube
 	                        _this.hasError = true;
 
+	                        _this.errors = [];
 	                        _this.errors.push(data.title);
 	                        _this.errors.push(data.detail);
 

@@ -247,6 +247,7 @@ module.exports = {
                         if (data.id == 'video_not_found') { // fix vimeo, youtube
                             this.hasError = true;
 
+                            this.errors = [];
                             this.errors.push(data.title);
                             this.errors.push(data.detail);
 
