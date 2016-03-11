@@ -24,7 +24,11 @@
             @include("errors/list")
 
             <div class="panel panel-default">
-                <div class="panel-heading">{{ lang('register.panel_title', 'Register') }}</div>
+                <div class="panel-heading">
+                    {{ lang('register.panel_title', 'Register') }}
+
+                    @include('auth.partials.social')
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('auth.register.post') }}">
                         {!! csrf_field() !!}

@@ -2,11 +2,11 @@
 
 Carbon\Carbon::setLocale('zh');
 
-// Route::get('/test', function() {
+Route::get('/test', function() {
     // return VideoApi::setType('youku')->getVideoDetail('XMTQ0MzU4MDMwOA==');
     // return VideoApi::setType('vimeo')->getVideoDetail('146522326');
     // return VideoApi::setType('youtube')->getVideoDetail('8ItNE_DX6Cc');
-// });
+});
 
 Route::group(['middleware' => 'web'], function () {
 

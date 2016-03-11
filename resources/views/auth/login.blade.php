@@ -26,10 +26,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ lang('login.panel_title', 'Login') }}
-                    <div class="pull-right social-group">
-                        <a href="{{ route('auth.github.login') }}"><i class="fa fa-github"></i></a>
-                        <a href="{{ route('auth.twitter.login') }}"><i class="fa fa-twitter"></i></a>
-                    </div>
+
+                    @include('auth.partials.social')
+
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('auth.login.post') }}">
