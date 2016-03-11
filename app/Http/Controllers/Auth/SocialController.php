@@ -65,18 +65,25 @@ class SocialController extends BaseController
 
         $authUser = $this->findOrCreateUser($user);
 
-        Auth::login($authUser, true);
+        if (is_array($authUser)) {
+            Auth::login($authUser[0], true);
+            flashy()->mutedDark('注册成功，不过用户名可能要自己改个酷酷的');
 
-        flashy()->message(lang('notification.register', 'Register Successfully!'));
+            return $this->redirectToRoute('user.profile');
+        } else {
+            Auth::login($authUser, true);
+            flashy()->message(lang('notification.register', 'Register Successfully!'));
 
-        return $this->redirectIntended('/');
+            return $this->redirectIntended('/');
+        }
     }
 
     /**
      * Return user if exists; create and return if doesn't
      *
      * @param $githubUser
-     * @return User
+     *
+     * @return \Learner\Models\User|array
      */
     private function findOrCreateUser($githubUser)
     {
@@ -84,11 +91,32 @@ class SocialController extends BaseController
             return $authUser;
         }
 
+        // username exist, add a random string and return use profile page.
+        if (User::where('username', $githubUser->nickname)->first()) {
+            $githubUser->nickname .= uniqid();
+
+            $user = $this->createAUser($githubUser->nickname, $githubUser->name, $githubUser->email, $githubUser->avatar);
+
+            return [$user];
+        }
+
+        return $this->createAUser($githubUser->nickname, $githubUser->name, $githubUser->email, $githubUser->avatar);
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @return \Learner\Models\User
+     */
+    protected function createAUser()
+    {
+        $args = func_get_args();
+
         $newUser = User::create([
-            'username' => $githubUser->nickname,
-            'nickname' => $githubUser->name,
-            'email' => $githubUser->email,
-            'avatar' => $githubUser->avatar
+            'username' => $args[0],
+            'nickname' => $args[1],
+            'email' => $args[2],
+            'avatar' => $args[3]
         ]);
 
         $userRole = Role::whereName('user')->first();

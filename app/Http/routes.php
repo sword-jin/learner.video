@@ -13,7 +13,10 @@ Route::group(['middleware' => 'web'], function () {
     /************************************
     * Home Page.
     ************************************/
-    Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
+    Route::get('/', [
+        'as' => 'home',
+        'uses' => 'PageController@index']
+    );
 
     /************************************
     * Github
@@ -58,41 +61,86 @@ Route::group(['middleware' => 'web'], function () {
     /************************************
     * Series
     ************************************/
-    Route::get('/series', ['as' => 'series', 'uses' => 'SeriesController@index']);
-    Route::get('/series/{slug}', ['as' => 'series.show', 'uses' => 'SeriesController@show']);
-    Route::get('/series/{slug}/episodes/{vid}', ['as' => 'series.video.show', 'uses' => 'SeriesController@showVideo']);
+    Route::get('/series', [
+        'as' => 'series',
+        'uses' => 'SeriesController@index']
+    );
+    Route::get('/series/{slug}', [
+        'as' => 'series.show',
+        'uses' => 'SeriesController@show']
+    );
+    Route::get('/series/{slug}/episodes/{vid}', [
+        'as' => 'series.video.show',
+        'uses' => 'SeriesController@showVideo']
+    );
 
     /************************************
     * Videos
     ************************************/
-    Route::get('/videos', ['as' => 'videos', 'uses' => 'VideoController@index']);
+    Route::get('/videos', [
+        'as' => 'videos',
+        'uses' => 'VideoController@index']
+    );
 
     /************************************
     * Categories
     ************************************/
-    Route::get('/categories/{name}', ['as' => 'categories', 'uses' => 'CategoryController@show']);
+    Route::get('/categories/{name}', [
+        'as' => 'categories',
+        'uses' => 'CategoryController@show']
+    );
 
     /************************************
     * Blogs
     ************************************/
-    Route::get('/blogs', ['as' => 'blogs', 'uses' => 'BlogController@index']);
-    Route::get('/blogs/{id}', ['as' => 'blogs.show', 'uses' => 'BlogController@show']);
+    Route::get('/blogs', [
+        'as' => 'blogs',
+        'uses' => 'BlogController@index']
+    );
+    Route::get('/blogs/{id}', [
+        'as' => 'blogs.show',
+        'uses' => 'BlogController@show']
+    );
 
     /************************************
     * Newsletters
     ************************************/
-    Route::get('/newsletters', ['as' => 'newsletters', 'uses' => 'NewsletterController@index']);
-    Route::get('/newsletters/{id}', ['as' => 'newsletters.show', 'uses' => 'NewsletterController@show']);
-    Route::post('/newsletters/subscribe', ['as' => 'subscribe', 'uses' => 'NewsletterController@subscribe']);
-    Route::post('/newsletters/unsubscribe', ['as' => 'unsubscribe', 'uses' => 'NewsletterController@unsubscribe']);
+    Route::get('/newsletters', [
+        'as' => 'newsletters',
+        'uses' => 'NewsletterController@index']
+    );
+    Route::get('/newsletters/{id}', [
+        'as' => 'newsletters.show',
+        'uses' => 'NewsletterController@show']
+    );
+    Route::post('/newsletters/subscribe', [
+        'as' => 'subscribe',
+        'uses' => 'NewsletterController@subscribe']
+    );
+    Route::post('/newsletters/unsubscribe', [
+        'as' => 'unsubscribe',
+        'uses' => 'NewsletterController@unsubscribe']
+    );
 
     /************************************
     * User
     ************************************/
-    Route::get('/user/profile', ['as' => 'user.profile', 'uses' => 'UserController@index']);
-    Route::post('/user/profile', ['as' => 'user.profile.update', 'uses' => 'UserController@updateProfile']);
-    Route::get('/user/account', ['as' => 'user.account', 'uses' => 'UserController@account']);
-    Route::post('/user/account', ['as' => 'user.account.update', 'uses' => 'UserController@updateAccount']);
+    Route::get('/user/profile', [
+        'as' => 'user.profile',
+        'uses' => 'UserController@index']
+    );
+    Route::post('/user/profile', [
+        'as' => 'user.profile.update',
+        'uses' => 'UserController@updateProfile']
+    );
+    Route::get('/user/account', [
+        'as' => 'user.account',
+        'uses' => 'UserController@account']
+    );
+    Route::post('/user/account', [
+        'as' => 'user.account.update',
+        'uses' => 'UserController@updateAccount']
+    );
 });
 
 
