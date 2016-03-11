@@ -147,6 +147,13 @@ nav .container {
     border-radius: 3px;
 }
 
+.nav-username {
+    color: #777;
+    position: relative;
+    bottom: -2px;
+    letter-spacing: 0.1px;
+}
+
 @media screen and (min-width: 992px) {
     .nav > li {
         margin-right: 15px;

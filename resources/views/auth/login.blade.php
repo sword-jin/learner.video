@@ -24,7 +24,13 @@
             @include("errors/list")
 
             <div class="panel panel-default">
-                <div class="panel-heading">{{ lang('login.panel_title', 'Login') }}</div>
+                <div class="panel-heading">
+                    {{ lang('login.panel_title', 'Login') }}
+                    <div class="pull-right social-group">
+                        <a href="{{ route('auth.github.login') }}"><i class="fa fa-github"></i></a>
+                        <a href="{{ route('auth.twitter.login') }}"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('auth.login.post') }}">
                         {!! csrf_field() !!}
@@ -61,7 +67,7 @@
                                     <i class="fa fa-btn fa-sign-in"></i>{{ lang('login.submit', 'Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('password/reset') }}">{{ lang('login.forget', 'Forget your password?') }}</a>
+                                <a class="btn btn-link no-hover-decoration" href="{{ url('password/reset') }}">{{ lang('login.forget', 'Forget your password?') }}</a>
                             </div>
                         </div>
                     </form>

@@ -1,0 +1,12 @@
+.no-hover-decoration {
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.panel-form {
+    padding: 12px 15px;
+}

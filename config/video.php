@@ -14,5 +14,5 @@ return [
     /**
      * Set the get video information time limit. (seconds)
      */
-    'video_timeout' => 30
+    'video_timeout' => 6
 ];

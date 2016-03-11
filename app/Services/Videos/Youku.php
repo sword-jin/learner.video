@@ -25,7 +25,7 @@ class Youku
     /**
      * Get the video detail.
      *
-     * @param  integer $id
+     * @param  string $id
      * @return array
      */
     public function getVideoDetail($id)

@@ -30,12 +30,13 @@
                     @else
                     <div class="nav-avatar-header">
                         <div class="nav-avatar dropdown simple-dropdown">
-                            <a href="#user" class="dropdown-toggle" data-toggle="collapse" data-hover="dropdown">
+                            <a href="#user" class="dropdown-toggle no-hover-decoration" data-toggle="collapse" data-hover="dropdown">
                                 <img src="{{ asset(Auth::user()->avatar) }}" alt="{{ Auth::user()->username }}" class="avatar">
+                                <span class="nav-username">{{ Auth::user()->displayName() }}</span>
                             </a>
                             <div id="user" class="dropdown-menu panel-collapse collapse learner-dropdown" role="menu">
                                 <li>
-                                    <a href="{{ route('user') }}" title="{{ lang('navigation.user_center', 'User Center') }}">
+                                    <a href="{{ route('user.profile') }}" title="{{ lang('navigation.user_center', 'User Center') }}">
                                         <i class="fa fa-user"></i>
                                         {{ lang('navigation.user_center', 'User Center') }}
                                     </a>

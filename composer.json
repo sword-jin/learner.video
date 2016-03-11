@@ -11,7 +11,8 @@
         "mercuryseries/flashy": "^1.0",
         "laravolt/avatar": "^1.2",
         "erusev/parsedown": "^1.6",
-        "spatie/laravel-newsletter": "^2.2"
+        "spatie/laravel-newsletter": "^2.2",
+        "overtrue/laravel-socialite": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -62,5 +63,5 @@
     "repositories": [
         {"type": "composer", "url": "http://packagist.phpcomposer.com"},
         {"packagist": false}
-    ] 
+    ]
 }

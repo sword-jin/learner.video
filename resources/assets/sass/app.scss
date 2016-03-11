@@ -4,6 +4,8 @@
 @import "helpers/screen";
 //** mixin
 @import "helpers/mixins";
+//** helper class
+@import "helpers/helpers";
 //** my own style
 @import "default/custom";
 
@@ -35,6 +37,8 @@
 @import "modules/technique";
 //** footer module
 @import "modules/footer";
+
+@import "modules/auth/login";
 
 //** series modules -- partials
 @import "modules/series-list";

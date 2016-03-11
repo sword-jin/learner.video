@@ -28,8 +28,8 @@ return [
     */
 
     // 'debug' => env('APP_DEBUG', false),
-    'debug' => false,
-    // 'debug' => false,
+     'debug' => true,
+    //'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost:8080',
+    'url' => 'http://learner.video',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,6 +173,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
+        Overtrue\LaravelSocialite\ServiceProvider::class,
     ],
 
     /*
@@ -222,6 +223,7 @@ return [
         /************************************
         * Aliases
         ************************************/
+        'Socialite' => Overtrue\LaravelSocialite\Socialite::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
