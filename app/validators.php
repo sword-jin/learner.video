@@ -9,3 +9,11 @@ $validator->extend(
     trans('validators.username')
 );
 
+$validator->extend(
+    'passcheck',
+    function($attribute, $value, $parameters) {
+        return Hash::check($value, Auth::user()->password);
+    },
+    trans('validators.passcheck')
+);
+

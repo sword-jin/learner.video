@@ -2,6 +2,7 @@
 
 namespace Learner\Http\Controllers;
 
+use Hash;
 use Auth;
 use Learner\Http\Controllers\BaseController;
 use Learner\Http\Requests\UpdateAccountRequest;
@@ -68,6 +69,13 @@ class UserController extends BaseController
      */
     public function updateAccount(UpdateAccountRequest $request)
     {
-        //
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+
+        flashy()->success('密码修改成功, 请重新登陆');
+        Auth::logout();
+
+        return $this->redirectToRoute('auth.login');
     }
 }

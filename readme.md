@@ -8,7 +8,7 @@ learner.video 使用 [laravel](http://laravel.com/) + [vue](http://vuejs.org/)(V
 
 ## 日志
 
-* 2016-03-10 添加分享功能, 添加 github 授权(twitter 申请无效)
+* 2016-03-10 添加分享功能, 添加 github 授权(twitter 申请无效), 添加用户修改账号资料
 * 2016-03-09 增加youtube，优酷视频源，调整 videos resource_id 为varchar(使用migrate更新数据库)
 > 好消息是可以用youku了，但 vimeo 被墙了最近
 * 2016-02-16 修改导航样式

@@ -23,12 +23,23 @@ class UpdateAccountRequest extends Request
      */
     public function rules()
     {
-        return [
-            'currentPassword' => 'required',
-            'password' => 'required|confirmed|min:6',
-        ];
+        if ($this->get('currentPassword') !== null) {
+            return [
+                'currentPassword' => 'required|passcheck',
+                'password' => 'required|confirmed|min:6',
+            ];
+        } else {
+            return [
+                'password' => 'required|confirmed|min:6',
+            ];
+        }
     }
 
+    /**
+     * Change attributes display name.
+     *
+     * @return array
+     */
     public function attributes()
     {
         return [

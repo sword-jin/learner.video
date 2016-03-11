@@ -10,10 +10,13 @@
         <form action="{{ route('user.account.update') }}" method="POST" role="form" class="panel-form">
             {!! csrf_field() !!}
             <!-- CurrentPassword field -->
+
+            @if ($user->password !== null)
             <div class="form-group">
                 <label for="currentPassword">当前密码</label>
                 <input type="password" class="form-control" name="currentPassword" id="currentPassword">
             </div>
+            @endif
 
             <!-- New Password field -->
             <div class="form-group">
