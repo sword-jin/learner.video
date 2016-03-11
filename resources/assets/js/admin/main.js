@@ -17,6 +17,10 @@ import Links from "./views/Links.vue"
 Vue.use(require('vue-resource'))
 Vue.use(VueRouter)
 
+// close the warning.
+Vue.config.debug = false
+Vue.config.silent = true
+
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value')
 
 Vue.filter('date', value => value.substring(0, 10))

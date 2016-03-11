@@ -102,6 +102,10 @@
 	Vue.use(__webpack_require__(48));
 	Vue.use(VueRouter);
 
+	// close the warning.
+	Vue.config.debug = false;
+	Vue.config.silent = true;
+
 	Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 
 	Vue.filter('date', function (value) {
