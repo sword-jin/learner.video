@@ -13,11 +13,11 @@ class ChangeVideosAndUsersTable extends Migration
     public function up()
     {
         // videos
-        DB::statement("ALTER TABLE learner.videos change column resource_id resource_id varchar(26)");
+        DB::statement("ALTER TABLE videos change column resource_id resource_id varchar(26)");
 
         // users
-        DB::statement("ALTER TABLE learner.users ADD nickname VARCHAR(255) NULL AFTER email");
-        DB::statement("ALTER TABLE learner.users MODIFY password VARCHAR(60)");
+        DB::statement("ALTER TABLE users ADD nickname VARCHAR(255) NULL AFTER email");
+        DB::statement("ALTER TABLE users MODIFY password VARCHAR(60)");
     }
 
     /**
@@ -31,7 +31,7 @@ class ChangeVideosAndUsersTable extends Migration
         DB::statement("ALTER TABLE videos change column resource_id resource_id int");
 
         // users
-        DB::statement("ALTER TABLE learner.users DROP nicknam");
-        DB::statement("ALTER TABLE learner.users MODIFY password VARCHAR(60) NOT NULL");
+        DB::statement("ALTER TABLE users DROP nickname");
+        DB::statement("ALTER TABLE users MODIFY password VARCHAR(60) NOT NULL");
     }
 }
